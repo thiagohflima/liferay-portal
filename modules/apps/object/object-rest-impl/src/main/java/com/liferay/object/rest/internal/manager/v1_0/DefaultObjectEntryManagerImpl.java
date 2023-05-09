@@ -20,7 +20,7 @@ import com.liferay.object.constants.ObjectConstants;
 import com.liferay.object.constants.ObjectDefinitionConstants;
 import com.liferay.object.constants.ObjectFieldConstants;
 import com.liferay.object.constants.ObjectRelationshipConstants;
-import com.liferay.object.entry.util.DTOConverterUtil;
+import com.liferay.object.entry.util.ObjectEntryDTOConverterUtil;
 import com.liferay.object.entry.util.ObjectEntryThreadLocal;
 import com.liferay.object.exception.NoSuchObjectEntryException;
 import com.liferay.object.field.business.type.ObjectFieldBusinessTypeRegistry;
@@ -739,7 +739,7 @@ public class DefaultObjectEntryManagerImpl
 					getSystemObjectDefinitionManager(
 						objectDefinition.getName());
 
-			return DTOConverterUtil.toDTO(
+			return ObjectEntryDTOConverterUtil.toDTO(
 				systemObjectDefinitionManager.
 					getBaseModelByExternalReferenceCode(
 						systemObjectDefinitionManager.getExternalReferenceCode(
@@ -1355,7 +1355,7 @@ public class DefaultObjectEntryManagerImpl
 			SystemObjectDefinitionManager systemObjectDefinitionManager)
 		throws Exception {
 
-		return DTOConverterUtil.toDTO(
+		return ObjectEntryDTOConverterUtil.toDTO(
 			baseModel, _dtoConverterRegistry, systemObjectDefinitionManager,
 			_userLocalService.getUser(serviceBuilderObjectEntry.getUserId()));
 	}
