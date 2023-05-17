@@ -85,6 +85,8 @@ public class FDSViewFragmentRenderer implements FragmentRenderer {
 							"name", "itemSelector"
 						).put(
 							"type", "itemSelector"
+						).put(
+							"typeOptions", JSONUtil.put("itemType", "FDSView")
 						))))
 		).toString();
 	}
