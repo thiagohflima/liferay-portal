@@ -236,6 +236,11 @@ public class ServletDataImpl implements ServletData {
 							SXPElementResourceImpl.class,
 							"postSXPElementBatch"));
 					put(
+						"mutation#updateSXPElementByExternalReferenceCode",
+						new ObjectValuePair<>(
+							SXPElementResourceImpl.class,
+							"putSXPElementByExternalReferenceCode"));
+					put(
 						"mutation#createSXPElementPreview",
 						new ObjectValuePair<>(
 							SXPElementResourceImpl.class,
@@ -332,6 +337,11 @@ public class ServletDataImpl implements ServletData {
 						new ObjectValuePair<>(
 							SXPElementResourceImpl.class,
 							"getSXPElementsPage"));
+					put(
+						"query#sXPElementByExternalReferenceCode",
+						new ObjectValuePair<>(
+							SXPElementResourceImpl.class,
+							"getSXPElementByExternalReferenceCode"));
 					put(
 						"query#sXPElement",
 						new ObjectValuePair<>(
