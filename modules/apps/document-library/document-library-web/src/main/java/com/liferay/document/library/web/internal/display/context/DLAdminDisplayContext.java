@@ -440,10 +440,8 @@ public class DLAdminDisplayContext {
 	}
 
 	public boolean isSearch() {
-		String mvcRenderCommandName = ParamUtil.getString(
-			_httpServletRequest, "mvcRenderCommandName");
-
-		return mvcRenderCommandName.equals("/document_library/search");
+		return !Validator.isBlank(
+			ParamUtil.getString(_httpServletRequest, "keywords"));
 	}
 
 	public boolean isUpdateAutoTags() {
