@@ -215,6 +215,10 @@ public class DLAdminDisplayContext {
 			return _orderByCol;
 		}
 
+		if (isNavigationRecent()) {
+			return "modifiedDate";
+		}
+
 		String orderByCol = ParamUtil.getString(
 			_httpServletRequest, "orderByCol");
 
@@ -686,11 +690,6 @@ public class DLAdminDisplayContext {
 			ArrayUtil.isNotEmpty(assetTagIds) ||
 			ArrayUtil.isNotEmpty(extensions) || navigation.equals("mine") ||
 			navigation.equals("recent")) {
-
-			if (navigation.equals("recent")) {
-				dlSearchContainer.setOrderByCol("modifiedDate");
-				dlSearchContainer.setOrderByType("desc");
-			}
 
 			SearchContext searchContext = _getSearchContext(dlSearchContainer);
 
