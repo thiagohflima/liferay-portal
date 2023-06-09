@@ -627,10 +627,6 @@ public class DLAdminDisplayContext {
 
 		String navigation = ParamUtil.getString(
 			_httpServletRequest, "navigation", "home");
-		String currentFolder = ParamUtil.getString(
-			_httpServletRequest, "curFolder");
-		String deltaFolder = ParamUtil.getString(
-			_httpServletRequest, "deltaFolder");
 		long fileEntryTypeId = ParamUtil.getLong(
 			_httpServletRequest, "fileEntryTypeId", -1);
 		String[] extensions = ParamUtil.getStringValues(
@@ -664,8 +660,6 @@ public class DLAdminDisplayContext {
 		}
 
 		portletURL.setParameter("navigation", navigation);
-		portletURL.setParameter("curFolder", currentFolder);
-		portletURL.setParameter("deltaFolder", deltaFolder);
 		portletURL.setParameter("folderId", String.valueOf(folderId));
 		portletURL.setParameter("extension", extensions);
 
