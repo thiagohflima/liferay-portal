@@ -871,6 +871,10 @@ public class DLAdminDisplayContext {
 
 		queryConfig.setSearchSubfolders(true);
 
+		searchContext.setSorts(
+			_getSort(
+				searchContainer.getOrderByCol(),
+				searchContainer.getOrderByType()));
 		searchContext.setStart(searchContainer.getStart());
 
 		return DLAppServiceUtil.search(searchRepositoryId, searchContext);
@@ -1011,6 +1015,9 @@ public class DLAdminDisplayContext {
 			new SearchContainer<>(
 				_liferayPortletRequest, getSearchSearchContainerURL(), null,
 				null);
+
+		searchContainer.setOrderByCol(getOrderByCol());
+		searchContainer.setOrderByType(getOrderByType());
 
 		Hits hits = _getHits(searchContainer);
 
