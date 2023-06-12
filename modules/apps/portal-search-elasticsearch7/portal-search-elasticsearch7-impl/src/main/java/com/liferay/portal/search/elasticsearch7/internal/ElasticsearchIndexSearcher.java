@@ -583,7 +583,7 @@ public class ElasticsearchIndexSearcher extends BaseIndexSearcher {
 
 		try {
 			if (end > maxResultWindow) {
-				SearchHit lastSearchHit = _skipToLastSearch(
+				SearchHit lastSearchHit = _skipToLastSearchHit(
 					maxResultWindow, searchSearchRequest, start);
 
 				if (lastSearchHit == null) {
@@ -663,7 +663,7 @@ public class ElasticsearchIndexSearcher extends BaseIndexSearcher {
 		}
 	}
 
-	private SearchHit _skipToLastSearch(
+	private SearchHit _skipToLastSearchHit(
 		int maxResultWindow, SearchSearchRequest searchSearchRequest,
 		int start) {
 
