@@ -178,7 +178,7 @@ public class StructuredContentResourceTest
 
 		super.testGetAssetLibraryStructuredContentByExternalReferenceCode();
 
-		// Uuid as external reference code
+		// Blank external reference code
 
 		StructuredContent randomStructuredContent = randomStructuredContent();
 
@@ -198,7 +198,7 @@ public class StructuredContentResourceTest
 		assertEquals(postStructuredContent, getStructuredContent);
 		assertValid(getStructuredContent);
 
-		// Non-exist external reference code
+		// Nonexistent external reference code
 
 		String externalReferenceCode = StringUtil.toLowerCase(
 			RandomTestUtil.randomString());
