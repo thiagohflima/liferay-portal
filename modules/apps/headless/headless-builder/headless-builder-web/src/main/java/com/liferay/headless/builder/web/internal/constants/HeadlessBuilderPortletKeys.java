@@ -19,7 +19,7 @@ package com.liferay.headless.builder.web.internal.constants;
  */
 public class HeadlessBuilderPortletKeys {
 
-	public static final String HEADLESS_BUILDER_WEB =
+	public static final String HEADLESS_BUILDER =
 		"com_liferay_headless_builder_web_internal_portlet" +
 			"_HeadlessBuilderPortlet";
 

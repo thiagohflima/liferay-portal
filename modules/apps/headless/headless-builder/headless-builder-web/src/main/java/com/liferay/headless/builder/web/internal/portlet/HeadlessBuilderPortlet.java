@@ -52,7 +52,7 @@ import org.osgi.service.component.annotations.Reference;
 		"javax.portlet.init-param.portlet-title-based-navigation=true",
 		"javax.portlet.init-param.template-path=/META-INF/resources/",
 		"javax.portlet.init-param.view-template=/view.jsp",
-		"javax.portlet.name=" + HeadlessBuilderPortletKeys.HEADLESS_BUILDER_WEB,
+		"javax.portlet.name=" + HeadlessBuilderPortletKeys.HEADLESS_BUILDER,
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user",
 		"javax.portlet.version=3.0"

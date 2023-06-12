@@ -46,7 +46,7 @@ public class HeadlessBuilderPanelApp extends BasePanelApp {
 
 	@Override
 	public String getPortletId() {
-		return HeadlessBuilderPortletKeys.HEADLESS_BUILDER_WEB;
+		return HeadlessBuilderPortletKeys.HEADLESS_BUILDER;
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class HeadlessBuilderPanelApp extends BasePanelApp {
 	}
 
 	@Reference(
-		target = "(javax.portlet.name=" + HeadlessBuilderPortletKeys.HEADLESS_BUILDER_WEB + ")"
+		target = "(javax.portlet.name=" + HeadlessBuilderPortletKeys.HEADLESS_BUILDER + ")"
 	)
 	private Portlet _portlet;
 
