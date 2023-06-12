@@ -16,13 +16,6 @@
 
 <%@ include file="/init.jsp" %>
 
-<%
-long commerceOrderItemId = ParamUtil.getLong(request, "commerceOrderItemId");
-
-//List<CommerceShipmentItem> commerceShipmentItems = commerceOrderContentDisplayContext.getCommerceShipmentItems(commerceOrderItemId);
-
-%>
-
 <commerce-ui:modal-content
 	contentCssClasses="p-0"
 	showCancelButton="<%= false %>"
