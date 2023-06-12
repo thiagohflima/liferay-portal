@@ -93,6 +93,10 @@ public class RequestQuoteFragmentRenderer implements FragmentRenderer {
 		}
 
 		try {
+			RequestDispatcher requestDispatcher =
+				_servletContext.getRequestDispatcher(
+					"/fragment/renderer/request_quote/page.jsp");
+
 			CommerceContext commerceContext =
 				(CommerceContext)httpServletRequest.getAttribute(
 					CommerceWebKeys.COMMERCE_CONTEXT);
@@ -123,10 +127,6 @@ public class RequestQuoteFragmentRenderer implements FragmentRenderer {
 
 			httpServletRequest.setAttribute(
 				"liferay-commerce:request-quote:namespace", namespace);
-
-			RequestDispatcher requestDispatcher =
-				_servletContext.getRequestDispatcher(
-					"/fragment/renderer/request_quote/page.jsp");
 
 			requestDispatcher.include(httpServletRequest, httpServletResponse);
 		}
