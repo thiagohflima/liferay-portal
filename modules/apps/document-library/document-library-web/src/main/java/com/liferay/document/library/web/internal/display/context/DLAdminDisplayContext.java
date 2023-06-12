@@ -419,6 +419,14 @@ public class DLAdminDisplayContext {
 			folderItemSelectorCriterion);
 	}
 
+	public String getViewMvcRenderCommandName(long folderId) {
+		if (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			return "/document_library/view";
+		}
+
+		return "/document_library/view_folder";
+	}
+
 	public boolean isAutoTaggingEnabled() {
 		return _assetAutoTaggerConfiguration.isEnabled();
 	}
@@ -636,37 +644,30 @@ public class DLAdminDisplayContext {
 		String[] assetTagIds = ParamUtil.getStringValues(
 			_httpServletRequest, "assetTagId");
 
-		int status = WorkflowConstants.STATUS_APPROVED;
-
-		User user = _themeDisplay.getUser();
-
-		if (_permissionChecker.isContentReviewer(
-				user.getCompanyId(), _themeDisplay.getScopeGroupId())) {
-
-			status = WorkflowConstants.STATUS_ANY;
-		}
-
-		PortletURL portletURL = _liferayPortletResponse.createRenderURL();
+		int status = _getStatus();
 
 		long folderId = getFolderId();
 
-		if (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			portletURL.setParameter(
-				"mvcRenderCommandName", "/document_library/view");
-		}
-		else {
-			portletURL.setParameter(
-				"mvcRenderCommandName", "/document_library/view_folder");
-		}
+		PortletURL portletURL = PortletURLBuilder.createRenderURL(
+			_liferayPortletResponse
+		).setMVCRenderCommandName(
+			getViewMvcRenderCommandName(folderId)
+		).setNavigation(
+			navigation
+		).setParameter(
+			"extension", extensions
+		).setParameter(
+			"fileEntryTypeId",
+			() -> {
+				if (fileEntryTypeId >= 0) {
+					return fileEntryTypeId;
+				}
 
-		portletURL.setParameter("navigation", navigation);
-		portletURL.setParameter("folderId", String.valueOf(folderId));
-		portletURL.setParameter("extension", extensions);
-
-		if (fileEntryTypeId >= 0) {
-			portletURL.setParameter(
-				"fileEntryTypeId", String.valueOf(fileEntryTypeId));
-		}
+				return null;
+			}
+		).setParameter(
+			"folderId", folderId
+		).buildPortletURL();
 
 		SearchContainer<RepositoryEntry> dlSearchContainer =
 			new SearchContainer<>(
@@ -1039,6 +1040,20 @@ public class DLAdminDisplayContext {
 
 		return SortFactoryUtil.create(
 			fieldName, type, !StringUtil.equalsIgnoreCase(orderByType, "asc"));
+	}
+
+	private int _getStatus() {
+		int status = WorkflowConstants.STATUS_APPROVED;
+
+		User user = _themeDisplay.getUser();
+
+		if (_permissionChecker.isContentReviewer(
+				user.getCompanyId(), _themeDisplay.getScopeGroupId())) {
+
+			status = WorkflowConstants.STATUS_ANY;
+		}
+
+		return status;
 	}
 
 	private boolean _isAncestorFolder(long folderId, FileEntry fileEntry) {
