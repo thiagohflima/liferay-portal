@@ -667,12 +667,12 @@ public class ElasticsearchIndexSearcher extends BaseIndexSearcher {
 		int maxResultWindow, SearchSearchRequest searchSearchRequest,
 		int start) {
 
-		int documentsToSkip = 0;
+		int skipToStart = 0;
 
 		if (start >= maxResultWindow) {
 			searchSearchRequest.setStart(maxResultWindow - 1);
 
-			documentsToSkip = start % maxResultWindow;
+			skipToStart = start % maxResultWindow;
 		}
 
 		searchSearchRequest.setSize(1);
@@ -698,10 +698,10 @@ public class ElasticsearchIndexSearcher extends BaseIndexSearcher {
 			}
 		}
 
-		if (documentsToSkip > 0) {
+		if (skipToStart > 0) {
 			lastSearchHit = _getLastSearchHit(
 				lastSearchHit.getSortValues(), searchSearchRequest,
-				documentsToSkip);
+				skipToStart);
 		}
 
 		return lastSearchHit;
