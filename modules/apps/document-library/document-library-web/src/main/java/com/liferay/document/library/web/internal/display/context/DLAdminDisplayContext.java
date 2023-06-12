@@ -686,7 +686,8 @@ public class DLAdminDisplayContext {
 			ArrayUtil.isNotEmpty(extensions) || navigation.equals("mine") ||
 			navigation.equals("recent")) {
 
-			SearchContext searchContext = _getSearchContext(dlSearchContainer);
+			SearchContext searchContext = _getSearchContext(
+				dlSearchContainer, "none");
 
 			long userId = 0;
 
@@ -830,10 +831,8 @@ public class DLAdminDisplayContext {
 	private Hits _getHits(SearchContainer<RepositoryEntry> searchContainer)
 		throws PortalException {
 
-		SearchContext searchContext = SearchContextFactory.getInstance(
-			_httpServletRequest);
-
-		searchContext.setAttribute("paginationType", "regular");
+		SearchContext searchContext = _getSearchContext(
+			searchContainer, "regular");
 
 		long searchRepositoryId = ParamUtil.getLong(
 			_httpServletRequest, "searchRepositoryId",
@@ -841,7 +840,6 @@ public class DLAdminDisplayContext {
 
 		searchContext.setAttribute("searchRepositoryId", searchRepositoryId);
 
-		searchContext.setEnd(searchContainer.getEnd());
 		searchContext.setFolderIds(
 			new long[] {
 				ParamUtil.getLong(_httpServletRequest, "searchFolderId")
@@ -865,12 +863,6 @@ public class DLAdminDisplayContext {
 		QueryConfig queryConfig = searchContext.getQueryConfig();
 
 		queryConfig.setSearchSubfolders(true);
-
-		searchContext.setSorts(
-			_getSort(
-				searchContainer.getOrderByCol(),
-				searchContainer.getOrderByType()));
-		searchContext.setStart(searchContainer.getStart());
 
 		return DLAppServiceUtil.search(searchRepositoryId, searchContext);
 	}
@@ -939,7 +931,8 @@ public class DLAdminDisplayContext {
 	}
 
 	private SearchContext _getSearchContext(
-		SearchContainer<RepositoryEntry> searchContainer) {
+		SearchContainer<RepositoryEntry> searchContainer,
+		String paginationType) {
 
 		SearchContext searchContext = SearchContextFactory.getInstance(
 			new long[0], new String[0], new HashMap<>(),
@@ -947,7 +940,7 @@ public class DLAdminDisplayContext {
 			_themeDisplay.getLocale(), _themeDisplay.getScopeGroupId(),
 			_themeDisplay.getTimeZone(), _themeDisplay.getUserId());
 
-		searchContext.setAttribute("paginationType", "none");
+		searchContext.setAttribute("paginationType", paginationType);
 		searchContext.setEnd(searchContainer.getEnd());
 		searchContext.setSorts(
 			_getSort(
