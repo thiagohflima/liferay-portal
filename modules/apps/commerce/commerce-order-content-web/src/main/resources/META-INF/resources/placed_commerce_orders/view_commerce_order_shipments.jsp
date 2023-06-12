@@ -23,7 +23,7 @@
 	title='<%= LanguageUtil.get(request, "shipments") %>'
 >
 	<frontend-data-set:headless-display
-		apiURL="<%= commerceOrderContentDisplayContext.getCommerceShipmentItemsApiUrl() %>"
+		apiURL="<%= commerceOrderContentDisplayContext.getCommerceShipmentItemsAPIURL() %>"
 		formName="fm"
 		id="<%= CommerceOrderFDSNames.SHIPMENTS %>"
 		showManagementBar="<%= false %>"

@@ -442,7 +442,7 @@ public class CommerceOrderContentDisplayContext {
 		return commerceChannel.getPriceDisplayType();
 	}
 
-	public String getCommerceShipmentItemsApiUrl() throws PortalException {
+	public String getCommerceShipmentItemsAPIURL() throws PortalException {
 		long commerceOrderItemId = ParamUtil.getLong(
 			_httpServletRequest, "commerceOrderItemId");
 
