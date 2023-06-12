@@ -16,7 +16,7 @@
 
 <%@ include file="/request_quote/init.jsp" %>
 
-<c:if test="<%= requestQuoteEnabled || priceOnApplication %>">
+<c:if test="<%= priceOnApplication || requestQuoteEnabled %>">
 	<div class="request-quote-wrapper" id="<%= requestQuoteElementId %>">
 		<button class="btn btn-lg request-quote skeleton">
 			<liferay-ui:message key="request-a-quote" />
