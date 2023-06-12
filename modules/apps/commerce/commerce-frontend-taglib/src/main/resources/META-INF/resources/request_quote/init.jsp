@@ -36,10 +36,9 @@ long cpInstanceId = (long)request.getAttribute("liferay-commerce:request-quote:c
 String namespace = (String)request.getAttribute("liferay-commerce:request-quote:namespace");
 String orderDetailURL = (String)request.getAttribute("liferay-commerce:request-quote:orderDetailURL");
 boolean priceOnApplication = (boolean)request.getAttribute("liferay-commerce:request-quote:priceOnApplication");
+boolean requestQuoteEnabled = (boolean)request.getAttribute("liferay-commerce:request-quote:requestQuoteEnabled");
 
 String randomNamespace = PortalUtil.generateRandomKey(request, "taglib") + StringPool.UNDERLINE;
 
 String requestQuoteElementId = randomNamespace + "request_quote";
-
-boolean requestQuoteEnabled = (boolean)request.getAttribute("liferay-commerce:request-quote:requestQuoteEnabled");
 %>
