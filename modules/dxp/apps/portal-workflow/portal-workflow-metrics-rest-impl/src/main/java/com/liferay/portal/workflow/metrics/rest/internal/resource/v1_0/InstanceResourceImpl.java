@@ -204,8 +204,7 @@ public class InstanceResourceImpl extends BaseInstanceResourceImpl {
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
 				WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexNameConstants.
-					SUFFIX_SLA_INSTANCE_RESULT,
+				WorkflowMetricsIndexNameConstants.SUFFIX_SLA_INSTANCE_RESULT,
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
 				WorkflowMetricsIndexNameConstants.SUFFIX_TASK);
 
@@ -1008,8 +1007,7 @@ public class InstanceResourceImpl extends BaseInstanceResourceImpl {
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexNameConstants.
-					SUFFIX_SLA_INSTANCE_RESULT);
+				WorkflowMetricsIndexNameConstants.SUFFIX_SLA_INSTANCE_RESULT);
 
 		BooleanQuery booleanQuery = _queries.booleanQuery();
 

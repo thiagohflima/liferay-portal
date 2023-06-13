@@ -656,8 +656,7 @@ public class WorkflowMetricsRESTTestHelper {
 						_queries.term(
 							"tasks.taskId", addTaskRequest.getTaskId()))),
 				1,
-				indexName +
-					WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
+				indexName + WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 				"companyId", addTaskRequest.getCompanyId(), "deleted", false,
 				"instanceId", instance.getId(), "processId",
 				addTaskRequest.getProcessId());
@@ -824,8 +823,7 @@ public class WorkflowMetricsRESTTestHelper {
 			booleanQuery -> booleanQuery.addMustQueryClauses(
 				_queries.nested(
 					"tasks", _queries.term("tasks.taskId", task.getId()))),
-			1,
-			indexName + WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
+			1, indexName + WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 			"companyId", companyId, "deleted", false, "instanceId",
 			instance.getId(), "processId", task.getProcessId());
 
@@ -920,8 +918,7 @@ public class WorkflowMetricsRESTTestHelper {
 
 		_assertCount(
 			_indexNameBuilder.getIndexName(companyId) +
-				WorkflowMetricsIndexNameConstants.
-					SUFFIX_SLA_INSTANCE_RESULT,
+				WorkflowMetricsIndexNameConstants.SUFFIX_SLA_INSTANCE_RESULT,
 			"blocked", true, "companyId", companyId, "deleted", false,
 			"processId", processId, "slaDefinitionId", slaDefinitionId);
 	}
@@ -1552,8 +1549,7 @@ public class WorkflowMetricsRESTTestHelper {
 							"slaResults.overdueDate",
 							_getDateString(slaResult.getDateOverdue())))),
 				1,
-				indexName +
-					WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
+				indexName + WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 				"companyId", companyId, "deleted", false, "instanceId",
 				instance.getId(), "processId", instance.getProcessId());
 		}

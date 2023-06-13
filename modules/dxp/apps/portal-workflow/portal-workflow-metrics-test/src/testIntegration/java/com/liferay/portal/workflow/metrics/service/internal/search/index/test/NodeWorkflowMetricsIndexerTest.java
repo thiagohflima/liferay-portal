@@ -166,16 +166,13 @@ public class NodeWorkflowMetricsIndexerTest
 
 		assertReindex(
 			LinkedHashMapBuilder.put(
-				indexName + WorkflowMetricsIndexNameConstants.SUFFIX_NODE,
-				4
+				indexName + WorkflowMetricsIndexNameConstants.SUFFIX_NODE, 4
 			).put(
 				indexName +
-					WorkflowMetricsIndexNameConstants.
-						SUFFIX_SLA_TASK_RESULT,
+					WorkflowMetricsIndexNameConstants.SUFFIX_SLA_TASK_RESULT,
 				2
 			).put(
-				indexName + WorkflowMetricsIndexNameConstants.SUFFIX_TASK,
-				2
+				indexName + WorkflowMetricsIndexNameConstants.SUFFIX_TASK, 2
 			).build(),
 			new String[] {
 				"WorkflowMetricsNodeType", "WorkflowMetricsSLATaskResultType",

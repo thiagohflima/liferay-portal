@@ -160,8 +160,7 @@ public class AssigneeMetricResourceImpl extends BaseAssigneeMetricResourceImpl {
 			_queries.term(
 				"_index",
 				_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-					WorkflowMetricsIndexNameConstants.
-						SUFFIX_SLA_TASK_RESULT));
+					WorkflowMetricsIndexNameConstants.SUFFIX_SLA_TASK_RESULT));
 		slaTaskResultsBooleanQuery.addMustQueryClauses(
 			_createSLATaskResultsBooleanQuery(
 				completed, dateEnd, dateStart, instanceIds, processId,

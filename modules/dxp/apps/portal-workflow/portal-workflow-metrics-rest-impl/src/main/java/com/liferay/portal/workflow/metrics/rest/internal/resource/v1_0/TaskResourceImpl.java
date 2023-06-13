@@ -355,8 +355,7 @@ public class TaskResourceImpl extends BaseTaskResourceImpl {
 			_queries.term(
 				"_index",
 				_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-					WorkflowMetricsIndexNameConstants.
-						SUFFIX_SLA_TASK_RESULT));
+					WorkflowMetricsIndexNameConstants.SUFFIX_SLA_TASK_RESULT));
 		slaTaskResultsBooleanQuery.addMustQueryClauses(
 			_createSLATaskResultsBooleanQuery(instanceIds, processId));
 

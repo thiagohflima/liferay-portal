@@ -335,8 +335,7 @@ public class WorkflowMetricsSLAProcessBackgroundTaskExecutor
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(companyId) +
-				WorkflowMetricsIndexNameConstants.
-					SUFFIX_SLA_INSTANCE_RESULT);
+				WorkflowMetricsIndexNameConstants.SUFFIX_SLA_INSTANCE_RESULT);
 
 		BooleanQuery booleanQuery = _queries.booleanQuery();
 
@@ -521,8 +520,7 @@ public class WorkflowMetricsSLAProcessBackgroundTaskExecutor
 			workflowMetricsSLADefinitionVersion.getCompanyId());
 
 		searchSearchRequest.setIndexNames(
-			indexName +
-				WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE);
+			indexName + WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE);
 
 		BooleanQuery booleanQuery = _queries.booleanQuery();
 
@@ -711,8 +709,7 @@ public class WorkflowMetricsSLAProcessBackgroundTaskExecutor
 						"ctx._source['slaDefinitionIds'] = [];",
 						"ctx._source.slaDefinitionIds.add(", slaDefinitionId,
 						")")),
-				indexName +
-					WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE);
+				indexName + WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE);
 
 		if (PortalRunMode.isTestMode()) {
 			updateByQueryDocumentRequest.setRefresh(true);

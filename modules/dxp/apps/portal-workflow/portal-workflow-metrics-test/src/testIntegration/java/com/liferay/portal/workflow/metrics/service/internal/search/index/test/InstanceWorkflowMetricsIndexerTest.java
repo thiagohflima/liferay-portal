@@ -120,8 +120,7 @@ public class InstanceWorkflowMetricsIndexerTest
 
 		assertReindex(
 			new String[] {
-				indexName +
-					WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE
+				indexName + WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE
 			},
 			new String[] {"WorkflowMetricsInstanceType"}, "companyId",
 			kaleoInstance.getCompanyId(), "instanceId",
@@ -141,8 +140,7 @@ public class InstanceWorkflowMetricsIndexerTest
 				queries.nested(
 					"tasks",
 					queries.term("tasks.assigneeType", Role.class.getName()))),
-			1,
-			indexName + WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
+			1, indexName + WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 			"WorkflowMetricsInstanceType", "className",
 			kaleoInstance.getClassName(), "classPK", kaleoInstance.getClassPK(),
 			"companyId", kaleoInstance.getCompanyId(), "completed", false,
@@ -165,8 +163,7 @@ public class InstanceWorkflowMetricsIndexerTest
 				queries.nested(
 					"tasks",
 					queries.term("tasks.assigneeName", user.getFullName()))),
-			1,
-			indexName + WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
+			1, indexName + WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 			"WorkflowMetricsInstanceType", "className",
 			kaleoInstance.getClassName(), "classPK", kaleoInstance.getClassPK(),
 			"companyId", kaleoInstance.getCompanyId(), "completed", false,
@@ -184,8 +181,7 @@ public class InstanceWorkflowMetricsIndexerTest
 					"tasks",
 					queries.term(
 						"tasks.assigneeName", updatedUser.getFullName()))),
-			1,
-			indexName + WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
+			1, indexName + WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 			"WorkflowMetricsInstanceType", "className",
 			kaleoInstance.getClassName(), "classPK", kaleoInstance.getClassPK(),
 			"companyId", kaleoInstance.getCompanyId(), "completed", false,

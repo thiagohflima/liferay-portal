@@ -111,8 +111,7 @@ public class SLAInstanceResultWorkflowMetricsIndexerTest
 			completeKaleoInstance(kaleoInstance);
 
 			assertCount(
-				indexName +
-					WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
+				indexName + WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 				"WorkflowMetricsInstanceType", "className",
 				kaleoInstance.getClassName(), "classPK",
 				kaleoInstance.getClassPK(), "companyId",

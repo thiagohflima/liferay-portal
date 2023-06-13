@@ -173,8 +173,7 @@ public class IndexResourceImpl extends BaseIndexResourceImpl {
 		).put(
 			"task", WorkflowMetricsIndexNameConstants.SUFFIX_TASK
 		).put(
-			"transition",
-			WorkflowMetricsIndexNameConstants.SUFFIX_TRANSITION
+			"transition", WorkflowMetricsIndexNameConstants.SUFFIX_TRANSITION
 		).build();
 
 	@Reference

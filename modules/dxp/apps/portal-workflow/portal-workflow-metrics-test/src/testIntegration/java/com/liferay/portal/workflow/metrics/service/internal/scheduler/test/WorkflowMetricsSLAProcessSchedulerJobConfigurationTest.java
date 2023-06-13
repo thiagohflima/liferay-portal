@@ -73,8 +73,7 @@ public class WorkflowMetricsSLAProcessSchedulerJobConfigurationTest
 		assertCount(
 			0,
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexNameConstants.
-					SUFFIX_SLA_INSTANCE_RESULT,
+				WorkflowMetricsIndexNameConstants.SUFFIX_SLA_INSTANCE_RESULT,
 			"WorkflowMetricsSLAInstanceResultType", "companyId",
 			workflowDefinition.getCompanyId(), "processId",
 			workflowDefinition.getWorkflowDefinitionId(), "slaDefinitionId",
@@ -120,8 +119,7 @@ public class WorkflowMetricsSLAProcessSchedulerJobConfigurationTest
 		assertCount(
 			0,
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexNameConstants.
-					SUFFIX_SLA_INSTANCE_RESULT,
+				WorkflowMetricsIndexNameConstants.SUFFIX_SLA_INSTANCE_RESULT,
 			"WorkflowMetricsSLAInstanceResultType", "companyId",
 			workflowDefinition.getCompanyId(), "processId",
 			workflowDefinition.getWorkflowDefinitionId(), "slaDefinitionId",
@@ -151,8 +149,7 @@ public class WorkflowMetricsSLAProcessSchedulerJobConfigurationTest
 
 		assertCount(
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexNameConstants.
-					SUFFIX_SLA_INSTANCE_RESULT,
+				WorkflowMetricsIndexNameConstants.SUFFIX_SLA_INSTANCE_RESULT,
 			"WorkflowMetricsSLAInstanceResultType", "companyId",
 			workflowDefinition.getCompanyId(), "processId",
 			workflowDefinition.getWorkflowDefinitionId(), "slaDefinitionId",
@@ -160,16 +157,14 @@ public class WorkflowMetricsSLAProcessSchedulerJobConfigurationTest
 			"status", "RUNNING");
 		assertCount(
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexNameConstants.
-					SUFFIX_SLA_INSTANCE_RESULT,
+				WorkflowMetricsIndexNameConstants.SUFFIX_SLA_INSTANCE_RESULT,
 			"WorkflowMetricsSLAInstanceResultType", "companyId",
 			workflowDefinition.getCompanyId(), "instanceId",
 			kaleoInstance.getKaleoInstanceId(), "processId",
 			workflowDefinition.getWorkflowDefinitionId());
 		assertCount(
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexNameConstants.
-					SUFFIX_SLA_INSTANCE_RESULT,
+				WorkflowMetricsIndexNameConstants.SUFFIX_SLA_INSTANCE_RESULT,
 			"WorkflowMetricsSLAInstanceResultType", "companyId",
 			workflowDefinition.getCompanyId(), "instanceId",
 			kaleoInstance.getKaleoInstanceId(), "processId",
@@ -180,8 +175,7 @@ public class WorkflowMetricsSLAProcessSchedulerJobConfigurationTest
 
 		assertCount(
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexNameConstants.
-					SUFFIX_SLA_INSTANCE_RESULT,
+				WorkflowMetricsIndexNameConstants.SUFFIX_SLA_INSTANCE_RESULT,
 			"WorkflowMetricsSLAInstanceResultType", "companyId",
 			workflowDefinition.getCompanyId(), "instanceId",
 			kaleoInstance.getKaleoInstanceId(), "processId",

@@ -402,8 +402,7 @@ public class ProcessMetricResourceImpl extends BaseProcessMetricResourceImpl {
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
 				WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexNameConstants.
-					SUFFIX_SLA_INSTANCE_RESULT);
+				WorkflowMetricsIndexNameConstants.SUFFIX_SLA_INSTANCE_RESULT);
 
 		searchSearchRequest.setQuery(
 			_createBooleanQuery(
@@ -560,8 +559,7 @@ public class ProcessMetricResourceImpl extends BaseProcessMetricResourceImpl {
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexNameConstants.
-					SUFFIX_SLA_INSTANCE_RESULT);
+				WorkflowMetricsIndexNameConstants.SUFFIX_SLA_INSTANCE_RESULT);
 		searchSearchRequest.setQuery(
 			_createSLAInstanceResultsBooleanQuery(
 				completed, null, null, processIds));

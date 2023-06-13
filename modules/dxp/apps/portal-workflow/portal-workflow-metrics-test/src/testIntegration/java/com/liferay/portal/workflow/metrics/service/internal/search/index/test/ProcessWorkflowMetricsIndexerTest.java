@@ -57,8 +57,7 @@ public class ProcessWorkflowMetricsIndexerTest
 			workflowDefinition.getWorkflowDefinitionId(), "instanceId", 0);
 		assertCount(
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexNameConstants.
-					SUFFIX_SLA_INSTANCE_RESULT,
+				WorkflowMetricsIndexNameConstants.SUFFIX_SLA_INSTANCE_RESULT,
 			"WorkflowMetricsSLAInstanceResultType", "companyId",
 			workflowDefinition.getCompanyId(), "deleted", false, "processId",
 			workflowDefinition.getWorkflowDefinitionId(), "slaDefinitionId", 0);
@@ -86,13 +85,10 @@ public class ProcessWorkflowMetricsIndexerTest
 
 		assertReindex(
 			new String[] {
+				indexName + WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS,
+				indexName + WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 				indexName +
-					WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS,
-				indexName +
-					WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
-				indexName +
-					WorkflowMetricsIndexNameConstants.
-						SUFFIX_SLA_INSTANCE_RESULT
+					WorkflowMetricsIndexNameConstants.SUFFIX_SLA_INSTANCE_RESULT
 			},
 			new String[] {
 				"WorkflowMetricsProcessType", "WorkflowMetricsInstanceType",
