@@ -242,7 +242,7 @@ public class ChannelResourceImpl extends BaseChannelResourceImpl {
 		return _toChannel(
 			_commerceChannelService.addOrUpdateCommerceChannel(
 				externalReferenceCode,
-				GetterUtil.get(
+				GetterUtil.getLong(
 					channel.getAccountId(),
 					AccountConstants.ACCOUNT_ENTRY_ID_DEFAULT),
 				channel.getSiteGroupId(), channel.getName(), channel.getType(),
