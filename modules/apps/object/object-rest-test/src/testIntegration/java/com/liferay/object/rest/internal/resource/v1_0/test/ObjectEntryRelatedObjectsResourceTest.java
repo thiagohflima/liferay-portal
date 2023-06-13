@@ -904,7 +904,7 @@ public class ObjectEntryRelatedObjectsResourceTest {
 			_getEndpoint(name), StringPool.SLASH, primaryKey);
 	}
 
-	private String _getERCEndpoint(
+	private String _getExternalReferenceCodeEndpoint(
 		boolean manyToOne, String objectEntryExternalReferenceCode,
 		String objectRelationshipName) {
 
@@ -1260,7 +1260,7 @@ public class ObjectEntryRelatedObjectsResourceTest {
 			() -> {
 				JSONObject systemObjectEntryJSONObject = HTTPTestUtil.invoke(
 					null,
-					_getERCEndpoint(
+					_getExternalReferenceCodeEndpoint(
 						manyToOne, customObjectEntryExternalReferenceCode,
 						objectRelationship.getName()),
 					Http.Method.GET);
