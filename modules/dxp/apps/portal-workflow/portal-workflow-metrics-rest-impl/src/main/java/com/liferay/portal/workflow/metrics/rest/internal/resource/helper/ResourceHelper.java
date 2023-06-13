@@ -49,7 +49,7 @@ import com.liferay.portal.search.sort.FieldSort;
 import com.liferay.portal.search.sort.SortOrder;
 import com.liferay.portal.search.sort.Sorts;
 import com.liferay.portal.vulcan.pagination.Pagination;
-import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexEntityNameConstants;
+import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexNameConstants;
 import com.liferay.portal.workflow.metrics.sla.processor.WorkflowMetricsSLAStatus;
 
 import java.io.IOException;
@@ -213,7 +213,7 @@ public class ResourceHelper {
 			_queries.term(
 				"_index",
 				_indexNameBuilder.getIndexName(companyId) +
-					WorkflowMetricsIndexEntityNameConstants.SUFFIX_TASK));
+					WorkflowMetricsIndexNameConstants.SUFFIX_TASK));
 
 		booleanQuery.addMustQueryClauses(
 			_queries.term("instanceCompleted", instanceCompleted));
@@ -378,7 +378,7 @@ public class ResourceHelper {
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(companyId) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_PROCESS);
+				WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS);
 
 		BooleanQuery booleanQuery = _queries.booleanQuery();
 

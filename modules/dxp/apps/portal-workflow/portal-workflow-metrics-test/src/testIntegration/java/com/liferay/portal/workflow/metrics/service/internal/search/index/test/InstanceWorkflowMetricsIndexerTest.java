@@ -28,7 +28,7 @@ import com.liferay.portal.search.index.IndexNameBuilder;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.workflow.kaleo.model.KaleoInstance;
 import com.liferay.portal.workflow.kaleo.service.KaleoTaskInstanceTokenLocalService;
-import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexEntityNameConstants;
+import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexNameConstants;
 import com.liferay.portal.workflow.metrics.service.util.BaseWorkflowMetricsIndexerTestCase;
 
 import java.time.Duration;
@@ -51,7 +51,7 @@ public class InstanceWorkflowMetricsIndexerTest
 
 		assertCount(
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_INSTANCE,
+				WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 			"WorkflowMetricsInstanceType", "className",
 			kaleoInstance.getClassName(), "classPK", kaleoInstance.getClassPK(),
 			"companyId", kaleoInstance.getCompanyId(), "completed", false,
@@ -66,7 +66,7 @@ public class InstanceWorkflowMetricsIndexerTest
 
 		assertCount(
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_INSTANCE,
+				WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 			"WorkflowMetricsInstanceType", "className",
 			kaleoInstance.getClassName(), "classPK", kaleoInstance.getClassPK(),
 			"companyId", kaleoInstance.getCompanyId(), "completed", false,
@@ -85,7 +85,7 @@ public class InstanceWorkflowMetricsIndexerTest
 
 		assertCount(
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_INSTANCE,
+				WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 			"WorkflowMetricsInstanceType", "className",
 			kaleoInstance.getClassName(), "classPK", kaleoInstance.getClassPK(),
 			"companyId", kaleoInstance.getCompanyId(), "completed", true,
@@ -102,7 +102,7 @@ public class InstanceWorkflowMetricsIndexerTest
 
 		assertCount(
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_INSTANCE,
+				WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 			"WorkflowMetricsInstanceType", "className",
 			kaleoInstance.getClassName(), "classPK", kaleoInstance.getClassPK(),
 			"companyId", kaleoInstance.getCompanyId(), "completed", false,
@@ -121,7 +121,7 @@ public class InstanceWorkflowMetricsIndexerTest
 		assertReindex(
 			new String[] {
 				indexName +
-					WorkflowMetricsIndexEntityNameConstants.SUFFIX_INSTANCE
+					WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE
 			},
 			new String[] {"WorkflowMetricsInstanceType"}, "companyId",
 			kaleoInstance.getCompanyId(), "instanceId",
@@ -142,7 +142,7 @@ public class InstanceWorkflowMetricsIndexerTest
 					"tasks",
 					queries.term("tasks.assigneeType", Role.class.getName()))),
 			1,
-			indexName + WorkflowMetricsIndexEntityNameConstants.SUFFIX_INSTANCE,
+			indexName + WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 			"WorkflowMetricsInstanceType", "className",
 			kaleoInstance.getClassName(), "classPK", kaleoInstance.getClassPK(),
 			"companyId", kaleoInstance.getCompanyId(), "completed", false,
@@ -166,7 +166,7 @@ public class InstanceWorkflowMetricsIndexerTest
 					"tasks",
 					queries.term("tasks.assigneeName", user.getFullName()))),
 			1,
-			indexName + WorkflowMetricsIndexEntityNameConstants.SUFFIX_INSTANCE,
+			indexName + WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 			"WorkflowMetricsInstanceType", "className",
 			kaleoInstance.getClassName(), "classPK", kaleoInstance.getClassPK(),
 			"companyId", kaleoInstance.getCompanyId(), "completed", false,
@@ -185,7 +185,7 @@ public class InstanceWorkflowMetricsIndexerTest
 					queries.term(
 						"tasks.assigneeName", updatedUser.getFullName()))),
 			1,
-			indexName + WorkflowMetricsIndexEntityNameConstants.SUFFIX_INSTANCE,
+			indexName + WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 			"WorkflowMetricsInstanceType", "className",
 			kaleoInstance.getClassName(), "classPK", kaleoInstance.getClassPK(),
 			"companyId", kaleoInstance.getCompanyId(), "completed", false,

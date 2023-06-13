@@ -65,7 +65,7 @@ import com.liferay.portal.workflow.metrics.rest.internal.resource.exception.NoSu
 import com.liferay.portal.workflow.metrics.rest.internal.resource.helper.ResourceHelper;
 import com.liferay.portal.workflow.metrics.rest.resource.v1_0.TaskResource;
 import com.liferay.portal.workflow.metrics.search.index.TaskWorkflowMetricsIndexer;
-import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexEntityNameConstants;
+import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexNameConstants;
 import com.liferay.portal.workflow.metrics.sla.processor.WorkflowMetricsSLAStatus;
 
 import java.util.ArrayList;
@@ -108,7 +108,7 @@ public class TaskResourceImpl extends BaseTaskResourceImpl {
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_TASK);
+				WorkflowMetricsIndexNameConstants.SUFFIX_TASK);
 		searchSearchRequest.setQuery(
 			_createTasksBooleanQuery(
 				processId, taskId,
@@ -355,7 +355,7 @@ public class TaskResourceImpl extends BaseTaskResourceImpl {
 			_queries.term(
 				"_index",
 				_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-					WorkflowMetricsIndexEntityNameConstants.
+					WorkflowMetricsIndexNameConstants.
 						SUFFIX_SLA_TASK_RESULT));
 		slaTaskResultsBooleanQuery.addMustQueryClauses(
 			_createSLATaskResultsBooleanQuery(instanceIds, processId));
@@ -366,7 +366,7 @@ public class TaskResourceImpl extends BaseTaskResourceImpl {
 			_queries.term(
 				"_index",
 				_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-					WorkflowMetricsIndexEntityNameConstants.SUFFIX_TASK));
+					WorkflowMetricsIndexNameConstants.SUFFIX_TASK));
 		tasksBooleanQuery.addMustQueryClauses(
 			_createTasksBooleanQuery(assigneeIds, instanceIds, processId));
 
@@ -535,9 +535,9 @@ public class TaskResourceImpl extends BaseTaskResourceImpl {
 				ListUtil.fromArray(taskNames)));
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_SLA_TASK_RESULT,
+				WorkflowMetricsIndexNameConstants.SUFFIX_SLA_TASK_RESULT,
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_TASK);
+				WorkflowMetricsIndexNameConstants.SUFFIX_TASK);
 		searchSearchRequest.setQuery(
 			_createBooleanQuery(assigneeIds, instanceIds, processId));
 
@@ -567,7 +567,7 @@ public class TaskResourceImpl extends BaseTaskResourceImpl {
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_TASK);
+				WorkflowMetricsIndexNameConstants.SUFFIX_TASK);
 		searchSearchRequest.setQuery(
 			_createTasksBooleanQuery(
 				processId,
@@ -612,7 +612,7 @@ public class TaskResourceImpl extends BaseTaskResourceImpl {
 			_queries.term(
 				"_index",
 				_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-					WorkflowMetricsIndexEntityNameConstants.SUFFIX_TASK));
+					WorkflowMetricsIndexNameConstants.SUFFIX_TASK));
 
 		indexFilterAggregation.addChildAggregation(
 			_aggregations.topHits("topHits"));
@@ -635,9 +635,9 @@ public class TaskResourceImpl extends BaseTaskResourceImpl {
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_SLA_TASK_RESULT,
+				WorkflowMetricsIndexNameConstants.SUFFIX_SLA_TASK_RESULT,
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_TASK);
+				WorkflowMetricsIndexNameConstants.SUFFIX_TASK);
 
 		searchSearchRequest.setQuery(
 			_createBooleanQuery(assigneeIds, instanceIds, processId));

@@ -34,7 +34,7 @@ import com.liferay.portal.search.query.BooleanQuery;
 import com.liferay.portal.search.query.Queries;
 import com.liferay.portal.workflow.metrics.internal.background.task.WorkflowMetricsSLAProcessBackgroundTaskHelper;
 import com.liferay.portal.workflow.metrics.internal.search.index.SLAInstanceResultWorkflowMetricsIndexer;
-import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexEntityNameConstants;
+import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexNameConstants;
 import com.liferay.portal.workflow.metrics.search.index.reindexer.WorkflowMetricsReindexer;
 
 import org.osgi.service.component.annotations.Component;
@@ -71,7 +71,7 @@ public class SLAInstanceResultWorkflowMetricsReindexer
 		if (!_searchCapabilities.isWorkflowMetricsSupported() ||
 			!_hasIndex(
 				_indexNameBuilder.getIndexName(companyId) +
-					WorkflowMetricsIndexEntityNameConstants.SUFFIX_PROCESS)) {
+					WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS)) {
 
 			return;
 		}
@@ -80,7 +80,7 @@ public class SLAInstanceResultWorkflowMetricsReindexer
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(companyId) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_PROCESS);
+				WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS);
 
 		BooleanQuery booleanQuery = _queries.booleanQuery();
 

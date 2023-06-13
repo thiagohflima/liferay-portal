@@ -58,7 +58,7 @@ import com.liferay.portal.workflow.metrics.rest.internal.dto.v1_0.util.AssigneeU
 import com.liferay.portal.workflow.metrics.rest.internal.odata.entity.v1_0.AssigneeMetricEntityModel;
 import com.liferay.portal.workflow.metrics.rest.internal.resource.helper.ResourceHelper;
 import com.liferay.portal.workflow.metrics.rest.resource.v1_0.AssigneeMetricResource;
-import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexEntityNameConstants;
+import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexNameConstants;
 import com.liferay.portal.workflow.metrics.sla.processor.WorkflowMetricsSLAStatus;
 
 import java.util.Collections;
@@ -160,7 +160,7 @@ public class AssigneeMetricResourceImpl extends BaseAssigneeMetricResourceImpl {
 			_queries.term(
 				"_index",
 				_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-					WorkflowMetricsIndexEntityNameConstants.
+					WorkflowMetricsIndexNameConstants.
 						SUFFIX_SLA_TASK_RESULT));
 		slaTaskResultsBooleanQuery.addMustQueryClauses(
 			_createSLATaskResultsBooleanQuery(
@@ -173,7 +173,7 @@ public class AssigneeMetricResourceImpl extends BaseAssigneeMetricResourceImpl {
 			_queries.term(
 				"_index",
 				_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-					WorkflowMetricsIndexEntityNameConstants.SUFFIX_TASK));
+					WorkflowMetricsIndexNameConstants.SUFFIX_TASK));
 		tasksBooleanQuery.addMustQueryClauses(
 			_createTasksBooleanQuery(
 				completed, dateEnd, dateStart, instanceIds, processId,
@@ -252,7 +252,7 @@ public class AssigneeMetricResourceImpl extends BaseAssigneeMetricResourceImpl {
 			_queries.term(
 				"_index",
 				_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-					WorkflowMetricsIndexEntityNameConstants.SUFFIX_TASK));
+					WorkflowMetricsIndexNameConstants.SUFFIX_TASK));
 
 		return booleanQuery.addMustNotQueryClauses(_queries.term("taskId", 0));
 	}
@@ -370,9 +370,9 @@ public class AssigneeMetricResourceImpl extends BaseAssigneeMetricResourceImpl {
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_SLA_TASK_RESULT,
+				WorkflowMetricsIndexNameConstants.SUFFIX_SLA_TASK_RESULT,
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_TASK);
+				WorkflowMetricsIndexNameConstants.SUFFIX_TASK);
 		searchSearchRequest.setQuery(
 			_createBooleanQuery(
 				completed, dateEnd, dateStart, instanceIds, processId,
@@ -403,7 +403,7 @@ public class AssigneeMetricResourceImpl extends BaseAssigneeMetricResourceImpl {
 				"assigneeId", completed ? "completionUserId" : "assigneeIds"));
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_TASK);
+				WorkflowMetricsIndexNameConstants.SUFFIX_TASK);
 		searchSearchRequest.setQuery(
 			_createTasksBooleanQuery(
 				completed, dateEnd, dateStart, instanceIds, processId,

@@ -60,7 +60,7 @@ import com.liferay.portal.workflow.metrics.internal.sla.processor.WorkflowMetric
 import com.liferay.portal.workflow.metrics.internal.sla.processor.WorkflowMetricsSLATaskResult;
 import com.liferay.portal.workflow.metrics.model.WorkflowMetricsSLADefinition;
 import com.liferay.portal.workflow.metrics.model.WorkflowMetricsSLADefinitionVersion;
-import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexEntityNameConstants;
+import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexNameConstants;
 import com.liferay.portal.workflow.metrics.service.WorkflowMetricsSLADefinitionLocalService;
 import com.liferay.portal.workflow.metrics.service.WorkflowMetricsSLADefinitionVersionLocalService;
 import com.liferay.portal.workflow.metrics.sla.processor.WorkflowMetricsSLAStatus;
@@ -296,7 +296,7 @@ public class WorkflowMetricsSLAProcessBackgroundTaskExecutor
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(companyId) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_NODE);
+				WorkflowMetricsIndexNameConstants.SUFFIX_NODE);
 
 		BooleanQuery booleanQuery = _queries.booleanQuery();
 
@@ -335,7 +335,7 @@ public class WorkflowMetricsSLAProcessBackgroundTaskExecutor
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(companyId) +
-				WorkflowMetricsIndexEntityNameConstants.
+				WorkflowMetricsIndexNameConstants.
 					SUFFIX_SLA_INSTANCE_RESULT);
 
 		BooleanQuery booleanQuery = _queries.booleanQuery();
@@ -402,7 +402,7 @@ public class WorkflowMetricsSLAProcessBackgroundTaskExecutor
 		searchSearchRequest.addSorts(_sorts.field("instanceId", SortOrder.ASC));
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(companyId) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_TASK);
+				WorkflowMetricsIndexNameConstants.SUFFIX_TASK);
 
 		BooleanQuery booleanQuery = _queries.booleanQuery();
 
@@ -522,7 +522,7 @@ public class WorkflowMetricsSLAProcessBackgroundTaskExecutor
 
 		searchSearchRequest.setIndexNames(
 			indexName +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_INSTANCE);
+				WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE);
 
 		BooleanQuery booleanQuery = _queries.booleanQuery();
 
@@ -712,7 +712,7 @@ public class WorkflowMetricsSLAProcessBackgroundTaskExecutor
 						"ctx._source.slaDefinitionIds.add(", slaDefinitionId,
 						")")),
 				indexName +
-					WorkflowMetricsIndexEntityNameConstants.SUFFIX_INSTANCE);
+					WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE);
 
 		if (PortalRunMode.isTestMode()) {
 			updateByQueryDocumentRequest.setRefresh(true);

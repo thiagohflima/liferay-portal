@@ -25,7 +25,7 @@ import com.liferay.portal.workflow.kaleo.definition.Task;
 import com.liferay.portal.workflow.kaleo.definition.Transition;
 import com.liferay.portal.workflow.kaleo.model.KaleoNode;
 import com.liferay.portal.workflow.kaleo.model.KaleoTask;
-import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexEntityNameConstants;
+import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexNameConstants;
 import com.liferay.portal.workflow.metrics.service.util.BaseWorkflowMetricsIndexerTestCase;
 
 import java.util.Collections;
@@ -53,7 +53,7 @@ public class NodeWorkflowMetricsIndexerTest
 
 		assertCount(
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_NODE,
+				WorkflowMetricsIndexNameConstants.SUFFIX_NODE,
 			"WorkflowMetricsNodeType", "companyId",
 			workflowDefinition.getCompanyId(), "deleted", false, "initial",
 			true, "name", "start", "nodeId", kaleoNode.getKaleoNodeId(),
@@ -65,7 +65,7 @@ public class NodeWorkflowMetricsIndexerTest
 
 		assertCount(
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_NODE,
+				WorkflowMetricsIndexNameConstants.SUFFIX_NODE,
 			"WorkflowMetricsNodeType", "companyId",
 			workflowDefinition.getCompanyId(), "deleted", false, "initial",
 			false, "name", "end", "nodeId", kaleoNode.getKaleoNodeId(),
@@ -84,7 +84,7 @@ public class NodeWorkflowMetricsIndexerTest
 
 		assertCount(
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_NODE,
+				WorkflowMetricsIndexNameConstants.SUFFIX_NODE,
 			"WorkflowMetricsNodeType", "companyId",
 			workflowDefinition.getCompanyId(), "deleted", false, "initial",
 			false, "name", "review", "nodeId", kaleoTask.getKaleoTaskId(),
@@ -93,7 +93,7 @@ public class NodeWorkflowMetricsIndexerTest
 			"1.0");
 		assertCount(
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_SLA_TASK_RESULT,
+				WorkflowMetricsIndexNameConstants.SUFFIX_SLA_TASK_RESULT,
 			"WorkflowMetricsSLATaskResultType", "companyId",
 			workflowDefinition.getCompanyId(), "deleted", false, "instanceId",
 			0, "processId", workflowDefinition.getWorkflowDefinitionId(),
@@ -101,7 +101,7 @@ public class NodeWorkflowMetricsIndexerTest
 			"taskName", "review");
 		assertCount(
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_TASK,
+				WorkflowMetricsIndexNameConstants.SUFFIX_TASK,
 			"WorkflowMetricsTaskType", "companyId",
 			workflowDefinition.getCompanyId(), "completed", false, "deleted",
 			false, "instanceId", 0, "processId",
@@ -117,7 +117,7 @@ public class NodeWorkflowMetricsIndexerTest
 
 		assertCount(
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_NODE,
+				WorkflowMetricsIndexNameConstants.SUFFIX_NODE,
 			"WorkflowMetricsNodeType", "companyId",
 			workflowDefinition.getCompanyId(), "deleted", false, "initial",
 			false, "name", "end", "nodeId", kaleoNode.getKaleoNodeId(),
@@ -129,7 +129,7 @@ public class NodeWorkflowMetricsIndexerTest
 
 		assertCount(
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_NODE,
+				WorkflowMetricsIndexNameConstants.SUFFIX_NODE,
 			"WorkflowMetricsNodeType", "companyId",
 			workflowDefinition.getCompanyId(), "deleted", true, "initial",
 			false, "name", "end", "nodeId", kaleoNode.getKaleoNodeId(),
@@ -150,7 +150,7 @@ public class NodeWorkflowMetricsIndexerTest
 
 		assertCount(
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_NODE,
+				WorkflowMetricsIndexNameConstants.SUFFIX_NODE,
 			"WorkflowMetricsNodeType", "companyId",
 			workflowDefinition.getCompanyId(), "deleted", true, "initial",
 			false, "name", "review", "nodeId", kaleoTask.getKaleoTaskId(),
@@ -166,15 +166,15 @@ public class NodeWorkflowMetricsIndexerTest
 
 		assertReindex(
 			LinkedHashMapBuilder.put(
-				indexName + WorkflowMetricsIndexEntityNameConstants.SUFFIX_NODE,
+				indexName + WorkflowMetricsIndexNameConstants.SUFFIX_NODE,
 				4
 			).put(
 				indexName +
-					WorkflowMetricsIndexEntityNameConstants.
+					WorkflowMetricsIndexNameConstants.
 						SUFFIX_SLA_TASK_RESULT,
 				2
 			).put(
-				indexName + WorkflowMetricsIndexEntityNameConstants.SUFFIX_TASK,
+				indexName + WorkflowMetricsIndexNameConstants.SUFFIX_TASK,
 				2
 			).build(),
 			new String[] {

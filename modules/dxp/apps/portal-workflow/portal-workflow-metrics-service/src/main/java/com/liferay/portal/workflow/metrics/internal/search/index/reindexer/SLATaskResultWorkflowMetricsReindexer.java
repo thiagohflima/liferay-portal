@@ -32,7 +32,7 @@ import com.liferay.portal.search.query.BooleanQuery;
 import com.liferay.portal.search.query.Queries;
 import com.liferay.portal.workflow.metrics.internal.search.index.SLATaskResultWorkflowMetricsIndexer;
 import com.liferay.portal.workflow.metrics.search.background.task.WorkflowMetricsReindexStatusMessageSender;
-import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexEntityNameConstants;
+import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexNameConstants;
 import com.liferay.portal.workflow.metrics.search.index.reindexer.WorkflowMetricsReindexer;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -62,7 +62,7 @@ public class SLATaskResultWorkflowMetricsReindexer
 		if (!_searchCapabilities.isWorkflowMetricsSupported() ||
 			!_hasIndex(
 				_indexNameBuilder.getIndexName(companyId) +
-					WorkflowMetricsIndexEntityNameConstants.SUFFIX_NODE)) {
+					WorkflowMetricsIndexNameConstants.SUFFIX_NODE)) {
 
 			return;
 		}
@@ -71,7 +71,7 @@ public class SLATaskResultWorkflowMetricsReindexer
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(companyId) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_NODE);
+				WorkflowMetricsIndexNameConstants.SUFFIX_NODE);
 
 		BooleanQuery booleanQuery = _queries.booleanQuery();
 

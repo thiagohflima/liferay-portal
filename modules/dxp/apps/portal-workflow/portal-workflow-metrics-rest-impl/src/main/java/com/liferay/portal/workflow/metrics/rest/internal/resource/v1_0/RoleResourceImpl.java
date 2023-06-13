@@ -33,7 +33,7 @@ import com.liferay.portal.search.query.Queries;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.workflow.metrics.rest.dto.v1_0.Role;
 import com.liferay.portal.workflow.metrics.rest.resource.v1_0.RoleResource;
-import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexEntityNameConstants;
+import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexNameConstants;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -90,7 +90,7 @@ public class RoleResourceImpl extends BaseRoleResourceImpl {
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_TASK);
+				WorkflowMetricsIndexNameConstants.SUFFIX_TASK);
 		searchSearchRequest.setQuery(
 			_createTasksBooleanQuery(completed, processId));
 

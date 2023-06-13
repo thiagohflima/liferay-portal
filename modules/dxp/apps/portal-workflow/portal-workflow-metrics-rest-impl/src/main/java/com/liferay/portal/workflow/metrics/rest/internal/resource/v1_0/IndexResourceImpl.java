@@ -34,7 +34,7 @@ import com.liferay.portal.workflow.metrics.rest.internal.dto.v1_0.util.IndexUtil
 import com.liferay.portal.workflow.metrics.rest.internal.resource.exception.IndexKeyException;
 import com.liferay.portal.workflow.metrics.rest.resource.v1_0.IndexResource;
 import com.liferay.portal.workflow.metrics.search.background.task.WorkflowMetricsBackgroundTaskExecutorNames;
-import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexEntityNameConstants;
+import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexNameConstants;
 import com.liferay.portal.workflow.metrics.search.index.reindexer.WorkflowMetricsReindexerRegistry;
 
 import java.io.Serializable;
@@ -159,22 +159,22 @@ public class IndexResourceImpl extends BaseIndexResourceImpl {
 
 	private static final Map<String, String> _indexNameSuffixMap =
 		HashMapBuilder.put(
-			"instance", WorkflowMetricsIndexEntityNameConstants.SUFFIX_INSTANCE
+			"instance", WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE
 		).put(
-			"node", WorkflowMetricsIndexEntityNameConstants.SUFFIX_NODE
+			"node", WorkflowMetricsIndexNameConstants.SUFFIX_NODE
 		).put(
-			"process", WorkflowMetricsIndexEntityNameConstants.SUFFIX_PROCESS
+			"process", WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS
 		).put(
 			"sla-instance-result",
-			WorkflowMetricsIndexEntityNameConstants.SUFFIX_SLA_INSTANCE_RESULT
+			WorkflowMetricsIndexNameConstants.SUFFIX_SLA_INSTANCE_RESULT
 		).put(
 			"sla-task-result",
-			WorkflowMetricsIndexEntityNameConstants.SUFFIX_SLA_TASK_RESULT
+			WorkflowMetricsIndexNameConstants.SUFFIX_SLA_TASK_RESULT
 		).put(
-			"task", WorkflowMetricsIndexEntityNameConstants.SUFFIX_TASK
+			"task", WorkflowMetricsIndexNameConstants.SUFFIX_TASK
 		).put(
 			"transition",
-			WorkflowMetricsIndexEntityNameConstants.SUFFIX_TRANSITION
+			WorkflowMetricsIndexNameConstants.SUFFIX_TRANSITION
 		).build();
 
 	@Reference

@@ -40,7 +40,7 @@ import com.liferay.portal.search.query.BooleanQuery;
 import com.liferay.portal.search.query.Queries;
 import com.liferay.portal.search.query.TermsQuery;
 import com.liferay.portal.workflow.metrics.model.WorkflowMetricsSLADefinition;
-import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexEntityNameConstants;
+import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexNameConstants;
 import com.liferay.portal.workflow.metrics.service.WorkflowMetricsSLADefinitionLocalService;
 
 import java.util.ArrayList;
@@ -146,7 +146,7 @@ public class WorkflowMetricsSLADefinitionTransformer {
 			workflowMetricsSLADefinition.getCompanyId());
 
 		searchSearchRequest.setIndexNames(
-			indexName + WorkflowMetricsIndexEntityNameConstants.SUFFIX_NODE);
+			indexName + WorkflowMetricsIndexNameConstants.SUFFIX_NODE);
 
 		searchSearchRequest.setQuery(
 			_createNodeBooleanQuery(

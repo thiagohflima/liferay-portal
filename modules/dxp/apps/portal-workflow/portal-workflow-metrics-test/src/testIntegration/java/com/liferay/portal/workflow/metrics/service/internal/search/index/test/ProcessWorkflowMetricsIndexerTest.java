@@ -20,7 +20,7 @@ import com.liferay.portal.search.index.IndexNameBuilder;
 import com.liferay.portal.search.query.TermsQuery;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
-import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexEntityNameConstants;
+import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexNameConstants;
 import com.liferay.portal.workflow.metrics.service.util.BaseWorkflowMetricsIndexerTestCase;
 
 import org.junit.ClassRule;
@@ -44,20 +44,20 @@ public class ProcessWorkflowMetricsIndexerTest
 	public void testAddProcess() throws Exception {
 		assertCount(
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_PROCESS,
+				WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS,
 			"WorkflowMetricsProcessType", "companyId",
 			workflowDefinition.getCompanyId(), "deleted", false, "processId",
 			workflowDefinition.getWorkflowDefinitionId(), "version", "1.0",
 			"versions", "1.0");
 		assertCount(
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_INSTANCE,
+				WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 			"WorkflowMetricsInstanceType", "companyId",
 			workflowDefinition.getCompanyId(), "deleted", false, "processId",
 			workflowDefinition.getWorkflowDefinitionId(), "instanceId", 0);
 		assertCount(
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.
+				WorkflowMetricsIndexNameConstants.
 					SUFFIX_SLA_INSTANCE_RESULT,
 			"WorkflowMetricsSLAInstanceResultType", "companyId",
 			workflowDefinition.getCompanyId(), "deleted", false, "processId",
@@ -74,7 +74,7 @@ public class ProcessWorkflowMetricsIndexerTest
 
 		assertCount(
 			_indexNameBuilder.getIndexName(companyId) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_PROCESS,
+				WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS,
 			"WorkflowMetricsProcessType", "companyId", companyId, "deleted",
 			true, "processId", workflowDefinitionId, "version", "1.0");
 	}
@@ -87,11 +87,11 @@ public class ProcessWorkflowMetricsIndexerTest
 		assertReindex(
 			new String[] {
 				indexName +
-					WorkflowMetricsIndexEntityNameConstants.SUFFIX_PROCESS,
+					WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS,
 				indexName +
-					WorkflowMetricsIndexEntityNameConstants.SUFFIX_INSTANCE,
+					WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 				indexName +
-					WorkflowMetricsIndexEntityNameConstants.
+					WorkflowMetricsIndexNameConstants.
 						SUFFIX_SLA_INSTANCE_RESULT
 			},
 			new String[] {
@@ -106,7 +106,7 @@ public class ProcessWorkflowMetricsIndexerTest
 	public void testUpdateProcess() throws Exception {
 		assertCount(
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_PROCESS,
+				WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS,
 			"WorkflowMetricsProcessType", "companyId",
 			workflowDefinition.getCompanyId(), "deleted", false, "processId",
 			workflowDefinition.getWorkflowDefinitionId(), "version", "1.0");
@@ -123,7 +123,7 @@ public class ProcessWorkflowMetricsIndexerTest
 			},
 			1,
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_PROCESS,
+				WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS,
 			"WorkflowMetricsProcessType", "companyId",
 			workflowDefinition.getCompanyId(), "deleted", false, "processId",
 			workflowDefinition.getWorkflowDefinitionId(), "version", "2.0");

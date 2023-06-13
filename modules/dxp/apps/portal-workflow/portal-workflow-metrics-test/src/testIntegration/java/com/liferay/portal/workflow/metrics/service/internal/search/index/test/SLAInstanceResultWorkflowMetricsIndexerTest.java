@@ -27,7 +27,7 @@ import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.workflow.kaleo.model.KaleoInstance;
 import com.liferay.portal.workflow.kaleo.service.KaleoDefinitionVersionLocalService;
 import com.liferay.portal.workflow.metrics.model.WorkflowMetricsSLADefinition;
-import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexEntityNameConstants;
+import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexNameConstants;
 import com.liferay.portal.workflow.metrics.service.WorkflowMetricsSLADefinitionLocalService;
 import com.liferay.portal.workflow.metrics.service.util.BaseWorkflowMetricsIndexerTestCase;
 
@@ -51,12 +51,12 @@ public class SLAInstanceResultWorkflowMetricsIndexerTest
 			workflowDefinition.getCompanyId());
 
 		assertCount(
-			4, indexName + WorkflowMetricsIndexEntityNameConstants.SUFFIX_NODE,
+			4, indexName + WorkflowMetricsIndexNameConstants.SUFFIX_NODE,
 			"WorkflowMetricsNodeType", "companyId",
 			workflowDefinition.getCompanyId(), "processId",
 			workflowDefinition.getWorkflowDefinitionId());
 		assertCount(
-			indexName + WorkflowMetricsIndexEntityNameConstants.SUFFIX_PROCESS,
+			indexName + WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS,
 			"WorkflowMetricsProcessType", "companyId",
 			workflowDefinition.getCompanyId(), "processId",
 			workflowDefinition.getWorkflowDefinitionId());
@@ -112,7 +112,7 @@ public class SLAInstanceResultWorkflowMetricsIndexerTest
 
 			assertCount(
 				indexName +
-					WorkflowMetricsIndexEntityNameConstants.SUFFIX_INSTANCE,
+					WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 				"WorkflowMetricsInstanceType", "className",
 				kaleoInstance.getClassName(), "classPK",
 				kaleoInstance.getClassPK(), "companyId",
@@ -127,7 +127,7 @@ public class SLAInstanceResultWorkflowMetricsIndexerTest
 			assertSLAReindex(
 				LinkedHashMapBuilder.put(
 					indexName +
-						WorkflowMetricsIndexEntityNameConstants.
+						WorkflowMetricsIndexNameConstants.
 							SUFFIX_SLA_INSTANCE_RESULT,
 					2
 				).build(),
@@ -146,7 +146,7 @@ public class SLAInstanceResultWorkflowMetricsIndexerTest
 				assertSLAReindex(
 					new String[] {
 						indexName +
-							WorkflowMetricsIndexEntityNameConstants.
+							WorkflowMetricsIndexNameConstants.
 								SUFFIX_SLA_INSTANCE_RESULT
 					},
 					new String[] {"WorkflowMetricsSLAInstanceResultType"},

@@ -30,7 +30,7 @@ import com.liferay.portal.search.index.IndexNameBuilder;
 import com.liferay.portal.search.query.BooleanQuery;
 import com.liferay.portal.search.query.Queries;
 import com.liferay.portal.vulcan.pagination.Page;
-import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexEntityNameConstants;
+import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexNameConstants;
 
 import java.util.List;
 
@@ -56,7 +56,7 @@ public class SPINodeResource<T> {
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(_companyId) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_NODE);
+				WorkflowMetricsIndexNameConstants.SUFFIX_NODE);
 
 		BooleanQuery booleanQuery = _queries.booleanQuery();
 
@@ -86,7 +86,7 @@ public class SPINodeResource<T> {
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(_companyId) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_PROCESS);
+				WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS);
 
 		BooleanQuery booleanQuery = _queries.booleanQuery();
 

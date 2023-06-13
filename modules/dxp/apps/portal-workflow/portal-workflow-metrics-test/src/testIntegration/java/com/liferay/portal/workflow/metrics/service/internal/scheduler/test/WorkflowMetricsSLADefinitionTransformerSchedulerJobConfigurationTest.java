@@ -25,7 +25,7 @@ import com.liferay.portal.search.index.IndexNameBuilder;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.workflow.metrics.model.WorkflowMetricsSLADefinition;
 import com.liferay.portal.workflow.metrics.model.WorkflowMetricsSLADefinitionVersion;
-import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexEntityNameConstants;
+import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexNameConstants;
 import com.liferay.portal.workflow.metrics.service.WorkflowMetricsSLADefinitionLocalService;
 import com.liferay.portal.workflow.metrics.service.WorkflowMetricsSLADefinitionVersionLocalService;
 import com.liferay.portal.workflow.metrics.service.util.BaseWorkflowMetricsTestCase;
@@ -49,13 +49,13 @@ public class
 		assertCount(
 			4,
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_NODE,
+				WorkflowMetricsIndexNameConstants.SUFFIX_NODE,
 			"WorkflowMetricsNodeType", "companyId",
 			workflowDefinition.getCompanyId(), "deleted", false, "processId",
 			workflowDefinition.getWorkflowDefinitionId(), "version", "1.0");
 		assertCount(
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_PROCESS,
+				WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS,
 			"WorkflowMetricsProcessType", "active", true, "companyId",
 			workflowDefinition.getCompanyId(), "processId",
 			workflowDefinition.getWorkflowDefinitionId(), "version", "1.0");
@@ -73,14 +73,14 @@ public class
 
 		assertCount(
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_PROCESS,
+				WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS,
 			"WorkflowMetricsProcessType", "active", true, "companyId",
 			workflowDefinition.getCompanyId(), "processId",
 			workflowDefinition.getWorkflowDefinitionId(), "version", "2.0");
 		assertCount(
 			4,
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_NODE,
+				WorkflowMetricsIndexNameConstants.SUFFIX_NODE,
 			"WorkflowMetricsNodeType", "companyId",
 			workflowDefinition.getCompanyId(), "deleted", false, "processId",
 			workflowDefinition.getWorkflowDefinitionId(), "version", "2.0");
@@ -114,13 +114,13 @@ public class
 		assertCount(
 			4,
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_NODE,
+				WorkflowMetricsIndexNameConstants.SUFFIX_NODE,
 			"WorkflowMetricsNodeType", "companyId",
 			workflowDefinition.getCompanyId(), "deleted", false, "processId",
 			workflowDefinition.getWorkflowDefinitionId(), "version", "1.0");
 		assertCount(
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_PROCESS,
+				WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS,
 			"WorkflowMetricsProcessType", "active", true, "companyId",
 			workflowDefinition.getCompanyId(), "processId",
 			workflowDefinition.getWorkflowDefinitionId(), "version", "1.0");
@@ -142,14 +142,14 @@ public class
 
 		assertCount(
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_PROCESS,
+				WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS,
 			"WorkflowMetricsProcessType", "active", true, "companyId",
 			workflowDefinition.getCompanyId(), "deleted", false, "processId",
 			workflowDefinition.getWorkflowDefinitionId(), "version", "2.0");
 		assertCount(
 			4,
 			_indexNameBuilder.getIndexName(workflowDefinition.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_NODE,
+				WorkflowMetricsIndexNameConstants.SUFFIX_NODE,
 			"WorkflowMetricsNodeType", "companyId",
 			workflowDefinition.getCompanyId(), "deleted", false, "processId",
 			workflowDefinition.getWorkflowDefinitionId(), "version", "2.0");

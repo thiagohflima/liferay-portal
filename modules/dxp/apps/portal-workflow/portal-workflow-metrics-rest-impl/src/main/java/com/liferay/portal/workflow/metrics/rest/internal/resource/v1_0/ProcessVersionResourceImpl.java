@@ -26,7 +26,7 @@ import com.liferay.portal.search.query.Queries;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.workflow.metrics.rest.dto.v1_0.ProcessVersion;
 import com.liferay.portal.workflow.metrics.rest.resource.v1_0.ProcessVersionResource;
-import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexEntityNameConstants;
+import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexNameConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +52,7 @@ public class ProcessVersionResourceImpl extends BaseProcessVersionResourceImpl {
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_PROCESS);
+				WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS);
 
 		BooleanQuery booleanQuery = _queries.booleanQuery();
 

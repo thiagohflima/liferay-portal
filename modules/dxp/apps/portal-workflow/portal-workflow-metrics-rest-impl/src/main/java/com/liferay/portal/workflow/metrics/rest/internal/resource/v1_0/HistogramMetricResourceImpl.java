@@ -31,7 +31,7 @@ import com.liferay.portal.search.query.Queries;
 import com.liferay.portal.workflow.metrics.rest.dto.v1_0.Histogram;
 import com.liferay.portal.workflow.metrics.rest.dto.v1_0.HistogramMetric;
 import com.liferay.portal.workflow.metrics.rest.resource.v1_0.HistogramMetricResource;
-import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexEntityNameConstants;
+import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexNameConstants;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
@@ -94,7 +94,7 @@ public class HistogramMetricResourceImpl
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_INSTANCE);
+				WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE);
 
 		BooleanQuery booleanQuery = _queries.booleanQuery();
 

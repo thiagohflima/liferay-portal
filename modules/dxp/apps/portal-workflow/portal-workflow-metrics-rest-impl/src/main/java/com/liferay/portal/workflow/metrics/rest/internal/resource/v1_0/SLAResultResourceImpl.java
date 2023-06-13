@@ -28,7 +28,7 @@ import com.liferay.portal.workflow.metrics.rest.dto.v1_0.SLAResult;
 import com.liferay.portal.workflow.metrics.rest.internal.dto.v1_0.util.SLAResultUtil;
 import com.liferay.portal.workflow.metrics.rest.internal.resource.exception.NoSuchSLAResultException;
 import com.liferay.portal.workflow.metrics.rest.resource.v1_0.SLAResultResource;
-import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexEntityNameConstants;
+import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexNameConstants;
 import com.liferay.portal.workflow.metrics.service.WorkflowMetricsSLADefinitionLocalService;
 
 import java.util.List;
@@ -54,7 +54,7 @@ public class SLAResultResourceImpl extends BaseSLAResultResourceImpl {
 			_sorts.field("modifiedDate", SortOrder.DESC));
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.
+				WorkflowMetricsIndexNameConstants.
 					SUFFIX_SLA_INSTANCE_RESULT);
 
 		BooleanQuery booleanQuery = _queries.booleanQuery();

@@ -36,7 +36,7 @@ import com.liferay.portal.workflow.metrics.rest.internal.dto.v1_0.util.ProcessUt
 import com.liferay.portal.workflow.metrics.rest.internal.resource.exception.NoSuchProcessException;
 import com.liferay.portal.workflow.metrics.rest.resource.v1_0.ProcessResource;
 import com.liferay.portal.workflow.metrics.search.index.ProcessWorkflowMetricsIndexer;
-import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexEntityNameConstants;
+import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexNameConstants;
 
 import java.util.List;
 import java.util.Locale;
@@ -76,7 +76,7 @@ public class ProcessResourceImpl extends BaseProcessResourceImpl {
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_PROCESS);
+				WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS);
 		searchSearchRequest.setQuery(_createBooleanQuery(processId));
 
 		SearchSearchResponse searchSearchResponse =
@@ -104,7 +104,7 @@ public class ProcessResourceImpl extends BaseProcessResourceImpl {
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_PROCESS);
+				WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS);
 		searchSearchRequest.setQuery(_createBooleanQuery(processId));
 		searchSearchRequest.setSelectedFieldNames(
 			"processId",

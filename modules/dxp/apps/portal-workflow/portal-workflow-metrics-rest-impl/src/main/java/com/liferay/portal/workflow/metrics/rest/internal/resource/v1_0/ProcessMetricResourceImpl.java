@@ -54,7 +54,7 @@ import com.liferay.portal.workflow.metrics.rest.internal.dto.v1_0.util.ProcessUt
 import com.liferay.portal.workflow.metrics.rest.internal.odata.entity.v1_0.ProcessMetricEntityModel;
 import com.liferay.portal.workflow.metrics.rest.internal.resource.helper.ResourceHelper;
 import com.liferay.portal.workflow.metrics.rest.resource.v1_0.ProcessMetricResource;
-import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexEntityNameConstants;
+import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexNameConstants;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -164,7 +164,7 @@ public class ProcessMetricResourceImpl extends BaseProcessMetricResourceImpl {
 			_queries.term(
 				"_index",
 				_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-					WorkflowMetricsIndexEntityNameConstants.SUFFIX_INSTANCE));
+					WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE));
 		instancesBooleanQuery.addMustNotQueryClauses(
 			_queries.term("instanceId", 0));
 		instancesBooleanQuery.addMustQueryClauses(
@@ -177,7 +177,7 @@ public class ProcessMetricResourceImpl extends BaseProcessMetricResourceImpl {
 			_queries.term(
 				"_index",
 				_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-					WorkflowMetricsIndexEntityNameConstants.
+					WorkflowMetricsIndexNameConstants.
 						SUFFIX_SLA_INSTANCE_RESULT));
 		slaInstanceResultsBooleanQuery.addMustNotQueryClauses(
 			_queries.term("slaDefinitionId", 0));
@@ -354,7 +354,7 @@ public class ProcessMetricResourceImpl extends BaseProcessMetricResourceImpl {
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_INSTANCE);
+				WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE);
 		searchSearchRequest.setQuery(
 			_createInstanceBooleanQuery(completed, null, null, processIds));
 
@@ -400,9 +400,9 @@ public class ProcessMetricResourceImpl extends BaseProcessMetricResourceImpl {
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_INSTANCE,
+				WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.
+				WorkflowMetricsIndexNameConstants.
 					SUFFIX_SLA_INSTANCE_RESULT);
 
 		searchSearchRequest.setQuery(
@@ -504,7 +504,7 @@ public class ProcessMetricResourceImpl extends BaseProcessMetricResourceImpl {
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_PROCESS);
+				WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS);
 		searchSearchRequest.setQuery(
 			_createProcessBooleanQuery(processId, title));
 
@@ -560,7 +560,7 @@ public class ProcessMetricResourceImpl extends BaseProcessMetricResourceImpl {
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.
+				WorkflowMetricsIndexNameConstants.
 					SUFFIX_SLA_INSTANCE_RESULT);
 		searchSearchRequest.setQuery(
 			_createSLAInstanceResultsBooleanQuery(

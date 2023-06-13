@@ -49,7 +49,7 @@ import com.liferay.portal.workflow.metrics.rest.dto.v1_0.NodeMetric;
 import com.liferay.portal.workflow.metrics.rest.internal.odata.entity.v1_0.NodeMetricEntityModel;
 import com.liferay.portal.workflow.metrics.rest.internal.resource.helper.ResourceHelper;
 import com.liferay.portal.workflow.metrics.rest.resource.v1_0.NodeMetricResource;
-import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexEntityNameConstants;
+import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexNameConstants;
 import com.liferay.portal.workflow.metrics.sla.processor.WorkflowMetricsSLAStatus;
 
 import java.util.Collection;
@@ -132,7 +132,7 @@ public class NodeMetricResourceImpl extends BaseNodeMetricResourceImpl {
 			_queries.term(
 				"_index",
 				_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-					WorkflowMetricsIndexEntityNameConstants.
+					WorkflowMetricsIndexNameConstants.
 						SUFFIX_SLA_TASK_RESULT));
 		slaTaskResultsBooleanQuery.addMustQueryClauses(
 			_createSLATaskResultsBooleanQuery(
@@ -144,7 +144,7 @@ public class NodeMetricResourceImpl extends BaseNodeMetricResourceImpl {
 			_queries.term(
 				"_index",
 				_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-					WorkflowMetricsIndexEntityNameConstants.SUFFIX_TASK));
+					WorkflowMetricsIndexNameConstants.SUFFIX_TASK));
 		tasksBooleanQuery.addMustQueryClauses(
 			_createTasksBooleanQuery(
 				completed, dateEnd, dateStart, processId, taskNames));
@@ -415,9 +415,9 @@ public class NodeMetricResourceImpl extends BaseNodeMetricResourceImpl {
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_TASK,
+				WorkflowMetricsIndexNameConstants.SUFFIX_TASK,
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_SLA_TASK_RESULT);
+				WorkflowMetricsIndexNameConstants.SUFFIX_SLA_TASK_RESULT);
 		searchSearchRequest.setQuery(
 			_createBooleanQuery(
 				completed, dateEnd, dateStart, processId,
@@ -462,7 +462,7 @@ public class NodeMetricResourceImpl extends BaseNodeMetricResourceImpl {
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_NODE);
+				WorkflowMetricsIndexNameConstants.SUFFIX_NODE);
 
 		searchSearchRequest.setQuery(
 			_createNodesBooleanQuery(
@@ -524,7 +524,7 @@ public class NodeMetricResourceImpl extends BaseNodeMetricResourceImpl {
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_TASK);
+				WorkflowMetricsIndexNameConstants.SUFFIX_TASK);
 
 		searchSearchRequest.setQuery(
 			_createTasksBooleanQuery(

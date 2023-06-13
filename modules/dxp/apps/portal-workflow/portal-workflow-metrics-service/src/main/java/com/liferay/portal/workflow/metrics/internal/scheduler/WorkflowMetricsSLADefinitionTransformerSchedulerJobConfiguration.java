@@ -38,7 +38,7 @@ import com.liferay.portal.search.query.BooleanQuery;
 import com.liferay.portal.search.query.Queries;
 import com.liferay.portal.workflow.metrics.internal.configuration.WorkflowMetricsConfiguration;
 import com.liferay.portal.workflow.metrics.internal.sla.transformer.WorkflowMetricsSLADefinitionTransformer;
-import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexEntityNameConstants;
+import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexNameConstants;
 
 import java.util.Map;
 
@@ -99,7 +99,7 @@ public class WorkflowMetricsSLADefinitionTransformerSchedulerJobConfiguration
 		IndicesExistsIndexRequest indicesExistsIndexRequest =
 			new IndicesExistsIndexRequest(
 				_indexNameBuilder.getIndexName(companyId) +
-					WorkflowMetricsIndexEntityNameConstants.SUFFIX_PROCESS);
+					WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS);
 
 		IndicesExistsIndexResponse indicesExistsIndexResponse =
 			_searchEngineAdapter.execute(indicesExistsIndexRequest);
@@ -116,7 +116,7 @@ public class WorkflowMetricsSLADefinitionTransformerSchedulerJobConfiguration
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(companyId) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_PROCESS);
+				WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS);
 
 		BooleanQuery booleanQuery = _queries.booleanQuery();
 

@@ -73,7 +73,7 @@ import com.liferay.portal.workflow.metrics.search.index.InstanceWorkflowMetricsI
 import com.liferay.portal.workflow.metrics.search.index.NodeWorkflowMetricsIndexer;
 import com.liferay.portal.workflow.metrics.search.index.ProcessWorkflowMetricsIndexer;
 import com.liferay.portal.workflow.metrics.search.index.TaskWorkflowMetricsIndexer;
-import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexEntityNameConstants;
+import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexNameConstants;
 
 import java.io.Serializable;
 
@@ -160,7 +160,7 @@ public class WorkflowMetricsRESTTestHelper {
 
 		_assertCount(
 			_indexNameBuilder.getIndexName(companyId) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_INSTANCE,
+				WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 			"active", true, "companyId", companyId, "deleted", false,
 			"instanceId", instance.getId(), "processId",
 			instance.getProcessId());
@@ -247,7 +247,7 @@ public class WorkflowMetricsRESTTestHelper {
 
 		_assertCount(
 			_indexNameBuilder.getIndexName(companyId) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_NODE,
+				WorkflowMetricsIndexNameConstants.SUFFIX_NODE,
 			"companyId", companyId, "deleted", false, "name", node.getName(),
 			"processId", processId, "version", version);
 
@@ -334,7 +334,7 @@ public class WorkflowMetricsRESTTestHelper {
 
 		_assertCount(
 			_indexNameBuilder.getIndexName(companyId) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_NODE,
+				WorkflowMetricsIndexNameConstants.SUFFIX_NODE,
 			"companyId", companyId, "deleted", false, "name", node.getName(),
 			"processId", processId);
 
@@ -403,7 +403,7 @@ public class WorkflowMetricsRESTTestHelper {
 
 		_assertCount(
 			_indexNameBuilder.getIndexName(companyId) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_PROCESS,
+				WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS,
 			"companyId", companyId, "deleted", false, "processId",
 			process.getId());
 
@@ -507,7 +507,7 @@ public class WorkflowMetricsRESTTestHelper {
 
 			_assertCount(
 				_indexNameBuilder.getIndexName(companyId) +
-					WorkflowMetricsIndexEntityNameConstants.
+					WorkflowMetricsIndexNameConstants.
 						SUFFIX_SLA_INSTANCE_RESULT,
 				"blocked", false, "companyId", companyId, "deleted", false,
 				"instanceCompleted",
@@ -539,7 +539,7 @@ public class WorkflowMetricsRESTTestHelper {
 
 		_assertCount(
 			_indexNameBuilder.getIndexName(companyId) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_SLA_TASK_RESULT,
+				WorkflowMetricsIndexNameConstants.SUFFIX_SLA_TASK_RESULT,
 			"breached", breached, "assigneeIds", assigneeId, "assigneeType",
 			User.class.getName(), "companyId", companyId, "deleted", false,
 			"instanceCompleted", Objects.nonNull(instance.getDateCompletion()),
@@ -638,7 +638,7 @@ public class WorkflowMetricsRESTTestHelper {
 
 		_assertCount(
 			_indexNameBuilder.getIndexName(addTaskRequest.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_TASK,
+				WorkflowMetricsIndexNameConstants.SUFFIX_TASK,
 			"active", true, "companyId", addTaskRequest.getCompanyId(),
 			"deleted", false, "instanceId", instance.getId(), "processId",
 			addTaskRequest.getProcessId(), "nodeId", addTaskRequest.getNodeId(),
@@ -657,7 +657,7 @@ public class WorkflowMetricsRESTTestHelper {
 							"tasks.taskId", addTaskRequest.getTaskId()))),
 				1,
 				indexName +
-					WorkflowMetricsIndexEntityNameConstants.SUFFIX_INSTANCE,
+					WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 				"companyId", addTaskRequest.getCompanyId(), "deleted", false,
 				"instanceId", instance.getId(), "processId",
 				addTaskRequest.getProcessId());
@@ -694,7 +694,7 @@ public class WorkflowMetricsRESTTestHelper {
 
 			_assertCount(
 				_indexNameBuilder.getIndexName(companyId) +
-					WorkflowMetricsIndexEntityNameConstants.SUFFIX_TASK,
+					WorkflowMetricsIndexNameConstants.SUFFIX_TASK,
 				"assigneeIds", assignment.getAssignmentId(), "assigneeType",
 				assignmentType, "companyId", addTaskRequest.getCompanyId(),
 				"deleted", false, "instanceId", instance.getId(), "processId",
@@ -726,7 +726,7 @@ public class WorkflowMetricsRESTTestHelper {
 
 			_assertCount(
 				_indexNameBuilder.getIndexName(addTaskRequest.getCompanyId()) +
-					WorkflowMetricsIndexEntityNameConstants.SUFFIX_TASK,
+					WorkflowMetricsIndexNameConstants.SUFFIX_TASK,
 				"companyId", addTaskRequest.getCompanyId(), "completed", true,
 				"completionUserId", addTaskRequest.getCompletionUserId(),
 				"deleted", false, "duration", durationAvg, "instanceId",
@@ -815,7 +815,7 @@ public class WorkflowMetricsRESTTestHelper {
 		String indexName = _indexNameBuilder.getIndexName(companyId);
 
 		_assertCount(
-			indexName + WorkflowMetricsIndexEntityNameConstants.SUFFIX_TASK,
+			indexName + WorkflowMetricsIndexNameConstants.SUFFIX_TASK,
 			"companyId", companyId, "deleted", false, "instanceId",
 			instance.getId(), "processId", task.getProcessId(), "nodeId",
 			task.getNodeId(), "name", task.getName(), "taskId", task.getId());
@@ -825,7 +825,7 @@ public class WorkflowMetricsRESTTestHelper {
 				_queries.nested(
 					"tasks", _queries.term("tasks.taskId", task.getId()))),
 			1,
-			indexName + WorkflowMetricsIndexEntityNameConstants.SUFFIX_INSTANCE,
+			indexName + WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 			"companyId", companyId, "deleted", false, "instanceId",
 			instance.getId(), "processId", task.getProcessId());
 
@@ -853,7 +853,7 @@ public class WorkflowMetricsRESTTestHelper {
 			Assignment assignment = assignments.get(0);
 
 			_assertCount(
-				indexName + WorkflowMetricsIndexEntityNameConstants.SUFFIX_TASK,
+				indexName + WorkflowMetricsIndexNameConstants.SUFFIX_TASK,
 				"assigneeIds", assignment.getAssignmentId(), "assigneeType",
 				assigneeType, "companyId", companyId, "deleted", false,
 				"instanceId", instance.getId(), "processId",
@@ -883,7 +883,7 @@ public class WorkflowMetricsRESTTestHelper {
 				).build());
 
 			_assertCount(
-				indexName + WorkflowMetricsIndexEntityNameConstants.SUFFIX_TASK,
+				indexName + WorkflowMetricsIndexNameConstants.SUFFIX_TASK,
 				"companyId", companyId, "completed", true, "completionUserId",
 				task.getCompletionUserId(), "deleted", false, "duration",
 				task.getDuration(), "instanceId", instance.getId(), "processId",
@@ -920,7 +920,7 @@ public class WorkflowMetricsRESTTestHelper {
 
 		_assertCount(
 			_indexNameBuilder.getIndexName(companyId) +
-				WorkflowMetricsIndexEntityNameConstants.
+				WorkflowMetricsIndexNameConstants.
 					SUFFIX_SLA_INSTANCE_RESULT,
 			"blocked", true, "companyId", companyId, "deleted", false,
 			"processId", processId, "slaDefinitionId", slaDefinitionId);
@@ -953,7 +953,7 @@ public class WorkflowMetricsRESTTestHelper {
 
 		_assertCount(
 			_indexNameBuilder.getIndexName(companyId) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_INSTANCE,
+				WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 			"companyId", companyId, "completed", true, "deleted", false,
 			"instanceId", instance.getId(), "processId",
 			instance.getProcessId());
@@ -967,7 +967,7 @@ public class WorkflowMetricsRESTTestHelper {
 
 		_assertCount(
 			_indexNameBuilder.getIndexName(companyId) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_INSTANCE,
+				WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 			"companyId", companyId, "deleted", true, "instanceId",
 			instance.getId(), "processId", instance.getProcessId());
 	}
@@ -986,7 +986,7 @@ public class WorkflowMetricsRESTTestHelper {
 
 		_assertCount(
 			_indexNameBuilder.getIndexName(companyId) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_NODE,
+				WorkflowMetricsIndexNameConstants.SUFFIX_NODE,
 			"companyId", companyId, "deleted", true, "name", node.getName(),
 			"processId", processId);
 	}
@@ -1004,7 +1004,7 @@ public class WorkflowMetricsRESTTestHelper {
 
 		_assertCount(
 			_indexNameBuilder.getIndexName(companyId) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_PROCESS,
+				WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS,
 			"companyId", companyId, "deleted", true, "processId", processId);
 	}
 
@@ -1019,14 +1019,14 @@ public class WorkflowMetricsRESTTestHelper {
 
 		_deleteDocuments(
 			_indexNameBuilder.getIndexName(companyId) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_SLA_TASK_RESULT,
+				WorkflowMetricsIndexNameConstants.SUFFIX_SLA_TASK_RESULT,
 			"companyId", companyId, "processId", processId);
 	}
 
 	public void deleteTasks(long companyId, long processId) throws Exception {
 		_deleteDocuments(
 			_indexNameBuilder.getIndexName(companyId) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_TASK,
+				WorkflowMetricsIndexNameConstants.SUFFIX_TASK,
 			"companyId", companyId, "processId", processId);
 	}
 
@@ -1039,7 +1039,7 @@ public class WorkflowMetricsRESTTestHelper {
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(companyId) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_PROCESS);
+				WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS);
 
 		BooleanQuery booleanQuery = _queries.booleanQuery();
 
@@ -1094,7 +1094,7 @@ public class WorkflowMetricsRESTTestHelper {
 
 		_assertCount(
 			_indexNameBuilder.getIndexName(document.getLong("companyId")) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_PROCESS,
+				WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS,
 			"companyId", document.getLong("companyId"), "deleted", false,
 			"processId", document.getLong("processId"));
 	}
@@ -1126,7 +1126,7 @@ public class WorkflowMetricsRESTTestHelper {
 
 		_assertCount(
 			_indexNameBuilder.getIndexName(companyId) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_PROCESS,
+				WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS,
 			"companyId", companyId, "deleted", false, "processId", processId,
 			"version", version);
 	}
@@ -1536,7 +1536,7 @@ public class WorkflowMetricsRESTTestHelper {
 		).build();
 
 		UpdateDocumentRequest updateDocumentRequest = new UpdateDocumentRequest(
-			indexName + WorkflowMetricsIndexEntityNameConstants.SUFFIX_INSTANCE,
+			indexName + WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 			document.getString("uid"), document);
 
 		updateDocumentRequest.setRefresh(true);
@@ -1553,7 +1553,7 @@ public class WorkflowMetricsRESTTestHelper {
 							_getDateString(slaResult.getDateOverdue())))),
 				1,
 				indexName +
-					WorkflowMetricsIndexEntityNameConstants.SUFFIX_INSTANCE,
+					WorkflowMetricsIndexNameConstants.SUFFIX_INSTANCE,
 				"companyId", companyId, "deleted", false, "instanceId",
 				instance.getId(), "processId", instance.getProcessId());
 		}

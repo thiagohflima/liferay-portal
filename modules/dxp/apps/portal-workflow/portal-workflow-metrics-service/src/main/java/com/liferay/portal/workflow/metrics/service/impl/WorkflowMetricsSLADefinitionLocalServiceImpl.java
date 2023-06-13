@@ -56,7 +56,7 @@ import com.liferay.portal.workflow.metrics.internal.search.index.SLAInstanceResu
 import com.liferay.portal.workflow.metrics.internal.search.index.SLATaskResultWorkflowMetricsIndexer;
 import com.liferay.portal.workflow.metrics.model.WorkflowMetricsSLADefinition;
 import com.liferay.portal.workflow.metrics.model.WorkflowMetricsSLADefinitionVersion;
-import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexEntityNameConstants;
+import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexNameConstants;
 import com.liferay.portal.workflow.metrics.service.base.WorkflowMetricsSLADefinitionLocalServiceBaseImpl;
 import com.liferay.portal.workflow.metrics.service.persistence.WorkflowMetricsSLADefinitionVersionPersistence;
 
@@ -403,7 +403,7 @@ public class WorkflowMetricsSLADefinitionLocalServiceImpl
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(companyId) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_PROCESS);
+				WorkflowMetricsIndexNameConstants.SUFFIX_PROCESS);
 
 		BooleanQuery booleanQuery = _queries.booleanQuery();
 
@@ -541,7 +541,7 @@ public class WorkflowMetricsSLADefinitionLocalServiceImpl
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(companyId) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_NODE);
+				WorkflowMetricsIndexNameConstants.SUFFIX_NODE);
 
 		BooleanQuery booleanQuery = _queries.booleanQuery();
 

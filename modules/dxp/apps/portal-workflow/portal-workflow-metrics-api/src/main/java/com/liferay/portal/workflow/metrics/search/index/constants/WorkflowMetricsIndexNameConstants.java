@@ -17,7 +17,7 @@ package com.liferay.portal.workflow.metrics.search.index.constants;
 /**
  * @author Jiaxu Wei
  */
-public interface WorkflowMetricsIndexEntityNameConstants {
+public interface WorkflowMetricsIndexNameConstants {
 
 	public static final String SUFFIX_INSTANCE = "-workflow-metrics-instances";
 

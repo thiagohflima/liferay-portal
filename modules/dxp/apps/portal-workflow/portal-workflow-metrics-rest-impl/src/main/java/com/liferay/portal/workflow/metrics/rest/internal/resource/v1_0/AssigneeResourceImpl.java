@@ -37,7 +37,7 @@ import com.liferay.portal.workflow.metrics.rest.dto.v1_0.Assignee;
 import com.liferay.portal.workflow.metrics.rest.dto.v1_0.AssigneeBulkSelection;
 import com.liferay.portal.workflow.metrics.rest.internal.dto.v1_0.util.AssigneeUtil;
 import com.liferay.portal.workflow.metrics.rest.resource.v1_0.AssigneeResource;
-import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexEntityNameConstants;
+import com.liferay.portal.workflow.metrics.search.index.constants.WorkflowMetricsIndexNameConstants;
 
 import java.util.Comparator;
 import java.util.List;
@@ -72,7 +72,7 @@ public class AssigneeResourceImpl extends BaseAssigneeResourceImpl {
 
 		searchSearchRequest.setIndexNames(
 			_indexNameBuilder.getIndexName(contextCompany.getCompanyId()) +
-				WorkflowMetricsIndexEntityNameConstants.SUFFIX_TASK);
+				WorkflowMetricsIndexNameConstants.SUFFIX_TASK);
 		searchSearchRequest.setQuery(
 			_createTasksBooleanQuery(
 				assigneeBulkSelection.getInstanceIds(), processId));
