@@ -512,10 +512,6 @@ public class RenderLayoutStructureDisplayContext {
 		return HashMapBuilder.<String, Object>put(
 			"executeInfoItemActionURL",
 			() -> {
-				ThemeDisplay themeDisplay =
-					(ThemeDisplay)_httpServletRequest.getAttribute(
-						WebKeys.THEME_DISPLAY);
-
 				StringBundler sb = new StringBundler(6);
 
 				sb.append(PortalUtil.getPortalURL(_httpServletRequest));
@@ -523,6 +519,11 @@ public class RenderLayoutStructureDisplayContext {
 				sb.append("/portal/execute_info_item_action?p_l_mode=");
 				sb.append(getLayoutMode());
 				sb.append("&plid=");
+
+				ThemeDisplay themeDisplay =
+					(ThemeDisplay)_httpServletRequest.getAttribute(
+						WebKeys.THEME_DISPLAY);
+
 				sb.append(themeDisplay.getPlid());
 
 				return sb.toString();

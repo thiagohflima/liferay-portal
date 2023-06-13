@@ -647,7 +647,9 @@ public class RenderLayoutStructureTag extends IncludeTag {
 		componentTag.setModule(module);
 		componentTag.setPageContext(pageContext);
 		componentTag.setServletContext(ServletContextUtil.getServletContext());
+
 		componentTag.doStartTag();
+
 		componentTag.doEndTag();
 	}
 
