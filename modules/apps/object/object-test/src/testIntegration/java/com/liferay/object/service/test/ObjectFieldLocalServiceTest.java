@@ -530,9 +530,6 @@ public class ObjectFieldLocalServiceTest {
 
 	@Test
 	public void testAddSystemObjectField() throws Exception {
-
-		// Business types
-
 		List<ObjectFieldBusinessType> objectFieldBusinessTypes =
 			_objectFieldBusinessTypeRegistry.getObjectFieldBusinessTypes();
 
@@ -564,9 +561,6 @@ public class ObjectFieldLocalServiceTest {
 			() -> _addUnmodifiableSystemObjectDefinition(
 				ObjectFieldUtil.createObjectField(
 					"businessType", StringPool.BLANK, "Able", "able")));
-
-		// Blob type is not indexable
-
 		AssertUtils.assertFailure(
 			ObjectFieldDBTypeException.class, "Blob type is not indexable",
 			() -> _addUnmodifiableSystemObjectDefinition(
@@ -574,9 +568,6 @@ public class ObjectFieldLocalServiceTest {
 					0, ObjectFieldConstants.BUSINESS_TYPE_LARGE_FILE, null,
 					ObjectFieldConstants.DB_TYPE_BLOB, true, false, "", "",
 					"able", false, true)));
-
-		// Indexed language ID can only be applied with type \"String\" that
-		// is not indexed as a keyword
 
 		String errorMessage =
 			"Indexed language ID can only be applied with type \"Clob\" or " +
@@ -605,8 +596,6 @@ public class ObjectFieldLocalServiceTest {
 					"", 0, "able", Collections.emptyList(),
 					ObjectFieldConstants.READ_ONLY_FALSE, null, false, true)));
 
-		// Invalid DB type
-
 		for (String dbType :
 				_objectFieldBusinessTypeRegistry.getObjectFieldDBTypes()) {
 
@@ -621,8 +610,6 @@ public class ObjectFieldLocalServiceTest {
 				ObjectFieldUtil.createObjectField(
 					StringPool.BLANK, "STRING", "Able", "able")));
 
-		// Label is null
-
 		AssertUtils.assertFailure(
 			ObjectFieldLabelException.class,
 			"Label is null for locale " + LocaleUtil.US.getDisplayName(),
@@ -630,8 +617,6 @@ public class ObjectFieldLocalServiceTest {
 				ObjectFieldUtil.createObjectField(
 					ObjectFieldConstants.BUSINESS_TYPE_TEXT,
 					ObjectFieldConstants.DB_TYPE_STRING, "", "able")));
-
-		// Duplicate name
 
 		ObjectDefinition objectDefinition =
 			ObjectDefinitionTestUtil.addObjectDefinition(
@@ -652,16 +637,12 @@ public class ObjectFieldLocalServiceTest {
 				LocalizedMapUtil.getLocalizedMap("Able"), "able", false,
 				false));
 
-		// Name is null
-
 		AssertUtils.assertFailure(
 			ObjectFieldNameException.class, "Name is null",
 			() -> _addUnmodifiableSystemObjectDefinition(
 				ObjectFieldUtil.createObjectField(
 					ObjectFieldConstants.BUSINESS_TYPE_TEXT,
 					ObjectFieldConstants.DB_TYPE_STRING, "Able", "")));
-
-		// Name must be less than 41 characters
 
 		_addUnmodifiableSystemObjectDefinition(
 			ObjectFieldUtil.createObjectField(
@@ -678,8 +659,6 @@ public class ObjectFieldLocalServiceTest {
 					ObjectFieldConstants.DB_TYPE_STRING,
 					"a123456789a123456789a123456789a12345678912")));
 
-		// Name must only contain letters and digits
-
 		_addUnmodifiableSystemObjectDefinition(
 			ObjectFieldUtil.createObjectField(
 				ObjectFieldConstants.BUSINESS_TYPE_TEXT,
@@ -692,7 +671,6 @@ public class ObjectFieldLocalServiceTest {
 				ObjectFieldUtil.createObjectField(
 					ObjectFieldConstants.BUSINESS_TYPE_TEXT,
 					ObjectFieldConstants.DB_TYPE_STRING, "abl e")));
-
 		AssertUtils.assertFailure(
 			ObjectFieldNameException.class,
 			"Name must only contain letters and digits",
@@ -700,8 +678,6 @@ public class ObjectFieldLocalServiceTest {
 				ObjectFieldUtil.createObjectField(
 					ObjectFieldConstants.BUSINESS_TYPE_TEXT,
 					ObjectFieldConstants.DB_TYPE_STRING, "abl-e")));
-
-		// Reserved name
 
 		String objectDefinitionName = "A" + RandomTestUtil.randomString();
 
@@ -716,8 +692,6 @@ public class ObjectFieldLocalServiceTest {
 				ObjectFieldUtil.createObjectField(
 					ObjectFieldConstants.BUSINESS_TYPE_TEXT,
 					ObjectFieldConstants.DB_TYPE_STRING, pkObjectFieldName)));
-
-		// The first character of a name must be an upper case letter
 
 		AssertUtils.assertFailure(
 			ObjectFieldNameException.class,
