@@ -131,9 +131,6 @@ public class ObjectFieldLocalServiceTest {
 
 	@Test
 	public void testAddCustomObjectField() throws Exception {
-
-		// Localization is not enabled
-
 		AssertUtils.assertFailure(
 			ObjectDefinitionEnableLocalizationException.class, null,
 			() -> ObjectDefinitionTestUtil.addObjectDefinition(
@@ -148,9 +145,6 @@ public class ObjectFieldLocalServiceTest {
 					).localized(
 						true
 					).build())));
-
-		// List type definition ID is 0
-
 		AssertUtils.assertFailure(
 			ObjectFieldListTypeDefinitionIdException.class,
 			"List type definition ID is 0",
@@ -164,28 +158,6 @@ public class ObjectFieldLocalServiceTest {
 					).name(
 						"a" + RandomTestUtil.randomString()
 					).build())));
-
-		// Localization is not supported
-
-		AssertUtils.assertFailure(
-			ObjectFieldLocalizedException.class,
-			"Only LongText,RichText and Text business types support " +
-				"localization",
-			() -> ObjectDefinitionTestUtil.addObjectDefinition(
-				false, _objectDefinitionLocalService,
-				Arrays.asList(
-					new DateObjectFieldBuilder(
-					).labelMap(
-						LocalizedMapUtil.getLocalizedMap(
-							RandomTestUtil.randomString())
-					).name(
-						"a" + RandomTestUtil.randomString()
-					).localized(
-						true
-					).build())));
-
-		// Localized object fields must not be required
-
 		AssertUtils.assertFailure(
 			ObjectFieldLocalizedException.class,
 			"Localized object fields must not be required",
@@ -203,8 +175,22 @@ public class ObjectFieldLocalServiceTest {
 					).required(
 						true
 					).build())));
-
-		// Reserved names
+		AssertUtils.assertFailure(
+			ObjectFieldLocalizedException.class,
+			"Only LongText,RichText and Text business types support " +
+				"localization",
+			() -> ObjectDefinitionTestUtil.addObjectDefinition(
+				false, _objectDefinitionLocalService,
+				Arrays.asList(
+					new DateObjectFieldBuilder(
+					).labelMap(
+						LocalizedMapUtil.getLocalizedMap(
+							RandomTestUtil.randomString())
+					).name(
+						"a" + RandomTestUtil.randomString()
+					).localized(
+						true
+					).build())));
 
 		String[] reservedNames = {
 			"actions", "companyId", "createDate", "creator", "dateCreated",
@@ -227,8 +213,6 @@ public class ObjectFieldLocalServiceTest {
 							reservedName
 						).build())));
 		}
-
-		// Object field setting invalid value
 
 		String defaultValue = RandomTestUtil.randomString();
 
@@ -326,8 +310,6 @@ public class ObjectFieldLocalServiceTest {
 						true
 					).build())));
 
-		// Object field setting missing required values
-
 		AssertUtils.assertFailure(
 			ObjectFieldSettingValueException.MissingRequiredValues.class,
 			"The settings acceptedFileExtensions, fileSource, " +
@@ -342,7 +324,6 @@ public class ObjectFieldLocalServiceTest {
 					).name(
 						"upload"
 					).build())));
-
 		AssertUtils.assertFailure(
 			ObjectFieldSettingValueException.MissingRequiredValues.class,
 			"The settings defaultValue, defaultValueType are required for " +
@@ -363,7 +344,6 @@ public class ObjectFieldLocalServiceTest {
 					).state(
 						true
 					).build())));
-
 		AssertUtils.assertFailure(
 			ObjectFieldSettingValueException.MissingRequiredValues.class,
 			"The settings maxLength are required for object field text",
@@ -385,7 +365,6 @@ public class ObjectFieldLocalServiceTest {
 								"true"
 							).build())
 					).build())));
-
 		AssertUtils.assertFailure(
 			ObjectFieldSettingValueException.MissingRequiredValues.class,
 			"The settings timeStorage are required for object field datetime",
@@ -405,9 +384,6 @@ public class ObjectFieldLocalServiceTest {
 					).objectFieldSettings(
 						Collections.emptyList()
 					).build())));
-
-		// Object field setting not allowed names
-
 		AssertUtils.assertFailure(
 			ObjectFieldSettingNameException.NotAllowedNames.class,
 			"The settings anySetting are not allowed for object field text",
@@ -435,7 +411,6 @@ public class ObjectFieldLocalServiceTest {
 								"true"
 							).build())
 					).build())));
-
 		AssertUtils.assertFailure(
 			ObjectFieldSettingNameException.NotAllowedNames.class,
 			"The settings defaultValue, defaultValueType are not allowed for " +
@@ -471,7 +446,6 @@ public class ObjectFieldLocalServiceTest {
 								"false"
 							).build())
 					).build())));
-
 		AssertUtils.assertFailure(
 			ObjectFieldSettingNameException.NotAllowedNames.class,
 			"The settings maxLength are not allowed for object field text",
@@ -493,7 +467,6 @@ public class ObjectFieldLocalServiceTest {
 								null
 							).build())
 					).build())));
-
 		AssertUtils.assertFailure(
 			ObjectFieldSettingNameException.NotAllowedNames.class,
 			"The settings maxLength are not allowed for object field text",
@@ -521,9 +494,6 @@ public class ObjectFieldLocalServiceTest {
 								"false"
 							).build())
 					).build())));
-
-		// Object field must be required when the state is true
-
 		AssertUtils.assertFailure(
 			ObjectFieldStateException.class,
 			"Object field must be required when the state is true",
