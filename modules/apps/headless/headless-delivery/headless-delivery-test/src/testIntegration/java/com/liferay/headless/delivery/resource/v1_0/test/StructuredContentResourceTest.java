@@ -201,7 +201,7 @@ public class StructuredContentResourceTest
 		assertEquals(postStructuredContent, getStructuredContent);
 		assertValid(getStructuredContent);
 
-		// Nonexistent asset library id
+		// Nonexistent asset library ID
 
 		long assetLibraryId = RandomTestUtil.randomLong();
 
