@@ -191,19 +191,15 @@ public class ReactRendererUtilTest {
 		_assertESImportEquals(
 			StringPool.BLANK, "deps-context#index.js", "dep1",
 			esImports.get(0));
-
 		_assertESImportEquals(
 			StringPool.BLANK, "deps-context#index.js", "dep2",
 			esImports.get(1));
-
 		_assertESImportEquals(
 			StringPool.BLANK, "portal-template-react-renderer-impl#index.js",
 			"render", esImports.get(2));
-
 		_assertESImportEquals(
 			"componentModule", "my-context#index.js", "component",
 			esImports.get(3));
-
 		_assertESImportEquals(
 			"propsTransformer", "props-transformer-context#index.js",
 			"myTransformer", esImports.get(4));

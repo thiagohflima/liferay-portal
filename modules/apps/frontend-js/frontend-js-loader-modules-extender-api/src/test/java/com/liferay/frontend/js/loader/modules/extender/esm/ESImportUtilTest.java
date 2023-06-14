@@ -160,7 +160,6 @@ public class ESImportUtilTest {
 						ESModuleAbsolutePortalURLBuilder.class);
 
 				String webContextPath = invocationOnMock.getArgument(0);
-
 				String esModulePath = invocationOnMock.getArgument(1);
 
 				Mockito.when(
