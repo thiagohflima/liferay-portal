@@ -43,8 +43,8 @@ public class ESImportUtilTest {
 			"{x as y} from my-package/lib/index.js");
 
 		Assert.assertEquals("y", esImport.getAlias());
-		Assert.assertEquals("x", esImport.getSymbol());
 		Assert.assertEquals("my-package|lib/index.js", esImport.getModule());
+		Assert.assertEquals("x", esImport.getSymbol());
 	}
 
 	@Test
@@ -54,8 +54,8 @@ public class ESImportUtilTest {
 			"{x as y} from my-package/lib/index.js");
 
 		Assert.assertEquals("z", esImport.getAlias());
-		Assert.assertEquals("x", esImport.getSymbol());
 		Assert.assertEquals("my-package|lib/index.js", esImport.getModule());
+		Assert.assertEquals("x", esImport.getSymbol());
 	}
 
 	@Test
@@ -64,8 +64,8 @@ public class ESImportUtilTest {
 			_getAbsolutePortalURLBuilder(), "x from my-package/lib/index.js");
 
 		Assert.assertEquals("x", esImport.getAlias());
-		Assert.assertEquals(StringPool.BLANK, esImport.getSymbol());
 		Assert.assertEquals("my-package|lib/index.js", esImport.getModule());
+		Assert.assertEquals(StringPool.BLANK, esImport.getSymbol());
 	}
 
 	@Test
@@ -75,8 +75,8 @@ public class ESImportUtilTest {
 			"x from my-package/lib/index.js");
 
 		Assert.assertEquals("z", esImport.getAlias());
-		Assert.assertEquals(StringPool.BLANK, esImport.getSymbol());
 		Assert.assertEquals("my-package|lib/index.js", esImport.getModule());
+		Assert.assertEquals(StringPool.BLANK, esImport.getSymbol());
 	}
 
 	@Test
@@ -85,8 +85,8 @@ public class ESImportUtilTest {
 			_getAbsolutePortalURLBuilder(), "{x} from my-package");
 
 		Assert.assertEquals(StringPool.BLANK, esImport.getAlias());
-		Assert.assertEquals("x", esImport.getSymbol());
 		Assert.assertEquals("my-package|index.js", esImport.getModule());
+		Assert.assertEquals("x", esImport.getSymbol());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -102,8 +102,8 @@ public class ESImportUtilTest {
 			_getAbsolutePortalURLBuilder(), "from my-package/css/main.css.js");
 
 		Assert.assertEquals(StringPool.BLANK, esImport.getAlias());
-		Assert.assertEquals(StringPool.BLANK, esImport.getSymbol());
 		Assert.assertEquals("my-package|css/main.css.js", esImport.getModule());
+		Assert.assertEquals(StringPool.BLANK, esImport.getSymbol());
 	}
 
 	@Test(expected = UnsupportedOperationException.class)
@@ -119,8 +119,8 @@ public class ESImportUtilTest {
 			_getAbsolutePortalURLBuilder(), "{x} from my-package/lib/index.js");
 
 		Assert.assertEquals(StringPool.BLANK, esImport.getAlias());
-		Assert.assertEquals("x", esImport.getSymbol());
 		Assert.assertEquals("my-package|lib/index.js", esImport.getModule());
+		Assert.assertEquals("x", esImport.getSymbol());
 	}
 
 	@Test
@@ -130,8 +130,8 @@ public class ESImportUtilTest {
 			"{x} from my-package/lib/index.js");
 
 		Assert.assertEquals("z", esImport.getAlias());
-		Assert.assertEquals("x", esImport.getSymbol());
 		Assert.assertEquals("my-package|lib/index.js", esImport.getModule());
+		Assert.assertEquals("x", esImport.getSymbol());
 	}
 
 	@Test
