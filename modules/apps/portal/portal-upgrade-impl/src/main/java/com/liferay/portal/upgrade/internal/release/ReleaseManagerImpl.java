@@ -198,9 +198,9 @@ public class ReleaseManagerImpl implements ReleaseManager {
 
 	@Deactivate
 	protected void deactivate() {
-		_serviceTrackerMap.close();
-
 		_initialUpgradeStepServiceTrackerMap.close();
+
+		_serviceTrackerMap.close();
 	}
 
 	private String _checkModules(boolean showUpgradeSteps) {
