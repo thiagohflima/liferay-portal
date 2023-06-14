@@ -47,6 +47,7 @@ import com.liferay.portal.kernel.change.tracking.CTCollectionThreadLocal;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.feature.flag.FeatureFlagManagerUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -323,6 +324,10 @@ public class DLAdminDisplayContext {
 	}
 
 	public String getSearchDisplayStyle() {
+		if (!FeatureFlagManagerUtil.isEnabled("LPS-84424")) {
+			return "descriptive";
+		}
+
 		return _getDisplayStyle("descriptive");
 	}
 
@@ -833,15 +838,17 @@ public class DLAdminDisplayContext {
 		SearchContext searchContext = _getSearchContext(
 			searchContainer, "regular");
 
-		_initializeFilterSearchContext(
-			searchContext,
-			ParamUtil.getLongValues(_httpServletRequest, "assetCategoryId"),
-			ParamUtil.getStringValues(_httpServletRequest, "assetTagId"),
-			ParamUtil.getStringValues(_httpServletRequest, "extension"),
-			ParamUtil.getLong(_httpServletRequest, "fileEntryTypeId", -1),
-			getFolderId(),
-			ParamUtil.getString(_httpServletRequest, "navigation", "home"),
-			_getStatus());
+		if (FeatureFlagManagerUtil.isEnabled("LPS-84424")) {
+			_initializeFilterSearchContext(
+				searchContext,
+				ParamUtil.getLongValues(_httpServletRequest, "assetCategoryId"),
+				ParamUtil.getStringValues(_httpServletRequest, "assetTagId"),
+				ParamUtil.getStringValues(_httpServletRequest, "extension"),
+				ParamUtil.getLong(_httpServletRequest, "fileEntryTypeId", -1),
+				getFolderId(),
+				ParamUtil.getString(_httpServletRequest, "navigation", "home"),
+				_getStatus());
+		}
 
 		long searchRepositoryId = ParamUtil.getLong(
 			_httpServletRequest, "searchRepositoryId",
@@ -951,10 +958,14 @@ public class DLAdminDisplayContext {
 
 		searchContext.setAttribute("paginationType", paginationType);
 		searchContext.setEnd(searchContainer.getEnd());
-		searchContext.setSorts(
-			_getSort(
-				searchContainer.getOrderByCol(),
-				searchContainer.getOrderByType()));
+
+		if (!isSearch() || FeatureFlagManagerUtil.isEnabled("LPS-84424")) {
+			searchContext.setSorts(
+				_getSort(
+					searchContainer.getOrderByCol(),
+					searchContainer.getOrderByType()));
+		}
+
 		searchContext.setStart(searchContainer.getStart());
 
 		return searchContext;
