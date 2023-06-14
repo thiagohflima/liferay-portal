@@ -530,7 +530,8 @@ public class PortletImportControllerImpl implements PortletImportController {
 				portletDataContext.getParameterMap();
 
 			parameterMap.put(
-				"portletPreferencePlid", new String[] {String.valueOf(elementPlid)});
+				"portletPreferencePlid",
+				new String[] {String.valueOf(elementPlid)});
 
 			portletDataContext.setParameterMap(parameterMap);
 
