@@ -65,8 +65,9 @@ public class GetCompletionMVCResourceCommand extends BaseMVCResourceCommand {
 						"message",
 						_language.get(
 							themeDisplay.getLocale(),
-							"openai-is-disabled.-enable-openai-from-settings-" +
-								"page-or-contact-your-admin"))));
+							"openai-is-disabled.-enable-openai-from-the-" +
+								"settings-page-or-contact-your-" +
+									"administrator"))));
 
 			return;
 		}
@@ -85,8 +86,8 @@ public class GetCompletionMVCResourceCommand extends BaseMVCResourceCommand {
 						_language.get(
 							themeDisplay.getLocale(),
 							"api-authentication-is-needed-to-use-this-" +
-								"feature.-add-an-api-key-from-settings-page-" +
-									"or-contact-your-admin"))));
+								"feature.-add-an-api-key-from-the-settings-" +
+									"page-or-contact-your-administrator"))));
 
 			return;
 		}
