@@ -136,10 +136,10 @@ public class SiteNavigationMenuExportImportPortletPreferencesProcessor
 			long siteNavigationMenuId = 0;
 
 			long originalPlid = MapUtil.getLong(
-				portletDataContext.getParameterMap(), "preferencePlid");
+				portletDataContext.getParameterMap(), "portletPreferencePlid");
 
 			List<com.liferay.portal.kernel.model.PortletPreferences>
-				serviceBuilderPortletPreferencesList;
+				serviceBuilderPortletPreferencesList = null;
 
 			if (originalPlid == PortletKeys.PREFS_PLID_SHARED) {
 				serviceBuilderPortletPreferencesList =
