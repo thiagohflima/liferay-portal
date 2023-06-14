@@ -362,7 +362,8 @@ public class JournalArticleStagedModelDataHandlerTest
 			journalArticle.getArticleId(), journalArticle.getVersion(),
 			journalArticle.getUrlTitle(), serviceContext);
 
-		// Do not assign to variable since the draft status is not exportable
+		// Do not assign to the "journalArticle" variable because the draft
+		// status is not exportable
 
 		updateArticleStatus(
 			journalArticle, WorkflowConstants.STATUS_DRAFT,
