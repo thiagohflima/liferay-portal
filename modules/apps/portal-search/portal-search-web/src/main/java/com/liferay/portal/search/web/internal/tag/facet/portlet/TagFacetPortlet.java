@@ -130,7 +130,6 @@ public class TagFacetPortlet extends MVCPortlet {
 
 		assetTagsSearchFacetDisplayContextBuilder.setParameterName(
 			parameterName);
-
 		assetTagsSearchFacetDisplayContextBuilder.setParameterValues(
 			portletSharedSearchResponse.getParameterValues(
 				parameterName, renderRequest));

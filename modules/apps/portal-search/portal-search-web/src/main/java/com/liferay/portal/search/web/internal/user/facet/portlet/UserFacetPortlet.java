@@ -126,7 +126,6 @@ public class UserFacetPortlet extends MVCPortlet {
 		String parameterName = userFacetPortletPreferences.getParameterName();
 
 		userSearchFacetDisplayContextBuilder.setParamName(parameterName);
-
 		userSearchFacetDisplayContextBuilder.setParamValues(
 			portletSharedSearchResponse.getParameterValues(
 				parameterName, renderRequest));

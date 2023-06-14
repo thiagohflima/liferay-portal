@@ -135,14 +135,11 @@ public class ModifiedFacetPortlet extends MVCPortlet {
 		modifiedFacetDisplayContextBuilder.setPaginationStartParameterName(
 			_getPaginationStartParameterName(portletSharedSearchResponse));
 		modifiedFacetDisplayContextBuilder.setParameterName(parameterName);
-
 		modifiedFacetDisplayContextBuilder.setParameterValues(
 			portletSharedSearchResponse.getParameterValues(
 				parameterName, renderRequest));
-
 		modifiedFacetDisplayContextBuilder.setTimeZone(
 			themeDisplay.getTimeZone());
-
 		modifiedFacetDisplayContextBuilder.setToParameterValue(
 			portletSharedSearchResponse.getParameter(
 				parameterName + "To", renderRequest));

@@ -168,7 +168,6 @@ public class CategoryFacetPortlet extends MVCPortlet {
 
 		assetCategoriesSearchFacetDisplayContextBuilder.setParameterName(
 			parameterName);
-
 		assetCategoriesSearchFacetDisplayContextBuilder.setParameterValues(
 			portletSharedSearchResponse.getParameterValues(
 				parameterName, renderRequest));

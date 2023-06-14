@@ -132,7 +132,6 @@ public class FolderFacetPortlet extends MVCPortlet {
 		String parameterName = folderFacetPortletPreferences.getParameterName();
 
 		folderSearchFacetDisplayContextBuilder.setParameterName(parameterName);
-
 		folderSearchFacetDisplayContextBuilder.setParameterValues(
 			portletSharedSearchResponse.getParameterValues(
 				parameterName, renderRequest));
