@@ -364,6 +364,13 @@ public class CommerceChannelLocalServiceImpl
 	}
 
 	@Override
+	public List<CommerceChannel> getCommerceChannelsByAccountEntryId(
+		long accountEntryId) {
+
+		return commerceChannelPersistence.findByAccountEntryId(accountEntryId);
+	}
+
+	@Override
 	public int getCommerceChannelsCount(long companyId, String keywords)
 		throws PortalException {
 
