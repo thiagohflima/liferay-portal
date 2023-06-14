@@ -434,8 +434,13 @@ public class DLAdminDisplayContext {
 	}
 
 	public boolean isSearch() {
-		return !Validator.isBlank(
-			ParamUtil.getString(_httpServletRequest, "keywords"));
+		if (Validator.isBlank(
+				ParamUtil.getString(_httpServletRequest, "keywords"))) {
+
+			return false;
+		}
+
+		return true;
 	}
 
 	public boolean isUpdateAutoTags() {
