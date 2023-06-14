@@ -167,7 +167,6 @@ public class StructuredContentResourceTest
 				deleteAssetLibraryStructuredContentByExternalReferenceCodeHttpResponse(
 					testDeleteAssetLibraryStructuredContentByExternalReferenceCode_getAssetLibraryId(),
 					postStructuredContent.getUuid()));
-
 		assertHttpResponseStatusCode(
 			404,
 			structuredContentResource.
