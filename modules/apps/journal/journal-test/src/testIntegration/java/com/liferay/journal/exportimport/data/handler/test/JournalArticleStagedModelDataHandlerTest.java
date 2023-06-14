@@ -330,13 +330,13 @@ public class JournalArticleStagedModelDataHandlerTest
 
 		initExport();
 
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(stagingGroup.getGroupId());
-
 		JournalArticle journalArticle = JournalTestUtil.addArticleWithWorkflow(
 			stagingGroup.getGroupId(), true);
 
 		DDMStructure ddmStructure = journalArticle.getDDMStructure();
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(stagingGroup.getGroupId());
 
 		LayoutPageTemplateEntry layoutPageTemplateEntry =
 			_layoutPageTemplateEntryLocalService.addLayoutPageTemplateEntry(
@@ -362,7 +362,7 @@ public class JournalArticleStagedModelDataHandlerTest
 			journalArticle.getArticleId(), journalArticle.getVersion(),
 			journalArticle.getUrlTitle(), serviceContext);
 
-		// Don't assign to variable since draft status is not exportable
+		// Do not assign to variable since the draft status is not exportable
 
 		updateArticleStatus(
 			journalArticle, WorkflowConstants.STATUS_DRAFT,
