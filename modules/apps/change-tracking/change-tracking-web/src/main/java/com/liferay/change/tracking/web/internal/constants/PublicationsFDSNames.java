@@ -22,9 +22,9 @@ import com.liferay.change.tracking.constants.CTPortletKeys;
 public class PublicationsFDSNames {
 
 	public static final String PUBLICATIONS_ONGOING =
-		CTPortletKeys.PUBLICATIONS + "-publications-ongoing";
+		CTPortletKeys.PUBLICATIONS + "-publicationsOngoing";
 
 	public static final String PUBLICATIONS_SCHEDULED =
-		CTPortletKeys.PUBLICATIONS + "-publications-scheduled";
+		CTPortletKeys.PUBLICATIONS + "-publicationsScheduled";
 
 }
