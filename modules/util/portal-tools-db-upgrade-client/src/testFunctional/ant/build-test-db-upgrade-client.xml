@@ -201,7 +201,6 @@
             db.upgrade.client.home="${db.upgrade.client.home}"
             file.suffix.bat="${file.suffix.bat}"
             expect.file="check-upgrade-client-gogo-shell-connection.expect"
-
 		/>
 	</target>
 
