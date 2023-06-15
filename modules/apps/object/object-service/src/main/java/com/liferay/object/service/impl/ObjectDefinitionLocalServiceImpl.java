@@ -1657,6 +1657,14 @@ public class ObjectDefinitionLocalServiceImpl
 			String name, boolean system)
 		throws PortalException {
 
+		if (modifiable && system &&
+			!ObjectDefinitionUtil.isAllowedModifiableSystemObjectDefinitionName(
+				name)) {
+
+			throw new ObjectDefinitionNameException.
+				ForbiddenModifiableSystemObjectDefinitionName(name);
+		}
+
 		if (Validator.isNull(name) || (!system && name.equals("C_"))) {
 			throw new ObjectDefinitionNameException.MustNotBeNull();
 		}
@@ -1670,14 +1678,6 @@ public class ObjectDefinitionLocalServiceImpl
 		else if (!system && !name.startsWith("C_")) {
 			throw new ObjectDefinitionNameException.
 				MustStartWithCAndUnderscoreForCustomObject();
-		}
-
-		if (modifiable && system &&
-			!ObjectDefinitionUtil.isAllowedModifiableSystemObjectDefinitionName(
-				name)) {
-
-			throw new ObjectDefinitionNameException.
-				ForbiddenModifiableSystemObjectDefinitionName(name);
 		}
 
 		char[] nameCharArray = name.toCharArray();
