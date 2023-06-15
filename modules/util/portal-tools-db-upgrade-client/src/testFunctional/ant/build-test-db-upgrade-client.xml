@@ -198,8 +198,8 @@
 		<get-database-upgrade-client-paths />
 
 		<run-expect
-            db.upgrade.client.home="${db.upgrade.client.home}"
-            expect.file="check-upgrade-client-gogo-shell-connection.expect"
+			db.upgrade.client.home="${db.upgrade.client.home}"
+			expect.file="check-upgrade-client-gogo-shell-connection.expect"
 			file.suffix.bat="${file.suffix.bat}"
 		/>
 	</target>
