@@ -1219,7 +1219,6 @@ public class RootProjectConfigurator implements Plugin<Project> {
 				}
 
 			});
-
 		initBundleTask.setGroup(BUNDLE_GROUP);
 		initBundleTask.setProvidedModules(osgiModulesConfiguration);
 
