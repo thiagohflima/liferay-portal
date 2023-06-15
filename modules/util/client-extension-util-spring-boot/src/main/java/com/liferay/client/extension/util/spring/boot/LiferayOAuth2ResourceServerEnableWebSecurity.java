@@ -168,7 +168,7 @@ public class LiferayOAuth2ResourceServerEnableWebSecurity {
 		).and(
 		).authorizeHttpRequests(
 			customizer -> customizer.antMatchers(
-				_serverPublicEndpoints
+				_liferayOauthURLsExcludes
 			).permitAll(
 			).anyRequest(
 			).authenticated()
@@ -203,8 +203,8 @@ public class LiferayOAuth2ResourceServerEnableWebSecurity {
 	@Value("${com.liferay.lxc.dxp.server.protocol}")
 	private String _lxcDXPServerProtocol;
 
-	@Value("${server.public.endpoints:}")
-	private String[] _serverPublicEndpoints;
+	@Value("${liferay.oauth.urls.excludes:}")
+	private String[] _liferayOauthURLsExcludes;
 
 	private class ClientIdOAuth2TokenValidator
 		implements OAuth2TokenValidator<Jwt> {
