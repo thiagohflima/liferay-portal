@@ -2143,6 +2143,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		subscriptionSender.setCompanyId(message.getCompanyId());
 		subscriptionSender.setContextAttribute(
 			"[$MESSAGE_BODY$]", messageBody, false);
+		subscriptionSender.setContextAttribute(
+			"[$MESSAGE_PARENT$]", messageParentMessageContent, false);
+		subscriptionSender.setContextAttribute(
+			"[$MESSAGE_SIBLINGS$]", messageSiblingMessagesContent, false);
+		subscriptionSender.setContextAttribute(
+			"[$ROOT_MESSAGE_BODY$]", rootMessageBody, false);
 
 		long groupId = message.getGroupId();
 
@@ -2167,14 +2173,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			"[$MESSAGE_SUBJECT_PREFIX$]", messageSubjectPrefix,
 			"[$MESSAGE_URL$]", messageURL, "[$MESSAGE_USER_ADDRESS$]",
 			emailAddress, "[$MESSAGE_USER_NAME$]", fullName);
-
-		subscriptionSender.setContextAttribute(
-			"[$MESSAGE_PARENT$]", messageParentMessageContent, false);
-		subscriptionSender.setContextAttribute(
-			"[$MESSAGE_SIBLINGS$]", messageSiblingMessagesContent, false);
-		subscriptionSender.setContextAttribute(
-			"[$ROOT_MESSAGE_BODY$]", rootMessageBody, false);
-
 		subscriptionSender.setCreatorUserId(message.getUserId());
 		subscriptionSender.setCurrentUserId(userId);
 		subscriptionSender.setEntryTitle(entryTitle);
