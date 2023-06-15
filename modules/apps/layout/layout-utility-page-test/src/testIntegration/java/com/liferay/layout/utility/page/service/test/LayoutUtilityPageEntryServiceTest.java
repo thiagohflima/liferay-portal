@@ -278,34 +278,6 @@ public class LayoutUtilityPageEntryServiceTest {
 		Assert.assertNull(persistedLayoutUtilityPageEntry);
 	}
 
-	@Test
-	public void testUpdateLayoutUtilityPageEntry() throws Exception {
-		LayoutUtilityPageEntry layoutUtilityPageEntry =
-			_layoutUtilityPageEntryService.addLayoutUtilityPageEntry(
-				RandomTestUtil.randomString(), _group.getGroupId(), 0, 0, true,
-				RandomTestUtil.randomString(), RandomTestUtil.randomString(), 0,
-				_serviceContext);
-
-		layoutUtilityPageEntry =
-			_layoutUtilityPageEntryLocalService.updateLayoutUtilityPageEntry(
-				layoutUtilityPageEntry.getLayoutUtilityPageEntryId(),
-				RandomTestUtil.randomString());
-
-		Layout draftLayout = _layoutLocalService.fetchDraftLayout(
-			layoutUtilityPageEntry.getPlid());
-
-		Assert.assertEquals(
-			layoutUtilityPageEntry.getName(),
-			draftLayout.getName(LocaleUtil.getSiteDefault()));
-
-		Layout layout = _layoutLocalService.getLayout(
-			layoutUtilityPageEntry.getPlid());
-
-		Assert.assertEquals(
-			layoutUtilityPageEntry.getName(),
-			layout.getName(LocaleUtil.getSiteDefault()));
-	}
-
 	@Test(expected = PrincipalException.MustHavePermission.class)
 	public void testSetDefaultLayoutUtilityPageEntryWithNoPermissions()
 		throws Exception {
@@ -438,6 +410,34 @@ public class LayoutUtilityPageEntryServiceTest {
 
 		Assert.assertFalse(
 			persistedLayoutUtilityPageEntry.isDefaultLayoutUtilityPageEntry());
+	}
+
+	@Test
+	public void testUpdateLayoutUtilityPageEntry() throws Exception {
+		LayoutUtilityPageEntry layoutUtilityPageEntry =
+			_layoutUtilityPageEntryService.addLayoutUtilityPageEntry(
+				RandomTestUtil.randomString(), _group.getGroupId(), 0, 0, true,
+				RandomTestUtil.randomString(), RandomTestUtil.randomString(), 0,
+				_serviceContext);
+
+		layoutUtilityPageEntry =
+			_layoutUtilityPageEntryLocalService.updateLayoutUtilityPageEntry(
+				layoutUtilityPageEntry.getLayoutUtilityPageEntryId(),
+				RandomTestUtil.randomString());
+
+		Layout draftLayout = _layoutLocalService.fetchDraftLayout(
+			layoutUtilityPageEntry.getPlid());
+
+		Assert.assertEquals(
+			layoutUtilityPageEntry.getName(),
+			draftLayout.getName(LocaleUtil.getSiteDefault()));
+
+		Layout layout = _layoutLocalService.getLayout(
+			layoutUtilityPageEntry.getPlid());
+
+		Assert.assertEquals(
+			layoutUtilityPageEntry.getName(),
+			layout.getName(LocaleUtil.getSiteDefault()));
 	}
 
 	@DeleteAfterTestRun
