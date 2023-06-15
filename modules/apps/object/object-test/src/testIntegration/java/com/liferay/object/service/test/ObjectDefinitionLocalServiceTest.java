@@ -979,10 +979,9 @@ public class ObjectDefinitionLocalServiceTest {
 				TestPropsValues.getUserId(),
 				objectDefinition.getObjectDefinitionId());
 
-		Assert.assertEquals("/test", objectDefinition.getRESTContextPath());
 		Assert.assertTrue(
 			StringUtil.startsWith(objectDefinition.getDBTableName(), "MSOD_"));
-
+		Assert.assertEquals("/test", objectDefinition.getRESTContextPath());
 		Assert.assertTrue(objectDefinition.isApproved());
 		Assert.assertTrue(objectDefinition.isEnableCategorization());
 		Assert.assertTrue(objectDefinition.isModifiable());
