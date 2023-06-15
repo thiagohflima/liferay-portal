@@ -16,7 +16,7 @@ package com.liferay.image.uploader.web.internal.upgrade.registry;
 
 import com.liferay.document.library.kernel.service.DLFolderLocalService;
 import com.liferay.image.uploader.web.internal.upgrade.v1_0_0.UpgradePortletId;
-import com.liferay.image.uploader.web.internal.upgrade.v1_0_1.DLFolderNameUpgradeProcess;
+import com.liferay.image.uploader.web.internal.upgrade.v1_0_1.DLFolderUpgradeProcess;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
 
 import org.osgi.service.component.annotations.Component;
@@ -37,7 +37,7 @@ public class ImageUploaderWebUpgradeStepRegistrator
 
 		registry.register(
 			"1.0.0", "1.0.1",
-			new DLFolderNameUpgradeProcess(_dlFolderLocalService));
+			new DLFolderUpgradeProcess(_dlFolderLocalService));
 	}
 
 	@Reference

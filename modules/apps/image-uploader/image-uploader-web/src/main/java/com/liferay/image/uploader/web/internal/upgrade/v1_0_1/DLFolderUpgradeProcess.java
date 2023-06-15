@@ -26,9 +26,9 @@ import java.sql.ResultSet;
 /**
  * @author Lily Chi
  */
-public class DLFolderNameUpgradeProcess extends UpgradeProcess {
+public class DLFolderUpgradeProcess extends UpgradeProcess {
 
-	public DLFolderNameUpgradeProcess(
+	public DLFolderUpgradeProcess(
 		DLFolderLocalService dlFolderLocalService) {
 
 		_dlFolderLocalService = dlFolderLocalService;
