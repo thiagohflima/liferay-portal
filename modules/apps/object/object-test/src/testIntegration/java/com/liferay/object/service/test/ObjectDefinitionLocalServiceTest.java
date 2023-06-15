@@ -739,13 +739,13 @@ public class ObjectDefinitionLocalServiceTest {
 
 		AssertUtils.assertFailure(
 			ObjectDefinitionNameException.
-				MustStartWithCAndUnderscoreForCustomObject.class,
+				MustNotStartWithCAndUnderscoreForSystemObject.class,
 			"System object definition names must not start with \"C_\"",
 			() -> _addSystemObjectDefinition("C_Test"));
 
 		AssertUtils.assertFailure(
 			ObjectDefinitionNameException.
-				MustStartWithCAndUnderscoreForCustomObject.class,
+				MustNotStartWithCAndUnderscoreForSystemObject.class,
 			"System object definition names must not start with \"C_\"",
 			() -> _addSystemObjectDefinition("c_Test"));
 
@@ -780,7 +780,7 @@ public class ObjectDefinitionLocalServiceTest {
 		AssertUtils.assertFailure(
 			ObjectDefinitionNameException.
 				ForbiddenModifiableSystemObjectDefinitionName.class,
-			"Name not allowed for a modifiable system object definition",
+			"Forbidden modifiable system object definition name Invalid Test",
 			() -> ObjectDefinitionTestUtil.addModifiableSystemObjectDefinition(
 				TestPropsValues.getUserId(), null,
 				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
