@@ -51,8 +51,8 @@ public class AccessibilitySettingTest {
 
 		Assert.assertEquals(_accessibilitySetting.isEnabled(), false);
 
-		_accessibilitySetting.setSessionClicksValue(true);
 		_accessibilitySetting.setDefaultValue(false);
+		_accessibilitySetting.setSessionClicksValue(true);
 
 		Assert.assertEquals(_accessibilitySetting.isEnabled(), true);
 	}
