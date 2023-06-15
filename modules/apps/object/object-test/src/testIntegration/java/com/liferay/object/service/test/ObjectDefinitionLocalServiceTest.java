@@ -738,12 +738,14 @@ public class ObjectDefinitionLocalServiceTest {
 			() -> _addSystemObjectDefinition(""));
 
 		AssertUtils.assertFailure(
-			ObjectDefinitionNameException.MustStartWithCAndUnderscoreForCustomObject.class,
+			ObjectDefinitionNameException.
+				MustStartWithCAndUnderscoreForCustomObject.class,
 			"System object definition names must not start with \"C_\"",
 			() -> _addSystemObjectDefinition("C_Test"));
 
 		AssertUtils.assertFailure(
-			ObjectDefinitionNameException.MustStartWithCAndUnderscoreForCustomObject.class,
+			ObjectDefinitionNameException.
+				MustStartWithCAndUnderscoreForCustomObject.class,
 			"System object definition names must not start with \"C_\"",
 			() -> _addSystemObjectDefinition("c_Test"));
 
@@ -776,7 +778,8 @@ public class ObjectDefinitionLocalServiceTest {
 				"A123456789a123456789a123456789a12345678912"));
 
 		AssertUtils.assertFailure(
-			ObjectDefinitionNameException.ForbiddenModifiableSystemObjectDefinitionName.class,
+			ObjectDefinitionNameException.
+				ForbiddenModifiableSystemObjectDefinitionName.class,
 			"Name not allowed for a modifiable system object definition",
 			() -> ObjectDefinitionTestUtil.addModifiableSystemObjectDefinition(
 				TestPropsValues.getUserId(), null,
@@ -795,8 +798,8 @@ public class ObjectDefinitionLocalServiceTest {
 		ObjectDefinition objectDefinition = _addSystemObjectDefinition("Test");
 
 		AssertUtils.assertFailure(
-			ObjectDefinitionNameException.MustNotBeDuplicate.class, "Duplicate name Test",
-			() -> _addSystemObjectDefinition("Test"));
+			ObjectDefinitionNameException.MustNotBeDuplicate.class,
+			"Duplicate name Test", () -> _addSystemObjectDefinition("Test"));
 
 		_objectDefinitionLocalService.deleteObjectDefinition(objectDefinition);
 
