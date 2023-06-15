@@ -124,8 +124,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		_mockPortal(null, virtualHost.getHostname());
 
 		_assertAttributesAndParameters(
-			String.valueOf(groupId),
-			String.valueOf(layout.getLayoutId()));
+			String.valueOf(groupId), String.valueOf(layout.getLayoutId()));
 	}
 
 	@Test
@@ -140,8 +139,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		_mockPortal(null, virtualHost.getHostname());
 
 		_assertAttributesAndParameters(
-			String.valueOf(groupId),
-			String.valueOf(layout.getLayoutId()));
+			String.valueOf(groupId), String.valueOf(layout.getLayoutId()));
 	}
 
 	private void _assertAttributesAndParameters(
@@ -161,8 +159,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		Assert.assertEquals(
 			layoutId, dynamicServletRequest.getParameter("layoutId"));
 		Assert.assertEquals(
-			null,
-			dynamicServletRequest.getAttribute(WebKeys.I18N_LANGUAGE_ID));
+			null, dynamicServletRequest.getAttribute(WebKeys.I18N_LANGUAGE_ID));
 	}
 
 	private Group _getGroup(long groupId) {
@@ -206,11 +203,10 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 
 		_mockLayoutLocalService(group, null, null);
 
-		LayoutSet layoutSet = _getLayoutSet(group);
 		VirtualHost virtualHost = _getVirtualHost(
 			0, RandomTestUtil.randomString());
 
-		_mockLayoutSetLocalService(layoutSet, virtualHost);
+		_mockLayoutSetLocalService(_getLayoutSet(group), virtualHost);
 
 		_mockVirtualHostLocalService(virtualHost);
 
@@ -227,10 +223,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		Group group = _getGroup(groupId);
 
 		_mockLayoutLocalService(group, publicLayout, privateLayout);
-
-		LayoutSet layoutSet = _getLayoutSet(group);
-
-		_mockLayoutSetLocalService(layoutSet, virtualHost);
+		_mockLayoutSetLocalService(_getLayoutSet(group), virtualHost);
 
 		_mockVirtualHostLocalService(virtualHost);
 
