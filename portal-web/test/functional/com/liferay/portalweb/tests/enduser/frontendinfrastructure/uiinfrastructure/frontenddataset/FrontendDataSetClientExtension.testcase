@@ -27,6 +27,27 @@ definition {
 		}
 	}
 
+	@description = "LPS-176807. Verify if is not possible to see an client extension deployed"
+	@priority = 4
+	test CannotSeeClientExtensionNotDeployed {
+		task ("When you access the Client Extension admin page") {
+			ApplicationsMenu.gotoPortlet(
+				category = "Custom Apps",
+				panel = "Applications",
+				portlet = "Client Extensions");
+		}
+
+		task ("Then the client extension is not present") {
+			AssertElementNotPresent(
+				key_tableEntryName = "Liferay Sample Frontend Data Set Cell Renderer",
+				locator1 = "ClientExtension#TABLE_ENTRY_NAME_REMOTE_TABLE");
+
+			AssertElementNotPresent(
+				key_tableEntryType = "Frontend Data Set Cell Renderer",
+				locator1 = "ClientExtension#TABLE_ENTRY_TYPE_REMOTE_TABLE");
+		}
+	}
+
 	@description = "LPS-176807. Verify if the Client Extension are visible when deploys"
 	@priority = 4
 	test CanViewDeployedFile {
