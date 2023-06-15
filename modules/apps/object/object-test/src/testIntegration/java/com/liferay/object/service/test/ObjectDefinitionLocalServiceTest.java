@@ -731,59 +731,49 @@ public class ObjectDefinitionLocalServiceTest {
 			() -> _addSystemObjectDefinition(
 				"", "Test", RandomTestUtil.randomString()));
 
-		// Name is null
+		// Name
 
 		AssertUtils.assertFailure(
-			ObjectDefinitionNameException.class, "Name is null",
+			ObjectDefinitionNameException.MustNotBeNull.class, "Name is null",
 			() -> _addSystemObjectDefinition(""));
 
-		// Name must not start with "C_"
-
 		AssertUtils.assertFailure(
-			ObjectDefinitionNameException.class,
+			ObjectDefinitionNameException.MustStartWithCAndUnderscoreForCustomObject.class,
 			"System object definition names must not start with \"C_\"",
 			() -> _addSystemObjectDefinition("C_Test"));
 
 		AssertUtils.assertFailure(
-			ObjectDefinitionNameException.class,
+			ObjectDefinitionNameException.MustStartWithCAndUnderscoreForCustomObject.class,
 			"System object definition names must not start with \"C_\"",
 			() -> _addSystemObjectDefinition("c_Test"));
-
-		// Name must only contain letters and digits
 
 		_objectDefinitionLocalService.deleteObjectDefinition(
 			_addSystemObjectDefinition(" Test "));
 
 		AssertUtils.assertFailure(
-			ObjectDefinitionNameException.class,
+			ObjectDefinitionNameException.MustOnlyContainLettersAndDigits.class,
 			"Name must only contain letters and digits",
 			() -> _addSystemObjectDefinition("Tes t"));
 
 		AssertUtils.assertFailure(
-			ObjectDefinitionNameException.class,
+			ObjectDefinitionNameException.MustOnlyContainLettersAndDigits.class,
 			"Name must only contain letters and digits",
 			() -> _addSystemObjectDefinition("Tes-t"));
 
-		// The first character of a name must be an upper case letter
-
 		AssertUtils.assertFailure(
-			ObjectDefinitionNameException.class,
+			ObjectDefinitionNameException.MustBeginWithUpperCaseLetter.class,
 			"The first character of a name must be an upper case letter",
 			() -> _addSystemObjectDefinition("test"));
-
-		// Name must be less than 41 characters
 
 		_objectDefinitionLocalService.deleteObjectDefinition(
 			_addSystemObjectDefinition(
 				"A123456789a123456789a123456789a1234567891"));
 
 		AssertUtils.assertFailure(
-			ObjectDefinitionNameException.class,
+			ObjectDefinitionNameException.MustBeLessThan41Characters.class,
 			"Name must be less than 41 characters",
 			() -> _addSystemObjectDefinition(
 				"A123456789a123456789a123456789a12345678912"));
-
-		// Name ...
 
 		AssertUtils.assertFailure(
 			ObjectDefinitionNameException.ForbiddenModifiableSystemObjectDefinitionName.class,
@@ -802,12 +792,10 @@ public class ObjectDefinitionLocalServiceTest {
 						RandomTestUtil.randomString(),
 						StringUtil.randomId()))));
 
-		// Duplicate name
-
 		ObjectDefinition objectDefinition = _addSystemObjectDefinition("Test");
 
 		AssertUtils.assertFailure(
-			ObjectDefinitionNameException.class, "Duplicate name Test",
+			ObjectDefinitionNameException.MustNotBeDuplicate.class, "Duplicate name Test",
 			() -> _addSystemObjectDefinition("Test"));
 
 		_objectDefinitionLocalService.deleteObjectDefinition(objectDefinition);
