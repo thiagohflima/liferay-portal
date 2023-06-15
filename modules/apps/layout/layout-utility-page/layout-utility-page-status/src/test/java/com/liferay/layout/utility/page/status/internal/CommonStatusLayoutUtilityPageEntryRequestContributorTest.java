@@ -245,9 +245,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		return virtualHost;
 	}
 
-	private VirtualHost _getVirtualHostWithoutLayouts()
-		throws PortalException {
-
+	private VirtualHost _getVirtualHostWithoutLayouts() throws PortalException {
 		Group group = _getGroup(RandomTestUtil.randomLong());
 
 		LayoutSet layoutSet = _getLayoutSet(group);
