@@ -631,6 +631,8 @@ public class CompanyIndexFactoryTest {
 			RestHighLevelClient restHighLevelClient)
 		throws Exception {
 
+		IngestClient ingestClient = restHighLevelClient.ingest();
+
 		String source = JSONUtil.put(
 			"description", "Adds timestamp to documents"
 		).put(
@@ -649,8 +651,6 @@ public class CompanyIndexFactoryTest {
 			"timestamp",
 			new BytesArray(source.getBytes(StandardCharsets.UTF_8)),
 			XContentType.JSON);
-
-		IngestClient ingestClient = restHighLevelClient.ingest();
 
 		ingestClient.putPipeline(putPipelineRequest, RequestOptions.DEFAULT);
 	}

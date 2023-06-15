@@ -43,17 +43,17 @@ public class SyncReindexManagerImpl implements SyncReindexManager {
 	public void deleteStaleDocuments(
 		long companyId, Date date, Set<String> classNames) {
 
-		Format format = _fastDateFormatFactory.getSimpleDateFormat(
-			"yyyyMMddHHmmss");
-
-		DateRangeTermQuery dateRangeTermQuery = _queries.dateRangeTerm(
-			"timestamp", false, false, null, format.format(date));
+		BooleanQuery booleanQuery = _queries.booleanQuery();
 
 		TermsQuery termsQuery = _queries.terms(Field.ENTRY_CLASS_NAME);
 
 		termsQuery.addValues(classNames.toArray());
 
-		BooleanQuery booleanQuery = _queries.booleanQuery();
+		Format format = _fastDateFormatFactory.getSimpleDateFormat(
+			"yyyyMMddHHmmss");
+
+		DateRangeTermQuery dateRangeTermQuery = _queries.dateRangeTerm(
+			"timestamp", false, false, null, format.format(date));
 
 		booleanQuery.addFilterQueryClauses(termsQuery, dateRangeTermQuery);
 
