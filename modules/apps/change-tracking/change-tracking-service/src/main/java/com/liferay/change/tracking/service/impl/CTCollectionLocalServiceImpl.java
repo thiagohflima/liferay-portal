@@ -883,8 +883,9 @@ public class CTCollectionLocalServiceImpl
 		if (newCTEntries.size() != publishedCTEntries.size()) {
 			throw new SystemException(
 				StringBundler.concat(
-					"Size mismatch expected ", publishedCTEntries.size(),
-					" but was ", newCTEntries.size()));
+					"Expected ", publishedCTEntries.size(),
+					" change tracking entries instead of ",
+					newCTEntries.size()));
 		}
 
 		_ctServiceRegistry.onAfterCopy(undoCTCollection, newCTCollection);
