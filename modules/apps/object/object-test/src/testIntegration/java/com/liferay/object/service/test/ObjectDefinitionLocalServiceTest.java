@@ -111,47 +111,23 @@ public class ObjectDefinitionLocalServiceTest {
 			"Label is null for locale " + LocaleUtil.US.getDisplayName(),
 			() -> _addCustomObjectDefinition("", "Test", "Tests"));
 
-		// Name is null
-
-		AssertUtils.assertFailure(
-			ObjectDefinitionNameException.class, "Name is null",
-			() -> _addCustomObjectDefinition("Test", "", "Tests"));
-
-		// Name must only contain letters and digits
+		// Name
 
 		_objectDefinitionLocalService.deleteObjectDefinition(
 			_addCustomObjectDefinition(" Test "));
-
-		AssertUtils.assertFailure(
-			ObjectDefinitionNameException.class,
-			"Name must only contain letters and digits",
-			() -> _addCustomObjectDefinition("Tes t"));
-
-		AssertUtils.assertFailure(
-			ObjectDefinitionNameException.class,
-			"Name must only contain letters and digits",
-			() -> _addCustomObjectDefinition("Tes-t"));
-
-		// The first character of a name must be an upper case letter
-
-		AssertUtils.assertFailure(
-			ObjectDefinitionNameException.class,
-			"The first character of a name must be an upper case letter",
-			() -> _addCustomObjectDefinition("test"));
-
-		// Name must be less than 41 characters
-
 		_objectDefinitionLocalService.deleteObjectDefinition(
 			_addCustomObjectDefinition(
 				"A123456789a123456789a123456789a1234567891"));
 
 		AssertUtils.assertFailure(
-			ObjectDefinitionNameException.class,
+			ObjectDefinitionNameException.MustBeLessThan41Characters.class,
 			"Name must be less than 41 characters",
 			() -> _addCustomObjectDefinition(
 				"A123456789a123456789a123456789a12345678912"));
-
-		// Duplicate name
+		AssertUtils.assertFailure(
+			ObjectDefinitionNameException.MustBeginWithUpperCaseLetter.class,
+			"The first character of a name must be an upper case letter",
+			() -> _addCustomObjectDefinition("test"));
 
 		ObjectDefinition objectDefinition =
 			_objectDefinitionLocalService.addCustomObjectDefinition(
@@ -173,10 +149,22 @@ public class ObjectDefinitionLocalServiceTest {
 				objectDefinition.getObjectDefinitionId());
 
 		AssertUtils.assertFailure(
-			ObjectDefinitionNameException.class, "Duplicate name C_Test",
-			() -> _addCustomObjectDefinition("Test"));
+			ObjectDefinitionNameException.MustNotBeDuplicate.class,
+			"Duplicate name C_Test", () -> _addCustomObjectDefinition("Test"));
 
 		_objectDefinitionLocalService.deleteObjectDefinition(objectDefinition);
+
+		AssertUtils.assertFailure(
+			ObjectDefinitionNameException.MustNotBeNull.class, "Name is null",
+			() -> _addCustomObjectDefinition("Test", "", "Tests"));
+		AssertUtils.assertFailure(
+			ObjectDefinitionNameException.MustOnlyContainLettersAndDigits.class,
+			"Name must only contain letters and digits",
+			() -> _addCustomObjectDefinition("Tes t"));
+		AssertUtils.assertFailure(
+			ObjectDefinitionNameException.MustOnlyContainLettersAndDigits.class,
+			"Name must only contain letters and digits",
+			() -> _addCustomObjectDefinition("Tes-t"));
 
 		// Plural label is null
 
@@ -734,10 +722,10 @@ public class ObjectDefinitionLocalServiceTest {
 		// Name
 
 		_objectDefinitionLocalService.deleteObjectDefinition(
+			_addSystemObjectDefinition(" Test "));
+		_objectDefinitionLocalService.deleteObjectDefinition(
 			_addSystemObjectDefinition(
 				"A123456789a123456789a123456789a1234567891"));
-		_objectDefinitionLocalService.deleteObjectDefinition(
-			_addSystemObjectDefinition(" Test "));
 
 		AssertUtils.assertFailure(
 			ObjectDefinitionNameException.
@@ -757,14 +745,14 @@ public class ObjectDefinitionLocalServiceTest {
 						RandomTestUtil.randomString(),
 						StringUtil.randomId()))));
 		AssertUtils.assertFailure(
-			ObjectDefinitionNameException.MustBeginWithUpperCaseLetter.class,
-			"The first character of a name must be an upper case letter",
-			() -> _addSystemObjectDefinition("test"));
-		AssertUtils.assertFailure(
 			ObjectDefinitionNameException.MustBeLessThan41Characters.class,
 			"Name must be less than 41 characters",
 			() -> _addSystemObjectDefinition(
 				"A123456789a123456789a123456789a12345678912"));
+		AssertUtils.assertFailure(
+			ObjectDefinitionNameException.MustBeginWithUpperCaseLetter.class,
+			"The first character of a name must be an upper case letter",
+			() -> _addSystemObjectDefinition("test"));
 
 		ObjectDefinition objectDefinition = _addSystemObjectDefinition("Test");
 
