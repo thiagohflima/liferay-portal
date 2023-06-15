@@ -311,15 +311,15 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		Portal portal = Mockito.mock(Portal.class);
 
 		Mockito.when(
-			portal.getHost(Mockito.any(DynamicServletRequest.class))
-		).thenReturn(
-			host
-		);
-
-		Mockito.when(
 			portal.getCurrentURL(Mockito.any(DynamicServletRequest.class))
 		).thenReturn(
 			currentURL
+		);
+
+		Mockito.when(
+			portal.getHost(Mockito.any(DynamicServletRequest.class))
+		).thenReturn(
+			host
 		);
 
 		ReflectionTestUtil.setFieldValue(
