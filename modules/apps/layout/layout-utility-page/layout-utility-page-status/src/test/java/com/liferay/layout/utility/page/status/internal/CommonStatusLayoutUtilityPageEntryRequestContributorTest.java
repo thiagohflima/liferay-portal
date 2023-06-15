@@ -88,7 +88,6 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 			0, RandomTestUtil.randomString());
 
 		_mockPortal(null, virtualHost.getHostname());
-
 		_mockVirtualHostLocalService(virtualHost);
 
 		_assertAttributesAndParameters(null, null, null);
@@ -97,7 +96,6 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 	@Test
 	public void testAddParametersWithoutVirtualHostAndWithoutCurrentURL() {
 		_mockPortal(null, null);
-
 		_mockVirtualHostLocalService(null);
 
 		_assertAttributesAndParameters(null, null, null);
@@ -119,7 +117,6 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		throws PortalException {
 
 		long groupId = RandomTestUtil.randomLong();
-
 		Layout layout = _getLayout();
 
 		VirtualHost virtualHost = _getVirtualHost(groupId, null, layout);
@@ -136,7 +133,6 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		throws PortalException {
 
 		long groupId = RandomTestUtil.randomLong();
-
 		Layout layout = _getLayout();
 
 		VirtualHost virtualHost = _getVirtualHost(groupId, layout, null);
