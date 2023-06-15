@@ -39,7 +39,7 @@ public abstract class BaseEventHandler implements EventHandler {
 		throws Exception {
 
 		if (projectJSONObject == null) {
-			throw new Exception("Invalid Project JSON object");
+			throw new Exception("Invalid project JSON object");
 		}
 
 		projectJSONObject = validateProjectJSONObject(projectJSONObject);
@@ -64,19 +64,19 @@ public abstract class BaseEventHandler implements EventHandler {
 		throws Exception {
 
 		if (buildJSONObject == null) {
-			throw new Exception("Invalid Build JSON object");
+			throw new Exception("Invalid build JSON object");
 		}
 
 		String buildName = buildJSONObject.optString("buildName");
 
 		if (buildName.isEmpty()) {
-			throw new Exception("Invalid Build 'buildName'");
+			throw new Exception("Invalid build name");
 		}
 
 		String jobName = buildJSONObject.optString("jobName");
 
 		if (jobName.isEmpty()) {
-			throw new Exception("Invalid Build 'jobName'");
+			throw new Exception("Invalid job name");
 		}
 
 		Build.State state = Build.State.getByKey(
@@ -120,7 +120,7 @@ public abstract class BaseEventHandler implements EventHandler {
 		throws Exception {
 
 		if (projectJSONObject == null) {
-			throw new Exception("Invalid Project JSON object");
+			throw new Exception("Invalid project JSON object");
 		}
 
 		if (projectJSONObject.has("id")) {
@@ -130,13 +130,13 @@ public abstract class BaseEventHandler implements EventHandler {
 		String name = projectJSONObject.optString("name");
 
 		if (name.isEmpty()) {
-			throw new Exception("Invalid Project 'name'");
+			throw new Exception("Invalid name");
 		}
 
 		int priority = projectJSONObject.optInt("priority");
 
 		if (priority <= 0) {
-			throw new Exception("Invalid Project 'priority'");
+			throw new Exception("Invalid priority");
 		}
 
 		Project.State state = Project.State.getByKey(
@@ -151,7 +151,7 @@ public abstract class BaseEventHandler implements EventHandler {
 
 		if (type == null) {
 			throw new Exception(
-				"Project 'type' key does not match: " + Project.Type.getKeys());
+				"Project type does not match: " + Project.Type.getKeys());
 		}
 
 		JSONObject jsonObject = new JSONObject();
