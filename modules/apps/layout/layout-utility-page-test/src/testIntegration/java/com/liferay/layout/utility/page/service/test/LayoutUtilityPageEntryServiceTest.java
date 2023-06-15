@@ -279,7 +279,7 @@ public class LayoutUtilityPageEntryServiceTest {
 	}
 
 	@Test
-	public void testRenameLayoutUtilityPageEntry() throws Exception {
+	public void testUpdateLayoutUtilityPageEntry() throws Exception {
 		LayoutUtilityPageEntry layoutUtilityPageEntry =
 			_layoutUtilityPageEntryService.addLayoutUtilityPageEntry(
 				RandomTestUtil.randomString(), _group.getGroupId(), 0, 0, true,
