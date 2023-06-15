@@ -21,11 +21,11 @@ import com.liferay.portal.kernel.exception.PortalException;
  */
 public class ObjectDefinitionNameException extends PortalException {
 
-	public static class MustBeAnAllowedModifiableSystemObjectDefinitionName
+	public static class ForbiddenModifiableSystemObjectDefinitionName
 		extends ObjectDefinitionNameException {
 
-		public MustBeAnAllowedModifiableSystemObjectDefinitionName() {
-			super("Name not allowed for a modifiable system object definition");
+		public ForbiddenModifiableSystemObjectDefinitionName(String name) {
+			super("Forbidden modifiable system object definition name " + name);
 		}
 
 	}

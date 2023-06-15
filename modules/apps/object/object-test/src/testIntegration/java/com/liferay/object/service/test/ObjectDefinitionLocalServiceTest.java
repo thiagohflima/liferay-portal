@@ -783,6 +783,25 @@ public class ObjectDefinitionLocalServiceTest {
 			() -> _addSystemObjectDefinition(
 				"A123456789a123456789a123456789a12345678912"));
 
+		// Name ...
+
+		AssertUtils.assertFailure(
+			ObjectDefinitionNameException.ForbiddenModifiableSystemObjectDefinitionName.class,
+			"Name not allowed for a modifiable system object definition",
+			() -> ObjectDefinitionTestUtil.addModifiableSystemObjectDefinition(
+				TestPropsValues.getUserId(), null,
+				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
+				"Invalid Test", null, null,
+				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
+				ObjectDefinitionConstants.SCOPE_SITE, null, 1,
+				_objectDefinitionLocalService,
+				Arrays.asList(
+					ObjectFieldUtil.createObjectField(
+						ObjectFieldConstants.BUSINESS_TYPE_TEXT,
+						ObjectFieldConstants.DB_TYPE_STRING,
+						RandomTestUtil.randomString(),
+						StringUtil.randomId()))));
+
 		// Duplicate name
 
 		ObjectDefinition objectDefinition = _addSystemObjectDefinition("Test");
@@ -992,25 +1011,6 @@ public class ObjectDefinitionLocalServiceTest {
 				ObjectDefinitionConstants.SCOPE_COMPANY, null, 1,
 				_objectDefinitionLocalService,
 				Collections.<ObjectField>emptyList());
-
-		// Disallowed modifiable system object definition
-
-		AssertUtils.assertFailure(
-			ObjectDefinitionNameException.class,
-			"Name not allowed for a modifiable system object definition",
-			() -> ObjectDefinitionTestUtil.addModifiableSystemObjectDefinition(
-				TestPropsValues.getUserId(), null,
-				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
-				"Invalid Test", null, null,
-				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
-				ObjectDefinitionConstants.SCOPE_SITE, null, 1,
-				_objectDefinitionLocalService,
-				Arrays.asList(
-					ObjectFieldUtil.createObjectField(
-						ObjectFieldConstants.BUSINESS_TYPE_TEXT,
-						ObjectFieldConstants.DB_TYPE_STRING,
-						RandomTestUtil.randomString(),
-						StringUtil.randomId()))));
 
 		// Publish unmodifiable system object definition
 

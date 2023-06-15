@@ -1171,14 +1171,14 @@ public class ObjectDefinitionLocalServiceImpl
 			return name;
 		}
 
-		String tablePrefix = "O_";
+		String prefix = "O_";
 
 		if (modifiable && system) {
-			tablePrefix = "MSOD_";
+			prefix = "MSOD_";
 		}
 
 		return StringBundler.concat(
-			tablePrefix, companyId, StringPool.UNDERLINE, shortName);
+			prefix, companyId, StringPool.UNDERLINE, shortName);
 	}
 
 	private String _getName(String name, boolean system) {
@@ -1677,7 +1677,7 @@ public class ObjectDefinitionLocalServiceImpl
 				name)) {
 
 			throw new ObjectDefinitionNameException.
-				MustBeAnAllowedModifiableSystemObjectDefinitionName();
+				ForbiddenModifiableSystemObjectDefinitionName(name);
 		}
 
 		char[] nameCharArray = name.toCharArray();
