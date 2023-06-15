@@ -87,6 +87,16 @@ public class MBMailUtil {
 			"[$MESSAGE_ID$]",
 			LanguageUtil.get(themeDisplay.getLocale(), "the-message-id")
 		).put(
+			"[$MESSAGE_PARENT$]",
+			LanguageUtil.get(
+				themeDisplay.getLocale(),
+				"the-message-body-of-the-parent-message")
+		).put(
+			"[$MESSAGE_SIBLINGS$]",
+			LanguageUtil.get(
+				themeDisplay.getLocale(),
+				"the-message-thread-of-messages-at-the-same-level")
+		).put(
 			"[$MESSAGE_SUBJECT$]",
 			LanguageUtil.get(themeDisplay.getLocale(), "the-message-subject")
 		).put(
@@ -117,6 +127,11 @@ public class MBMailUtil {
 				return HtmlUtil.escape(portletDisplay.getTitle());
 			}
 		).put(
+			"[$ROOT_MESSAGE_BODY$]",
+			LanguageUtil.get(
+				themeDisplay.getLocale(),
+				"the-message-body-of-the-original-message")
+		).put(
 			"[$SITE_NAME$]",
 			LanguageUtil.get(
 				themeDisplay.getLocale(),
@@ -135,22 +150,6 @@ public class MBMailUtil {
 					themeDisplay.getLocale(),
 					"the-name-of-the-email-recipient"));
 		}
-
-		definitionTerms.put(
-			"[$MESSAGE_PARENT$]",
-			LanguageUtil.get(
-				themeDisplay.getLocale(),
-				"the-message-body-of-the-parent-message"));
-		definitionTerms.put(
-			"[$MESSAGE_SIBLINGS$]",
-			LanguageUtil.get(
-				themeDisplay.getLocale(),
-				"the-message-thread-of-messages-at-the-same-level"));
-		definitionTerms.put(
-			"[$ROOT_MESSAGE_BODY$]",
-			LanguageUtil.get(
-				themeDisplay.getLocale(),
-				"the-message-body-of-the-original-message"));
 
 		return definitionTerms;
 	}
