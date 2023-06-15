@@ -84,7 +84,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 
 	@Test
 	public void testAddParametersWithDefaultVirtualHostAndWithoutCurrentURL() {
-		VirtualHost virtualHost = _getMockVirtualHost(
+		VirtualHost virtualHost = _getVirtualHost(
 			0, RandomTestUtil.randomString());
 
 		_mockPortal(null, virtualHost.getHostname());
@@ -107,7 +107,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 	public void testAddParametersWithVirtualHostWithoutLayoutsAndWithoutCurrentURL()
 		throws PortalException {
 
-		VirtualHost virtualHost = _getMockVirtualHostWithoutLayouts();
+		VirtualHost virtualHost = _getVirtualHostWithoutLayouts();
 
 		_mockPortal(null, virtualHost.getHostname());
 
@@ -120,9 +120,9 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 
 		long groupId = RandomTestUtil.randomLong();
 
-		Layout layout = _getMockLayout();
+		Layout layout = _getLayout();
 
-		VirtualHost virtualHost = _getMockVirtualHostWithLayouts(
+		VirtualHost virtualHost = _getVirtualHostWithLayouts(
 			groupId, null, layout);
 
 		_mockPortal(null, virtualHost.getHostname());
@@ -138,9 +138,9 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 
 		long groupId = RandomTestUtil.randomLong();
 
-		Layout layout = _getMockLayout();
+		Layout layout = _getLayout();
 
-		VirtualHost virtualHost = _getMockVirtualHostWithLayouts(
+		VirtualHost virtualHost = _getVirtualHostWithLayouts(
 			groupId, layout, null);
 
 		_mockPortal(null, virtualHost.getHostname());
@@ -171,7 +171,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 			dynamicServletRequest.getAttribute(WebKeys.I18N_LANGUAGE_ID));
 	}
 
-	private Group _getMockGroup(long groupId) {
+	private Group _getGroup(long groupId) {
 		Group group = Mockito.mock(Group.class);
 
 		Mockito.when(
@@ -183,7 +183,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		return group;
 	}
 
-	private Layout _getMockLayout() {
+	private Layout _getLayout() {
 		Layout layout = Mockito.mock(Layout.class);
 
 		Mockito.when(
@@ -195,7 +195,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		return layout;
 	}
 
-	private LayoutSet _getMockLayoutSet(Group group) throws PortalException {
+	private LayoutSet _getLayoutSet(Group group) throws PortalException {
 		LayoutSet layoutSet = Mockito.mock(LayoutSet.class);
 
 		Mockito.when(
@@ -207,7 +207,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		return layoutSet;
 	}
 
-	private VirtualHost _getMockVirtualHost(long layoutSetId, String name) {
+	private VirtualHost _getVirtualHost(long layoutSetId, String name) {
 		VirtualHost virtualHost = Mockito.mock(VirtualHost.class);
 
 		Mockito.when(
@@ -225,16 +225,16 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		return virtualHost;
 	}
 
-	private VirtualHost _getMockVirtualHostWithLayouts(
+	private VirtualHost _getVirtualHostWithLayouts(
 			long groupId, Layout privateLayout, Layout publicLayout)
 		throws PortalException {
 
-		VirtualHost virtualHost = _getMockVirtualHost(
+		VirtualHost virtualHost = _getVirtualHost(
 			RandomTestUtil.randomLong(), RandomTestUtil.randomString());
 
-		Group group = _getMockGroup(groupId);
+		Group group = _getGroup(groupId);
 
-		LayoutSet layoutSet = _getMockLayoutSet(group);
+		LayoutSet layoutSet = _getLayoutSet(group);
 
 		_mockLayoutLocalService(group, publicLayout, privateLayout);
 
@@ -245,16 +245,16 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		return virtualHost;
 	}
 
-	private VirtualHost _getMockVirtualHostWithoutLayouts()
+	private VirtualHost _getVirtualHostWithoutLayouts()
 		throws PortalException {
 
-		Group group = _getMockGroup(RandomTestUtil.randomLong());
+		Group group = _getGroup(RandomTestUtil.randomLong());
 
-		LayoutSet layoutSet = _getMockLayoutSet(group);
+		LayoutSet layoutSet = _getLayoutSet(group);
 
 		_mockLayoutLocalService(group, null, null);
 
-		VirtualHost virtualHost = _getMockVirtualHost(
+		VirtualHost virtualHost = _getVirtualHost(
 			0, RandomTestUtil.randomString());
 
 		_mockLayoutSetLocalService(layoutSet, virtualHost);
