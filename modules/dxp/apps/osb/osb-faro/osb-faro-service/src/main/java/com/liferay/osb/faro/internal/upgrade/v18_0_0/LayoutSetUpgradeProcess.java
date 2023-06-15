@@ -14,7 +14,6 @@
 
 package com.liferay.osb.faro.internal.upgrade.v18_0_0;
 
-import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 
 /**
@@ -25,13 +24,9 @@ public class LayoutSetUpgradeProcess extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		String oldThemeId = "osbfaro_WAR_osbfarotheme";
-		String newThemeId = "osbfarotheme_WAR_osbfarotheme";
-
 		runSQL(
-			StringBundler.concat(
-				"update LayoutSet set themeId = '", newThemeId,
-				"' where themeId = '", oldThemeId, "'"));
+			"update LayoutSet set themeId = 'osbfarotheme_WAR_osbfarotheme' " +
+                "where themeId = 'osbfaro_WAR_osbfarotheme'");
 	}
 
 }
