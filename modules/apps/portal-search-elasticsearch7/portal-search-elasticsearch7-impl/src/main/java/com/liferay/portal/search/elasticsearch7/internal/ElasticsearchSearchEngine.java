@@ -376,7 +376,7 @@ public class ElasticsearchSearchEngine implements SearchEngine {
 				putPipelineRequest, RequestOptions.DEFAULT);
 		}
 		catch (IOException ioException) {
-			_log.error("Unable to put timestamp pipline", ioException);
+			_log.error("Unable to put timestamp pipeline", ioException);
 		}
 	}
 
