@@ -231,9 +231,9 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 
 		Group group = _getGroup(groupId);
 
-		LayoutSet layoutSet = _getLayoutSet(group);
-
 		_mockLayoutLocalService(group, publicLayout, privateLayout);
+
+		LayoutSet layoutSet = _getLayoutSet(group);
 
 		_mockLayoutSetLocalService(layoutSet, virtualHost);
 
