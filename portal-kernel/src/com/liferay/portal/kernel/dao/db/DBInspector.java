@@ -85,9 +85,9 @@ public class DBInspector {
 	public List<String> getTableNames(String tableNamePattern)
 		throws SQLException {
 
-		DatabaseMetaData databaseMetaData = _connection.getMetaData();
-
 		List<String> tableNames = new ArrayList<>();
+
+		DatabaseMetaData databaseMetaData = _connection.getMetaData();
 
 		try (ResultSet resultSet = databaseMetaData.getTables(
 				_connection.getCatalog(), _connection.getSchema(),
