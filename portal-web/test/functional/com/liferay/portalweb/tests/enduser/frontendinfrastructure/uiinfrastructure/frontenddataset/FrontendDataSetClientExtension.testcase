@@ -27,4 +27,32 @@ definition {
 		}
 	}
 
+	@description = "LPS-176807. Verify if the Client Extension are visible when deploys"
+	@priority = 4
+	test CanViewDeployedFile {
+		property osgi.modules.includes = "frontend-data-set-sample-web";
+
+		task ("When create a page") {
+			JSONLayout.addPublicLayout(
+				groupName = "Guest",
+				layoutName = "Frontend Data Set Test Page");
+		}
+
+		task ("And Go to page edit page") {
+			Navigator.gotoPage(pageName = "Frontend Data Set Test Page");
+
+			Click(locator1 = "Icon#PLUS");
+		}
+
+		task ("Then Confirm the client extension sample is located at Widgets > Samples") {
+			Click(
+				key_panel = "Sample",
+				locator1 = "Panel#PANEL");
+
+			AssertElementPresent(
+				key_remoteAppName = "Frontend Data Set Sample",
+				locator1 = "ClientExtension#APPLICATION_SEARCH_FIELD_WIDGET_SEARCH_REMOTE_APP");
+		}
+	}
+
 }
