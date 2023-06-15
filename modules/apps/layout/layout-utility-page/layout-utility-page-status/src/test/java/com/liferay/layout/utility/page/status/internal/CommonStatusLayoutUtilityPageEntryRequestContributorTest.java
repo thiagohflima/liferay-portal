@@ -107,7 +107,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 	public void testAddParametersWithVirtualHostWithoutLayoutsAndWithoutCurrentURL()
 		throws PortalException {
 
-		VirtualHost virtualHost = _getVirtualHostWithoutLayouts();
+		VirtualHost virtualHost = _getVirtualHost();
 
 		_mockPortal(null, virtualHost.getHostname());
 
@@ -122,7 +122,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 
 		Layout layout = _getLayout();
 
-		VirtualHost virtualHost = _getVirtualHostWithLayouts(
+		VirtualHost virtualHost = _getVirtualHost(
 			groupId, null, layout);
 
 		_mockPortal(null, virtualHost.getHostname());
@@ -140,7 +140,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 
 		Layout layout = _getLayout();
 
-		VirtualHost virtualHost = _getVirtualHostWithLayouts(
+		VirtualHost virtualHost = _getVirtualHost(
 			groupId, layout, null);
 
 		_mockPortal(null, virtualHost.getHostname());
@@ -225,7 +225,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		return virtualHost;
 	}
 
-	private VirtualHost _getVirtualHostWithLayouts(
+	private VirtualHost _getVirtualHost(
 			long groupId, Layout privateLayout, Layout publicLayout)
 		throws PortalException {
 
@@ -245,7 +245,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		return virtualHost;
 	}
 
-	private VirtualHost _getVirtualHostWithoutLayouts() throws PortalException {
+	private VirtualHost _getVirtualHost() throws PortalException {
 		Group group = _getGroup(RandomTestUtil.randomLong());
 
 		LayoutSet layoutSet = _getLayoutSet(group);
