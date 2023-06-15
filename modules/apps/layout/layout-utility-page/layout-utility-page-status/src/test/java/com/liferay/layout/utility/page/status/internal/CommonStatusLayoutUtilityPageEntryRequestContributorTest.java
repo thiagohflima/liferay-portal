@@ -90,7 +90,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		_mockPortal(null, virtualHost.getHostname());
 		_mockVirtualHostLocalService(virtualHost);
 
-		_assertAttributesAndParameters(null, null, null);
+		_assertAttributesAndParameters(null, null);
 	}
 
 	@Test
@@ -98,7 +98,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		_mockPortal(null, null);
 		_mockVirtualHostLocalService(null);
 
-		_assertAttributesAndParameters(null, null, null);
+		_assertAttributesAndParameters(null, null);
 	}
 
 	@Test
@@ -109,7 +109,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 
 		_mockPortal(null, virtualHost.getHostname());
 
-		_assertAttributesAndParameters(null, null, null);
+		_assertAttributesAndParameters(null, null);
 	}
 
 	@Test
@@ -124,7 +124,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		_mockPortal(null, virtualHost.getHostname());
 
 		_assertAttributesAndParameters(
-			null, String.valueOf(groupId),
+			String.valueOf(groupId),
 			String.valueOf(layout.getLayoutId()));
 	}
 
@@ -140,12 +140,12 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		_mockPortal(null, virtualHost.getHostname());
 
 		_assertAttributesAndParameters(
-			null, String.valueOf(groupId),
+			String.valueOf(groupId),
 			String.valueOf(layout.getLayoutId()));
 	}
 
 	private void _assertAttributesAndParameters(
-		String languageId, String groupId, String layoutId) {
+		String groupId, String layoutId) {
 
 		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
@@ -161,7 +161,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		Assert.assertEquals(
 			layoutId, dynamicServletRequest.getParameter("layoutId"));
 		Assert.assertEquals(
-			languageId,
+			null,
 			dynamicServletRequest.getAttribute(WebKeys.I18N_LANGUAGE_ID));
 	}
 
