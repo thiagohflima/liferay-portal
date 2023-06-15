@@ -194,6 +194,9 @@ public class LiferayOAuth2ResourceServerEnableWebSecurity {
 	@Autowired
 	private Environment _environment;
 
+	@Value("${liferay.oauth.urls.excludes:}")
+	private String[] _liferayOauthURLsExcludes;
+
 	@Value("${com.liferay.lxc.dxp.domains}")
 	private String _lxcDXPDomains;
 
@@ -202,9 +205,6 @@ public class LiferayOAuth2ResourceServerEnableWebSecurity {
 
 	@Value("${com.liferay.lxc.dxp.server.protocol}")
 	private String _lxcDXPServerProtocol;
-
-	@Value("${liferay.oauth.urls.excludes:}")
-	private String[] _liferayOauthURLsExcludes;
 
 	private class ClientIdOAuth2TokenValidator
 		implements OAuth2TokenValidator<Jwt> {
