@@ -55,4 +55,36 @@ definition {
 		}
 	}
 
+	@description = "LPS-176807. Verify if filters are corretly displayed"
+	@priority = 4
+	test CanViewSpecificFilters {
+		property osgi.modules.includes = "frontend-data-set-sample-web";
+
+		task ("And entering on a page which uses FDS") {
+			JSONLayout.addPublicLayout(
+				groupName = "Guest",
+				layoutName = "Frontend Data Set Test Page");
+
+			JSONLayout.addWidgetToPublicLayout(
+				groupName = "Guest",
+				layoutName = "Frontend Data Set Test Page",
+				widgetName = "Frontend Data Set Sample");
+
+			Navigator.gotoPage(pageName = "Frontend Data Set Test Page");
+		}
+
+		task ("When Selecting the Customized tab") {
+			Click(
+				key_sampleTab = "Customized",
+				locator1 = "FrontendDataSet#FDS_DATASET");
+		}
+
+		task ("Then check that the user can see the word "Green" within the Color column") {
+			AssertElementPresent(
+				key_color = "Green",
+				key_field = "Color",
+				locator1 = "FrontendDataSet#SEARCH_COLUMN_AND_ROW");
+		}
+	}
+
 }
