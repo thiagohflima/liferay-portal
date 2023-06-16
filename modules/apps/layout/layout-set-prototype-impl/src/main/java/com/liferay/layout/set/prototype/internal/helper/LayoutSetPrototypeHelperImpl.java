@@ -201,7 +201,7 @@ public class LayoutSetPrototypeHelperImpl implements LayoutSetPrototypeHelper {
 		Group group = _groupLocalService.getGroup(groupId);
 
 		if (group.isLayoutSetPrototype()) {
-			long count = _countDuplicatedFriendlyURLSiteLayouts(
+			long count = _getDuplicatedFriendlyURLSiteLayoutsCount(
 				group.getCompanyId(), group.getGroupId(), layoutUuid,
 				friendlyURL);
 
@@ -216,7 +216,7 @@ public class LayoutSetPrototypeHelperImpl implements LayoutSetPrototypeHelper {
 			groupId, privateLayout, layoutUuid, friendlyURL);
 	}
 
-	private long _countDuplicatedFriendlyURLSiteLayouts(
+	private long _getDuplicatedFriendlyURLSiteLayoutsCount(
 			long companyId, long groupId, String layoutUuid, String friendlyURL)
 		throws PortalException {
 
