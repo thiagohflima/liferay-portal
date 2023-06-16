@@ -489,13 +489,12 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 	}
 
 	private VirtualHost _mockVirtualHost() throws PortalException {
-		Group group = _mockGroup(RandomTestUtil.randomLong(), null);
-
-		_mockLayoutLocalService(group, null, null);
-
 		VirtualHost virtualHost = _mockVirtualHost(
 			0, RandomTestUtil.randomString());
 
+		Group group = _mockGroup(RandomTestUtil.randomLong(), null);
+
+		_mockLayoutLocalService(group, null, null);
 		_mockLayoutSetLocalService(_mockLayoutSet(group), virtualHost);
 
 		_mockVirtualHostLocalService(virtualHost);
