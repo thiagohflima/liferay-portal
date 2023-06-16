@@ -60,6 +60,9 @@ public class LoadBalancerUtil {
 			allJenkinsMasters = _jenkinsMasters.get(masterPrefix);
 		}
 
+		List<JenkinsMaster> availableJenkinsMasters = new ArrayList<>(
+			allJenkinsMasters.size());
+
 		List<String> blacklist = _getBlacklist(properties, verbose);
 
 		if ((blacklistString != null) && !blacklistString.isEmpty()) {
@@ -71,9 +74,6 @@ public class LoadBalancerUtil {
 				}
 			}
 		}
-
-		List<JenkinsMaster> availableJenkinsMasters = new ArrayList<>(
-			allJenkinsMasters.size());
 
 		List<String> goodClockList = _getGoodClockList(properties, verbose);
 
