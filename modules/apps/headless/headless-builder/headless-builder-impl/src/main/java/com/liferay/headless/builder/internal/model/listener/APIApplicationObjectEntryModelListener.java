@@ -86,8 +86,7 @@ public class APIApplicationObjectEntryModelListener
 
 			if (!matcher.matches()) {
 				throw new IllegalArgumentException(
-					"Base URL should not have blank spaces and special " +
-						"characters with a maximum of 255 characters");
+					"Base URL can have a maximum of 255 alphanumeric characters");
 			}
 		}
 		catch (Exception exception) {
