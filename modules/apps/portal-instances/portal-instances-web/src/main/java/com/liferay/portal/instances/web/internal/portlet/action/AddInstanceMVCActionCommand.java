@@ -130,7 +130,6 @@ public class AddInstanceMVCActionCommand extends BaseMVCActionCommand {
 		String mx = ParamUtil.getString(actionRequest, "mx");
 		int maxUsers = ParamUtil.getInteger(actionRequest, "maxUsers");
 		boolean active = ParamUtil.getBoolean(actionRequest, "active");
-
 		String defaultAdminPassword = ParamUtil.getString(
 			actionRequest, "defaultAdminPassword", null);
 		String defaultAdminScreenName = ParamUtil.getString(
