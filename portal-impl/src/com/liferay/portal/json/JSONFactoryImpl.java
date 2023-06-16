@@ -56,9 +56,9 @@ public class JSONFactoryImpl implements JSONFactory {
 		try {
 			_jsonSerializer.registerDefaultSerializers();
 
+			_jsonSerializer.registerSerializer(new EnumSerializer());
 			_jsonSerializer.registerSerializer(new LiferaySerializer());
 			_jsonSerializer.registerSerializer(new LocaleSerializer());
-			_jsonSerializer.registerSerializer(new EnumSerializer());
 		}
 		catch (Exception exception) {
 			_log.error(exception);
