@@ -102,7 +102,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 
 	@Test
 	public void testAddParametersWithDefaultVirtualHostAndWithoutCurrentURL() {
-		VirtualHost virtualHost = _getVirtualHost(
+		VirtualHost virtualHost = _mockVirtualHost(
 			0, RandomTestUtil.randomString());
 
 		_mockPortal(null, virtualHost.getHostname(), null);
@@ -128,9 +128,9 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		throws PortalException {
 
 		long groupId = RandomTestUtil.randomLong();
-		Layout layout = _getLayout();
+		Layout layout = _mockLayout();
 
-		VirtualHost virtualHost = _getVirtualHost(groupId, layout, null);
+		VirtualHost virtualHost = _mockVirtualHost(groupId, layout, null);
 
 		_mockPortal(
 			null, virtualHost.getHostname(), RandomTestUtil.randomString());
@@ -149,14 +149,14 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		String groupFriendlyURL =
 			StringPool.SLASH + RandomTestUtil.randomString();
 		String languageId = LocaleUtil.toLanguageId(LocaleUtil.getDefault());
-		Layout layout = _getLayout();
+		Layout layout = _mockLayout();
 
 		String currentURL = StringBundler.concat(
 			_PATH_PROXY, _PATH_CONTEXT, StringPool.SLASH, languageId,
 			PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING,
 			StringPool.SLASH, RandomTestUtil.randomString(), "/test/test");
 
-		VirtualHost virtualHost = _getVirtualHost(groupId, layout, null);
+		VirtualHost virtualHost = _mockVirtualHost(groupId, layout, null);
 
 		_mockGroupLocalService(
 			virtualHost.getCompanyId(), groupFriendlyURL, null);
@@ -175,16 +175,16 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		String groupFriendlyURL =
 			StringPool.SLASH + RandomTestUtil.randomString();
 		String languageId = LocaleUtil.toLanguageId(LocaleUtil.getDefault());
-		Layout layout = _getLayout();
-		Layout virtualHostGroupLayout = _getLayout();
+		Layout layout = _mockLayout();
+		Layout virtualHostGroupLayout = _mockLayout();
 
 		String currentURL = StringBundler.concat(
 			_PATH_PROXY, _PATH_CONTEXT, StringPool.SLASH, languageId,
 			PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING,
 			groupFriendlyURL, "/test/test");
 
-		Group group = _getGroup(RandomTestUtil.randomLong(), groupFriendlyURL);
-		VirtualHost virtualHost = _getVirtualHost(
+		Group group = _mockGroup(RandomTestUtil.randomLong(), groupFriendlyURL);
+		VirtualHost virtualHost = _mockVirtualHost(
 			groupId, virtualHostGroupLayout, null);
 
 		_mockGroupLocalService(
@@ -207,15 +207,15 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		String groupFriendlyURL =
 			StringPool.SLASH + RandomTestUtil.randomString();
 		String languageId = LocaleUtil.toLanguageId(LocaleUtil.getDefault());
-		Layout layout = _getLayout();
+		Layout layout = _mockLayout();
 
 		String currentURL = StringBundler.concat(
 			_PATH_PROXY, _PATH_CONTEXT, StringPool.SLASH, languageId,
 			PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING,
 			groupFriendlyURL, "/test/test");
 
-		Group group = _getGroup(RandomTestUtil.randomLong(), groupFriendlyURL);
-		VirtualHost virtualHost = _getVirtualHost(groupId, layout, null);
+		Group group = _mockGroup(RandomTestUtil.randomLong(), groupFriendlyURL);
+		VirtualHost virtualHost = _mockVirtualHost(groupId, layout, null);
 
 		_mockGroupLocalService(
 			virtualHost.getCompanyId(), groupFriendlyURL, group);
@@ -231,13 +231,13 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 
 		long groupId = RandomTestUtil.randomLong();
 		String languageId = LocaleUtil.toLanguageId(LocaleUtil.getDefault());
-		Layout layout = _getLayout();
+		Layout layout = _mockLayout();
 
 		String currentURL = StringBundler.concat(
 			_PATH_PROXY, _PATH_CONTEXT, StringPool.SLASH, languageId,
 			StringPool.SLASH + RandomTestUtil.randomString());
 
-		VirtualHost virtualHost = _getVirtualHost(groupId, layout, null);
+		VirtualHost virtualHost = _mockVirtualHost(groupId, layout, null);
 
 		_mockPortal(currentURL, virtualHost.getHostname(), _PATH_PROXY);
 
@@ -252,13 +252,13 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 
 		long groupId = RandomTestUtil.randomLong();
 		String languageId = LocaleUtil.toLanguageId(LocaleUtil.getDefault());
-		Layout layout = _getLayout();
+		Layout layout = _mockLayout();
 
 		String currentURL = StringBundler.concat(
 			_PATH_PROXY, _PATH_CONTEXT, StringPool.SLASH, languageId,
 			StringPool.SLASH);
 
-		VirtualHost virtualHost = _getVirtualHost(groupId, layout, null);
+		VirtualHost virtualHost = _mockVirtualHost(groupId, layout, null);
 
 		_mockPortal(currentURL, virtualHost.getHostname(), _PATH_PROXY);
 
@@ -271,7 +271,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 	public void testAddParametersWithVirtualHostWithoutLayoutsAndWithoutCurrentURL()
 		throws PortalException {
 
-		VirtualHost virtualHost = _getVirtualHost();
+		VirtualHost virtualHost = _mockVirtualHost();
 
 		_mockPortal(null, virtualHost.getHostname(), null);
 
@@ -285,9 +285,9 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		throws PortalException {
 
 		long groupId = RandomTestUtil.randomLong();
-		Layout layout = _getLayout();
+		Layout layout = _mockLayout();
 
-		VirtualHost virtualHost = _getVirtualHost(groupId, layout, null);
+		VirtualHost virtualHost = _mockVirtualHost(groupId, layout, null);
 
 		_mockPortal(
 			null, virtualHost.getHostname(), RandomTestUtil.randomString());
@@ -302,9 +302,9 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		throws PortalException {
 
 		long groupId = RandomTestUtil.randomLong();
-		Layout layout = _getLayout();
+		Layout layout = _mockLayout();
 
-		VirtualHost virtualHost = _getVirtualHost(groupId, null, layout);
+		VirtualHost virtualHost = _mockVirtualHost(groupId, null, layout);
 
 		_mockPortal(null, virtualHost.getHostname(), null);
 
@@ -319,9 +319,9 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		throws PortalException {
 
 		long groupId = RandomTestUtil.randomLong();
-		Layout layout = _getLayout();
+		Layout layout = _mockLayout();
 
-		VirtualHost virtualHost = _getVirtualHost(groupId, layout, null);
+		VirtualHost virtualHost = _mockVirtualHost(groupId, layout, null);
 
 		_mockPortal(null, virtualHost.getHostname(), null);
 
@@ -358,7 +358,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		return new DynamicServletRequest(mockHttpServletRequest);
 	}
 
-	private Group _getGroup(long groupId, String friendlyURL) {
+	private Group _mockGroup(long groupId, String friendlyURL) {
 		Group group = Mockito.mock(Group.class);
 
 		Mockito.when(
@@ -376,7 +376,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		return group;
 	}
 
-	private Layout _getLayout() {
+	private Layout _mockLayout() {
 		Layout layout = Mockito.mock(Layout.class);
 
 		Mockito.when(
@@ -388,7 +388,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		return layout;
 	}
 
-	private LayoutSet _getLayoutSet(Group group) throws PortalException {
+	private LayoutSet _mockLayoutSet(Group group) throws PortalException {
 		LayoutSet layoutSet = Mockito.mock(LayoutSet.class);
 
 		Mockito.when(
@@ -400,39 +400,39 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		return layoutSet;
 	}
 
-	private VirtualHost _getVirtualHost() throws PortalException {
-		Group group = _getGroup(RandomTestUtil.randomLong(), null);
+	private VirtualHost _mockVirtualHost() throws PortalException {
+		Group group = _mockGroup(RandomTestUtil.randomLong(), null);
 
 		_mockLayoutLocalService(group, null, null);
 
-		VirtualHost virtualHost = _getVirtualHost(
+		VirtualHost virtualHost = _mockVirtualHost(
 			0, RandomTestUtil.randomString());
 
-		_mockLayoutSetLocalService(_getLayoutSet(group), virtualHost);
+		_mockLayoutSetLocalService(_mockLayoutSet(group), virtualHost);
 
 		_mockVirtualHostLocalService(virtualHost);
 
 		return virtualHost;
 	}
 
-	private VirtualHost _getVirtualHost(
+	private VirtualHost _mockVirtualHost(
 			long groupId, Layout privateLayout, Layout publicLayout)
 		throws PortalException {
 
-		VirtualHost virtualHost = _getVirtualHost(
+		VirtualHost virtualHost = _mockVirtualHost(
 			RandomTestUtil.randomLong(), RandomTestUtil.randomString());
 
-		Group group = _getGroup(groupId, null);
+		Group group = _mockGroup(groupId, null);
 
 		_mockLayoutLocalService(group, publicLayout, privateLayout);
-		_mockLayoutSetLocalService(_getLayoutSet(group), virtualHost);
+		_mockLayoutSetLocalService(_mockLayoutSet(group), virtualHost);
 
 		_mockVirtualHostLocalService(virtualHost);
 
 		return virtualHost;
 	}
 
-	private VirtualHost _getVirtualHost(long layoutSetId, String name) {
+	private VirtualHost _mockVirtualHost(long layoutSetId, String name) {
 		VirtualHost virtualHost = Mockito.mock(VirtualHost.class);
 
 		Mockito.when(
