@@ -36,7 +36,7 @@ public interface LayoutSetPrototypeHelper {
 		throws PortalException;
 
 	public boolean hasDuplicatedFriendlyURLs(
-			long groupId, boolean privateLayout, String layoutUuid,
+			String layoutUuid, long groupId, boolean privateLayout,
 			String friendlyURL)
 		throws PortalException;
 

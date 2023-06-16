@@ -156,9 +156,9 @@ public class LayoutSetPrototypeHelperTest {
 
 		boolean hasConflicts =
 			_layoutSetPrototypeHelper.hasDuplicatedFriendlyURLs(
-				layoutSetPrototypeLayout.getGroupId(),
+				layoutSetPrototypeLayout.getUuid(), layoutSetPrototypeLayout.getGroupId(),
 				layoutSetPrototypeLayout.isPrivateLayout(),
-				layoutSetPrototypeLayout.getUuid(), "/test");
+				"/test");
 
 		Assert.assertTrue(hasConflicts);
 	}
@@ -171,7 +171,7 @@ public class LayoutSetPrototypeHelperTest {
 
 		boolean hasConflicts =
 			_layoutSetPrototypeHelper.hasDuplicatedFriendlyURLs(
-				_layoutSetPrototypeGroup.getGroupId(), true, null, "/test");
+				null, _layoutSetPrototypeGroup.getGroupId(), true, "/test");
 
 		Assert.assertTrue(hasConflicts);
 	}
@@ -204,8 +204,8 @@ public class LayoutSetPrototypeHelperTest {
 
 		boolean hasConflicts =
 			_layoutSetPrototypeHelper.hasDuplicatedFriendlyURLs(
-				_prototypeLayout.getGroupId(),
-				_prototypeLayout.isPrivateLayout(), _prototypeLayout.getUuid(),
+				_prototypeLayout.getUuid(), _prototypeLayout.getGroupId(),
+				_prototypeLayout.isPrivateLayout(),
 				_prototypeLayout.getFriendlyURL());
 
 		Assert.assertFalse(hasConflicts);
@@ -223,8 +223,8 @@ public class LayoutSetPrototypeHelperTest {
 
 		boolean hasConflicts =
 			_layoutSetPrototypeHelper.hasDuplicatedFriendlyURLs(
-				siteLayout.getGroupId(), siteLayout.isPrivateLayout(),
-				siteLayout.getUuid(), "/test");
+				siteLayout.getUuid(), siteLayout.getGroupId(), siteLayout.isPrivateLayout(),
+				"/test");
 
 		Assert.assertTrue(hasConflicts);
 	}
@@ -238,7 +238,7 @@ public class LayoutSetPrototypeHelperTest {
 
 		boolean hasConflicts =
 			_layoutSetPrototypeHelper.hasDuplicatedFriendlyURLs(
-				_group.getGroupId(), false, null, "/test");
+				null, _group.getGroupId(), false, "/test");
 
 		Assert.assertTrue(hasConflicts);
 	}
@@ -271,8 +271,8 @@ public class LayoutSetPrototypeHelperTest {
 
 		boolean hasConflicts =
 			_layoutSetPrototypeHelper.hasDuplicatedFriendlyURLs(
-				_siteLayout.getGroupId(), _siteLayout.isPrivateLayout(),
-				_siteLayout.getUuid(), _siteLayout.getFriendlyURL());
+				_siteLayout.getUuid(), _siteLayout.getGroupId(), _siteLayout.isPrivateLayout(),
+				_siteLayout.getFriendlyURL());
 
 		Assert.assertFalse(hasConflicts);
 	}

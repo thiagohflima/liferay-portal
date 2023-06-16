@@ -194,7 +194,7 @@ public class LayoutSetPrototypeHelperImpl implements LayoutSetPrototypeHelper {
 
 	@Override
 	public boolean hasDuplicatedFriendlyURLs(
-			long groupId, boolean privateLayout, String layoutUuid,
+			String layoutUuid, long groupId, boolean privateLayout,
 			String friendlyURL)
 		throws PortalException {
 
@@ -202,7 +202,7 @@ public class LayoutSetPrototypeHelperImpl implements LayoutSetPrototypeHelper {
 
 		if (group.isLayoutSetPrototype()) {
 			long count = _getDuplicatedFriendlyURLSiteLayoutsCount(
-				group.getCompanyId(), group.getGroupId(), layoutUuid,
+				layoutUuid, group.getCompanyId(), group.getGroupId(),
 				friendlyURL);
 
 			if (count > 0) {
@@ -213,7 +213,7 @@ public class LayoutSetPrototypeHelperImpl implements LayoutSetPrototypeHelper {
 		}
 
 		return _hasDuplicatedFriendlyURLPrototypeLayout(
-			groupId, privateLayout, layoutUuid, friendlyURL);
+			layoutUuid, groupId, privateLayout, friendlyURL);
 	}
 
 	private Layout _getDuplicatedFriendlyURLPrototypeLayout(Layout layout)
@@ -306,7 +306,7 @@ public class LayoutSetPrototypeHelperImpl implements LayoutSetPrototypeHelper {
 	}
 
 	private long _getDuplicatedFriendlyURLSiteLayoutsCount(
-			long companyId, long groupId, String layoutUuid, String friendlyURL)
+			String layoutUuid, long companyId, long groupId, String friendlyURL)
 		throws PortalException {
 
 		Predicate sourcePrototypeLayoutUuidPredicate =
@@ -364,8 +364,8 @@ public class LayoutSetPrototypeHelperImpl implements LayoutSetPrototypeHelper {
 	}
 
 	private boolean _hasDuplicatedFriendlyURLPrototypeLayout(
-			long groupId, boolean privateLayout,
-			String sourcePrototypeLayoutUuid, String friendlyURL)
+			String sourcePrototypeLayoutUuid, long groupId,
+			boolean privateLayout, String friendlyURL)
 		throws PortalException {
 
 		LayoutSet layoutSet = _layoutSetLocalService.getLayoutSet(
