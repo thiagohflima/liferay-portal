@@ -14,7 +14,6 @@
 
 package com.liferay.headless.builder.internal.model.listener;
 
-import com.liferay.headless.builder.internal.exception.InvalidBaseURLException;
 import com.liferay.headless.builder.internal.validator.HeadlessBuilderValidator;
 import com.liferay.object.model.ObjectDefinition;
 import com.liferay.object.model.ObjectEntry;
@@ -72,7 +71,7 @@ public class APIApplicationObjectEntryModelListener
 			if (!HeadlessBuilderValidator.validatePath(
 					(String)objectEntryValues.get("baseURL"))) {
 
-				throw new InvalidBaseURLException(
+				throw new IllegalArgumentException(
 					"Base URL should not have blank spaces and special " +
 						"characters with a maximum of 255 characters");
 			}
