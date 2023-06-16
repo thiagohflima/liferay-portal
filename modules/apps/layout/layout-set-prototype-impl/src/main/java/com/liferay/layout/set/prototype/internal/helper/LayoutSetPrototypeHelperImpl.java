@@ -34,7 +34,7 @@ import com.liferay.portal.kernel.service.LayoutSetLocalService;
 import com.liferay.portal.kernel.service.LayoutSetPrototypeLocalService;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.osgi.service.component.annotations.Component;
@@ -58,20 +58,18 @@ public class LayoutSetPrototypeHelperImpl implements LayoutSetPrototypeHelper {
 
 		LayoutSet layoutSet = layout.getLayoutSet();
 
-		List<Layout> layouts = new ArrayList<>();
-
 		if (!layoutSet.isLayoutSetPrototypeLinkActive()) {
-			return layouts;
+			return Collections.emptyList();
 		}
 
 		Layout conflictLayout = _getDuplicatedFriendlyURLPrototypeLayout(
 			layout);
 
 		if (conflictLayout != null) {
-			layouts.add(conflictLayout);
+			Collections.singletonList(conflictLayout);
 		}
 
-		return layouts;
+		return Collections.emptyList();
 	}
 
 	@Override
