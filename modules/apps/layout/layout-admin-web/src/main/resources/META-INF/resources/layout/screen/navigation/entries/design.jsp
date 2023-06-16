@@ -80,7 +80,7 @@ LayoutRevision layoutRevision = LayoutStagingUtil.getLayoutRevision(selLayout);
 				cssClass="ml-0 sheet-lg"
 				displayType="info"
 			>
-				<liferay-ui:message key="these-design-configurations-are-now-saved-in-a-draft-.to-fully-apply-them-the-page-needs-to-be-published" />
+				<liferay-ui:message key="these-design-configurations-are-now-saved-in-a-draft-.to-fully-apply-them,-the-page-needs-to-be-published" />
 
 				<clay:link
 					href="<%= layoutsAdminDisplayContext.getPreviewCurrentDesignURL() %>"
