@@ -42,10 +42,6 @@ public class APIApplicationObjectEntryModelListener
 	public void onBeforeCreate(ObjectEntry objectEntry)
 		throws ModelListenerException {
 
-		if (!_isAPIApplicationObjectDefinition(objectEntry)) {
-			return;
-		}
-
 		_validate(objectEntry);
 	}
 
@@ -54,14 +50,21 @@ public class APIApplicationObjectEntryModelListener
 			ObjectEntry originalObjectEntry, ObjectEntry objectEntry)
 		throws ModelListenerException {
 
-		if (!_isAPIApplicationObjectDefinition(objectEntry)) {
-			return;
-		}
-
 		_validate(objectEntry);
 	}
 
 	private void _validate(ObjectEntry objectEntry) {
+		ObjectDefinition objectDefinition =
+			_objectDefinitionLocalService.fetchObjectDefinition(
+				objectEntry.getObjectDefinitionId());
+
+		if (!Objects.equals(
+				objectDefinition.getExternalReferenceCode(),
+				"MSOD_API_APPLICATION")) {
+
+			return;
+		}
+
 		try {
 			Map<String, Serializable> objectEntryValues =
 				objectEntry.getValues();
@@ -77,21 +80,6 @@ public class APIApplicationObjectEntryModelListener
 		catch (Exception exception) {
 			throw new ModelListenerException(exception);
 		}
-	}
-
-	private boolean _isAPIApplicationObjectDefinition(ObjectEntry objectEntry) {
-		ObjectDefinition objectDefinition =
-			_objectDefinitionLocalService.fetchObjectDefinition(
-				objectEntry.getObjectDefinitionId());
-
-		if (Objects.equals(
-				objectDefinition.getExternalReferenceCode(),
-				"MSOD_API_APPLICATION")) {
-
-			return true;
-		}
-
-		return false;
 	}
 
 	@Reference
