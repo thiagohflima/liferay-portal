@@ -42,7 +42,7 @@ public class APIApplicationObjectEntryModelListener
 	public void onBeforeCreate(ObjectEntry objectEntry)
 		throws ModelListenerException {
 
-		if (!_validObjectDefinition(objectEntry)) {
+		if (!_isAPIApplicationObjectDefinition(objectEntry)) {
 			return;
 		}
 
@@ -54,7 +54,7 @@ public class APIApplicationObjectEntryModelListener
 			ObjectEntry originalObjectEntry, ObjectEntry objectEntry)
 		throws ModelListenerException {
 
-		if (!_validObjectDefinition(objectEntry)) {
+		if (!_isAPIApplicationObjectDefinition(objectEntry)) {
 			return;
 		}
 
@@ -79,7 +79,7 @@ public class APIApplicationObjectEntryModelListener
 		}
 	}
 
-	private boolean _validObjectDefinition(ObjectEntry objectEntry) {
+	private boolean _isAPIApplicationObjectDefinition(ObjectEntry objectEntry) {
 		ObjectDefinition apiApplicationObjectDefinition =
 			_objectDefinitionLocalService.fetchObjectDefinition(
 				objectEntry.getObjectDefinitionId());
