@@ -14,7 +14,6 @@
 
 package com.liferay.headless.builder.internal.model.listener;
 
-import com.liferay.headless.builder.internal.validator.HeadlessBuilderValidator;
 import com.liferay.object.model.ObjectDefinition;
 import com.liferay.object.model.ObjectEntry;
 import com.liferay.object.service.ObjectDefinitionLocalService;
@@ -26,6 +25,8 @@ import java.io.Serializable;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -68,9 +69,10 @@ public class APIApplicationObjectEntryModelListener
 			Map<String, Serializable> objectEntryValues =
 				objectEntry.getValues();
 
-			if (!HeadlessBuilderValidator.validatePath(
-					(String)objectEntryValues.get("baseURL"))) {
+			Matcher matcher = _baseURLPattern.matcher(
+				(String)objectEntryValues.get("baseURL"));
 
+			if (!matcher.matches()) {
 				throw new IllegalArgumentException(
 					"Base URL should not have blank spaces and special " +
 						"characters with a maximum of 255 characters");
@@ -80,6 +82,9 @@ public class APIApplicationObjectEntryModelListener
 			throw new ModelListenerException(exception);
 		}
 	}
+
+	private static final Pattern _baseURLPattern = Pattern.compile(
+		"[a-zA-Z0-9-]{1,255}");
 
 	@Reference
 	private ObjectDefinitionLocalService _objectDefinitionLocalService;
