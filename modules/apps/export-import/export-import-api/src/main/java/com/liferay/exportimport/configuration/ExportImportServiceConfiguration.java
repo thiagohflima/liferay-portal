@@ -79,7 +79,7 @@ public interface ExportImportServiceConfiguration {
 		name = "layout-references-validation-whitelisted-url-pattern",
 		required = false
 	)
-	public String[] layoutReferencesValidationWhitelistedURLPatterns();
+	public String[] validateLayoutReferencesWhitelistedURLPatterns();
 
 	@Meta.AD(
 		deflt = "true", description = "validate-missing-references-help",

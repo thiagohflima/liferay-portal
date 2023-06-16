@@ -81,7 +81,7 @@ public class ExportImportServiceConfigurationModelListener
 
 		String[] whitelistedURLPatterns =
 			exportImportServiceConfiguration.
-				layoutReferencesValidationWhitelistedURLPatterns();
+				validateLayoutReferencesWhitelistedURLPatterns();
 
 		if (whitelistedURLPatterns == null) {
 			return;
