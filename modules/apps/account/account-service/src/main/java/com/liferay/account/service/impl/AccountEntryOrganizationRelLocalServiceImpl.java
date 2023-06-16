@@ -176,7 +176,7 @@ public class AccountEntryOrganizationRelLocalServiceImpl
 	}
 
 	@Override
-	public int getAccountEntryOrganizationRelsByOrganizationIdCount(
+	public int getAccountEntryOrganizationRelsCountByOrganizationId(
 		long organizationId) {
 
 		return accountEntryOrganizationRelPersistence.countByOrganizationId(

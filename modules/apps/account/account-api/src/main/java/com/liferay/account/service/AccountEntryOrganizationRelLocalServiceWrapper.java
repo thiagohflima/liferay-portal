@@ -395,11 +395,11 @@ public class AccountEntryOrganizationRelLocalServiceWrapper
 	}
 
 	@Override
-	public int getAccountEntryOrganizationRelsByOrganizationIdCount(
+	public int getAccountEntryOrganizationRelsCountByOrganizationId(
 		long organizationId) {
 
 		return _accountEntryOrganizationRelLocalService.
-			getAccountEntryOrganizationRelsByOrganizationIdCount(
+			getAccountEntryOrganizationRelsCountByOrganizationId(
 				organizationId);
 	}
 

@@ -463,7 +463,7 @@ public class BundleSiteInitializerTest {
 		Assert.assertEquals(
 			organizationAssignmentsCount,
 			_accountEntryOrganizationRelLocalService.
-				getAccountEntryOrganizationRelsByOrganizationIdCount(
+				getAccountEntryOrganizationRelsCountByOrganizationId(
 					GetterUtil.getLong(organization.getId())));
 	}
 

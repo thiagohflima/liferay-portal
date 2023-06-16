@@ -281,7 +281,7 @@ public interface AccountEntryOrganizationRelLocalService
 			long organizationId, int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getAccountEntryOrganizationRelsByOrganizationIdCount(
+	public int getAccountEntryOrganizationRelsCountByOrganizationId(
 		long organizationId);
 
 	/**

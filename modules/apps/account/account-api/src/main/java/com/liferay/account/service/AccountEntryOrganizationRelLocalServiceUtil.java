@@ -345,11 +345,11 @@ public class AccountEntryOrganizationRelLocalServiceUtil {
 			organizationId, start, end);
 	}
 
-	public static int getAccountEntryOrganizationRelsByOrganizationIdCount(
+	public static int getAccountEntryOrganizationRelsCountByOrganizationId(
 		long organizationId) {
 
 		return getService().
-			getAccountEntryOrganizationRelsByOrganizationIdCount(
+			getAccountEntryOrganizationRelsCountByOrganizationId(
 				organizationId);
 	}
 
