@@ -80,12 +80,12 @@ public class APIApplicationObjectEntryModelListener
 	}
 
 	private boolean _isAPIApplicationObjectDefinition(ObjectEntry objectEntry) {
-		ObjectDefinition apiApplicationObjectDefinition =
+		ObjectDefinition objectDefinition =
 			_objectDefinitionLocalService.fetchObjectDefinition(
 				objectEntry.getObjectDefinitionId());
 
 		if (Objects.equals(
-				apiApplicationObjectDefinition.getExternalReferenceCode(),
+				objectDefinition.getExternalReferenceCode(),
 				"MSOD_API_APPLICATION")) {
 
 			return true;
