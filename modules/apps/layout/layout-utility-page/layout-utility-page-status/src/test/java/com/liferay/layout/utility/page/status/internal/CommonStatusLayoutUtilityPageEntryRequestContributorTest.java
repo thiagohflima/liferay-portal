@@ -376,6 +376,23 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		return group;
 	}
 
+	private void _mockGroupLocalService(
+		long companyId, String groupFriendlyURL, Group group) {
+
+		GroupLocalService groupLocalService = Mockito.mock(
+			GroupLocalService.class);
+
+		Mockito.when(
+			groupLocalService.fetchFriendlyURLGroup(companyId, groupFriendlyURL)
+		).thenReturn(
+			group
+		);
+
+		ReflectionTestUtil.setFieldValue(
+			_commonStatusLayoutUtilityPageEntryRequestContributor,
+			"_groupLocalService", groupLocalService);
+	}
+
 	private Layout _mockLayout() {
 		Layout layout = Mockito.mock(Layout.class);
 
@@ -388,6 +405,33 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		return layout;
 	}
 
+	private void _mockLayoutLocalService(
+		Group group, Layout privateLayout, Layout publicLayout) {
+
+		LayoutLocalService layoutLocalService = Mockito.mock(
+			LayoutLocalService.class);
+
+		Mockito.when(
+			layoutLocalService.fetchFirstLayout(
+				group.getGroupId(), false,
+				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID)
+		).thenReturn(
+			publicLayout
+		);
+
+		Mockito.when(
+			layoutLocalService.fetchFirstLayout(
+				group.getGroupId(), true,
+				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID)
+		).thenReturn(
+			privateLayout
+		);
+
+		ReflectionTestUtil.setFieldValue(
+			_commonStatusLayoutUtilityPageEntryRequestContributor,
+			"_layoutLocalService", layoutLocalService);
+	}
+
 	private LayoutSet _mockLayoutSet(Group group) throws PortalException {
 		LayoutSet layoutSet = Mockito.mock(LayoutSet.class);
 
@@ -398,6 +442,50 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		);
 
 		return layoutSet;
+	}
+
+	private void _mockLayoutSetLocalService(
+			LayoutSet layoutSet, VirtualHost virtualHost)
+		throws PortalException {
+
+		LayoutSetLocalService layoutSetLocalService = Mockito.mock(
+			LayoutSetLocalService.class);
+
+		Mockito.when(
+			layoutSetLocalService.getLayoutSet(virtualHost.getLayoutSetId())
+		).thenReturn(
+			layoutSet
+		);
+
+		ReflectionTestUtil.setFieldValue(
+			_commonStatusLayoutUtilityPageEntryRequestContributor,
+			"_layoutSetLocalService", layoutSetLocalService);
+	}
+
+	private void _mockPortal(String currentURL, String host, String pathProxy) {
+		Portal portal = Mockito.mock(Portal.class);
+
+		Mockito.when(
+			portal.getCurrentURL(Mockito.any(DynamicServletRequest.class))
+		).thenReturn(
+			currentURL
+		);
+
+		Mockito.when(
+			portal.getHost(Mockito.any(DynamicServletRequest.class))
+		).thenReturn(
+			host
+		);
+
+		Mockito.when(
+			portal.getPathProxy()
+		).thenReturn(
+			pathProxy
+		);
+
+		ReflectionTestUtil.setFieldValue(
+			_commonStatusLayoutUtilityPageEntryRequestContributor, "_portal",
+			portal);
 	}
 
 	private VirtualHost _mockVirtualHost() throws PortalException {
@@ -454,94 +542,6 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributorTest {
 		);
 
 		return virtualHost;
-	}
-
-	private void _mockGroupLocalService(
-		long companyId, String groupFriendlyURL, Group group) {
-
-		GroupLocalService groupLocalService = Mockito.mock(
-			GroupLocalService.class);
-
-		Mockito.when(
-			groupLocalService.fetchFriendlyURLGroup(companyId, groupFriendlyURL)
-		).thenReturn(
-			group
-		);
-
-		ReflectionTestUtil.setFieldValue(
-			_commonStatusLayoutUtilityPageEntryRequestContributor,
-			"_groupLocalService", groupLocalService);
-	}
-
-	private void _mockLayoutLocalService(
-		Group group, Layout privateLayout, Layout publicLayout) {
-
-		LayoutLocalService layoutLocalService = Mockito.mock(
-			LayoutLocalService.class);
-
-		Mockito.when(
-			layoutLocalService.fetchFirstLayout(
-				group.getGroupId(), false,
-				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID)
-		).thenReturn(
-			publicLayout
-		);
-
-		Mockito.when(
-			layoutLocalService.fetchFirstLayout(
-				group.getGroupId(), true,
-				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID)
-		).thenReturn(
-			privateLayout
-		);
-
-		ReflectionTestUtil.setFieldValue(
-			_commonStatusLayoutUtilityPageEntryRequestContributor,
-			"_layoutLocalService", layoutLocalService);
-	}
-
-	private void _mockLayoutSetLocalService(
-			LayoutSet layoutSet, VirtualHost virtualHost)
-		throws PortalException {
-
-		LayoutSetLocalService layoutSetLocalService = Mockito.mock(
-			LayoutSetLocalService.class);
-
-		Mockito.when(
-			layoutSetLocalService.getLayoutSet(virtualHost.getLayoutSetId())
-		).thenReturn(
-			layoutSet
-		);
-
-		ReflectionTestUtil.setFieldValue(
-			_commonStatusLayoutUtilityPageEntryRequestContributor,
-			"_layoutSetLocalService", layoutSetLocalService);
-	}
-
-	private void _mockPortal(String currentURL, String host, String pathProxy) {
-		Portal portal = Mockito.mock(Portal.class);
-
-		Mockito.when(
-			portal.getCurrentURL(Mockito.any(DynamicServletRequest.class))
-		).thenReturn(
-			currentURL
-		);
-
-		Mockito.when(
-			portal.getHost(Mockito.any(DynamicServletRequest.class))
-		).thenReturn(
-			host
-		);
-
-		Mockito.when(
-			portal.getPathProxy()
-		).thenReturn(
-			pathProxy
-		);
-
-		ReflectionTestUtil.setFieldValue(
-			_commonStatusLayoutUtilityPageEntryRequestContributor, "_portal",
-			portal);
 	}
 
 	private void _mockVirtualHostLocalService(VirtualHost virtualHost) {
