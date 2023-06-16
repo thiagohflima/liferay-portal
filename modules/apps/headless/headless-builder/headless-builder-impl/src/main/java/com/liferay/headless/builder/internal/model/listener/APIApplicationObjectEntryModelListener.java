@@ -14,7 +14,6 @@
 
 package com.liferay.headless.builder.internal.model.listener;
 
-import com.liferay.headless.builder.internal.constants.HeadlessBuilderConstants;
 import com.liferay.headless.builder.internal.exception.InvalidBaseURLException;
 import com.liferay.headless.builder.internal.validator.HeadlessBuilderValidator;
 import com.liferay.object.model.ObjectDefinition;
@@ -68,9 +67,7 @@ public class APIApplicationObjectEntryModelListener
 				objectEntry.getValues();
 
 			if (!HeadlessBuilderValidator.validatePath(
-					(String)objectEntryValues.get(
-						HeadlessBuilderConstants.
-							API_APPLICATION_BASE_URL_FIELD_NAME))) {
+					(String)objectEntryValues.get("baseURL"))) {
 
 				throw new InvalidBaseURLException(
 					"Base URL should not have blank spaces and special " +
@@ -89,7 +86,7 @@ public class APIApplicationObjectEntryModelListener
 
 		if (Objects.equals(
 				apiApplicationObjectDefinition.getExternalReferenceCode(),
-				HeadlessBuilderConstants.API_APPLICATION_ERC)) {
+				"MSOD_API_APPLICATION")) {
 
 			return true;
 		}
