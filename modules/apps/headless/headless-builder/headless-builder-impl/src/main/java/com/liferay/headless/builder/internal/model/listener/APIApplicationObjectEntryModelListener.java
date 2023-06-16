@@ -54,6 +54,22 @@ public class APIApplicationObjectEntryModelListener
 	}
 
 	private void _validate(ObjectEntry objectEntry) {
+
+		// APIApplication is defined in headless-builder.json and has a required
+		// object field called "baseURL".
+
+		Map<String, Serializable> objectEntryValues = objectEntry.getValues();
+
+		String baseURL = (String)objectEntryValues.get("baseURL");
+
+		if (baseURL == null) {
+			return;
+		}
+
+		// Just because you have an object field called "baseURL" does not mean
+		// you are an APIApplication. My mom is a woman, but not every woman is
+		// my mom.
+
 		ObjectDefinition objectDefinition =
 			_objectDefinitionLocalService.fetchObjectDefinition(
 				objectEntry.getObjectDefinitionId());
@@ -66,11 +82,7 @@ public class APIApplicationObjectEntryModelListener
 		}
 
 		try {
-			Map<String, Serializable> objectEntryValues =
-				objectEntry.getValues();
-
-			Matcher matcher = _baseURLPattern.matcher(
-				(String)objectEntryValues.get("baseURL"));
+			Matcher matcher = _baseURLPattern.matcher(baseURL);
 
 			if (!matcher.matches()) {
 				throw new IllegalArgumentException(
