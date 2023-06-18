@@ -45,7 +45,6 @@ public class RankingIndexCreatorImplTest extends BaseRankingsIndexTestCase {
 
 		ReflectionTestUtil.setFieldValue(
 			_rankingIndexCreatorImpl, "_jsonFactory", new JSONFactoryImpl());
-
 		ReflectionTestUtil.setFieldValue(
 			_rankingIndexCreatorImpl, "_searchEngineAdapter",
 			searchEngineAdapter);
