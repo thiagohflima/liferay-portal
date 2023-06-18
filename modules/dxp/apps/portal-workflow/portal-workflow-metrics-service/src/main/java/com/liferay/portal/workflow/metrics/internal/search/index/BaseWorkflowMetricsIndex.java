@@ -47,8 +47,8 @@ public abstract class BaseWorkflowMetricsIndex implements WorkflowMetricsIndex {
 			getIndexName(companyId));
 
 		createIndexRequest.setMappings(
-			_readJSONResource(getIndexType() + "-mappings.json"));
-		createIndexRequest.setSettings(_readJSONResource("settings.json"));
+			_readJSON(getIndexType() + "-mappings.json"));
+		createIndexRequest.setSettings(_readJSON("settings.json"));
 
 		try {
 			searchEngineAdapter.execute(createIndexRequest);
@@ -90,7 +90,7 @@ public abstract class BaseWorkflowMetricsIndex implements WorkflowMetricsIndex {
 		return indicesExistsIndexResponse.isExists();
 	}
 
-	private String _readJSONResource(String fileName) {
+	private String _readJSON(String fileName) {
 		try {
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
 				StringUtil.read(getClass(), "/META-INF/search/" + fileName));

@@ -45,9 +45,9 @@ public class RankingIndexCreatorImpl implements RankingIndexCreator {
 			rankingIndexName.getIndexName());
 
 		createIndexRequest.setMappings(
-			_readJSONResource(_INDEX_MAPPINGS_FILE_NAME));
+			_readJSON(_INDEX_MAPPINGS_FILE_NAME));
 		createIndexRequest.setSettings(
-			_readJSONResource(_INDEX_SETTINGS_FILE_NAME));
+			_readJSON(_INDEX_SETTINGS_FILE_NAME));
 
 		_searchEngineAdapter.execute(createIndexRequest);
 	}
@@ -68,7 +68,7 @@ public class RankingIndexCreatorImpl implements RankingIndexCreator {
 		}
 	}
 
-	private String _readJSONResource(String fileName) {
+	private String _readJSON(String fileName) {
 		try {
 			JSONObject jsonObject = _jsonFactory.createJSONObject(
 				StringUtil.read(getClass(), "/META-INF/search/" + fileName));

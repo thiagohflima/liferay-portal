@@ -52,8 +52,8 @@ public class CommerceMLSearchEngineHelper {
 		CreateIndexRequest createIndexRequest = new CreateIndexRequest(
 			indexName);
 
-		createIndexRequest.setMappings(_readJSONResource(indexMappingFileName));
-		createIndexRequest.setSettings(_readJSONResource("settings.json"));
+		createIndexRequest.setMappings(_readJSON(indexMappingFileName));
+		createIndexRequest.setSettings(_readJSON("settings.json"));
 
 		searchEngineAdapter.execute(createIndexRequest);
 
@@ -100,7 +100,7 @@ public class CommerceMLSearchEngineHelper {
 		return indicesExistsIndexResponse.isExists();
 	}
 
-	private String _readJSONResource(String fileName) {
+	private String _readJSON(String fileName) {
 		try {
 			JSONObject jsonObject = _jsonFactory.createJSONObject(
 				StringUtil.read(getClass(), "/META-INF/search/" + fileName));
