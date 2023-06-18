@@ -39,7 +39,6 @@ import com.liferay.product.navigation.control.menu.constants.ProductNavigationCo
 import java.io.IOException;
 import java.io.Writer;
 
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -99,17 +98,19 @@ public class ToggleControlsProductNavigationControlMenuEntry
 		}
 
 		try {
-			HashMap<String, String> values = HashMapBuilder.put(
-				"iconTag",
-				iconTag.doTagAsString(httpServletRequest, httpServletResponse)
-			).put(
-				"title", _language.get(resourceBundle, "toggle-controls")
-			).build();
-
 			Writer writer = httpServletResponse.getWriter();
 
 			writer.write(
-				StringUtil.replace(_ICON_TMPL_CONTENT, "${", "}", values));
+				StringUtil.replace(
+					_ICON_TMPL_CONTENT, "${", "}",
+					HashMapBuilder.put(
+						"iconTag",
+						iconTag.doTagAsString(
+							httpServletRequest, httpServletResponse)
+					).put(
+						"title",
+						_language.get(resourceBundle, "toggle-controls")
+					).build()));
 		}
 		catch (JspException jspException) {
 			throw new IOException(jspException);
