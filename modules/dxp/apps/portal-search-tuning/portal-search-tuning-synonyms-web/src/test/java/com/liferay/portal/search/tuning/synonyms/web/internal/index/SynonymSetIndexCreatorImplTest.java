@@ -46,7 +46,6 @@ public class SynonymSetIndexCreatorImplTest extends BaseSynonymsWebTestCase {
 
 		ReflectionTestUtil.setFieldValue(
 			_synonymSetIndexCreatorImpl, "_jsonFactory", new JSONFactoryImpl());
-
 		ReflectionTestUtil.setFieldValue(
 			_synonymSetIndexCreatorImpl, "_searchEngineAdapter",
 			searchEngineAdapter);
