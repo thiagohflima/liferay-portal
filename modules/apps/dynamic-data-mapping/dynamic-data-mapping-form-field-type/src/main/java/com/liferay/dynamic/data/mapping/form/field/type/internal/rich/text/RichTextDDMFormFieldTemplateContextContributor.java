@@ -109,9 +109,6 @@ public class RichTextDDMFormFieldTemplateContextContributor
 		).build();
 	}
 
-	@Reference
-	protected JSONFactory jsonFactory;
-
 	private Map<String, Object> _getData(
 		DDMFormFieldRenderingContext ddmFormFieldRenderingContext,
 		String ddmFormFieldType) {
@@ -145,7 +142,7 @@ public class RichTextDDMFormFieldTemplateContextContributor
 	}
 
 	private JSONObject _getLocaleJSONObject(Locale locale) {
-		JSONObject jsonObject = jsonFactory.createJSONObject();
+		JSONObject jsonObject = _jsonFactory.createJSONObject();
 
 		String languageId = LocaleUtil.toLanguageId(locale);
 
@@ -179,7 +176,7 @@ public class RichTextDDMFormFieldTemplateContextContributor
 		DDMFormFieldRenderingContext ddmFormFieldRenderingContext) {
 
 		try {
-			return jsonFactory.createJSONObject(
+			return _jsonFactory.createJSONObject(
 				ddmFormFieldRenderingContext.getValue());
 		}
 		catch (JSONException jsonException) {
@@ -188,7 +185,7 @@ public class RichTextDDMFormFieldTemplateContextContributor
 			}
 		}
 
-		return jsonFactory.createJSONObject();
+		return _jsonFactory.createJSONObject();
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
@@ -199,6 +196,9 @@ public class RichTextDDMFormFieldTemplateContextContributor
 
 	@Reference
 	private EditorConfigurationFactory _editorConfigurationFactory;
+
+	@Reference
+	private JSONFactory _jsonFactory;
 
 	@Reference
 	private Language _language;
