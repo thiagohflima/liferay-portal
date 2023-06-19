@@ -87,7 +87,16 @@ public class ExportClientExtensionEntryMVCResourceCommand
 				"clientExtensionEntries",
 				_getClientExtensionEntriesJSONObject(clientExtensionEntry)
 			).put(
-				"company", _getCompanyJSONObject(company)
+				"company",
+				JSONUtil.put(
+					"id", company.getCompanyId()
+				).put(
+					"name", company.getName()
+				).put(
+					"virtualHostName", company.getVirtualHostname()
+				).put(
+					"webId", company.getWebId()
+				)
 			).put(
 				"exportDate", dateFormat.format(new Date())
 			).put(
@@ -133,40 +142,22 @@ public class ExportClientExtensionEntryMVCResourceCommand
 
 			jsonObject.put(
 				clientExtensionEntry.getExternalReferenceCode(),
-				_getClientExtensionEntryJSONObject(clientExtensionEntry));
+				JSONUtil.put(
+					"description", clientExtensionEntry.getDescription()
+				).put(
+					"name", clientExtensionEntry.getName()
+				).put(
+					"properties", clientExtensionEntry.getProperties()
+				).put(
+					"sourceCodeURL", clientExtensionEntry.getSourceCodeURL()
+				).put(
+					"type", clientExtensionEntry.getType()
+				).put(
+					"typeSettings", clientExtensionEntry.getTypeSettings()
+				));
 		}
 
 		return jsonObject;
-	}
-
-	private JSONObject _getClientExtensionEntryJSONObject(
-		ClientExtensionEntry clientExtensionEntry) {
-
-		return JSONUtil.put(
-			"description", clientExtensionEntry.getDescription()
-		).put(
-			"name", clientExtensionEntry.getName()
-		).put(
-			"properties", clientExtensionEntry.getProperties()
-		).put(
-			"sourceCodeURL", clientExtensionEntry.getSourceCodeURL()
-		).put(
-			"type", clientExtensionEntry.getType()
-		).put(
-			"typeSettings", clientExtensionEntry.getTypeSettings()
-		);
-	}
-
-	private JSONObject _getCompanyJSONObject(Company company) {
-		return JSONUtil.put(
-			"id", company.getCompanyId()
-		).put(
-			"name", company.getName()
-		).put(
-			"virtualHostName", company.getVirtualHostname()
-		).put(
-			"webId", company.getWebId()
-		);
 	}
 
 	private JSONObject _getUserJSONObject(User user) {
