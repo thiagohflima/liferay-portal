@@ -451,7 +451,8 @@ public class ContentLayoutTestUtil {
 
 		LayoutSet layoutSet = group.getPublicLayoutSet();
 
-		themeDisplay.setLookAndFeel(layoutSet.getTheme(), null);
+		themeDisplay.setLookAndFeel(
+			layoutSet.getTheme(), layoutSet.getColorScheme());
 
 		themeDisplay.setPermissionChecker(
 			PermissionThreadLocal.getPermissionChecker());
