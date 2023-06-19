@@ -100,7 +100,18 @@ public class ExportClientExtensionEntryMVCResourceCommand
 			).put(
 				"exportDate", dateFormat.format(new Date())
 			).put(
-				"user", _getUserJSONObject(_portal.getUser(resourceRequest))
+				"user",
+				() -> {
+					User user = _portal.getUser(resourceRequest);
+
+					return JSONUtil.put(
+						"fullName", user.getFullName()
+					).put(
+						"id", user.getUserId()
+					).put(
+						"screenName", user.getScreenName()
+					);
+				}
 			).put(
 				"version", ClientExtensionAdminWebConstants.EXPORT_VERSION
 			).toString();
@@ -158,16 +169,6 @@ public class ExportClientExtensionEntryMVCResourceCommand
 		}
 
 		return jsonObject;
-	}
-
-	private JSONObject _getUserJSONObject(User user) {
-		return JSONUtil.put(
-			"fullName", user.getFullName()
-		).put(
-			"id", user.getUserId()
-		).put(
-			"screenName", user.getScreenName()
-		);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
