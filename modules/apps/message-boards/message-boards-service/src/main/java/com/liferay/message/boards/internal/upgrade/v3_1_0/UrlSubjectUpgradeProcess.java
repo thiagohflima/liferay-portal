@@ -86,7 +86,7 @@ public class UrlSubjectUpgradeProcess extends UpgradeProcess {
 					"update MBMessage set urlSubject = ? where messageId = " +
 						"?")) {
 
-			String curURLSubject = null;
+			String urlSubject = null;
 
 			while (resultSet.next()) {
 				long messageId = resultSet.getLong(1);
@@ -94,20 +94,20 @@ public class UrlSubjectUpgradeProcess extends UpgradeProcess {
 
 				String suffix = StringPool.BLANK;
 
-				curURLSubject = _getURLSubject(messageId, subject);
+				urlSubject = _getURLSubject(messageId, subject);
 
 				IntegerWrapper count = counts.computeIfAbsent(
-					curURLSubject, key -> new IntegerWrapper(0));
+					urlSubject, key -> new IntegerWrapper(0));
 
 				if (count.getValue() > 0) {
 					suffix = StringPool.DASH + count.getValue();
 
-					counts.put(curURLSubject + suffix, new IntegerWrapper(1));
+					counts.put(urlSubject + suffix, new IntegerWrapper(1));
 				}
 
 				count.increment();
 
-				preparedStatement2.setString(1, curURLSubject + suffix);
+				preparedStatement2.setString(1, urlSubject + suffix);
 				preparedStatement2.setLong(2, messageId);
 
 				preparedStatement2.addBatch();
