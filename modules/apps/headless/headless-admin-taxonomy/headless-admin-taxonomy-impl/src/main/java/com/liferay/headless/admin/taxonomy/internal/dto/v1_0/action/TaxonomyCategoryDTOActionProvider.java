@@ -45,6 +45,26 @@ import org.osgi.service.component.annotations.Reference;
 public class TaxonomyCategoryDTOActionProvider implements DTOActionProvider {
 
 	@Override
+	public Map<String, ActionInfo> getActionInfos() throws Exception {
+		Map<String, ActionInfo> actionInfos = new HashMap<>();
+
+		TaxonomyCategoryDTOActionMetadataProvider
+			taxonomyCategoryDTOActionMetadataProvider =
+				new TaxonomyCategoryDTOActionMetadataProvider();
+
+		for (String actionName :
+				taxonomyCategoryDTOActionMetadataProvider.getActionNames()) {
+
+			actionInfos.put(
+				actionName,
+				taxonomyCategoryDTOActionMetadataProvider.getActionInfo(
+					actionName));
+		}
+
+		return actionInfos;
+	}
+
+	@Override
 	public Map<String, Map<String, String>> getActions(
 		long groupId, long primaryKey, UriInfo uriInfo, long userId) {
 
@@ -82,26 +102,6 @@ public class TaxonomyCategoryDTOActionProvider implements DTOActionProvider {
 		}
 
 		return actions;
-	}
-
-	@Override
-	public Map<String, ActionInfo> getActionInfos() throws Exception {
-		Map<String, ActionInfo> actionInfos = new HashMap<>();
-
-		TaxonomyCategoryDTOActionMetadataProvider
-			taxonomyCategoryDTOActionMetadataProvider =
-				new TaxonomyCategoryDTOActionMetadataProvider();
-
-		for (String actionName :
-				taxonomyCategoryDTOActionMetadataProvider.getActionNames()) {
-
-			actionInfos.put(
-				actionName,
-				taxonomyCategoryDTOActionMetadataProvider.getActionInfo(
-					actionName));
-		}
-
-		return actionInfos;
 	}
 
 	@Reference

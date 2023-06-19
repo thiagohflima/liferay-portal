@@ -45,6 +45,24 @@ import org.osgi.service.component.annotations.Reference;
 public class KeywordDTOActionProvider implements DTOActionProvider {
 
 	@Override
+	public Map<String, ActionInfo> getActionInfos() throws Exception {
+		Map<String, ActionInfo> actionInfos = new HashMap<>();
+
+		KeywordDTOActionMetadataProvider keywordDTOActionMetadataProvider =
+			new KeywordDTOActionMetadataProvider();
+
+		for (String actionName :
+				keywordDTOActionMetadataProvider.getActionNames()) {
+
+			actionInfos.put(
+				actionName,
+				keywordDTOActionMetadataProvider.getActionInfo(actionName));
+		}
+
+		return actionInfos;
+	}
+
+	@Override
 	public Map<String, Map<String, String>> getActions(
 		long groupId, long primaryKey, UriInfo uriInfo, long userId) {
 
@@ -79,24 +97,6 @@ public class KeywordDTOActionProvider implements DTOActionProvider {
 		}
 
 		return actions;
-	}
-
-	@Override
-	public Map<String, ActionInfo> getActionInfos() throws Exception {
-		Map<String, ActionInfo> actionInfos = new HashMap<>();
-
-		KeywordDTOActionMetadataProvider keywordDTOActionMetadataProvider =
-			new KeywordDTOActionMetadataProvider();
-
-		for (String actionName :
-				keywordDTOActionMetadataProvider.getActionNames()) {
-
-			actionInfos.put(
-				actionName,
-				keywordDTOActionMetadataProvider.getActionInfo(actionName));
-		}
-
-		return actionInfos;
 	}
 
 	@Reference

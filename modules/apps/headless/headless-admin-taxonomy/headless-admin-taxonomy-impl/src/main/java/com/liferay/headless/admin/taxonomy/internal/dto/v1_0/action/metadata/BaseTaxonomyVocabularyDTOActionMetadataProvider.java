@@ -29,22 +29,22 @@ import java.util.Set;
 public abstract class BaseTaxonomyVocabularyDTOActionMetadataProvider {
 
 	public BaseTaxonomyVocabularyDTOActionMetadataProvider() {
-		_actionInfoMap.put(
+		_actionInfos.put(
 			"delete",
 			new ActionInfo(
 				getDeleteActionName(), TaxonomyVocabularyResourceImpl.class,
 				getDeleteResourceMethodName()));
-		_actionInfoMap.put(
+		_actionInfos.put(
 			"get",
 			new ActionInfo(
 				getGetActionName(), TaxonomyVocabularyResourceImpl.class,
 				getGetResourceMethodName()));
-		_actionInfoMap.put(
+		_actionInfos.put(
 			"replace",
 			new ActionInfo(
 				getReplaceActionName(), TaxonomyVocabularyResourceImpl.class,
 				getReplaceResourceMethodName()));
-		_actionInfoMap.put(
+		_actionInfos.put(
 			"update",
 			new ActionInfo(
 				getUpdateActionName(), TaxonomyVocabularyResourceImpl.class,
@@ -52,11 +52,11 @@ public abstract class BaseTaxonomyVocabularyDTOActionMetadataProvider {
 	}
 
 	public final ActionInfo getActionInfo(String actionName) {
-		return _actionInfoMap.get(actionName);
+		return _actionInfos.get(actionName);
 	}
 
 	public final Set<String> getActionNames() {
-		return _actionInfoMap.keySet();
+		return _actionInfos.keySet();
 	}
 
 	public abstract String getPermissionName();
@@ -94,11 +94,11 @@ public abstract class BaseTaxonomyVocabularyDTOActionMetadataProvider {
 	}
 
 	protected final void registerActionInfo(
-		String actionName, ActionInfo actionInfo) {
+		ActionInfo actionInfo, String actionName) {
 
-		_actionInfoMap.put(actionName, actionInfo);
+		_actionInfos.put(actionName, actionInfo);
 	}
 
-	private final Map<String, ActionInfo> _actionInfoMap = new HashMap<>();
+	private final Map<String, ActionInfo> _actionInfos = new HashMap<>();
 
 }
