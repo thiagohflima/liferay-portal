@@ -77,7 +77,7 @@ public class APIApplicationProviderTest {
 	}
 
 	@Test
-	public void testAPIApplicationProvider() throws Exception {
+	public void test() throws Exception {
 		HTTPTestUtil.invoke(
 			JSONUtil.put(
 				"apiApplicationToAPIEndpoints",
