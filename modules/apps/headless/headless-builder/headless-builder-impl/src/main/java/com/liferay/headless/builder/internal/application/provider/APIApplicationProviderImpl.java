@@ -86,7 +86,7 @@ public class APIApplicationProviderImpl implements APIApplicationProvider {
 			}
 
 			@Override
-			public String getOsgiJaxRsName() {
+			public String getOSGiJaxRsName() {
 				return getTitle() + getCompanyId();
 			}
 
