@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.headless.builder.test.validation.test;
+package com.liferay.headless.builder.model.listener.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.petra.string.StringBundler;

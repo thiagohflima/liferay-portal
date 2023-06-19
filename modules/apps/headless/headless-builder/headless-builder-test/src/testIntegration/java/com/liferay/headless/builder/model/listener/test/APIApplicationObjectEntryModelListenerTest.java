@@ -12,9 +12,10 @@
  * details.
  */
 
-package com.liferay.headless.builder.test.validation.test;
+package com.liferay.headless.builder.model.listener.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.json.JSONUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
@@ -35,7 +36,7 @@ import org.junit.runner.RunWith;
  */
 @Ignore
 @RunWith(Arquillian.class)
-public class APISchemaObjectEntryModelListenerTest {
+public class APIApplicationObjectEntryModelListenerTest {
 
 	@ClassRule
 	@Rule
@@ -43,26 +44,27 @@ public class APISchemaObjectEntryModelListenerTest {
 		new LiferayIntegrationTestRule();
 
 	@Test
-	public void testPostAPISchemaNotRelatedWithAPIApplication()
-		throws Exception {
-
+	public void testInvalidBaseURLPathAPIApplication() throws Exception {
 		JSONObject jsonObject = HTTPTestUtil.invoke(
 			JSONUtil.put(
-				"mainObjectDefinitionERC", RandomTestUtil.randomString()
+				"applicationStatus", "published"
 			).put(
-				"name", RandomTestUtil.randomString()
+				"baseURL",
+				RandomTestUtil.randomString() + StringPool.FORWARD_SLASH
+			).put(
+				"title", RandomTestUtil.randomString()
 			).toString(),
-			"headless-builder/schemas", Http.Method.POST);
+			"headless-builder/applications", Http.Method.POST);
 
 		Assert.assertEquals("BAD_REQUEST", jsonObject.get("status"));
 		Assert.assertEquals(
-			"An schema must be related to an application",
+			"Base URL can have a maximum of 255 alphanumeric characters",
 			jsonObject.get("title"));
 	}
 
 	@Test
-	public void testPostAPISchemaRelatedWithAPIApplication() throws Exception {
-		JSONObject apiApplicationJSONObject = HTTPTestUtil.invoke(
+	public void testValidBaseURLPathAPIApplication() throws Exception {
+		JSONObject jsonObject = HTTPTestUtil.invoke(
 			JSONUtil.put(
 				"applicationStatus", "published"
 			).put(
@@ -71,17 +73,6 @@ public class APISchemaObjectEntryModelListenerTest {
 				"title", RandomTestUtil.randomString()
 			).toString(),
 			"headless-builder/applications", Http.Method.POST);
-
-		JSONObject jsonObject = HTTPTestUtil.invoke(
-			JSONUtil.put(
-				"mainObjectDefinitionERC", RandomTestUtil.randomString()
-			).put(
-				"name", RandomTestUtil.randomString()
-			).put(
-				"r_apiApplicationToAPISchemas_c_apiApplicationId",
-				apiApplicationJSONObject.getLong("id")
-			).toString(),
-			"headless-builder/schemas", Http.Method.POST);
 
 		Assert.assertEquals(
 			0,
