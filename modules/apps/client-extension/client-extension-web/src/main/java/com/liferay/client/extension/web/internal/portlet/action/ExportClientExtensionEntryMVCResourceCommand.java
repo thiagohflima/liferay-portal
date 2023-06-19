@@ -81,8 +81,6 @@ public class ExportClientExtensionEntryMVCResourceCommand
 				return;
 			}
 
-			DateFormat dateFormat = DateUtil.getISO8601Format();
-
 			String json = JSONUtil.put(
 				"clientExtensionEntries",
 				_getClientExtensionEntriesJSONObject(clientExtensionEntry)
@@ -98,7 +96,12 @@ public class ExportClientExtensionEntryMVCResourceCommand
 					"webId", company.getWebId()
 				)
 			).put(
-				"exportDate", dateFormat.format(new Date())
+				"exportDate",
+				() -> {
+					DateFormat dateFormat = DateUtil.getISO8601Format();
+
+					return dateFormat.format(new Date());
+				}
 			).put(
 				"user",
 				() -> {
