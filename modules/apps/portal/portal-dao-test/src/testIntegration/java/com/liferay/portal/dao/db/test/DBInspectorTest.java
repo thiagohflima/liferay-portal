@@ -140,7 +140,6 @@ public class DBInspectorTest {
 		Assert.assertTrue(
 			_dbInspector.hasColumnType(
 				_TABLE_NAME, "typeLongDefault", "LONG default 10 not null"));
-
 		Assert.assertFalse(
 			_dbInspector.hasColumnType(
 				_TABLE_NAME, "typeLongDefault", "LONG default 15 not null"));
