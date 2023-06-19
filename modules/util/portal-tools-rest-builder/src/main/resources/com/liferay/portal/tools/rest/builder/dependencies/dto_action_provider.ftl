@@ -32,8 +32,20 @@ import org.osgi.service.component.annotations.Reference;
 public class ${schemaName}DTOActionProvider implements DTOActionProvider {
 
 	@Override
-	public Map<String, Map<String, String>> getActions(long groupId, long primaryKey, UriInfo uriInfo, long userId) {
+	public Map<String, ActionInfo> getActionInfos() throws Exception {
+		Map<String, ActionInfo> actionInfos = new HashMap<>();
 
+		${schemaName}DTOActionMetadataProvider ${schemaVarName}DTOActionMetadataProvider = new ${schemaName}DTOActionMetadataProvider();
+
+		for (String actionName : ${schemaVarName}DTOActionMetadataProvider.getActionNames()) {
+			actionInfos.put(actionName, ${schemaVarName}DTOActionMetadataProvider.getActionInfo(actionName));
+		}
+
+		return actionInfos;
+	}
+
+	@Override
+	public Map<String, Map<String, String>> getActions(long groupId, long primaryKey, UriInfo uriInfo, long userId) {
 		Map<String, Map<String, String>> actions = new HashMap<>();
 
 		${schemaName}DTOActionMetadataProvider ${schemaVarName}DTOActionMetadataProvider = new ${schemaName}DTOActionMetadataProvider();
@@ -49,19 +61,6 @@ public class ${schemaName}DTOActionProvider implements DTOActionProvider {
 		}
 
 		return actions;
-	}
-
-	@Override
-	public Map<String, ActionInfo> getActionInfos() throws Exception {
-		Map<String, ActionInfo> actionInfos = new HashMap<>();
-
-		${schemaName}DTOActionMetadataProvider ${schemaVarName}DTOActionMetadataProvider = new ${schemaName}DTOActionMetadataProvider();
-
-		for (String actionName : ${schemaVarName}DTOActionMetadataProvider.getActionNames()) {
-			actionInfos.put(actionName, ${schemaVarName}DTOActionMetadataProvider.getActionInfo(actionName));
-		}
-
-		return actionInfos;
 	}
 
 	@Reference
