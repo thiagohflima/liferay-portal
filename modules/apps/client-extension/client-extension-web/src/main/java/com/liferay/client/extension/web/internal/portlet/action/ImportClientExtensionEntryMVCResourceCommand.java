@@ -116,8 +116,8 @@ public class ImportClientExtensionEntryMVCResourceCommand
 		}
 		catch (JSONException jsonException) {
 			_sendResponse(
-				"import-file-format-is-not-valid-or-has-and-unsupported-" +
-					"version-number",
+				"import-file-format-is-invalid-or-has-an-unsupported-version-" +
+					"number",
 				null, resourceRequest, resourceResponse);
 
 			if (_log.isDebugEnabled()) {
