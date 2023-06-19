@@ -149,11 +149,11 @@ public class DisplayPageInfoItemFieldSetProviderImpl
 				itemClassName, itemClassPK, themeDisplay);
 		}
 
-		String urlViewInContext = assetRenderer.getURLViewInContext(
+		String viewInContextURL = assetRenderer.getURLViewInContext(
 			themeDisplay, StringPool.BLANK);
 
-		if (Validator.isNotNull(urlViewInContext)) {
-			return urlViewInContext;
+		if (Validator.isNotNull(viewInContextURL)) {
+			return viewInContextURL;
 		}
 
 		return _assetDisplayPageFriendlyURLProvider.getFriendlyURL(
