@@ -74,8 +74,6 @@ public class UrlSubjectUpgradeProcess extends UpgradeProcess {
 	}
 
 	private void _populateUrlSubject() throws Exception {
-		Map<String, IntegerWrapper> counts = new HashMap<>();
-
 		try (PreparedStatement preparedStatement1 = connection.prepareStatement(
 				"select messageId, subject from MBMessage order by subject, " +
 					"messageId asc");
@@ -85,6 +83,8 @@ public class UrlSubjectUpgradeProcess extends UpgradeProcess {
 					connection,
 					"update MBMessage set urlSubject = ? where messageId = " +
 						"?")) {
+
+			Map<String, IntegerWrapper> counts = new HashMap<>();
 
 			while (resultSet.next()) {
 				long messageId = resultSet.getLong(1);
