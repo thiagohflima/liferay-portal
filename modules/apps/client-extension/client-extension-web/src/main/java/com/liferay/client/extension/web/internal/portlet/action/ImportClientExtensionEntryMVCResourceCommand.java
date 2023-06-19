@@ -233,23 +233,23 @@ public class ImportClientExtensionEntryMVCResourceCommand
 		throws JSONException {
 
 		if (Validator.isNull(jsonObject.getString("name"))) {
-			throw new JSONException("Missing name field");
+			throw new JSONException("Missing name");
 		}
 
 		String type = jsonObject.getString("type");
 
 		if (Validator.isNull(type)) {
-			throw new JSONException("Missing or empty type field");
+			throw new JSONException("Missing type");
 		}
 
 		if ((clientExtensionEntry != null) &&
 			!Objects.equals(clientExtensionEntry.getType(), type)) {
 
-			throw new JSONException("Update type mismatched: " + type);
+			throw new JSONException("Mismatched type: " + type);
 		}
 
 		if (Validator.isNull(jsonObject.getString("typeSettings"))) {
-			throw new JSONException("Missing or empty typeSettings field");
+			throw new JSONException("Missing type settings");
 		}
 	}
 
