@@ -37,13 +37,13 @@ public abstract class BaseObjectEventHandler extends BaseEventHandler {
 		throws Exception {
 
 		if (projectJSONObject == null) {
-			throw new Exception("Invalid Project JSON object");
+			throw new Exception("Missing project");
 		}
 
 		long projectId = projectJSONObject.optLong("id");
 
 		if (projectId <= 0) {
-			throw new Exception("Missing Project 'id'");
+			throw new Exception("Missing ID from project");
 		}
 
 		ProjectRepository projectRepository = getProjectRepository();
@@ -61,19 +61,19 @@ public abstract class BaseObjectEventHandler extends BaseEventHandler {
 		throws Exception {
 
 		if (buildJSONObject == null) {
-			throw new Exception("Invalid Build JSON object");
+			throw new Exception("Missing build");
 		}
 
 		String buildName = buildJSONObject.optString("buildName");
 
 		if (buildName.isEmpty()) {
-			throw new Exception("Invalid Build 'buildName'");
+			throw new Exception("Missing build name from build");
 		}
 
 		String jobName = buildJSONObject.optString("jobName");
 
 		if (jobName.isEmpty()) {
-			throw new Exception("Invalid Build 'jobName'");
+			throw new Exception("Missing job name from build");
 		}
 
 		Build.State state = Build.State.getByKey(
@@ -117,7 +117,7 @@ public abstract class BaseObjectEventHandler extends BaseEventHandler {
 		throws Exception {
 
 		if (projectJSONObject == null) {
-			throw new Exception("Invalid Project JSON object");
+			throw new Exception("Missing project");
 		}
 
 		if (projectJSONObject.has("id")) {
@@ -127,13 +127,13 @@ public abstract class BaseObjectEventHandler extends BaseEventHandler {
 		String name = projectJSONObject.optString("name");
 
 		if (name.isEmpty()) {
-			throw new Exception("Invalid Project 'name'");
+			throw new Exception("Missing name from project");
 		}
 
 		int priority = projectJSONObject.optInt("priority");
 
 		if (priority <= 0) {
-			throw new Exception("Invalid Project 'priority'");
+			throw new Exception("Missing priority from project");
 		}
 
 		Project.State state = Project.State.getByKey(
@@ -148,7 +148,8 @@ public abstract class BaseObjectEventHandler extends BaseEventHandler {
 
 		if (type == null) {
 			throw new Exception(
-				"Project 'type' key does not match: " + Project.Type.getKeys());
+				"Project type is not one of the following: " +
+					Project.Type.getKeys());
 		}
 
 		JSONObject jsonObject = new JSONObject();
