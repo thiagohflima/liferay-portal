@@ -20,6 +20,7 @@ import com.liferay.client.extension.web.internal.constants.ClientExtensionAdminP
 import com.liferay.client.extension.web.internal.constants.ClientExtensionAdminWebConstants;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.json.JSONUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
@@ -64,8 +65,6 @@ public class ExportClientExtensionEntryMVCResourceCommand
 		throws Exception {
 
 		try {
-			JSONObject jsonObject = _jsonFactory.createJSONObject();
-
 			Company company = _portal.getCompany(resourceRequest);
 
 			String externalReferenceCode = resourceRequest.getParameter(
@@ -84,7 +83,7 @@ public class ExportClientExtensionEntryMVCResourceCommand
 
 			DateFormat dateFormat = DateUtil.getISO8601Format();
 
-			jsonObject.put(
+			String json = JSONUtil.put(
 				"clientExtensionEntries",
 				_getClientExtensionEntriesJSONObject(clientExtensionEntry)
 			).put(
@@ -95,9 +94,7 @@ public class ExportClientExtensionEntryMVCResourceCommand
 				"user", _getUserJSONObject(_portal.getUser(resourceRequest))
 			).put(
 				"version", ClientExtensionAdminWebConstants.EXPORT_VERSION
-			);
-
-			String json = jsonObject.toString();
+			).toString();
 
 			resourceResponse.setContentLength(json.length());
 
@@ -145,9 +142,7 @@ public class ExportClientExtensionEntryMVCResourceCommand
 	private JSONObject _getClientExtensionEntryJSONObject(
 		ClientExtensionEntry clientExtensionEntry) {
 
-		JSONObject jsonObject = _jsonFactory.createJSONObject();
-
-		jsonObject.put(
+		return JSONUtil.put(
 			"description", clientExtensionEntry.getDescription()
 		).put(
 			"name", clientExtensionEntry.getName()
@@ -160,14 +155,10 @@ public class ExportClientExtensionEntryMVCResourceCommand
 		).put(
 			"typeSettings", clientExtensionEntry.getTypeSettings()
 		);
-
-		return jsonObject;
 	}
 
 	private JSONObject _getCompanyJSONObject(Company company) {
-		JSONObject jsonObject = _jsonFactory.createJSONObject();
-
-		jsonObject.put(
+		return JSONUtil.put(
 			"id", company.getCompanyId()
 		).put(
 			"name", company.getName()
@@ -176,22 +167,16 @@ public class ExportClientExtensionEntryMVCResourceCommand
 		).put(
 			"webId", company.getWebId()
 		);
-
-		return jsonObject;
 	}
 
 	private JSONObject _getUserJSONObject(User user) {
-		JSONObject jsonObject = _jsonFactory.createJSONObject();
-
-		jsonObject.put(
+		return JSONUtil.put(
 			"fullName", user.getFullName()
 		).put(
 			"id", user.getUserId()
 		).put(
 			"screenName", user.getScreenName()
 		);
-
-		return jsonObject;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
