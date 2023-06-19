@@ -27,15 +27,15 @@ public class KeywordDTOActionMetadataProvider
 
 	public KeywordDTOActionMetadataProvider() {
 		registerActionInfo(
-			"subscribe",
 			new ActionInfo(
 				ActionKeys.SUBSCRIBE, KeywordResourceImpl.class,
-				"putKeywordSubscribe"));
+				"putKeywordSubscribe"),
+			"subscribe");
 		registerActionInfo(
-			"unsubscribe",
 			new ActionInfo(
 				ActionKeys.SUBSCRIBE, KeywordResourceImpl.class,
-				"putKeywordUnsubscribe"));
+				"putKeywordUnsubscribe"),
+			"unsubscribe");
 	}
 
 	@Override

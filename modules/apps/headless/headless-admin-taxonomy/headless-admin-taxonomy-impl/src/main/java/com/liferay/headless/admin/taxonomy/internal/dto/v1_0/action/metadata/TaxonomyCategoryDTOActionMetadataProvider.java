@@ -27,10 +27,10 @@ public class TaxonomyCategoryDTOActionMetadataProvider
 
 	public TaxonomyCategoryDTOActionMetadataProvider() {
 		registerActionInfo(
-			"add-category",
 			new ActionInfo(
 				ActionKeys.ADD_CATEGORY, TaxonomyCategoryResourceImpl.class,
-				"postTaxonomyCategoryTaxonomyCategory"));
+				"postTaxonomyCategoryTaxonomyCategory"),
+			"add-category");
 	}
 
 	@Override

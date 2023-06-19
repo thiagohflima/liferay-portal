@@ -13,6 +13,7 @@ import java.util.Set;
  * @generated
  */
 public abstract class Base${schemaName}DTOActionMetadataProvider {
+
 	<#assign
 		actionPropertyNames = ["delete", "get", "replace", "update"]
 		javaMethodSignatures = freeMarkerTool.getResourceJavaMethodSignatures(configYAML, openAPIYAML, schemaName)
@@ -52,7 +53,7 @@ public abstract class Base${schemaName}DTOActionMetadataProvider {
 		</#if>
 	</#list>
 
-	protected final void registerActionInfo(String actionName, ActionInfo actionInfo) {
+	protected final void registerActionInfo(ActionInfo actionInfo, String actionName) {
 		_actionInfos.put(actionName, actionInfo);
 	}
 
