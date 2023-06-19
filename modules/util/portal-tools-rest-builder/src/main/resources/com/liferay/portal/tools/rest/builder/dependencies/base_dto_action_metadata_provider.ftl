@@ -14,12 +14,11 @@ import java.util.Set;
  */
 public abstract class Base${schemaName}DTOActionMetadataProvider {
 
-	<#assign
-		actionPropertyNames = ["delete", "get", "replace", "update"]
-		javaMethodSignatures = freeMarkerTool.getResourceJavaMethodSignatures(configYAML, openAPIYAML, schemaName)
-	/>
-
 	public Base${schemaName}DTOActionMetadataProvider() {
+		<#assign
+			actionPropertyNames = ["delete", "get", "replace", "update"]
+		/>
+
 		<#list actionPropertyNames as actionPropertyName>
 			_actionInfos.put("${actionPropertyName}", new ActionInfo(get${actionPropertyName?cap_first}ActionName(), ${schemaName}ResourceImpl.class, get${actionPropertyName?cap_first}ResourceMethodName()));
 		</#list>
@@ -42,7 +41,11 @@ public abstract class Base${schemaName}DTOActionMetadataProvider {
 			return ActionKeys.${actionName!};
 		}
 
-		<#assign resourceMethodName = freeMarkerTool.getResourceMethodName(javaMethodSignatures, actionPropertyName)!"" />
+		<#assign
+			javaMethodSignatures = freeMarkerTool.getResourceJavaMethodSignatures(configYAML, openAPIYAML, schemaName)
+
+			resourceMethodName = freeMarkerTool.getResourceMethodName(javaMethodSignatures, actionPropertyName)!""
+		/>
 
 		<#if resourceMethodName?has_content>
 			protected String get${actionPropertyName?cap_first}ResourceMethodName() {
