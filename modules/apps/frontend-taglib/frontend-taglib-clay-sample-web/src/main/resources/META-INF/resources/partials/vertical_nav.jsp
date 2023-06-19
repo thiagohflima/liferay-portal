@@ -17,7 +17,7 @@
 <%@ include file="/init.jsp" %>
 
 <blockquote>
-	<p>Vertical Navigation implements a pattern that displays navigation items in a vertical menu.</p>
+	<p>Vertical navigation implements a pattern that displays navigation items in a vertical menu.</p>
 </blockquote>
 
 <h3>DEFAULT VERTICAL NAV</h3>
