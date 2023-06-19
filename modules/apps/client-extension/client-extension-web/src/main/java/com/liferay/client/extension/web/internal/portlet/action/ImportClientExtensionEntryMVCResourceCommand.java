@@ -144,7 +144,7 @@ public class ImportClientExtensionEntryMVCResourceCommand
 			if (jsonObject.getInt("version", -1) !=
 					ClientExtensionAdminWebConstants.EXPORT_VERSION) {
 
-				throw new JSONException("Invalid version number");
+				throw new JSONException("Invalid version");
 			}
 
 			JSONObject clientExtensionEntriesJSONObject =
