@@ -159,8 +159,8 @@ public class ImportClientExtensionEntryMVCResourceCommand
 				ClientExtensionEntry clientExtensionEntry =
 					_clientExtensionEntryService.
 						fetchClientExtensionEntryByExternalReferenceCode(
-							_portal.getCompanyId(resourceRequest),
-							externalReferenceCode);
+							externalReferenceCode,
+							_portal.getCompanyId(resourceRequest));
 
 				_validate(clientExtensionEntry, jsonObject);
 
@@ -200,7 +200,7 @@ public class ImportClientExtensionEntryMVCResourceCommand
 			jsonObject.put("error", false);
 		}
 		else {
-			String message;
+			String message = null;
 
 			HttpServletRequest httpServletRequest =
 				_portal.getHttpServletRequest(resourceRequest);

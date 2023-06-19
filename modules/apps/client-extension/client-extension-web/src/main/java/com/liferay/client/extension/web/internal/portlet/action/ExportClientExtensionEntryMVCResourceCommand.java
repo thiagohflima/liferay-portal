@@ -74,7 +74,7 @@ public class ExportClientExtensionEntryMVCResourceCommand
 			ClientExtensionEntry clientExtensionEntry =
 				_clientExtensionEntryService.
 					fetchClientExtensionEntryByExternalReferenceCode(
-						company.getCompanyId(), externalReferenceCode);
+						externalReferenceCode, company.getCompanyId());
 
 			if (clientExtensionEntry == null) {
 				resourceResponse.setStatus(HttpServletResponse.SC_NOT_FOUND);
