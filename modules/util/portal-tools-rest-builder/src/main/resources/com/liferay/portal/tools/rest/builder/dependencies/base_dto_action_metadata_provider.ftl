@@ -20,16 +20,16 @@ public abstract class Base${schemaName}DTOActionMetadataProvider {
 
 	public Base${schemaName}DTOActionMetadataProvider() {
 		<#list actionPropertyNames as actionPropertyName>
-			_actionInfoMap.put("${actionPropertyName}", new ActionInfo(get${actionPropertyName?cap_first}ActionName(), ${schemaName}ResourceImpl.class, get${actionPropertyName?cap_first}ResourceMethodName()));
+			_actionInfos.put("${actionPropertyName}", new ActionInfo(get${actionPropertyName?cap_first}ActionName(), ${schemaName}ResourceImpl.class, get${actionPropertyName?cap_first}ResourceMethodName()));
 		</#list>
 	}
 
 	public final ActionInfo getActionInfo(String actionName) {
-		return _actionInfoMap.get(actionName);
+		return _actionInfos.get(actionName);
 	}
 
 	public final Set<String> getActionNames() {
-		return _actionInfoMap.keySet();
+		return _actionInfos.keySet();
 	}
 
 	public abstract String getPermissionName();
@@ -53,8 +53,9 @@ public abstract class Base${schemaName}DTOActionMetadataProvider {
 	</#list>
 
 	protected final void registerActionInfo(String actionName, ActionInfo actionInfo) {
-		_actionInfoMap.put(actionName, actionInfo);
+		_actionInfos.put(actionName, actionInfo);
 	}
 
-	private final Map<String, ActionInfo> _actionInfoMap = new HashMap<>();
+	private final Map<String, ActionInfo> _actionInfos = new HashMap<>();
+
 }
