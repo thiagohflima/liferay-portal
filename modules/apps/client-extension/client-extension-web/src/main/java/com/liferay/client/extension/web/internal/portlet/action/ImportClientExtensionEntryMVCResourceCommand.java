@@ -141,7 +141,7 @@ public class ImportClientExtensionEntryMVCResourceCommand
 			JSONObject jsonObject = _jsonFactory.createJSONObject(
 				StringUtil.read(part.getInputStream()));
 
-			if (jsonObject.getInt("version", -1) !=
+			if (jsonObject.getInt("version") !=
 					ClientExtensionAdminWebConstants.EXPORT_VERSION) {
 
 				throw new JSONException("Invalid version");
