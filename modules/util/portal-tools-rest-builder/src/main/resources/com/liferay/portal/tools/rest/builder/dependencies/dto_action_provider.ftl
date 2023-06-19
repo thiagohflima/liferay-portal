@@ -65,4 +65,5 @@ public class ${schemaName}DTOActionProvider implements DTOActionProvider {
 
 	@Reference
 	private ScopeChecker _scopeChecker;
+
 }
