@@ -36,11 +36,9 @@ public class Validator {
 
 		Recorder recorder = new Recorder();
 
-		_validateRelease(recorder, sourceConnection, targetConnection);
-
 		_validatePartitionedTables(
 			recorder, sourceConnection, targetConnection);
-
+		_validateRelease(recorder, sourceConnection, targetConnection);
 		_validateWebId(recorder, sourceConnection, targetConnection);
 
 		return recorder;
