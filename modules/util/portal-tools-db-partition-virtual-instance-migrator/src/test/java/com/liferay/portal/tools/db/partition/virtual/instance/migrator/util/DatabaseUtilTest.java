@@ -38,6 +38,31 @@ import org.mockito.Mockito;
 public class DatabaseUtilTest {
 
 	@Test
+	public void testGetFailedServletContextNames1() throws SQLException {
+		_setUpGetFailedServletContextNames(false);
+
+		List<String> failedServletContextNames =
+			DatabaseUtil.getFailedServletContextNames(_connection);
+
+		Assert.assertEquals(
+			failedServletContextNames.toString(), 2,
+			failedServletContextNames.size());
+
+		Assert.assertTrue(failedServletContextNames.contains("module1"));
+		Assert.assertTrue(failedServletContextNames.contains("module2"));
+	}
+
+	@Test
+	public void testGetFailedServletContextNames2() throws SQLException {
+		_setUpGetFailedServletContextNames(true);
+
+		List<String> failedServletContextNames =
+			DatabaseUtil.getFailedServletContextNames(_connection);
+
+		Assert.assertTrue(failedServletContextNames.isEmpty());
+	}
+
+	@Test
 	public void testGetPartitionedTableNames() throws Exception {
 
 		// Mock _connection
@@ -257,24 +282,15 @@ public class DatabaseUtilTest {
 	}
 
 	@Test
-	public void testHasWebId() throws SQLException {
-		_testHasWebId(false);
-		_testHasWebId(true);
+	public void testHasSingleCompanyInfo1() throws SQLException {
+		_testHasSingleCompanyInfo(false);
+		_testHasSingleCompanyInfo(true);
 	}
 
 	@Test
-	public void testGetFailedServletContextNames1() throws SQLException {
-		_setUpGetFailedServletContextNames(false);
-
-		List<String> failedServletContextNames =
-			DatabaseUtil.getFailedServletContextNames(_connection);
-
-		Assert.assertEquals(
-			failedServletContextNames.toString(), 2,
-			failedServletContextNames.size());
-
-		Assert.assertTrue(failedServletContextNames.contains("module1"));
-		Assert.assertTrue(failedServletContextNames.contains("module2"));
+	public void testHasWebId() throws SQLException {
+		_testHasWebId(false);
+		_testHasWebId(true);
 	}
 
 	@Test
@@ -283,53 +299,48 @@ public class DatabaseUtilTest {
 		_testIsDefaultPartition(true);
 	}
 
-	@Test
-	public void testHasSingleCompanyInfo1() throws SQLException {
-		_testHasSingleCompanyInfo(false);
-		_testHasSingleCompanyInfo(true);
-	}
-
-	@Test
-	public void testGetFailedServletContextNames2() throws SQLException {
-		_setUpGetFailedServletContextNames(true);
-
-		List<String> failedServletContextNames =
-			DatabaseUtil.getFailedServletContextNames(_connection);
-
-		Assert.assertTrue(failedServletContextNames.isEmpty());
-	}
-
-	private void _testIsDefaultPartition(boolean defaultPartition)
-		throws Exception {
+	private void _setUpGetFailedServletContextNames(boolean state)
+		throws SQLException {
 
 		Mockito.when(
-			_connection.getMetaData()
+			_connection.prepareStatement(
+				"select servletContextName from Release_ where state_ != 0;")
 		).thenReturn(
-			_databaseMetaData
+			_preparedStatement
 		);
 
 		Mockito.when(
-			_databaseMetaData.getTables(
-				Mockito.nullable(String.class), Mockito.nullable(String.class),
-				Mockito.eq("company"), Mockito.nullable(String[].class))
+			_preparedStatement.executeQuery()
 		).thenReturn(
 			_resultSet
 		);
 
-		Mockito.when(
-			_databaseMetaData.storesLowerCaseIdentifiers()
-		).thenReturn(
-			true
-		);
+		if (state) {
+			Mockito.when(
+				_resultSet.next()
+			).thenReturn(
+				false
+			);
+		}
+		else {
+			Mockito.when(
+				_resultSet.getString(1)
+			).thenReturn(
+				"module1"
+			).thenReturn(
+				"module2"
+			);
 
-		Mockito.when(
-			_resultSet.next()
-		).thenReturn(
-			defaultPartition
-		);
-
-		Assert.assertEquals(
-			defaultPartition, DatabaseUtil.isDefaultPartition(_connection));
+			Mockito.when(
+				_resultSet.next()
+			).thenReturn(
+				true
+			).thenReturn(
+				true
+			).thenReturn(
+				false
+			);
+		}
 	}
 
 	private void _setUpGetReleasesMap(Release release, boolean found)
@@ -387,48 +398,6 @@ public class DatabaseUtilTest {
 		}
 	}
 
-	private void _setUpGetFailedServletContextNames(boolean state) throws SQLException {
-		Mockito.when(
-			_connection.prepareStatement(
-				"select servletContextName from Release_ where state_ != 0;")
-		).thenReturn(
-			_preparedStatement
-		);
-
-		Mockito.when(
-			_preparedStatement.executeQuery()
-		).thenReturn(
-			_resultSet
-		);
-
-		if (state) {
-			Mockito.when(
-				_resultSet.next()
-			).thenReturn(
-				false
-			);
-		}
-		else {
-			Mockito.when(
-				_resultSet.getString(1)
-			).thenReturn(
-				"module1"
-			).thenReturn(
-				"module2"
-			);
-
-			Mockito.when(
-				_resultSet.next()
-			).thenReturn(
-				true
-			).thenReturn(
-				true
-			).thenReturn(
-				false
-			);
-		}
-	}
-
 	private void _testHasSingleCompanyInfo(boolean singleCompanyInfo)
 		throws SQLException {
 
@@ -456,7 +425,8 @@ public class DatabaseUtilTest {
 			true
 		);
 
-		Assert.assertEquals(singleCompanyInfo, DatabaseUtil.hasSingleCompanyInfo(_connection));
+		Assert.assertEquals(
+			singleCompanyInfo, DatabaseUtil.hasSingleCompanyInfo(_connection));
 	}
 
 	private void _testHasWebId(boolean hasWebId) throws SQLException {
@@ -492,6 +462,39 @@ public class DatabaseUtilTest {
 		);
 
 		Assert.assertEquals("webId", argumentCaptor.getValue());
+	}
+
+	private void _testIsDefaultPartition(boolean defaultPartition)
+		throws Exception {
+
+		Mockito.when(
+			_connection.getMetaData()
+		).thenReturn(
+			_databaseMetaData
+		);
+
+		Mockito.when(
+			_databaseMetaData.getTables(
+				Mockito.nullable(String.class), Mockito.nullable(String.class),
+				Mockito.eq("company"), Mockito.nullable(String[].class))
+		).thenReturn(
+			_resultSet
+		);
+
+		Mockito.when(
+			_databaseMetaData.storesLowerCaseIdentifiers()
+		).thenReturn(
+			true
+		);
+
+		Mockito.when(
+			_resultSet.next()
+		).thenReturn(
+			defaultPartition
+		);
+
+		Assert.assertEquals(
+			defaultPartition, DatabaseUtil.isDefaultPartition(_connection));
 	}
 
 	private final Connection _connection = Mockito.mock(Connection.class);
