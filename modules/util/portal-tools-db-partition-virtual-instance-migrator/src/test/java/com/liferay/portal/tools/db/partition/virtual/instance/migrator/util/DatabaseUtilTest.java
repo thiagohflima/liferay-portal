@@ -39,48 +39,17 @@ public class DatabaseUtilTest {
 
 	@Test
 	public void testGetPartitionedTableNames() throws Exception {
+
+		// Mock _connection
+
 		Mockito.when(
 			_connection.getMetaData()
 		).thenReturn(
 			_databaseMetaData
 		);
 
-		Mockito.when(
-			_databaseMetaData.getTables(
-				Mockito.nullable(String.class), Mockito.nullable(String.class),
-				Mockito.nullable(String.class), Mockito.any(String[].class))
-		).thenReturn(
-			_resultSet
-		);
-
-		Mockito.when(
-			_resultSet.next()
-		).thenReturn(
-			true
-		).thenReturn(
-			true
-		).thenReturn(
-			true
-		).thenReturn(
-			false
-		);
-
-		Mockito.when(
-			_resultSet.getString("TABLE_NAME")
-		).thenReturn(
-			"Table1"
-		).thenReturn(
-			"Company"
-		).thenReturn(
-			"Table2"
-		).thenReturn(
-			"Object_x_25000"
-		);
-
 		PreparedStatement preparedStatement = Mockito.mock(
 			PreparedStatement.class);
-
-		ResultSet resultSet1 = Mockito.mock(ResultSet.class);
 
 		Mockito.when(
 			_connection.prepareStatement("select companyId from Company")
@@ -88,10 +57,18 @@ public class DatabaseUtilTest {
 			preparedStatement
 		);
 
+		ResultSet resultSet1 = Mockito.mock(ResultSet.class);
+
 		Mockito.when(
 			preparedStatement.executeQuery()
 		).thenReturn(
 			resultSet1
+		);
+
+		Mockito.when(
+			resultSet1.getLong("companyId")
+		).thenReturn(
+			25000L
 		);
 
 		Mockito.when(
@@ -102,11 +79,7 @@ public class DatabaseUtilTest {
 			false
 		);
 
-		Mockito.when(
-			resultSet1.getLong("companyId")
-		).thenReturn(
-			25000L
-		);
+		// Mock _databaseMetaData
 
 		ResultSet resultSet2 = Mockito.mock(ResultSet.class);
 
@@ -140,15 +113,48 @@ public class DatabaseUtilTest {
 			true
 		);
 
+		Mockito.when(
+			_databaseMetaData.getTables(
+				Mockito.nullable(String.class), Mockito.nullable(String.class),
+				Mockito.nullable(String.class), Mockito.any(String[].class))
+		).thenReturn(
+			_resultSet
+		);
+
+		// Mock _resultSet
+
+		Mockito.when(
+			_resultSet.getString("TABLE_NAME")
+		).thenReturn(
+			"Table1"
+		).thenReturn(
+			"Company"
+		).thenReturn(
+			"Table2"
+		).thenReturn(
+			"Object_x_25000"
+		);
+
+		Mockito.when(
+			_resultSet.next()
+		).thenReturn(
+			true
+		).thenReturn(
+			true
+		).thenReturn(
+			true
+		).thenReturn(
+			false
+		);
+
 		List<String> tableNames = DatabaseUtil.getPartitionedTableNames(
 			_connection);
 
 		Assert.assertEquals(tableNames.toString(), 2, tableNames.size());
-
-		Assert.assertTrue(tableNames.contains("Table1"));
-		Assert.assertTrue(tableNames.contains("Table2"));
 		Assert.assertFalse(tableNames.contains("Company"));
 		Assert.assertFalse(tableNames.contains("Object_x_25000"));
+		Assert.assertTrue(tableNames.contains("Table1"));
+		Assert.assertTrue(tableNames.contains("Table2"));
 	}
 
 	@Test
@@ -183,6 +189,14 @@ public class DatabaseUtilTest {
 		);
 
 		Mockito.when(
+			_resultSet.getBoolean(3)
+		).thenReturn(
+			module1Release.getVerified()
+		).thenReturn(
+			module2Release.getVerified()
+		);
+
+		Mockito.when(
 			_resultSet.getString(1)
 		).thenReturn(
 			module1Release.getServletContextName()
@@ -201,14 +215,6 @@ public class DatabaseUtilTest {
 			module2SchemaVersion.toString()
 		);
 
-		Mockito.when(
-			_resultSet.getBoolean(3)
-		).thenReturn(
-			module1Release.getVerified()
-		).thenReturn(
-			module2Release.getVerified()
-		);
-
 		List<Release> releases = DatabaseUtil.getReleases(_connection);
 
 		Assert.assertEquals(releases.toString(), 2, releases.size());
@@ -223,7 +229,7 @@ public class DatabaseUtilTest {
 	}
 
 	@Test
-	public void testGetReleasesMapEntry() throws SQLException {
+	public void testGetReleasesMap1() throws SQLException {
 		Release release = new Release(
 			Version.parseVersion("14.2.4"), "module", true);
 
@@ -238,7 +244,7 @@ public class DatabaseUtilTest {
 	}
 
 	@Test
-	public void testGetReleasesMapNotFoundEntry() throws SQLException {
+	public void testGetReleasesMap2() throws SQLException {
 		Release release = new Release(
 			Version.parseVersion("14.2.4"), "module", true);
 
@@ -251,41 +257,43 @@ public class DatabaseUtilTest {
 	}
 
 	@Test
-	public void testHasNotWebId() throws SQLException {
+	public void testHasWebId1() throws SQLException {
 		_mockWebId(false);
 
 		Assert.assertFalse(DatabaseUtil.hasWebId(_connection, "webId"));
 
-		ArgumentCaptor<String> webIdCaptor = ArgumentCaptor.forClass(
+		ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(
 			String.class);
 
 		Mockito.verify(
 			_preparedStatement
 		).setString(
-			Mockito.eq(1), webIdCaptor.capture()
+			Mockito.eq(1), argumentCaptor.capture()
 		);
-		Assert.assertEquals("webId", webIdCaptor.getValue());
+
+		Assert.assertEquals("webId", argumentCaptor.getValue());
 	}
 
 	@Test
-	public void testHasWebId() throws SQLException {
+	public void testHasWebId2() throws SQLException {
 		_mockWebId(true);
 
 		Assert.assertTrue(DatabaseUtil.hasWebId(_connection, "webId"));
 
-		ArgumentCaptor<String> webIdCaptor = ArgumentCaptor.forClass(
+		ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(
 			String.class);
 
 		Mockito.verify(
 			_preparedStatement
 		).setString(
-			Mockito.eq(1), webIdCaptor.capture()
+			Mockito.eq(1), argumentCaptor.capture()
 		);
-		Assert.assertEquals("webId", webIdCaptor.getValue());
+
+		Assert.assertEquals("webId", argumentCaptor.getValue());
 	}
 
 	@Test
-	public void testInvalidReleaseState() throws SQLException {
+	public void testGetFailedServletContextNames1() throws SQLException {
 		_mockReleaseState(false);
 
 		List<String> failedServletContextNames =
@@ -300,35 +308,35 @@ public class DatabaseUtilTest {
 	}
 
 	@Test
-	public void testIsDefaultPartition() throws Exception {
+	public void testIsDefaultPartition1() throws Exception {
 		_mockDefaultPartition(true);
 
 		Assert.assertTrue(DatabaseUtil.isDefaultPartition(_connection));
 	}
 
 	@Test
-	public void testIsNotDefaultPartition() throws Exception {
+	public void testIsNotDefaultPartition2() throws Exception {
 		_mockDefaultPartition(false);
 
 		Assert.assertFalse(DatabaseUtil.isDefaultPartition(_connection));
 	}
 
 	@Test
-	public void testIsNotSingleVirtualInstance() throws SQLException {
+	public void testhasSingleCompanyInfo1() throws SQLException {
 		_mockSingleVirtualInstance(false);
 
 		Assert.assertFalse(DatabaseUtil.hasSingleCompanyInfo(_connection));
 	}
 
 	@Test
-	public void testIsSingleVirtualInstance() throws SQLException {
+	public void testhasSingleCompanyInfo2() throws SQLException {
 		_mockSingleVirtualInstance(true);
 
 		Assert.assertTrue(DatabaseUtil.hasSingleCompanyInfo(_connection));
 	}
 
 	@Test
-	public void testValidReleaseState() throws SQLException {
+	public void testGetFailedServletContextNames2() throws SQLException {
 		_mockReleaseState(true);
 
 		List<String> failedServletContextNames =
