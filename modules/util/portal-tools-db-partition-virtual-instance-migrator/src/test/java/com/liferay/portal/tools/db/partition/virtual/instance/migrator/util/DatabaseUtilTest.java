@@ -257,39 +257,9 @@ public class DatabaseUtilTest {
 	}
 
 	@Test
-	public void testHasWebId1() throws SQLException {
-		_setUpHasWebId(false);
-
-		Assert.assertFalse(DatabaseUtil.hasWebId(_connection, "webId"));
-
-		ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(
-			String.class);
-
-		Mockito.verify(
-			_preparedStatement
-		).setString(
-			Mockito.eq(1), argumentCaptor.capture()
-		);
-
-		Assert.assertEquals("webId", argumentCaptor.getValue());
-	}
-
-	@Test
-	public void testHasWebId2() throws SQLException {
-		_setUpHasWebId(true);
-
-		Assert.assertTrue(DatabaseUtil.hasWebId(_connection, "webId"));
-
-		ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(
-			String.class);
-
-		Mockito.verify(
-			_preparedStatement
-		).setString(
-			Mockito.eq(1), argumentCaptor.capture()
-		);
-
-		Assert.assertEquals("webId", argumentCaptor.getValue());
+	public void testHasWebId() throws SQLException {
+		_testHasWebId(false);
+		_testHasWebId(true);
 	}
 
 	@Test
@@ -309,30 +279,14 @@ public class DatabaseUtilTest {
 
 	@Test
 	public void testIsDefaultPartition1() throws Exception {
-		_setUpIsDefaultPartition(true);
-
-		Assert.assertTrue(DatabaseUtil.isDefaultPartition(_connection));
-	}
-
-	@Test
-	public void testIsDefaultPartition2() throws Exception {
-		_setUpIsDefaultPartition(false);
-
-		Assert.assertFalse(DatabaseUtil.isDefaultPartition(_connection));
+		_testIsDefaultPartition(false);
+		_testIsDefaultPartition(true);
 	}
 
 	@Test
 	public void testHasSingleCompanyInfo1() throws SQLException {
-		_setUpHasSingleCompanyInfo(false);
-
-		Assert.assertFalse(DatabaseUtil.hasSingleCompanyInfo(_connection));
-	}
-
-	@Test
-	public void testHasSingleCompanyInfo2() throws SQLException {
-		_setUpHasSingleCompanyInfo(true);
-
-		Assert.assertTrue(DatabaseUtil.hasSingleCompanyInfo(_connection));
+		_testHasSingleCompanyInfo(false);
+		_testHasSingleCompanyInfo(true);
 	}
 
 	@Test
@@ -345,7 +299,7 @@ public class DatabaseUtilTest {
 		Assert.assertTrue(failedServletContextNames.isEmpty());
 	}
 
-	private void _setUpIsDefaultPartition(boolean defaultPartition)
+	private void _testIsDefaultPartition(boolean defaultPartition)
 		throws Exception {
 
 		Mockito.when(
@@ -373,6 +327,9 @@ public class DatabaseUtilTest {
 		).thenReturn(
 			defaultPartition
 		);
+
+		Assert.assertEquals(
+			defaultPartition, DatabaseUtil.isDefaultPartition(_connection));
 	}
 
 	private void _setUpGetReleasesMap(Release release, boolean found)
@@ -472,7 +429,7 @@ public class DatabaseUtilTest {
 		}
 	}
 
-	private void _setUpHasSingleCompanyInfo(boolean singleCompanyInfo)
+	private void _testHasSingleCompanyInfo(boolean singleCompanyInfo)
 		throws SQLException {
 
 		Mockito.when(
@@ -498,9 +455,11 @@ public class DatabaseUtilTest {
 		).thenReturn(
 			true
 		);
+
+		Assert.assertEquals(singleCompanyInfo, DatabaseUtil.hasSingleCompanyInfo(_connection));
 	}
 
-	private void _setUpHasWebId(boolean hasWebId) throws SQLException {
+	private void _testHasWebId(boolean hasWebId) throws SQLException {
 		Mockito.when(
 			_connection.prepareStatement(
 				"select companyId from Company where webId = ?")
@@ -519,6 +478,20 @@ public class DatabaseUtilTest {
 		).thenReturn(
 			hasWebId
 		);
+
+		Assert.assertEquals(
+			hasWebId, DatabaseUtil.hasWebId(_connection, "webId"));
+
+		ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(
+			String.class);
+
+		Mockito.verify(
+			_preparedStatement
+		).setString(
+			Mockito.eq(1), argumentCaptor.capture()
+		);
+
+		Assert.assertEquals("webId", argumentCaptor.getValue());
 	}
 
 	private final Connection _connection = Mockito.mock(Connection.class);
