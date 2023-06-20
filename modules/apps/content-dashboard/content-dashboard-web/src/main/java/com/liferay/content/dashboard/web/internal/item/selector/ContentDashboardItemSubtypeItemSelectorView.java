@@ -114,9 +114,9 @@ public class ContentDashboardItemSubtypeItemSelectorView
 			PortletURL portletURL, String itemSelectedEventName, boolean search)
 		throws IOException {
 
-		PrintWriter writer = servletResponse.getWriter();
+		PrintWriter printWriter = servletResponse.getWriter();
 
-		writer.write("<section class=\"h-100\">");
+		printWriter.write("<section class=\"h-100\">");
 
 		String moduleName = _npmResolver.resolveModuleName(
 			"@liferay/content-dashboard-web");
@@ -130,9 +130,9 @@ public class ContentDashboardItemSubtypeItemSelectorView
 			).put(
 				"itemSelectorSaveEvent", itemSelectedEventName
 			).build(),
-			(HttpServletRequest)servletRequest, writer);
+			(HttpServletRequest)servletRequest, printWriter);
 
-		writer.write("</section>");
+		printWriter.write("</section>");
 	}
 
 	private Set<InfoItemReference>
@@ -171,16 +171,15 @@ public class ContentDashboardItemSubtypeItemSelectorView
 	private JSONArray _getContentDashboardItemTypesJSONArray(
 		ServletRequest servletRequest) {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)servletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		JSONArray contentDashboardItemTypesJSONArray =
+			_jsonFactory.createJSONArray();
 
 		Set<InfoItemReference>
 			checkedContentDashboardItemSubtypesInfoItemReferences =
 				_getCheckedContentDashboardItemSubtypesInfoItemReferences(
 					servletRequest);
-
-		JSONArray contentDashboardItemTypesJSONArray =
-			_jsonFactory.createJSONArray();
+		ThemeDisplay themeDisplay = (ThemeDisplay)servletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		for (String className :
 				_contentDashboardItemFactoryRegistry.getClassNames()) {
