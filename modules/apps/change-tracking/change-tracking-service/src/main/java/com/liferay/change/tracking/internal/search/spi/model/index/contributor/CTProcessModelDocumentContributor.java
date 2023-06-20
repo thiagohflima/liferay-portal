@@ -49,8 +49,9 @@ public class CTProcessModelDocumentContributor
 			document.addKeyword(Field.USER_ID, user.getUserId());
 			document.addText(Field.USER_NAME, user.getFullName());
 		}
-
-		document.addKeyword(Field.USER_ID, ctProcess.getUserId());
+		else {
+			document.addKeyword(Field.USER_ID, ctProcess.getUserId());
+		}
 
 		BackgroundTask backgroundTask =
 			_backgroundTaskLocalService.fetchBackgroundTask(
