@@ -534,7 +534,7 @@ public class EditRolePermissionsNavigationDisplayContext {
 
 			if (navigationItem.id == null) {
 				navigationItem.setId(
-					_NAVIGATION_ITEM + SecureRandomUtil.nextLong());
+					"NAVIGATION_ITEM" + SecureRandomUtil.nextLong());
 			}
 
 			return navigationItem;
@@ -587,8 +587,6 @@ public class EditRolePermissionsNavigationDisplayContext {
 
 		@JsonAnyGetter
 		protected final Map<String, Object> properties = new HashMap<>();
-
-		private static final String _NAVIGATION_ITEM = "NAVIGATION_ITEM";
 
 	}
 
