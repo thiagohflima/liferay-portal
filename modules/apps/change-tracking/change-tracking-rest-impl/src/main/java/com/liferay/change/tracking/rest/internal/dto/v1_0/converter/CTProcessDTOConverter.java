@@ -91,7 +91,7 @@ public class CTProcessDTOConverter
 
 		int status = backgroundTask.getStatus();
 
-		String statusLabel = StringPool.BLANK;
+		String statusLabel;
 
 		if (status == BackgroundTaskConstants.STATUS_FAILED) {
 			statusLabel = "failed";
@@ -101,6 +101,9 @@ public class CTProcessDTOConverter
 		}
 		else if (status == BackgroundTaskConstants.STATUS_SUCCESSFUL) {
 			statusLabel = "published";
+		}
+		else {
+			statusLabel = StringPool.BLANK;
 		}
 
 		return new Status() {
