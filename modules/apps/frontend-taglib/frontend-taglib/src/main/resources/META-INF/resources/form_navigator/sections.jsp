@@ -19,8 +19,6 @@
 <%
 FormNavigatorDisplayContext formNavigatorDisplayContext = new FormNavigatorDisplayContext(request);
 
-String[] categoryKeys = formNavigatorDisplayContext.getCategoryKeys();
-
 List<FormNavigatorEntry<Object>> formNavigatorEntries = (List<FormNavigatorEntry<Object>>)request.getAttribute(FormNavigatorWebKeys.FORM_NAVIGATOR_ENTRIES);
 
 String errorSection = null;
@@ -41,6 +39,11 @@ for (FormNavigatorEntry<Object> curFormNavigatorEntry : formNavigatorEntries) {
 
 	<c:choose>
 		<c:when test="<%= formNavigatorDisplayContext.getType() == FormNavigatorConstants.FormNavigatorType.SHEET_SECTIONS %>">
+
+			<%
+			String[] categoryKeys = formNavigatorDisplayContext.getCategoryKeys();
+			%>
+
 			<clay:sheet
 				cssClass="mb-4 ml-0 mt-4"
 				size='<%= (categoryKeys.length == 1) ? "full" : "lg" %>'
