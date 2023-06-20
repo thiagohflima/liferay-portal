@@ -164,7 +164,7 @@ public class DefinitionLocalServiceImpl extends DefinitionLocalServiceBaseImpl {
 	}
 
 	@Override
-	public String[] getAttachmentsFiles(Definition definition) {
+	public String[] getAttachmentsFileNames(Definition definition) {
 		return _store.getFileNames(
 			definition.getCompanyId(), CompanyConstants.SYSTEM,
 			definition.getAttachmentsDir());

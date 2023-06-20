@@ -263,8 +263,8 @@ public class EntryLocalServiceUtil {
 		return getService().getActionableDynamicQuery();
 	}
 
-	public static String[] getAttachmentsFiles(Entry entry) {
-		return getService().getAttachmentsFiles(entry);
+	public static String[] getAttachmentsFileNames(Entry entry) {
+		return getService().getAttachmentsFileNames(entry);
 	}
 
 	/**

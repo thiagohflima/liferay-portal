@@ -276,10 +276,10 @@ public class SourceLocalServiceWrapper
 	}
 
 	@Override
-	public String[] getAttachmentsFiles(
+	public String[] getAttachmentsFileNames(
 		com.liferay.portal.reports.engine.console.model.Source source) {
 
-		return _sourceLocalService.getAttachmentsFiles(source);
+		return _sourceLocalService.getAttachmentsFileNames(source);
 	}
 
 	@Override

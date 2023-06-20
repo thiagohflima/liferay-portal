@@ -114,7 +114,7 @@ public class DefinitionStagedModelDataHandler
 		Element definitionElement = portletDataContext.getExportDataElement(
 			definition);
 
-		for (String fullFileName : definition.getAttachmentsFiles()) {
+		for (String fullFileName : definition.getAttachmentsFileNames()) {
 			Element attachmentElement = definitionElement.addElement(
 				"attachment");
 

@@ -28,8 +28,8 @@ public class DefinitionImpl extends DefinitionBaseImpl {
 	}
 
 	@Override
-	public String[] getAttachmentsFiles() throws PortalException {
-		return DefinitionLocalServiceUtil.getAttachmentsFiles(this);
+	public String[] getAttachmentsFileNames() throws PortalException {
+		return DefinitionLocalServiceUtil.getAttachmentsFileNames(this);
 	}
 
 }

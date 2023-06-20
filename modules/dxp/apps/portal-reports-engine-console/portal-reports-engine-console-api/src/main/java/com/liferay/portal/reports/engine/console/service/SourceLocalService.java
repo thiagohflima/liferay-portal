@@ -229,7 +229,7 @@ public interface SourceLocalService
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public String[] getAttachmentsFiles(Source source);
+	public String[] getAttachmentsFileNames(Source source);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(

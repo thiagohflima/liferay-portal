@@ -35,8 +35,8 @@ public class EntryImpl extends EntryBaseImpl {
 	}
 
 	@Override
-	public String[] getAttachmentsFiles() throws PortalException {
-		return EntryLocalServiceUtil.getAttachmentsFiles(this);
+	public String[] getAttachmentsFileNames() throws PortalException {
+		return EntryLocalServiceUtil.getAttachmentsFileNames(this);
 	}
 
 	@Override

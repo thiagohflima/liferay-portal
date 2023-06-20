@@ -298,10 +298,10 @@ public class EntryLocalServiceWrapper
 	}
 
 	@Override
-	public String[] getAttachmentsFiles(
+	public String[] getAttachmentsFileNames(
 		com.liferay.portal.reports.engine.console.model.Entry entry) {
 
-		return _entryLocalService.getAttachmentsFiles(entry);
+		return _entryLocalService.getAttachmentsFileNames(entry);
 	}
 
 	/**

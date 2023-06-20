@@ -295,10 +295,10 @@ public class DefinitionLocalServiceWrapper
 	}
 
 	@Override
-	public String[] getAttachmentsFiles(
+	public String[] getAttachmentsFileNames(
 		com.liferay.portal.reports.engine.console.model.Definition definition) {
 
-		return _definitionLocalService.getAttachmentsFiles(definition);
+		return _definitionLocalService.getAttachmentsFileNames(definition);
 	}
 
 	/**

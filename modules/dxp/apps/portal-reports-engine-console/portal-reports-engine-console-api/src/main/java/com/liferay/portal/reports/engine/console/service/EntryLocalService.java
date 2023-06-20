@@ -237,7 +237,7 @@ public interface EntryLocalService
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public String[] getAttachmentsFiles(Entry entry);
+	public String[] getAttachmentsFileNames(Entry entry);
 
 	/**
 	 * Returns a range of all the entries.

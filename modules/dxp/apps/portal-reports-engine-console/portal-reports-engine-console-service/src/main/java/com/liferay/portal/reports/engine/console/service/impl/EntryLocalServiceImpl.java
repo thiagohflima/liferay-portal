@@ -250,7 +250,7 @@ public class EntryLocalServiceImpl extends EntryLocalServiceBaseImpl {
 		Definition definition = _definitionPersistence.findByPrimaryKey(
 			entry.getDefinitionId());
 
-		String[] existingFiles = definition.getAttachmentsFiles();
+		String[] existingFiles = definition.getAttachmentsFileNames();
 
 		ReportDesignRetriever retriever = new MemoryReportDesignRetriever(
 			reportName + StringPool.PERIOD + entry.getFormat(),
@@ -311,7 +311,7 @@ public class EntryLocalServiceImpl extends EntryLocalServiceBaseImpl {
 	}
 
 	@Override
-	public String[] getAttachmentsFiles(Entry entry) {
+	public String[] getAttachmentsFileNames(Entry entry) {
 		return _store.getFileNames(
 			entry.getCompanyId(), CompanyConstants.SYSTEM,
 			entry.getAttachmentsDir());

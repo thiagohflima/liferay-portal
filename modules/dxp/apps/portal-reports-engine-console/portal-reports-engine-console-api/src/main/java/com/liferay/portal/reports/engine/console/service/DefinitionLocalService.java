@@ -239,7 +239,7 @@ public interface DefinitionLocalService
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public String[] getAttachmentsFiles(Definition definition);
+	public String[] getAttachmentsFileNames(Definition definition);
 
 	/**
 	 * Returns the definition with the primary key.

@@ -28,8 +28,8 @@ public class SourceImpl extends SourceBaseImpl {
 	}
 
 	@Override
-	public String[] getAttachmentsFiles() throws PortalException {
-		return SourceLocalServiceUtil.getAttachmentsFiles(this);
+	public String[] getAttachmentsFileNames() throws PortalException {
+		return SourceLocalServiceUtil.getAttachmentsFileNames(this);
 	}
 
 }

@@ -256,8 +256,8 @@ public class DefinitionLocalServiceUtil {
 		return getService().getActionableDynamicQuery();
 	}
 
-	public static String[] getAttachmentsFiles(Definition definition) {
-		return getService().getAttachmentsFiles(definition);
+	public static String[] getAttachmentsFileNames(Definition definition) {
+		return getService().getAttachmentsFileNames(definition);
 	}
 
 	/**

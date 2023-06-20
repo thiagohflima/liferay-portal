@@ -243,8 +243,8 @@ public class SourceLocalServiceUtil {
 		return getService().getActionableDynamicQuery();
 	}
 
-	public static String[] getAttachmentsFiles(Source source) {
-		return getService().getAttachmentsFiles(source);
+	public static String[] getAttachmentsFileNames(Source source) {
+		return getService().getAttachmentsFileNames(source);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery

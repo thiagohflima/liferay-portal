@@ -125,7 +125,7 @@ public class SourceLocalServiceImpl extends SourceLocalServiceBaseImpl {
 	}
 
 	@Override
-	public String[] getAttachmentsFiles(Source source) {
+	public String[] getAttachmentsFileNames(Source source) {
 		return _store.getFileNames(
 			source.getCompanyId(), CompanyConstants.SYSTEM,
 			source.getAttachmentsDir());
