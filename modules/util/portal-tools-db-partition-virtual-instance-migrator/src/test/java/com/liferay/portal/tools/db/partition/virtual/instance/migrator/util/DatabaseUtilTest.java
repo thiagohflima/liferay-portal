@@ -25,6 +25,7 @@ import java.sql.SQLException;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -38,28 +39,23 @@ import org.mockito.Mockito;
 public class DatabaseUtilTest {
 
 	@Test
-	public void testGetFailedServletContextNames1() throws SQLException {
-		_setUpGetFailedServletContextNames(false);
+	public void testGetFailedServletContextNames() throws SQLException {
+		_testGetFailedServletContextNames(
+			failedServletContextNames -> {
+				Assert.assertEquals(
+					failedServletContextNames.toString(), 2,
+					failedServletContextNames.size());
 
-		List<String> failedServletContextNames =
-			DatabaseUtil.getFailedServletContextNames(_connection);
-
-		Assert.assertEquals(
-			failedServletContextNames.toString(), 2,
-			failedServletContextNames.size());
-
-		Assert.assertTrue(failedServletContextNames.contains("module1"));
-		Assert.assertTrue(failedServletContextNames.contains("module2"));
-	}
-
-	@Test
-	public void testGetFailedServletContextNames2() throws SQLException {
-		_setUpGetFailedServletContextNames(true);
-
-		List<String> failedServletContextNames =
-			DatabaseUtil.getFailedServletContextNames(_connection);
-
-		Assert.assertTrue(failedServletContextNames.isEmpty());
+				Assert.assertTrue(
+					failedServletContextNames.contains("module1"));
+				Assert.assertTrue(
+					failedServletContextNames.contains("module2"));
+			},
+			false);
+		_testGetFailedServletContextNames(
+			failedServletContextNames -> Assert.assertTrue(
+				failedServletContextNames.isEmpty()),
+			true);
 	}
 
 	@Test
@@ -299,50 +295,6 @@ public class DatabaseUtilTest {
 		_testIsDefaultPartition(true);
 	}
 
-	private void _setUpGetFailedServletContextNames(boolean state)
-		throws SQLException {
-
-		Mockito.when(
-			_connection.prepareStatement(
-				"select servletContextName from Release_ where state_ != 0;")
-		).thenReturn(
-			_preparedStatement
-		);
-
-		Mockito.when(
-			_preparedStatement.executeQuery()
-		).thenReturn(
-			_resultSet
-		);
-
-		if (state) {
-			Mockito.when(
-				_resultSet.next()
-			).thenReturn(
-				false
-			);
-		}
-		else {
-			Mockito.when(
-				_resultSet.getString(1)
-			).thenReturn(
-				"module1"
-			).thenReturn(
-				"module2"
-			);
-
-			Mockito.when(
-				_resultSet.next()
-			).thenReturn(
-				true
-			).thenReturn(
-				true
-			).thenReturn(
-				false
-			);
-		}
-	}
-
 	private void _setUpGetReleasesMap(Release release, boolean found)
 		throws SQLException {
 
@@ -396,6 +348,53 @@ public class DatabaseUtilTest {
 				false
 			);
 		}
+	}
+
+	private void _testGetFailedServletContextNames(
+			Consumer<List<String>> consumer, boolean state)
+		throws SQLException {
+
+		Mockito.when(
+			_connection.prepareStatement(
+				"select servletContextName from Release_ where state_ != 0;")
+		).thenReturn(
+			_preparedStatement
+		);
+
+		Mockito.when(
+			_preparedStatement.executeQuery()
+		).thenReturn(
+			_resultSet
+		);
+
+		if (state) {
+			Mockito.when(
+				_resultSet.next()
+			).thenReturn(
+				false
+			);
+		}
+		else {
+			Mockito.when(
+				_resultSet.getString(1)
+			).thenReturn(
+				"module1"
+			).thenReturn(
+				"module2"
+			);
+
+			Mockito.when(
+				_resultSet.next()
+			).thenReturn(
+				true
+			).thenReturn(
+				true
+			).thenReturn(
+				false
+			);
+		}
+
+		consumer.accept(DatabaseUtil.getFailedServletContextNames(_connection));
 	}
 
 	private void _testHasSingleCompanyInfo(boolean singleCompanyInfo)
