@@ -63,13 +63,13 @@ public class TensorFlowProcessHolder {
 	}
 
 	public TensorFlowProcessHolder(
-			ProcessExecutor processExecutor,
-			TensorFlowDownloadHelper tensorFlowDownloadHelper, Bundle bundle)
+			Bundle bundle, ProcessExecutor processExecutor,
+			TensorFlowDownloadHelper tensorFlowDownloadHelper)
 		throws Exception {
 
+		_bundle = bundle;
 		_processExecutor = processExecutor;
 		_tensorFlowDownloadHelper = tensorFlowDownloadHelper;
-		_bundle = bundle;
 
 		_tensorFlowWorkDir = bundle.getDataFile("tensorflow-workdir");
 

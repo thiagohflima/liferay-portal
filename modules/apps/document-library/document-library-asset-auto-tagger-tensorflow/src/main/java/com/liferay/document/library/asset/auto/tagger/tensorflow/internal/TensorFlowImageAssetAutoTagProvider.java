@@ -105,8 +105,8 @@ public class TensorFlowImageAssetAutoTagProvider
 		modified(properties);
 
 		_tensorFlowProcessHolder = new TensorFlowProcessHolder(
-			_processExecutor, _tensorFlowDownloadHelper,
-			bundleContext.getBundle());
+			bundleContext.getBundle(), _processExecutor,
+			_tensorFlowDownloadHelper);
 	}
 
 	@Deactivate
