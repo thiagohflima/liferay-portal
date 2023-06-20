@@ -317,14 +317,14 @@ public class DatabaseUtilTest {
 	public void testIsNotSingleVirtualInstance() throws SQLException {
 		_mockSingleVirtualInstance(false);
 
-		Assert.assertFalse(DatabaseUtil.isSingleVirtualInstance(_connection));
+		Assert.assertFalse(DatabaseUtil.hasSingleCompanyInfo(_connection));
 	}
 
 	@Test
 	public void testIsSingleVirtualInstance() throws SQLException {
 		_mockSingleVirtualInstance(true);
 
-		Assert.assertTrue(DatabaseUtil.isSingleVirtualInstance(_connection));
+		Assert.assertTrue(DatabaseUtil.hasSingleCompanyInfo(_connection));
 	}
 
 	@Test

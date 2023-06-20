@@ -149,7 +149,7 @@ public class DatabaseUtil {
 		return dbInspector.hasTable("Company");
 	}
 
-	public static boolean isSingleVirtualInstance(Connection connection)
+	public static boolean hasSingleCompanyInfo(Connection connection)
 		throws SQLException {
 
 		try (PreparedStatement preparedStatement = connection.prepareStatement(

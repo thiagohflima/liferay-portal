@@ -124,8 +124,8 @@ public class DBPartitionVirtualInstanceMigrator {
 				_exit(_LIFERAY_COMMON_EXIT_CODE_BAD);
 			}
 
-			if (!DatabaseUtil.isSingleVirtualInstance(_sourceConnection)) {
-				System.err.println("Source has more than one virtual instance");
+			if (!DatabaseUtil.hasSingleCompanyInfo(_sourceConnection)) {
+				System.err.println("Source has more than one company info");
 
 				_exit(_LIFERAY_COMMON_EXIT_CODE_BAD);
 			}
