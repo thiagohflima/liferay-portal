@@ -96,7 +96,7 @@ public class CTCollectionDTOConverter
 	}
 
 	private Status _toStatus(Locale locale, int status) throws Exception {
-		String statusLabel;
+		String statusLabel = StringPool.BLANK;
 
 		if (status == WorkflowConstants.STATUS_APPROVED) {
 			statusLabel = "published";
@@ -112,9 +112,6 @@ public class CTCollectionDTOConverter
 		}
 		else if (status == WorkflowConstants.STATUS_SCHEDULED) {
 			statusLabel = "scheduled";
-		}
-		else {
-			statusLabel = StringPool.BLANK;
 		}
 
 		return new Status() {
