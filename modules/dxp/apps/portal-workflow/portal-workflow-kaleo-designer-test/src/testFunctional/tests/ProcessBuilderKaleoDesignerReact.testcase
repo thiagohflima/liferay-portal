@@ -1406,7 +1406,7 @@ definition {
 
 		ProcessBuilderKaleoDesignerReact.gotoNotification(notificationName = "New Notification");
 
-		ProcessBuilderKaleoDesignerReact.deleteRoleTypeInNotifications();
+		ProcessBuilderKaleoDesignerReact.deleteRoleTypeInNotifications(index = 1);
 
 		ProcessBuilderKaleoDesignerReact.backArrowOnSidebar();
 
