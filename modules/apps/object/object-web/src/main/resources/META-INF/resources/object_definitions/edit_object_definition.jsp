@@ -23,7 +23,7 @@ String screenNavigationCategoryKey = ParamUtil.getString(request, "screenNavigat
 %>
 
 <c:choose>
-	<c:when test="<%= objectDefinitionsDetailsDisplayContext.isPublicationsEnabled() %>">
+	<c:when test="<%= objectDefinitionsDetailsDisplayContext.isChangeTrackingEnabled() %>">
 		<div class="lfr-object__edit-object-definition publication">
 	</c:when>
 	<c:otherwise>

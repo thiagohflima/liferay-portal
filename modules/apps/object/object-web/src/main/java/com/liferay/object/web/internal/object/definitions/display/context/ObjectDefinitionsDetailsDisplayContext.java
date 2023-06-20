@@ -174,7 +174,7 @@ public class ObjectDefinitionsDetailsDisplayContext
 			ObjectActionKeys.PUBLISH_OBJECT_DEFINITION);
 	}
 
-	public boolean isPublicationsEnabled() throws Exception {
+	public boolean isChangeTrackingEnabled() throws Exception {
 		CTSettingsConfiguration ctSettingsConfiguration =
 			_configurationProvider.getCompanyConfiguration(
 				CTSettingsConfiguration.class,
