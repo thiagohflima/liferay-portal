@@ -14,7 +14,6 @@
 
 package com.liferay.portal.tools.db.partition.virtual.instance.migrator;
 
-import com.liferay.portal.tools.db.partition.virtual.instance.migrator.error.ErrorCodes;
 import com.liferay.portal.tools.db.partition.virtual.instance.migrator.util.DatabaseUtil;
 import com.liferay.portal.tools.db.partition.virtual.instance.migrator.util.Validator;
 
@@ -43,7 +42,7 @@ public class DBPartitionVirtualInstanceMigrator {
 
 			exception.printStackTrace();
 
-			_exit(ErrorCodes.LIFERAY_COMMON_EXIT_CODE_BAD);
+			_exit(_LIFERAY_COMMON_EXIT_CODE_BAD);
 		}
 	}
 
@@ -61,7 +60,7 @@ public class DBPartitionVirtualInstanceMigrator {
 			System.err.println(sqlException);
 		}
 
-		if (code != ErrorCodes.LIFERAY_COMMON_EXIT_CODE_OK) {
+		if (code != _LIFERAY_COMMON_EXIT_CODE_OK) {
 			System.exit(code);
 		}
 	}
@@ -122,13 +121,13 @@ public class DBPartitionVirtualInstanceMigrator {
 
 				sqlException.printStackTrace();
 
-				_exit(ErrorCodes.LIFERAY_COMMON_EXIT_CODE_BAD);
+				_exit(_LIFERAY_COMMON_EXIT_CODE_BAD);
 			}
 
 			if (!DatabaseUtil.isSingleVirtualInstance(_sourceConnection)) {
 				System.err.println("Source has more than one virtual instance");
 
-				_exit(ErrorCodes.LIFERAY_COMMON_EXIT_CODE_BAD);
+				_exit(_LIFERAY_COMMON_EXIT_CODE_BAD);
 			}
 
 			try {
@@ -144,13 +143,13 @@ public class DBPartitionVirtualInstanceMigrator {
 
 				sqlException.printStackTrace();
 
-				_exit(ErrorCodes.LIFERAY_COMMON_EXIT_CODE_BAD);
+				_exit(_LIFERAY_COMMON_EXIT_CODE_BAD);
 			}
 
 			if (!DatabaseUtil.isDefaultPartition(_targetConnection)) {
 				System.err.println("Target is not the default partition");
 
-				_exit(ErrorCodes.LIFERAY_COMMON_EXIT_CODE_BAD);
+				_exit(_LIFERAY_COMMON_EXIT_CODE_BAD);
 			}
 
 			if (commandLine.hasOption("target-schema-prefix")) {
@@ -164,7 +163,7 @@ public class DBPartitionVirtualInstanceMigrator {
 			if (recorder.hasErrors() || recorder.hasWarnings()) {
 				recorder.printMessages();
 
-				_exit(ErrorCodes.LIFERAY_COMMON_EXIT_CODE_BAD);
+				_exit(_LIFERAY_COMMON_EXIT_CODE_BAD);
 			}
 		}
 		catch (ParseException parseException) {
@@ -178,11 +177,20 @@ public class DBPartitionVirtualInstanceMigrator {
 				"Liferay Portal Tools DB Partition Virtual Instance Migrator",
 				options);
 
-			_exit(ErrorCodes.LIFERAY_COMMON_EXIT_CODE_HELP);
+			_exit(_LIFERAY_COMMON_EXIT_CODE_HELP);
 		}
 
-		_exit(ErrorCodes.LIFERAY_COMMON_EXIT_CODE_OK);
+		_exit(_LIFERAY_COMMON_EXIT_CODE_OK);
 	}
+
+	/**
+	 * https://github.com/liferay/liferay-docker/blob/master/_liferay_common.sh
+	 */
+	private static final int _LIFERAY_COMMON_EXIT_CODE_BAD = 1;
+
+	private static final int _LIFERAY_COMMON_EXIT_CODE_HELP = 2;
+
+	private static final int _LIFERAY_COMMON_EXIT_CODE_OK = 0;
 
 	private static Connection _sourceConnection;
 	private static Connection _targetConnection;
