@@ -41,25 +41,23 @@ public class RecorderTest {
 	}
 
 	@Test
-	public void testPrintingOrder() {
+	public void testPrintingMessages() {
 		Recorder recorder = new Recorder();
 
 		recorder.registerWarning("A simple warning message");
+
 		recorder.registerError("A simple error message");
+
 		recorder.printMessages();
 
-		Assert.assertTrue(recorder.hasWarnings());
 		Assert.assertTrue(recorder.hasErrors());
+		Assert.assertTrue(recorder.hasWarnings());
 
-		String outputString = _byteArrayOutputStream.toString();
+		String string = _byteArrayOutputStream.toString();
 
-		Assert.assertTrue(
-			outputString.contains("[WARN] A simple warning message"));
-		Assert.assertTrue(
-			outputString.contains("[ERROR] A simple error message"));
-
-		Assert.assertTrue(
-			outputString.indexOf("[ERROR]") < outputString.indexOf("[WARN]"));
+		Assert.assertTrue(string.contains("[ERROR] A simple error message"));
+		Assert.assertTrue(string.contains("[WARN] A simple warning message"));
+		Assert.assertTrue(string.indexOf("[ERROR]") < string.indexOf("[WARN]"));
 	}
 
 	@Test
@@ -70,8 +68,8 @@ public class RecorderTest {
 
 		recorder.printMessages();
 
-		Assert.assertFalse(recorder.hasWarnings());
 		Assert.assertTrue(recorder.hasErrors());
+		Assert.assertFalse(recorder.hasWarnings());
 
 		Assert.assertEquals(
 			"[ERROR] A simple message\n", _byteArrayOutputStream.toString());
@@ -87,14 +85,14 @@ public class RecorderTest {
 
 		recorder.printMessages();
 
-		Assert.assertFalse(recorder.hasWarnings());
 		Assert.assertTrue(recorder.hasErrors());
+		Assert.assertFalse(recorder.hasWarnings());
 
-		String outputString = _byteArrayOutputStream.toString();
+		String string = _byteArrayOutputStream.toString();
 
 		for (String module : modules) {
 			Assert.assertTrue(
-				outputString.contains(
+				string.contains(
 					"[ERROR] Module " + module + " simple message"));
 		}
 	}
@@ -107,8 +105,8 @@ public class RecorderTest {
 
 		recorder.printMessages();
 
-		Assert.assertTrue(recorder.hasWarnings());
 		Assert.assertFalse(recorder.hasErrors());
+		Assert.assertTrue(recorder.hasWarnings());
 
 		Assert.assertEquals(
 			"[WARN] A simple message\n", _byteArrayOutputStream.toString());
@@ -124,8 +122,8 @@ public class RecorderTest {
 
 		recorder.printMessages();
 
-		Assert.assertTrue(recorder.hasWarnings());
 		Assert.assertFalse(recorder.hasErrors());
+		Assert.assertTrue(recorder.hasWarnings());
 
 		String outputString = _byteArrayOutputStream.toString();
 

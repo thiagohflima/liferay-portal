@@ -240,14 +240,8 @@ public class DatabaseUtilTest {
 		List<Release> releases = DatabaseUtil.getReleases(_connection);
 
 		Assert.assertEquals(releases.toString(), 2, releases.size());
-
-		Release module1Entry = releases.get(0);
-
-		Assert.assertTrue(module1Entry.equals(module1Release));
-
-		Release module2Entry = releases.get(1);
-
-		Assert.assertTrue(module2Entry.equals(module2Release));
+		Assert.assertTrue(module1Release.equals(releases.get(0)));
+		Assert.assertTrue(module2Release.equals(releases.get(1)));
 	}
 
 	@Test
