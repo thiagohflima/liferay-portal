@@ -123,6 +123,21 @@ public class DatabaseUtil {
 		}
 	}
 
+	public static boolean hasSingleCompanyInfo(Connection connection)
+		throws SQLException {
+
+		try (PreparedStatement preparedStatement = connection.prepareStatement(
+				"select count(1) from CompanyInfo");
+			ResultSet resultSet = preparedStatement.executeQuery()) {
+
+			if (resultSet.next() && (resultSet.getInt(1) > 1)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 	public static boolean hasWebId(Connection connection, String webId)
 		throws SQLException {
 
@@ -147,21 +162,6 @@ public class DatabaseUtil {
 		DBInspector dbInspector = new DBInspector(connection);
 
 		return dbInspector.hasTable("Company");
-	}
-
-	public static boolean hasSingleCompanyInfo(Connection connection)
-		throws SQLException {
-
-		try (PreparedStatement preparedStatement = connection.prepareStatement(
-				"select count(1) from CompanyInfo");
-			ResultSet resultSet = preparedStatement.executeQuery()) {
-
-			if (resultSet.next() && (resultSet.getInt(1) > 1)) {
-				return false;
-			}
-		}
-
-		return true;
 	}
 
 	public static void setSchemaPrefix(String schemaPrefix) {
