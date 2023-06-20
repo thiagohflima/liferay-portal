@@ -195,7 +195,7 @@ EOF
 
 import React from 'react';
 
-import {Liferay} from '../services/liferay/liferay.js';
+import {Liferay} from '../services/liferay/liferay';
 
 let oAuth2Client;
 
