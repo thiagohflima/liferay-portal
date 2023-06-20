@@ -98,6 +98,8 @@ public class OpenAPIResourceImpl {
 
 			add(CTEntryResourceImpl.class);
 
+			add(CTProcessResourceImpl.class);
+
 			add(OpenAPIResourceImpl.class);
 		}
 	};
