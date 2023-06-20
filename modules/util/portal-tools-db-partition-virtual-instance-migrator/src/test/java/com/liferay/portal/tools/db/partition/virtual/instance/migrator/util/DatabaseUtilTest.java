@@ -233,7 +233,7 @@ public class DatabaseUtilTest {
 		Release release = new Release(
 			Version.parseVersion("14.2.4"), "module", true);
 
-		_mockGetReleasesMap(release, true);
+		_setUpGetReleasesMap(release, true);
 
 		Map<String, Release> releasesMap = DatabaseUtil.getReleasesMap(
 			_connection);
@@ -248,7 +248,7 @@ public class DatabaseUtilTest {
 		Release release = new Release(
 			Version.parseVersion("14.2.4"), "module", true);
 
-		_mockGetReleasesMap(release, false);
+		_setUpGetReleasesMap(release, false);
 
 		Map<String, Release> releasesMap = DatabaseUtil.getReleasesMap(
 			_connection);
@@ -258,7 +258,7 @@ public class DatabaseUtilTest {
 
 	@Test
 	public void testHasWebId1() throws SQLException {
-		_mockWebId(false);
+		_setUpHasWebId(false);
 
 		Assert.assertFalse(DatabaseUtil.hasWebId(_connection, "webId"));
 
@@ -276,7 +276,7 @@ public class DatabaseUtilTest {
 
 	@Test
 	public void testHasWebId2() throws SQLException {
-		_mockWebId(true);
+		_setUpHasWebId(true);
 
 		Assert.assertTrue(DatabaseUtil.hasWebId(_connection, "webId"));
 
@@ -294,7 +294,7 @@ public class DatabaseUtilTest {
 
 	@Test
 	public void testGetFailedServletContextNames1() throws SQLException {
-		_mockReleaseState(false);
+		_setUpGetFailedServletContextNames(false);
 
 		List<String> failedServletContextNames =
 			DatabaseUtil.getFailedServletContextNames(_connection);
@@ -309,35 +309,35 @@ public class DatabaseUtilTest {
 
 	@Test
 	public void testIsDefaultPartition1() throws Exception {
-		_mockDefaultPartition(true);
+		_setUpIsDefaultPartition(true);
 
 		Assert.assertTrue(DatabaseUtil.isDefaultPartition(_connection));
 	}
 
 	@Test
-	public void testIsNotDefaultPartition2() throws Exception {
-		_mockDefaultPartition(false);
+	public void testIsDefaultPartition2() throws Exception {
+		_setUpIsDefaultPartition(false);
 
 		Assert.assertFalse(DatabaseUtil.isDefaultPartition(_connection));
 	}
 
 	@Test
-	public void testhasSingleCompanyInfo1() throws SQLException {
-		_mockSingleVirtualInstance(false);
+	public void testHasSingleCompanyInfo1() throws SQLException {
+		_setUpHasSingleCompanyInfo(false);
 
 		Assert.assertFalse(DatabaseUtil.hasSingleCompanyInfo(_connection));
 	}
 
 	@Test
-	public void testhasSingleCompanyInfo2() throws SQLException {
-		_mockSingleVirtualInstance(true);
+	public void testHasSingleCompanyInfo2() throws SQLException {
+		_setUpHasSingleCompanyInfo(true);
 
 		Assert.assertTrue(DatabaseUtil.hasSingleCompanyInfo(_connection));
 	}
 
 	@Test
 	public void testGetFailedServletContextNames2() throws SQLException {
-		_mockReleaseState(true);
+		_setUpGetFailedServletContextNames(true);
 
 		List<String> failedServletContextNames =
 			DatabaseUtil.getFailedServletContextNames(_connection);
@@ -345,19 +345,13 @@ public class DatabaseUtilTest {
 		Assert.assertTrue(failedServletContextNames.isEmpty());
 	}
 
-	private void _mockDefaultPartition(boolean defaultPartition)
+	private void _setUpIsDefaultPartition(boolean defaultPartition)
 		throws Exception {
 
 		Mockito.when(
 			_connection.getMetaData()
 		).thenReturn(
 			_databaseMetaData
-		);
-
-		Mockito.when(
-			_databaseMetaData.storesLowerCaseIdentifiers()
-		).thenReturn(
-			true
 		);
 
 		Mockito.when(
@@ -369,13 +363,19 @@ public class DatabaseUtilTest {
 		);
 
 		Mockito.when(
+			_databaseMetaData.storesLowerCaseIdentifiers()
+		).thenReturn(
+			true
+		);
+
+		Mockito.when(
 			_resultSet.next()
 		).thenReturn(
 			defaultPartition
 		);
 	}
 
-	private void _mockGetReleasesMap(Release release, boolean found)
+	private void _setUpGetReleasesMap(Release release, boolean found)
 		throws SQLException {
 
 		Mockito.when(
@@ -394,11 +394,9 @@ public class DatabaseUtilTest {
 
 		if (found) {
 			Mockito.when(
-				_resultSet.next()
+				_resultSet.getBoolean(3)
 			).thenReturn(
-				true
-			).thenReturn(
-				false
+				release.getVerified()
 			);
 
 			Mockito.when(
@@ -416,9 +414,11 @@ public class DatabaseUtilTest {
 			);
 
 			Mockito.when(
-				_resultSet.getBoolean(3)
+				_resultSet.next()
 			).thenReturn(
-				release.getVerified()
+				true
+			).thenReturn(
+				false
 			);
 		}
 		else {
@@ -430,7 +430,7 @@ public class DatabaseUtilTest {
 		}
 	}
 
-	private void _mockReleaseState(boolean stateGood) throws SQLException {
+	private void _setUpGetFailedServletContextNames(boolean state) throws SQLException {
 		Mockito.when(
 			_connection.prepareStatement(
 				"select servletContextName from Release_ where state_ != 0;")
@@ -444,7 +444,7 @@ public class DatabaseUtilTest {
 			_resultSet
 		);
 
-		if (stateGood) {
+		if (state) {
 			Mockito.when(
 				_resultSet.next()
 			).thenReturn(
@@ -453,6 +453,14 @@ public class DatabaseUtilTest {
 		}
 		else {
 			Mockito.when(
+				_resultSet.getString(1)
+			).thenReturn(
+				"module1"
+			).thenReturn(
+				"module2"
+			);
+
+			Mockito.when(
 				_resultSet.next()
 			).thenReturn(
 				true
@@ -461,18 +469,10 @@ public class DatabaseUtilTest {
 			).thenReturn(
 				false
 			);
-
-			Mockito.when(
-				_resultSet.getString(1)
-			).thenReturn(
-				"module1"
-			).thenReturn(
-				"module2"
-			);
 		}
 	}
 
-	private void _mockSingleVirtualInstance(boolean singleVirtualInstance)
+	private void _setUpHasSingleCompanyInfo(boolean singleCompanyInfo)
 		throws SQLException {
 
 		Mockito.when(
@@ -490,7 +490,7 @@ public class DatabaseUtilTest {
 		Mockito.when(
 			_resultSet.getInt(1)
 		).thenReturn(
-			singleVirtualInstance ? 1 : 4
+			singleCompanyInfo ? 1 : 4
 		);
 
 		Mockito.when(
@@ -500,7 +500,7 @@ public class DatabaseUtilTest {
 		);
 	}
 
-	private void _mockWebId(boolean hasWebId) throws SQLException {
+	private void _setUpHasWebId(boolean hasWebId) throws SQLException {
 		Mockito.when(
 			_connection.prepareStatement(
 				"select companyId from Company where webId = ?")

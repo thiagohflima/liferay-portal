@@ -59,7 +59,7 @@ public class ValidatorTest {
 
 	@Test
 	public void testCheckWebIdNotValid() throws Exception {
-		_mockWebIds(false);
+		_setUpHasWebIds(false);
 
 		_executeAndAssert(
 			true, false,
@@ -70,7 +70,7 @@ public class ValidatorTest {
 
 	@Test
 	public void testCheckWebIdValid() throws Exception {
-		_mockWebIds(true);
+		_setUpHasWebIds(true);
 
 		_executeAndAssert(false, false, null);
 	}
@@ -406,7 +406,7 @@ public class ValidatorTest {
 		);
 	}
 
-	private void _mockWebIds(boolean valid) {
+	private void _setUpHasWebIds(boolean valid) {
 		_databaseMockedStatic.when(
 			() -> DatabaseUtil.getWebId(_sourceConnection)
 		).thenReturn(
