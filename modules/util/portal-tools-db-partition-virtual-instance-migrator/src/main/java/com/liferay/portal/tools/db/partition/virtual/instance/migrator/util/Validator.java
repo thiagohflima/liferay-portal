@@ -163,14 +163,14 @@ public class Validator {
 			Connection targetConnection)
 		throws Exception {
 
-		String message = "has a failed Release state in the ? database";
+		String message = "has a failed release state in the %s database";
 
 		List<String> failedServletContextNames =
 			DatabaseUtil.getFailedServletContextNames(sourceConnection);
 
 		if (!failedServletContextNames.isEmpty()) {
 			recorder.registerErrors(
-				StringUtil.replace(message, '?', "source"),
+				String.format(message, "source"),
 				failedServletContextNames);
 		}
 
@@ -179,7 +179,7 @@ public class Validator {
 
 		if (!failedServletContextNames.isEmpty()) {
 			recorder.registerErrors(
-				StringUtil.replace(message, '?', "target"),
+				String.format(message, "target"),
 				failedServletContextNames);
 		}
 	}
@@ -193,7 +193,7 @@ public class Validator {
 
 		if (DatabaseUtil.hasWebId(targetConnection, sourceWebId)) {
 			recorder.registerError(
-				"WebId " + sourceWebId +
+				"Web ID " + sourceWebId +
 					" already exists in the target database");
 		}
 	}
