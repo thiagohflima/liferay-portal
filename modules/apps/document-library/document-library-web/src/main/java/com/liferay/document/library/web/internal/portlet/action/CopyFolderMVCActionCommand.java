@@ -76,7 +76,7 @@ public class CopyFolderMVCActionCommand extends BaseMVCActionCommand {
 
 		if ((group != null) && group.isStaged() && !group.isStagingGroup()) {
 			throw new PortalException(
-				"cannot-copy-entries-to-the-live-version-of-a-group");
+				"cannot-copy-folders-to-the-live-version-of-a-group");
 		}
 	}
 
