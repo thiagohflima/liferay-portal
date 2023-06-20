@@ -260,7 +260,7 @@ public class DatabaseUtilTest {
 	}
 
 	@Test
-	public void testHasSingleCompanyInfo1() throws SQLException {
+	public void testHasSingleCompanyInfo() throws SQLException {
 		_testHasSingleCompanyInfo(false);
 		_testHasSingleCompanyInfo(true);
 	}
@@ -272,7 +272,7 @@ public class DatabaseUtilTest {
 	}
 
 	@Test
-	public void testIsDefaultPartition1() throws Exception {
+	public void testIsDefaultPartition() throws Exception {
 		_testIsDefaultPartition(false);
 		_testIsDefaultPartition(true);
 	}
