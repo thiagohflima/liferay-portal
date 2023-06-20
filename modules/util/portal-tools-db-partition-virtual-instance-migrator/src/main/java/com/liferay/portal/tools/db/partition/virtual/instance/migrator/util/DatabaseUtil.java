@@ -54,11 +54,11 @@ public class DatabaseUtil {
 	public static List<String> getPartitionedTableNames(Connection connection)
 		throws Exception {
 
-		DBInspector dbInspector = new DBInspector(connection);
+		List<String> partitionedTableNames = new ArrayList<>();
 
 		List<Long> companyIds = _getCompanyIds(connection);
 
-		List<String> partitionedTableNames = new ArrayList<>();
+		DBInspector dbInspector = new DBInspector(connection);
 
 		for (String tableName : dbInspector.getTableNames(null)) {
 			if (!dbInspector.isControlTable(companyIds, tableName) &&
@@ -74,9 +74,9 @@ public class DatabaseUtil {
 	public static List<Release> getReleases(Connection connection)
 		throws SQLException {
 
-		Map<String, Release> releasesMap = getReleasesMap(connection);
-
 		List<Release> releases = new ArrayList<>();
+
+		Map<String, Release> releasesMap = getReleasesMap(connection);
 
 		for (Release release : releasesMap.values()) {
 			releases.add(release);
@@ -88,7 +88,7 @@ public class DatabaseUtil {
 	public static Map<String, Release> getReleasesMap(Connection connection)
 		throws SQLException {
 
-		Map<String, Release> releaseMap = new HashMap<>();
+		Map<String, Release> releasesMap = new HashMap<>();
 
 		try (PreparedStatement preparedStatement = connection.prepareStatement(
 				"select servletContextName, schemaVersion, verified from " +
@@ -98,7 +98,7 @@ public class DatabaseUtil {
 			while (resultSet.next()) {
 				String servletContextName = resultSet.getString(1);
 
-				releaseMap.put(
+				releasesMap.put(
 					servletContextName,
 					new Release(
 						Version.parseVersion(resultSet.getString(2)),
@@ -106,7 +106,7 @@ public class DatabaseUtil {
 			}
 		}
 
-		return releaseMap;
+		return releasesMap;
 	}
 
 	public static String getWebId(Connection connection) throws SQLException {
