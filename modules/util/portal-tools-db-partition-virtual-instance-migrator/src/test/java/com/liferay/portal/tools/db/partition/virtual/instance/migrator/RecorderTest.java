@@ -32,72 +32,12 @@ public class RecorderTest {
 
 	@Before
 	public void setUp() {
-		System.setOut(new PrintStream(_testOutByteArrayOutputStream));
+		System.setOut(new PrintStream(_byteArrayOutputStream));
 	}
 
 	@After
 	public void tearDown() {
 		System.setOut(_originalOut);
-	}
-
-	@Test
-	public void testError() {
-		Recorder recorder = new Recorder();
-
-		recorder.registerError("A simple message");
-
-		recorder.printMessages();
-
-		Assert.assertFalse(recorder.hasWarnings());
-		Assert.assertTrue(recorder.hasErrors());
-
-		Assert.assertEquals(
-			"[ERROR] A simple message\n",
-			_testOutByteArrayOutputStream.toString());
-	}
-
-	@Test
-	public void testMultipleError() {
-		Recorder recorder = new Recorder();
-
-		List<String> modules = Arrays.asList("module1", "module2", "module3");
-
-		recorder.registerErrors("simple message", modules);
-
-		recorder.printMessages();
-
-		Assert.assertFalse(recorder.hasWarnings());
-		Assert.assertTrue(recorder.hasErrors());
-
-		String outputString = _testOutByteArrayOutputStream.toString();
-
-		for (String module : modules) {
-			Assert.assertTrue(
-				outputString.contains(
-					"[ERROR] Module " + module + " simple message"));
-		}
-	}
-
-	@Test
-	public void testMultipleWarnings() {
-		Recorder recorder = new Recorder();
-
-		List<String> modules = Arrays.asList("module1", "module2", "module3");
-
-		recorder.registerWarnings("simple message", modules);
-
-		recorder.printMessages();
-
-		Assert.assertTrue(recorder.hasWarnings());
-		Assert.assertFalse(recorder.hasErrors());
-
-		String outputString = _testOutByteArrayOutputStream.toString();
-
-		for (String module : modules) {
-			Assert.assertTrue(
-				outputString.contains(
-					"[WARN] Module " + module + " simple message"));
-		}
 	}
 
 	@Test
@@ -111,7 +51,7 @@ public class RecorderTest {
 		Assert.assertTrue(recorder.hasWarnings());
 		Assert.assertTrue(recorder.hasErrors());
 
-		String outputString = _testOutByteArrayOutputStream.toString();
+		String outputString = _byteArrayOutputStream.toString();
 
 		Assert.assertTrue(
 			outputString.contains("[WARN] A simple warning message"));
@@ -123,22 +63,81 @@ public class RecorderTest {
 	}
 
 	@Test
-	public void testWarning() {
+	public void testRegisterError() {
+		Recorder recorder = new Recorder();
+
+		recorder.registerError("A simple message");
+
+		recorder.printMessages();
+
+		Assert.assertFalse(recorder.hasWarnings());
+		Assert.assertTrue(recorder.hasErrors());
+
+		Assert.assertEquals(
+			"[ERROR] A simple message\n", _byteArrayOutputStream.toString());
+	}
+
+	@Test
+	public void testRegisterErrors() {
+		Recorder recorder = new Recorder();
+
+		List<String> modules = Arrays.asList("module1", "module2", "module3");
+
+		recorder.registerErrors("simple message", modules);
+
+		recorder.printMessages();
+
+		Assert.assertFalse(recorder.hasWarnings());
+		Assert.assertTrue(recorder.hasErrors());
+
+		String outputString = _byteArrayOutputStream.toString();
+
+		for (String module : modules) {
+			Assert.assertTrue(
+				outputString.contains(
+					"[ERROR] Module " + module + " simple message"));
+		}
+	}
+
+	@Test
+	public void testRegisterWarning() {
 		Recorder recorder = new Recorder();
 
 		recorder.registerWarning("A simple message");
+
 		recorder.printMessages();
 
 		Assert.assertTrue(recorder.hasWarnings());
 		Assert.assertFalse(recorder.hasErrors());
 
 		Assert.assertEquals(
-			"[WARN] A simple message\n",
-			_testOutByteArrayOutputStream.toString());
+			"[WARN] A simple message\n", _byteArrayOutputStream.toString());
 	}
 
-	private final PrintStream _originalOut = System.out;
-	private final ByteArrayOutputStream _testOutByteArrayOutputStream =
+	@Test
+	public void testRegisterWarnings() {
+		Recorder recorder = new Recorder();
+
+		List<String> modules = Arrays.asList("module1", "module2", "module3");
+
+		recorder.registerWarnings("simple message", modules);
+
+		recorder.printMessages();
+
+		Assert.assertTrue(recorder.hasWarnings());
+		Assert.assertFalse(recorder.hasErrors());
+
+		String outputString = _byteArrayOutputStream.toString();
+
+		for (String module : modules) {
+			Assert.assertTrue(
+				outputString.contains(
+					"[WARN] Module " + module + " simple message"));
+		}
+	}
+
+	private final ByteArrayOutputStream _byteArrayOutputStream =
 		new ByteArrayOutputStream();
+	private final PrintStream _originalOut = System.out;
 
 }

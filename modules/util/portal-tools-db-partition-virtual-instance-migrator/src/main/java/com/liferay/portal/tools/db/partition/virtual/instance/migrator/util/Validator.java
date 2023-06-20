@@ -14,7 +14,6 @@
 
 package com.liferay.portal.tools.db.partition.virtual.instance.migrator.util;
 
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.version.Version;
 import com.liferay.portal.tools.db.partition.virtual.instance.migrator.Recorder;
 import com.liferay.portal.tools.db.partition.virtual.instance.migrator.Release;
@@ -92,7 +91,9 @@ public class Validator {
 		List<String> unverifiedSourceModules = new ArrayList<>();
 		List<String> unverifiedTargetModules = new ArrayList<>();
 
-		for (Release sourceRelease : DatabaseUtil.getReleases(sourceConnection)) {
+		for (Release sourceRelease :
+				DatabaseUtil.getReleases(sourceConnection)) {
+
 			String sourceServletContextName =
 				sourceRelease.getServletContextName();
 
@@ -170,8 +171,7 @@ public class Validator {
 
 		if (!failedServletContextNames.isEmpty()) {
 			recorder.registerErrors(
-				String.format(message, "source"),
-				failedServletContextNames);
+				String.format(message, "source"), failedServletContextNames);
 		}
 
 		failedServletContextNames = DatabaseUtil.getFailedServletContextNames(
@@ -179,8 +179,7 @@ public class Validator {
 
 		if (!failedServletContextNames.isEmpty()) {
 			recorder.registerErrors(
-				String.format(message, "target"),
-				failedServletContextNames);
+				String.format(message, "target"), failedServletContextNames);
 		}
 	}
 

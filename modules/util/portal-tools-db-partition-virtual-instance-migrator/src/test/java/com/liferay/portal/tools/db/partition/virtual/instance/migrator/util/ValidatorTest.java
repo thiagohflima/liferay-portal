@@ -44,7 +44,7 @@ public class ValidatorTest {
 
 	@Before
 	public void setUp() {
-		System.setOut(new PrintStream(_testOutByteArrayOutputStream));
+		System.setOut(new PrintStream(_byteArrayOutputStream));
 		_databaseMockedStatic = Mockito.mockStatic(DatabaseUtil.class);
 
 		_sourceConnection = Mockito.mock(Connection.class);
@@ -250,7 +250,7 @@ public class ValidatorTest {
 
 		recorder.printMessages();
 
-		String output = _testOutByteArrayOutputStream.toString();
+		String output = _byteArrayOutputStream.toString();
 
 		if (messages == null) {
 			Assert.assertTrue(output.isEmpty());
@@ -422,11 +422,11 @@ public class ValidatorTest {
 
 	private static final String _TEST_WEB_ID = "www.able.com";
 
+	private final ByteArrayOutputStream _byteArrayOutputStream =
+		new ByteArrayOutputStream();
 	private MockedStatic<DatabaseUtil> _databaseMockedStatic;
 	private final PrintStream _originalOut = System.out;
 	private Connection _sourceConnection;
 	private Connection _targetConnection;
-	private final ByteArrayOutputStream _testOutByteArrayOutputStream =
-		new ByteArrayOutputStream();
 
 }
