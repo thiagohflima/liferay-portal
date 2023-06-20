@@ -25,6 +25,7 @@ import java.sql.SQLException;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import org.junit.Assert;
@@ -250,31 +251,18 @@ public class DatabaseUtilTest {
 	}
 
 	@Test
-	public void testGetReleasesMap1() throws SQLException {
-		Release release = new Release(
-			Version.parseVersion("14.2.4"), "module", true);
+	public void testGetReleasesMap() throws SQLException {
+		_testGetReleasesMap(
+			(release, releasesMap) -> {
+				Assert.assertNotNull(releasesMap.get("module"));
 
-		_setUpGetReleasesMap(release, true);
-
-		Map<String, Release> releasesMap = DatabaseUtil.getReleasesMap(
-			_connection);
-
-		Assert.assertNotNull(releasesMap.get("module"));
-
-		Assert.assertTrue(release.equals(releasesMap.get("module")));
-	}
-
-	@Test
-	public void testGetReleasesMap2() throws SQLException {
-		Release release = new Release(
-			Version.parseVersion("14.2.4"), "module", true);
-
-		_setUpGetReleasesMap(release, false);
-
-		Map<String, Release> releasesMap = DatabaseUtil.getReleasesMap(
-			_connection);
-
-		Assert.assertNull(releasesMap.get("module"));
+				Assert.assertTrue(release.equals(releasesMap.get("module")));
+			},
+			new Release(Version.parseVersion("14.2.4"), "module", true));
+		_testGetReleasesMap(
+			(release, releasesMap) -> Assert.assertNull(
+				releasesMap.get("module")),
+			null);
 	}
 
 	@Test
@@ -293,61 +281,6 @@ public class DatabaseUtilTest {
 	public void testIsDefaultPartition1() throws Exception {
 		_testIsDefaultPartition(false);
 		_testIsDefaultPartition(true);
-	}
-
-	private void _setUpGetReleasesMap(Release release, boolean found)
-		throws SQLException {
-
-		Mockito.when(
-			_connection.prepareStatement(
-				"select servletContextName, schemaVersion, verified from " +
-					"Release_")
-		).thenReturn(
-			_preparedStatement
-		);
-
-		Mockito.when(
-			_preparedStatement.executeQuery()
-		).thenReturn(
-			_resultSet
-		);
-
-		if (found) {
-			Mockito.when(
-				_resultSet.getBoolean(3)
-			).thenReturn(
-				release.getVerified()
-			);
-
-			Mockito.when(
-				_resultSet.getString(1)
-			).thenReturn(
-				release.getServletContextName()
-			);
-
-			Version releaseVersion = release.getSchemaVersion();
-
-			Mockito.when(
-				_resultSet.getString(2)
-			).thenReturn(
-				releaseVersion.toString()
-			);
-
-			Mockito.when(
-				_resultSet.next()
-			).thenReturn(
-				true
-			).thenReturn(
-				false
-			);
-		}
-		else {
-			Mockito.when(
-				_resultSet.next()
-			).thenReturn(
-				false
-			);
-		}
 	}
 
 	private void _testGetFailedServletContextNames(
@@ -395,6 +328,65 @@ public class DatabaseUtilTest {
 		}
 
 		consumer.accept(DatabaseUtil.getFailedServletContextNames(_connection));
+	}
+
+	private void _testGetReleasesMap(
+			BiConsumer<Release, Map<String, Release>> biConsumer,
+			Release release)
+		throws SQLException {
+
+		Mockito.when(
+			_connection.prepareStatement(
+				"select servletContextName, schemaVersion, verified from " +
+					"Release_")
+		).thenReturn(
+			_preparedStatement
+		);
+
+		Mockito.when(
+			_preparedStatement.executeQuery()
+		).thenReturn(
+			_resultSet
+		);
+
+		if (release != null) {
+			Mockito.when(
+				_resultSet.getBoolean(3)
+			).thenReturn(
+				release.getVerified()
+			);
+
+			Mockito.when(
+				_resultSet.getString(1)
+			).thenReturn(
+				release.getServletContextName()
+			);
+
+			Version releaseVersion = release.getSchemaVersion();
+
+			Mockito.when(
+				_resultSet.getString(2)
+			).thenReturn(
+				releaseVersion.toString()
+			);
+
+			Mockito.when(
+				_resultSet.next()
+			).thenReturn(
+				true
+			).thenReturn(
+				false
+			);
+		}
+		else {
+			Mockito.when(
+				_resultSet.next()
+			).thenReturn(
+				false
+			);
+		}
+
+		biConsumer.accept(release, DatabaseUtil.getReleasesMap(_connection));
 	}
 
 	private void _testHasSingleCompanyInfo(boolean singleCompanyInfo)
