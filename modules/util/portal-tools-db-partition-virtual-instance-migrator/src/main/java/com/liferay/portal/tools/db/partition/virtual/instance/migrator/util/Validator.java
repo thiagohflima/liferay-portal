@@ -82,21 +82,17 @@ public class Validator {
 
 		_validateReleaseState(recorder, sourceConnection, targetConnection);
 
-		Map<String, Release> targetReleasesMap = DatabaseUtil.getReleasesMap(
-			targetConnection);
-
-		List<Release> sourceReleases = DatabaseUtil.getReleases(
-			sourceConnection);
-
 		List<String> higherVersionModules = new ArrayList<>();
 		List<String> lowerVersionModules = new ArrayList<>();
+		List<String> missingSourceModules = new ArrayList<>();
 		List<String> missingTargetModules = new ArrayList<>();
 		List<String> missingTargetServiceModules = new ArrayList<>();
-		List<String> missingSourceModules = new ArrayList<>();
+		Map<String, Release> targetReleasesMap = DatabaseUtil.getReleasesMap(
+			targetConnection);
 		List<String> unverifiedSourceModules = new ArrayList<>();
 		List<String> unverifiedTargetModules = new ArrayList<>();
 
-		for (Release sourceRelease : sourceReleases) {
+		for (Release sourceRelease : DatabaseUtil.getReleases(sourceConnection)) {
 			String sourceServletContextName =
 				sourceRelease.getServletContextName();
 
@@ -129,9 +125,9 @@ public class Validator {
 			}
 		}
 
-		for (Release destionationRelease : targetReleasesMap.values()) {
+		for (Release targetRelease : targetReleasesMap.values()) {
 			String targetServletContextName =
-				destionationRelease.getServletContextName();
+				targetRelease.getServletContextName();
 
 			if (targetServletContextName.endsWith(".service")) {
 				missingTargetServiceModules.add(targetServletContextName);
@@ -142,24 +138,24 @@ public class Validator {
 		}
 
 		recorder.registerErrors(
-			"needs to be installed in the source database before the migration",
-			missingTargetServiceModules);
+			"needs to be upgraded in the target database before the migration",
+			higherVersionModules);
 		recorder.registerErrors(
 			"needs to be upgraded in the source database before the migration",
 			lowerVersionModules);
+		recorder.registerWarnings(
+			"is not present in the target database", missingSourceModules);
+		recorder.registerWarnings(
+			"is not present in the source database", missingTargetModules);
 		recorder.registerErrors(
-			"needs to be upgraded in the target database before the migration",
-			higherVersionModules);
+			"needs to be installed in the source database before the migration",
+			missingTargetServiceModules);
 		recorder.registerErrors(
 			"needs to be verified in the source database before the migration",
 			unverifiedSourceModules);
 		recorder.registerErrors(
 			"needs to be verified in the target database before the migration",
 			unverifiedTargetModules);
-		recorder.registerWarnings(
-			"is not present in the source database", missingTargetModules);
-		recorder.registerWarnings(
-			"is not present in the target database", missingSourceModules);
 	}
 
 	private static void _validateReleaseState(
