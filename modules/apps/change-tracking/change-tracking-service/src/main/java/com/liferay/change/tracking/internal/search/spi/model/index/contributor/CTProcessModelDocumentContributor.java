@@ -41,16 +41,13 @@ public class CTProcessModelDocumentContributor
 	@Override
 	public void contribute(Document document, CTProcess ctProcess) {
 		document.addDate(Field.CREATE_DATE, ctProcess.getCreateDate());
-		document.addKeyword(Field.TYPE, ctProcess.getType());
 
-		User user = _userLocalService.fetchUser(ctProcess.getUserId());
+		CTCollection ctCollection = _ctCollectionLocalService.fetchCTCollection(
+			ctProcess.getCtCollectionId());
 
-		if (user != null) {
-			document.addKeyword(Field.USER_ID, user.getUserId());
-			document.addText(Field.USER_NAME, user.getFullName());
-		}
-		else {
-			document.addKeyword(Field.USER_ID, ctProcess.getUserId());
+		if (ctCollection != null) {
+			document.addText(Field.DESCRIPTION, ctCollection.getDescription());
+			document.addText(Field.NAME, ctCollection.getName());
 		}
 
 		BackgroundTask backgroundTask =
@@ -61,12 +58,16 @@ public class CTProcessModelDocumentContributor
 			document.addKeyword(Field.STATUS, backgroundTask.getStatus());
 		}
 
-		CTCollection ctCollection = _ctCollectionLocalService.fetchCTCollection(
-			ctProcess.getCtCollectionId());
+		document.addKeyword(Field.TYPE, ctProcess.getType());
 
-		if (ctCollection != null) {
-			document.addText(Field.DESCRIPTION, ctCollection.getDescription());
-			document.addText(Field.NAME, ctCollection.getName());
+		User user = _userLocalService.fetchUser(ctProcess.getUserId());
+
+		if (user != null) {
+			document.addKeyword(Field.USER_ID, user.getUserId());
+			document.addText(Field.USER_NAME, user.getFullName());
+		}
+		else {
+			document.addKeyword(Field.USER_ID, ctProcess.getUserId());
 		}
 	}
 
