@@ -166,7 +166,6 @@ public class KBArticleUpgradeProcess extends UpgradeProcess {
 			new KBArticleLatestUpgradeColumnImpl(
 				kbArticleAttachmentsHelper, kbArticleIdColumn,
 				resourcePrimKeyColumn);
-
 		KBArticleMainUpgradeColumnImpl kbArticleMainUpgradeColumnImpl =
 			new KBArticleMainUpgradeColumnImpl(
 				kbArticleAttachmentsHelper, kbArticleIdColumn,
