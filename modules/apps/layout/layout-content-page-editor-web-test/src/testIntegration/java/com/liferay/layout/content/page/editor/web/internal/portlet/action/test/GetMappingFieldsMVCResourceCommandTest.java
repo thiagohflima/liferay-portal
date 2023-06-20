@@ -69,7 +69,7 @@ public class GetMappingFieldsMVCResourceCommandTest {
 	}
 
 	@Test
-	public void testGetAssetDisplayPageFields() throws Exception {
+	public void test() throws Exception {
 		long classNameId = _portal.getClassNameId(BlogsEntry.class);
 
 		LayoutPageTemplateEntry layoutPageTemplateEntry =
