@@ -71,7 +71,7 @@ public class Recorder {
 		}
 	}
 
-	private final ArrayList<String> _errors = new ArrayList<>();
-	private final ArrayList<String> _warnings = new ArrayList<>();
+	private final List<String> _errors = new ArrayList<>();
+	private final List<String> _warnings = new ArrayList<>();
 
 }
