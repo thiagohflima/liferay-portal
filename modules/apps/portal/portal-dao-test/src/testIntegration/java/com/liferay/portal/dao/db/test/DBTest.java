@@ -61,9 +61,8 @@ public class DBTest {
 	public static void setUpClass() throws Exception {
 		_connection = DataAccess.getConnection();
 
-		_dbInspector = new DBInspector(_connection);
-
 		_db = DBManagerUtil.getDB();
+		_dbInspector = new DBInspector(_connection);
 
 		for (int i = 0; i < _SYNC_TABLES_COLUMN_NAMES.length; i++) {
 			_SYNC_TABLES_COLUMN_NAMES[i] = _dbInspector.normalizeName(
