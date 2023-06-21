@@ -98,10 +98,8 @@ public class StructuredContentResourceTest
 			testGetSiteStructuredContentsPage_getSiteId(),
 			RandomTestUtil.randomDouble());
 
-		StructuredContent structuredContent =
-			_addDraftStructuredContent(
-				testGetSiteStructuredContentsPage_getSiteId(),
-				Double.valueOf(1));
+		StructuredContent structuredContent = _addDraftStructuredContent(
+			testGetSiteStructuredContentsPage_getSiteId(), Double.valueOf(1));
 
 		com.liferay.headless.delivery.client.dto.v1_0.StructuredContent
 			patchStructuredContent =
@@ -143,25 +141,19 @@ public class StructuredContentResourceTest
 				).getId());
 		}
 
-		StructuredContent draftStructuredContent1 =
-			_addDraftStructuredContent(
-				testGetSiteStructuredContentsPage_getSiteId(),
-				Double.valueOf(0.99));
+		StructuredContent draftStructuredContent1 = _addDraftStructuredContent(
+			testGetSiteStructuredContentsPage_getSiteId(),
+			Double.valueOf(0.99));
 
-		StructuredContent draftStructuredContent2 =
-			_addDraftStructuredContent(
-				testGetSiteStructuredContentsPage_getSiteId(),
-				Double.valueOf(1));
+		StructuredContent draftStructuredContent2 = _addDraftStructuredContent(
+			testGetSiteStructuredContentsPage_getSiteId(), Double.valueOf(1));
 
-		StructuredContent draftStructuredContent3 =
-			_addDraftStructuredContent(
-				testGetSiteStructuredContentsPage_getSiteId(),
-				Double.valueOf(1.1));
+		StructuredContent draftStructuredContent3 = _addDraftStructuredContent(
+			testGetSiteStructuredContentsPage_getSiteId(), Double.valueOf(1.1));
 
-		StructuredContent draftStructuredContent4 =
-			_addDraftStructuredContent(
-				testGetSiteStructuredContentsPage_getSiteId(),
-				Double.valueOf(2.99));
+		StructuredContent draftStructuredContent4 = _addDraftStructuredContent(
+			testGetSiteStructuredContentsPage_getSiteId(),
+			Double.valueOf(2.99));
 
 		page = structuredContentResource.getSiteStructuredContentsPage(
 			testGroup.getGroupId(), true, null, null, "priority ne 1.0",
