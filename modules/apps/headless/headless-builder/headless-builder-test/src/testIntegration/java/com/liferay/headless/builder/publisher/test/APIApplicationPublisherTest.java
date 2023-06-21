@@ -109,9 +109,9 @@ public class APIApplicationPublisherTest extends BaseHeadlessBuilderTestCase {
 
 			};
 
-		APIApplication apiApplication1 = _createAPIApplication(
+		APIApplication apiApplication1 = _addAPIApplication(
 			_API_APPLICATION_ERC_1);
-		APIApplication apiApplication2 = _createAPIApplication(
+		APIApplication apiApplication2 = _addAPIApplication(
 			_API_APPLICATION_ERC_2);
 
 		try {
@@ -141,7 +141,7 @@ public class APIApplicationPublisherTest extends BaseHeadlessBuilderTestCase {
 		}
 	}
 
-	private APIApplication _createAPIApplication(String externalReferenceCode)
+	private APIApplication _addAPIApplication(String externalReferenceCode)
 		throws Exception {
 
 		String apiEndpointExternalReferenceCode = RandomTestUtil.randomString();
