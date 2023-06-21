@@ -152,6 +152,9 @@ public class PostgreSQLDB extends BaseDB {
 			String[] targetPrimaryKeyColumnNames)
 		throws Exception {
 
+		_createTrigger(
+			connection, sourceTableName, "after delete", triggerName);
+
 		StringBundler sb = new StringBundler();
 
 		sb.append("delete from ");
@@ -169,8 +172,6 @@ public class PostgreSQLDB extends BaseDB {
 		}
 
 		_createTriggerFunction(connection, triggerName, sb.toString());
-		_createTrigger(
-			connection, sourceTableName, "after delete", triggerName);
 	}
 
 	@Override
@@ -181,6 +182,9 @@ public class PostgreSQLDB extends BaseDB {
 			String[] sourcePrimaryKeyColumnNames,
 			String[] targetPrimaryKeyColumnNames)
 		throws Exception {
+
+		_createTrigger(
+			connection, sourceTableName, "after insert", triggerName);
 
 		StringBundler sb = new StringBundler();
 
@@ -202,8 +206,6 @@ public class PostgreSQLDB extends BaseDB {
 		sb.append(")");
 
 		_createTriggerFunction(connection, triggerName, sb.toString());
-		_createTrigger(
-			connection, sourceTableName, "after insert", triggerName);
 	}
 
 	@Override
@@ -214,6 +216,9 @@ public class PostgreSQLDB extends BaseDB {
 			String[] sourcePrimaryKeyColumnNames,
 			String[] targetPrimaryKeyColumnNames)
 		throws Exception {
+
+		_createTrigger(
+			connection, sourceTableName, "after update", triggerName);
 
 		StringBundler sb = new StringBundler();
 
@@ -244,8 +249,6 @@ public class PostgreSQLDB extends BaseDB {
 		}
 
 		_createTriggerFunction(connection, triggerName, sb.toString());
-		_createTrigger(
-			connection, sourceTableName, "after update", triggerName);
 	}
 
 	@Override
