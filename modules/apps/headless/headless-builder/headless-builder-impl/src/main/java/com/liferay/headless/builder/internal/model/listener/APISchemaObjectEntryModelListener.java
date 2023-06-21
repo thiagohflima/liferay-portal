@@ -61,7 +61,7 @@ public class APISchemaObjectEntryModelListener
 					"r_apiApplicationToAPISchemas_c_apiApplicationId") == 0) {
 
 				throw new IllegalArgumentException(
-					"An schema must be related to an application");
+					"A schema must be related to an application");
 			}
 		}
 		catch (Exception exception) {
