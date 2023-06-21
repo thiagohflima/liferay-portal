@@ -1202,10 +1202,8 @@ public class DLAdminDisplayContext {
 	private void _setFilterParameters(PortletURL portletURL) {
 		portletURL.setParameter(
 			"assetCategoryId", ArrayUtil.toStringArray(getAssetCategoryIds()));
-
 		portletURL.setParameter(
 			"assetTagId", ArrayUtil.toStringArray(getAssetTagIds()));
-
 		portletURL.setParameter("extension", getExtensions());
 
 		long fileEntryTypeId = getFileEntryTypeId();
@@ -1249,16 +1247,12 @@ public class DLAdminDisplayContext {
 
 	private void _setSearchParameters(PortletURL portletURL) {
 		portletURL.setParameter("keywords", _getKeywords());
-
 		portletURL.setParameter(
 			"repositoryId", String.valueOf(getRepositoryId()));
-
 		portletURL.setParameter(
 			"searchFolderId", String.valueOf(_getSearchFolderId()));
-
 		portletURL.setParameter(
 			"searchRepositoryId", String.valueOf(_getSearchRepositoryId()));
-
 		portletURL.setParameter("showSearchInfo", Boolean.TRUE.toString());
 	}
 

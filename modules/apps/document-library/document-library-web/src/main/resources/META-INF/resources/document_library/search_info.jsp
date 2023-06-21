@@ -20,6 +20,7 @@
 DLAdminDisplayContext dlAdminDisplayContext = (DLAdminDisplayContext)request.getAttribute(DLAdminDisplayContext.class.getName());
 
 Folder folder = null;
+
 long folderId = ParamUtil.getLong(request, "folderId");
 
 if (folderId != dlAdminDisplayContext.getRootFolderId()) {

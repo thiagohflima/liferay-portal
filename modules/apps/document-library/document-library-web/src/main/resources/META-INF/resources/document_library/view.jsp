@@ -21,8 +21,6 @@ DLAdminDisplayContext dlAdminDisplayContext = (DLAdminDisplayContext)request.get
 DLAdminManagementToolbarDisplayContext dlAdminManagementToolbarDisplayContext = (DLAdminManagementToolbarDisplayContext)request.getAttribute(DLAdminManagementToolbarDisplayContext.class.getName());
 
 DLViewDisplayContext dlViewDisplayContext = new DLViewDisplayContext(dlAdminDisplayContext, request, renderRequest, renderResponse);
-
-List<Folder> mountFolders = dlAdminDisplayContext.getMountFolders();
 %>
 
 <liferay-ui:success key='<%= portletDisplay.getId() + "requestProcessed" %>' message="your-request-completed-successfully" />
@@ -142,7 +140,7 @@ List<Folder> mountFolders = dlAdminDisplayContext.getMountFolders();
 				</liferay-frontend:sidebar-panel>
 
 				<div class="sidenav-content <%= portletTitleBasedNavigation ? "container-fluid container-fluid-max-xl container-view" : StringPool.BLANK %>">
-					<c:if test='<%= dlAdminDisplayContext.hasFilterParameters() && !mountFolders.isEmpty() && FeatureFlagManagerUtil.isEnabled("LPS-84424") %>'>
+					<c:if test='<%= dlAdminDisplayContext.hasFilterParameters() && ListUtil.isNotEmpty(dlAdminDisplayContext.getMountFolders()) && FeatureFlagManagerUtil.isEnabled("LPS-84424") %>'>
 						<clay:alert
 							displayType="info"
 							message="filters-only-apply-to-documents-in-local-repositories"
