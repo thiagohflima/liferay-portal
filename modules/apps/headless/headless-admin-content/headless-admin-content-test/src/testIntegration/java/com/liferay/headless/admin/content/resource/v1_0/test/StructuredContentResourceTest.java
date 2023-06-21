@@ -94,12 +94,12 @@ public class StructuredContentResourceTest
 	public void testGetSiteStructuredContentsPage() throws Exception {
 		super.testGetSiteStructuredContentsPage();
 
-		_addDraftStructuredContentWithPriority(
+		_addDraftStructuredContent(
 			testGetSiteStructuredContentsPage_getSiteId(),
 			RandomTestUtil.randomDouble());
 
 		StructuredContent structuredContent =
-			_addDraftStructuredContentWithPriority(
+			_addDraftStructuredContent(
 				testGetSiteStructuredContentsPage_getSiteId(),
 				Double.valueOf(1));
 
@@ -144,22 +144,22 @@ public class StructuredContentResourceTest
 		}
 
 		StructuredContent draftStructuredContent1 =
-			_addDraftStructuredContentWithPriority(
+			_addDraftStructuredContent(
 				testGetSiteStructuredContentsPage_getSiteId(),
 				Double.valueOf(0.99));
 
 		StructuredContent draftStructuredContent2 =
-			_addDraftStructuredContentWithPriority(
+			_addDraftStructuredContent(
 				testGetSiteStructuredContentsPage_getSiteId(),
 				Double.valueOf(1));
 
 		StructuredContent draftStructuredContent3 =
-			_addDraftStructuredContentWithPriority(
+			_addDraftStructuredContent(
 				testGetSiteStructuredContentsPage_getSiteId(),
 				Double.valueOf(1.1));
 
 		StructuredContent draftStructuredContent4 =
-			_addDraftStructuredContentWithPriority(
+			_addDraftStructuredContent(
 				testGetSiteStructuredContentsPage_getSiteId(),
 				Double.valueOf(2.99));
 
@@ -474,7 +474,7 @@ public class StructuredContentResourceTest
 			_read("test-structured-content-template.vm"), LocaleUtil.US);
 	}
 
-	private StructuredContent _addDraftStructuredContentWithPriority(
+	private StructuredContent _addDraftStructuredContent(
 			Long siteId, Double priority)
 		throws Exception {
 
