@@ -77,7 +77,7 @@ import org.skyscreamer.jsonassert.JSONCompareMode;
 /**
  * @author Carlos Correa
  */
-@FeatureFlags({"LPS-184413", "LPS-167253", "LPS-153117"})
+@FeatureFlags({"LPS-153117", "LPS-167253", "LPS-184413"})
 @RunWith(Arquillian.class)
 public class APIApplicationOpenAPIContributorTest extends BaseTestCase {
 
@@ -491,11 +491,9 @@ public class APIApplicationOpenAPIContributorTest extends BaseTestCase {
 			List<ObjectField> objectFields)
 		throws Exception {
 
-		long userId = TestPropsValues.getUserId();
-
 		ObjectDefinition objectDefinition =
 			_objectDefinitionLocalService.addCustomObjectDefinition(
-				userId, false, false,
+				TestPropsValues.getUserId(), false, false,
 				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
 				"A" + RandomTestUtil.randomString(), null, null,
 				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
@@ -503,7 +501,8 @@ public class APIApplicationOpenAPIContributorTest extends BaseTestCase {
 				ObjectDefinitionConstants.STORAGE_TYPE_DEFAULT, objectFields);
 
 		return _objectDefinitionLocalService.publishCustomObjectDefinition(
-			userId, objectDefinition.getObjectDefinitionId());
+			TestPropsValues.getUserId(),
+			objectDefinition.getObjectDefinitionId());
 	}
 
 	private static final String _API_APPLICATION_ERC =
