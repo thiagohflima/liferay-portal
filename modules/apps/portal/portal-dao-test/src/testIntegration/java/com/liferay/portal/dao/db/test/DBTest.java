@@ -459,14 +459,14 @@ public class DBTest {
 				" (id, notNilColumn, typeString) values (1, '1', ",
 				"'testValueA')"));
 
-		Map<String, String> columnNameMap = new HashMap<>();
+		Map<String, String> columnNamesMap = new HashMap<>();
 
 		for (String columnName : _SYNC_TABLES_COLUMN_NAMES) {
-			columnNameMap.put(columnName, columnName);
+			columnNamesMap.put(columnName, columnName);
 		}
 
 		try (AutoCloseable autoCloseable = _db.syncTables(
-				_connection, _TABLE_NAME_1, _TABLE_NAME_2, columnNameMap)) {
+				_connection, _TABLE_NAME_1, _TABLE_NAME_2, columnNamesMap)) {
 
 			_db.runSQL(
 				StringBundler.concat(
@@ -519,14 +519,14 @@ public class DBTest {
 				" (id2, notNilColumn2, typeString2) values (1, '1', ",
 				"'testValueA')"));
 
-		Map<String, String> columnNameMap = new HashMap<>();
+		Map<String, String> columnNamesMap = new HashMap<>();
 
 		for (String columnName : _SYNC_TABLES_COLUMN_NAMES) {
-			columnNameMap.put(columnName, columnName + "2");
+			columnNamesMap.put(columnName, columnName + "2");
 		}
 
 		try (AutoCloseable autoCloseable = _db.syncTables(
-				_connection, _TABLE_NAME_1, _TABLE_NAME_2, columnNameMap)) {
+				_connection, _TABLE_NAME_1, _TABLE_NAME_2, columnNamesMap)) {
 
 			_db.runSQL(
 				StringBundler.concat(

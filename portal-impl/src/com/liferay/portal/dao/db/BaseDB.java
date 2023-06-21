@@ -662,10 +662,10 @@ public abstract class BaseDB implements DB {
 	@Override
 	public AutoCloseable syncTables(
 			Connection connection, String sourceTableName,
-			String targetTableName, Map<String, String> columnNameMap)
+			String targetTableName, Map<String, String> columnNamesMap)
 		throws Exception {
 
-		Set<Map.Entry<String, String>> entrySet = columnNameMap.entrySet();
+		Set<Map.Entry<String, String>> entrySet = columnNamesMap.entrySet();
 
 		String[] sourceColumnNames = TransformUtil.transformToArray(
 			entrySet, Map.Entry::getKey, String.class);
@@ -677,7 +677,7 @@ public abstract class BaseDB implements DB {
 			connection, sourceTableName);
 
 		String[] targetPrimaryKeyColumnNames = TransformUtil.transform(
-			sourcePrimaryKeyColumnNames, columnNameMap::get, String.class);
+			sourcePrimaryKeyColumnNames, columnNamesMap::get, String.class);
 
 		DBInspector dbInspector = new DBInspector(connection);
 

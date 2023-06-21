@@ -179,7 +179,7 @@ public interface DB {
 
 	public AutoCloseable syncTables(
 			Connection connection, String sourceTableName,
-			String targetTableName, Map<String, String> columnNameMap)
+			String targetTableName, Map<String, String> columnNamesMap)
 		throws Exception;
 
 	public void updateIndexes(
