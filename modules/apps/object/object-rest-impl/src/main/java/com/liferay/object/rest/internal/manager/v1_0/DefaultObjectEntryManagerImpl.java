@@ -875,9 +875,6 @@ public class DefaultObjectEntryManagerImpl
 
 						nestedObjectEntryProperties.put(
 							objectRelationshipName, primaryKey);
-
-						nestedObjectEntry.setProperties(
-							nestedObjectEntryProperties);
 					}
 
 					nestedObjectEntry = objectEntryManager.updateObjectEntry(
