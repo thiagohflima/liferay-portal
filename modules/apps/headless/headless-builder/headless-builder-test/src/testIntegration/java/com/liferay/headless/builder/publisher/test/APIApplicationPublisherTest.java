@@ -155,7 +155,8 @@ public class APIApplicationPublisherTest extends BaseHeadlessBuilderTestCase {
 					JSONUtil.put(
 						"description", "description"
 					).put(
-						"externalReferenceCode", apiEndpointExternalReferenceCode
+						"externalReferenceCode",
+						apiEndpointExternalReferenceCode
 					).put(
 						"httpMethod", "get"
 					).put(
@@ -197,11 +198,13 @@ public class APIApplicationPublisherTest extends BaseHeadlessBuilderTestCase {
 				"title", RandomTestUtil.randomString()
 			).toString(),
 			"headless-builder/applications", Http.Method.POST);
+
 		HTTPTestUtil.invoke(
 			null,
 			StringBundler.concat(
 				"headless-builder/schemas/by-external-reference-code/",
-				apiSchemaExternalReferenceCode, "/requestAPISchemaToAPIEndpoints/",
+				apiSchemaExternalReferenceCode,
+				"/requestAPISchemaToAPIEndpoints/",
 				apiEndpointExternalReferenceCode),
 			Http.Method.PUT);
 		HTTPTestUtil.invoke(
