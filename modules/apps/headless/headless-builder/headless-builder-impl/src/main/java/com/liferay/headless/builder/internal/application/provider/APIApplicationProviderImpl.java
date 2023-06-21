@@ -218,7 +218,7 @@ public class APIApplicationProviderImpl implements APIApplicationProvider {
 
 						if (type == null) {
 							throw new IllegalStateException(
-								"Object field type " +
+								"Object field business type " +
 									objectField.getBusinessType() +
 										" not supported");
 						}
