@@ -17,7 +17,7 @@ package com.liferay.headless.builder.publisher.test;
 import com.liferay.headless.builder.application.APIApplication;
 import com.liferay.headless.builder.application.provider.APIApplicationProvider;
 import com.liferay.headless.builder.application.publisher.APIApplicationPublisher;
-import com.liferay.headless.builder.test.BaseHeadlessBuilderTestCase;
+import com.liferay.headless.builder.test.BaseTestCase;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.json.JSONUtil;
 import com.liferay.portal.kernel.test.util.HTTPTestUtil;
@@ -47,7 +47,7 @@ import org.osgi.util.tracker.ServiceTracker;
  * @author Luis Miguel Barcos
  */
 @FeatureFlags({"LPS-186757", "LPS-184413", "LPS-167253", "LPS-153117"})
-public class APIApplicationPublisherTest extends BaseHeadlessBuilderTestCase {
+public class APIApplicationPublisherTest extends BaseTestCase {
 
 	@After
 	public void tearDown() throws Exception {

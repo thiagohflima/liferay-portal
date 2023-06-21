@@ -16,7 +16,7 @@ package com.liferay.headless.builder.application.provider.test;
 
 import com.liferay.headless.builder.application.APIApplication;
 import com.liferay.headless.builder.application.provider.APIApplicationProvider;
-import com.liferay.headless.builder.test.BaseHeadlessBuilderTestCase;
+import com.liferay.headless.builder.test.BaseTestCase;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.json.JSONUtil;
 import com.liferay.portal.kernel.test.util.HTTPTestUtil;
@@ -36,7 +36,7 @@ import org.junit.Test;
  * @author Alejandro Tardín
  */
 @FeatureFlags({"LPS-184413", "LPS-167253", "LPS-153117"})
-public class APIApplicationProviderTest extends BaseHeadlessBuilderTestCase {
+public class APIApplicationProviderTest extends BaseTestCase {
 
 	@After
 	public void tearDown() throws Exception {

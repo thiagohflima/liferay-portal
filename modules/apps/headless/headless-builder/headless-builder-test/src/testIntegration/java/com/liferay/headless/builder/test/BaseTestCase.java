@@ -37,7 +37,7 @@ import org.osgi.framework.FrameworkUtil;
  * @author Alejandro Tardín
  */
 @RunWith(Arquillian.class)
-public abstract class BaseHeadlessBuilderTestCase {
+public abstract class BaseTestCase {
 
 	@ClassRule
 	@Rule
@@ -46,8 +46,7 @@ public abstract class BaseHeadlessBuilderTestCase {
 
 	@Before
 	public void setUp() {
-		Bundle testBundle = FrameworkUtil.getBundle(
-			BaseHeadlessBuilderTestCase.class);
+		Bundle testBundle = FrameworkUtil.getBundle(BaseTestCase.class);
 
 		BundleContext bundleContext = testBundle.getBundleContext();
 
