@@ -62,6 +62,7 @@ public class DBTest {
 		_connection = DataAccess.getConnection();
 
 		_db = DBManagerUtil.getDB();
+
 		_dbInspector = new DBInspector(_connection);
 
 		for (int i = 0; i < _SYNC_TABLES_COLUMN_NAMES.length; i++) {

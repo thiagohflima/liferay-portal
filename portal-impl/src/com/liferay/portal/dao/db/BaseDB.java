@@ -672,6 +672,7 @@ public abstract class BaseDB implements DB {
 
 		String[] sourcePrimaryKeyColumnNames = getPrimaryKeyColumnNames(
 			connection, sourceTableName);
+
 		String[] targetPrimaryKeyColumnNames = TransformUtil.transform(
 			sourcePrimaryKeyColumnNames, columnNamesMap::get, String.class);
 
