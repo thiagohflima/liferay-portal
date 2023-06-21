@@ -131,7 +131,7 @@ public class APIEndpointObjectEntryModelListener
 					"r_apiApplicationToAPIEndpoints_c_apiApplicationId") == 0) {
 
 				throw new IllegalArgumentException(
-					"An endpoint must be related to an application");
+					"An API endpoint must be related to an API application");
 			}
 		}
 		catch (Exception exception) {
