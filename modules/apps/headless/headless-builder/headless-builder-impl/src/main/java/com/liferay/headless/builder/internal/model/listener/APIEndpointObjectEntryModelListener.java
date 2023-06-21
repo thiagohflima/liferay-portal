@@ -125,16 +125,17 @@ public class APIEndpointObjectEntryModelListener
 	private boolean _isModified(
 		ObjectEntry originalObjectEntry, ObjectEntry objectEntry) {
 
-		Map<String, Serializable> values = objectEntry.getValues();
 		Map<String, Serializable> originalValues =
 			originalObjectEntry.getValues();
+		Map<String, Serializable> values = objectEntry.getValues();
 
 		if (Objects.equals(
 				values.get("httpMethod"), originalValues.get("httpMethod")) &&
 			Objects.equals(values.get("path"), originalValues.get("path")) &&
 			Objects.equals(
-				values.get("r_apiApplicationToAPIEndpoints_c_apiApplicationId"),
 				originalValues.get(
+					"r_apiApplicationToAPIEndpoints_c_apiApplicationId"),
+				values.get(
 					"r_apiApplicationToAPIEndpoints_c_apiApplicationId"))) {
 
 			return false;
