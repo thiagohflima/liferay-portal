@@ -46,6 +46,7 @@ import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.test.util.TestPropsValues;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.search.model.uid.UIDFactory;
 import com.liferay.portal.search.searcher.SearchRequestBuilder;
 import com.liferay.portal.search.searcher.SearchRequestBuilderFactory;
@@ -63,8 +64,6 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
-
-import org.apache.commons.lang3.StringUtils;
 
 import org.junit.Before;
 import org.junit.ClassRule;
@@ -438,7 +437,7 @@ public class CTEntrySearcherTest {
 			searchResponse.getResponseString(), searchResponse.getDocuments(),
 			Field.UID,
 			StringBundler.concat(
-				"[", StringUtils.join(expectedValues, ", "), "]"));
+				"[", StringUtil.merge(expectedValues, ", "), "]"));
 	}
 
 	private Consumer<SearchRequestBuilder> _byAttribute(
