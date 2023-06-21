@@ -21,6 +21,7 @@ import com.liferay.headless.builder.test.BaseHeadlessBuilderTestCase;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.json.JSONUtil;
 import com.liferay.portal.kernel.test.util.HTTPTestUtil;
+import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.TestPropsValues;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
@@ -291,9 +292,11 @@ public class APIApplicationPublisherTest extends BaseHeadlessBuilderTestCase {
 			baseURL, TestPropsValues.getCompanyId());
 	}
 
-	private static final String _API_APPLICATION_ERC_1 = "APPLICATION1";
+	private static final String _API_APPLICATION_ERC_1 =
+		RandomTestUtil.randomString();
 
-	private static final String _API_APPLICATION_ERC_2 = "APPLICATION2";
+	private static final String _API_APPLICATION_ERC_2 =
+		RandomTestUtil.randomString();
 
 	@Inject
 	private APIApplicationProvider _apiApplicationProvider;
