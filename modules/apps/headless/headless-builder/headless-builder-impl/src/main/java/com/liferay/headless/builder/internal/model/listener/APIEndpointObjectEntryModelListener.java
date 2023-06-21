@@ -67,10 +67,6 @@ public class APIEndpointObjectEntryModelListener
 	}
 
 	private void _validate(ObjectEntry objectEntry) {
-		ObjectDefinition apiEndpointObjectDefinition =
-			_objectDefinitionLocalService.fetchObjectDefinition(
-				objectEntry.getObjectDefinitionId());
-
 		try {
 			Map<String, Serializable> values = objectEntry.getValues();
 
@@ -89,6 +85,10 @@ public class APIEndpointObjectEntryModelListener
 				values.get("r_apiApplicationToAPIEndpoints_c_apiApplicationId"),
 				"'");
 
+			ObjectDefinition apiEndpointObjectDefinition =
+				_objectDefinitionLocalService.fetchObjectDefinition(
+					objectEntry.getObjectDefinitionId());
+
 			Predicate predicate = _filterPredicateFactory.create(
 				filterString,
 				apiEndpointObjectDefinition.getObjectDefinitionId());
@@ -102,8 +102,7 @@ public class APIEndpointObjectEntryModelListener
 
 			if (!valuesList.isEmpty()) {
 				throw new IllegalArgumentException(
-					"There is an endpoint with the same http method and path " +
-						"combination");
+					"There is an endpoint with the same HTTP method and path");
 			}
 
 			if ((long)values.get(
