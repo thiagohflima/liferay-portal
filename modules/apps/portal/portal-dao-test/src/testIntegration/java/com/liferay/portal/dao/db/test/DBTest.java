@@ -485,6 +485,7 @@ public class DBTest {
 			ResultSet resultSet = preparedStatement.executeQuery()) {
 
 			Assert.assertTrue(resultSet.next());
+
 			Assert.assertEquals(2, resultSet.getLong("id"));
 			Assert.assertEquals("2", resultSet.getString("notNilColumn"));
 			Assert.assertEquals(
