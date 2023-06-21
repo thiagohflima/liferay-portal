@@ -56,7 +56,6 @@ public class APIApplicationPublisherTest extends BaseHeadlessBuilderTestCase {
 			"headless-builder/applications/by-external-reference-code/" +
 				_API_APPLICATION_ERC_1,
 			Http.Method.DELETE);
-
 		HTTPTestUtil.invoke(
 			null,
 			"headless-builder/applications/by-external-reference-code/" +
@@ -65,80 +64,7 @@ public class APIApplicationPublisherTest extends BaseHeadlessBuilderTestCase {
 	}
 
 	@Test
-	public void testPublishAPIApplication() throws Exception {
-		Bundle bundle = FrameworkUtil.getBundle(getClass());
-
-		BundleContext bundleContext = bundle.getBundleContext();
-
-		CountDownLatch addedCountLatch = new CountDownLatch(1);
-		CountDownLatch removedCountLatch = new CountDownLatch(1);
-
-		ServiceTracker<?, ?> serviceTracker =
-			new ServiceTracker<Application, Application>(
-				bundleContext, Application.class, null) {
-
-				@Override
-				public Application addingService(
-					ServiceReference<Application> serviceReference) {
-
-					if (GetterUtil.getBoolean(
-							serviceReference.getProperty(
-								"liferay.headless.builder.application"))) {
-
-						addedCountLatch.countDown();
-
-						return super.addingService(serviceReference);
-					}
-
-					return null;
-				}
-
-				@Override
-				public void removedService(
-					ServiceReference<Application> serviceReference,
-					Application service) {
-
-					if (GetterUtil.getBoolean(
-							serviceReference.getProperty(
-								"liferay.headless.builder.application"))) {
-
-						removedCountLatch.countDown();
-
-						super.removedService(serviceReference, service);
-					}
-				}
-
-			};
-
-		APIApplication apiApplication = _createAPIApplication(
-			"test", _API_APPLICATION_ERC_1, "test");
-
-		try {
-			serviceTracker.open();
-
-			Assert.assertEquals(0, serviceTracker.size());
-
-			_apiApplicationPublisher.publish(apiApplication);
-
-			addedCountLatch.await(1, TimeUnit.MINUTES);
-
-			Assert.assertEquals(1, serviceTracker.size());
-
-			_apiApplicationPublisher.unpublish(apiApplication);
-
-			removedCountLatch.await(1, TimeUnit.MINUTES);
-
-			Assert.assertEquals(0, serviceTracker.size());
-		}
-		finally {
-			serviceTracker.close();
-
-			_apiApplicationPublisher.unpublish(apiApplication);
-		}
-	}
-
-	@Test
-	public void testPublishMultipleAPIApplications() throws Exception {
+	public void testPublish() throws Exception {
 		Bundle bundle = FrameworkUtil.getBundle(getClass());
 
 		BundleContext bundleContext = bundle.getBundleContext();
