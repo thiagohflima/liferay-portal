@@ -342,14 +342,10 @@ public class CTEntrySearcherTest {
 	@Test
 	public void testSortByUserName() throws Exception {
 		JournalFolder journalFolder1 = null;
-
 		JournalFolder journalFolder2 = null;
-
 		String originalName = PrincipalThreadLocal.getName();
-
 		User user1 = UserTestUtil.addUser(
 			"AA", LocaleUtil.getDefault(), "AA", "AA", null);
-
 		User user2 = UserTestUtil.addUser(
 			"BB", LocaleUtil.getDefault(), "BB", "BB", null);
 
