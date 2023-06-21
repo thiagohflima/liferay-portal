@@ -94,8 +94,7 @@ public class ObjectEntryModelListener extends BaseModelListener<ObjectEntry> {
 		_runRelevantObjectEntryModelListeners(
 			objectEntry,
 			relevantObjectEntryModelListener ->
-				relevantObjectEntryModelListener.onAfterCreate(
-					objectEntry));
+				relevantObjectEntryModelListener.onAfterCreate(objectEntry));
 	}
 
 	@Override
@@ -118,8 +117,7 @@ public class ObjectEntryModelListener extends BaseModelListener<ObjectEntry> {
 		_runRelevantObjectEntryModelListeners(
 			objectEntry,
 			relevantObjectEntryModelListener ->
-				relevantObjectEntryModelListener.onAfterRemove(
-					objectEntry));
+				relevantObjectEntryModelListener.onAfterRemove(objectEntry));
 	}
 
 	@Override
@@ -164,8 +162,7 @@ public class ObjectEntryModelListener extends BaseModelListener<ObjectEntry> {
 		_runRelevantObjectEntryModelListeners(
 			objectEntry,
 			relevantObjectEntryModelListener ->
-				relevantObjectEntryModelListener.onBeforeCreate(
-					objectEntry));
+				relevantObjectEntryModelListener.onBeforeCreate(objectEntry));
 	}
 
 	@Override
@@ -175,8 +172,7 @@ public class ObjectEntryModelListener extends BaseModelListener<ObjectEntry> {
 		_runRelevantObjectEntryModelListeners(
 			objectEntry,
 			relevantObjectEntryModelListener ->
-				relevantObjectEntryModelListener.onBeforeRemove(
-					objectEntry));
+				relevantObjectEntryModelListener.onBeforeRemove(objectEntry));
 	}
 
 	@Override
@@ -195,9 +191,8 @@ public class ObjectEntryModelListener extends BaseModelListener<ObjectEntry> {
 
 	@Activate
 	protected void activate(BundleContext bundleContext) {
-		_relevantObjectEntryModelListeners =
-			ServiceTrackerListFactory.open(
-				bundleContext, RelevantObjectEntryModelListener.class);
+		_relevantObjectEntryModelListeners = ServiceTrackerListFactory.open(
+			bundleContext, RelevantObjectEntryModelListener.class);
 	}
 
 	private void _executeObjectActions(
@@ -382,17 +377,15 @@ public class ObjectEntryModelListener extends BaseModelListener<ObjectEntry> {
 
 	private void _runRelevantObjectEntryModelListeners(
 		ObjectEntry objectEntry,
-		UnsafeConsumer
-			<RelevantObjectEntryModelListener, ModelListenerException>
-				unsafeConsumer) {
+		UnsafeConsumer<RelevantObjectEntryModelListener, ModelListenerException>
+			unsafeConsumer) {
 
 		ObjectDefinition objectDefinition =
 			_objectDefinitionLocalService.fetchObjectDefinition(
 				objectEntry.getObjectDefinitionId());
 
-		for (RelevantObjectEntryModelListener
-				relevantObjectEntryModelListener :
-					_relevantObjectEntryModelListeners) {
+		for (RelevantObjectEntryModelListener relevantObjectEntryModelListener :
+				_relevantObjectEntryModelListeners) {
 
 			if (Objects.equals(
 					objectDefinition.getExternalReferenceCode(),
@@ -517,9 +510,6 @@ public class ObjectEntryModelListener extends BaseModelListener<ObjectEntry> {
 	@Reference
 	private ObjectDefinitionLocalService _objectDefinitionLocalService;
 
-	private ServiceTrackerList<RelevantObjectEntryModelListener>
-		_relevantObjectEntryModelListeners;
-
 	@Reference
 	private ObjectEntryLocalService _objectEntryLocalService;
 
@@ -532,6 +522,9 @@ public class ObjectEntryModelListener extends BaseModelListener<ObjectEntry> {
 	@Reference
 	private ObjectViewFilterColumnLocalService
 		_objectViewFilterColumnLocalService;
+
+	private ServiceTrackerList<RelevantObjectEntryModelListener>
+		_relevantObjectEntryModelListeners;
 
 	@Reference
 	private UserLocalService _userLocalService;
