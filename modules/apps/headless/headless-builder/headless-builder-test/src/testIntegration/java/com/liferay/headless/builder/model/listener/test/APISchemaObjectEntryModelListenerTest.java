@@ -14,33 +14,22 @@
 
 package com.liferay.headless.builder.model.listener.test;
 
-import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
+import com.liferay.headless.builder.test.BaseTestCase;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.json.JSONUtil;
-import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.util.HTTPTestUtil;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.util.Http;
-import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.FeatureFlags;
 
 import org.junit.Assert;
-import org.junit.ClassRule;
-import org.junit.Ignore;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 /**
  * @author Sergio Jiménez del Coso
  */
-@Ignore
-@RunWith(Arquillian.class)
-public class APISchemaObjectEntryModelListenerTest {
-
-	@ClassRule
-	@Rule
-	public static final AggregateTestRule aggregateTestRule =
-		new LiferayIntegrationTestRule();
+@FeatureFlags({"LPS-184413", "LPS-167253", "LPS-153117"})
+public class APISchemaObjectEntryModelListenerTest extends BaseTestCase {
 
 	@Test
 	public void testPostAPISchemaNotRelatedWithAPIApplication()
