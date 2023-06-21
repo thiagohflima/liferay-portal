@@ -110,9 +110,9 @@ public class APIApplicationPublisherTest extends BaseHeadlessBuilderTestCase {
 			};
 
 		APIApplication apiApplication1 = _createAPIApplication(
-			"test1", _API_APPLICATION_ERC_1, "test1");
+			"test1", _API_APPLICATION_ERC_1);
 		APIApplication apiApplication2 = _createAPIApplication(
-			"test2", _API_APPLICATION_ERC_2, "test2");
+			"test2", _API_APPLICATION_ERC_2);
 
 		try {
 			serviceTracker.open();
@@ -142,7 +142,7 @@ public class APIApplicationPublisherTest extends BaseHeadlessBuilderTestCase {
 	}
 
 	private APIApplication _createAPIApplication(
-			String baseURL, String externalReferenceCode, String title)
+			String baseURL, String externalReferenceCode)
 		throws Exception {
 
 		String schemaExternalReferenceCode = externalReferenceCode + "_SCHEMA";
@@ -195,7 +195,7 @@ public class APIApplicationPublisherTest extends BaseHeadlessBuilderTestCase {
 			).put(
 				"externalReferenceCode", externalReferenceCode
 			).put(
-				"title", title
+				"title", RandomTestUtil.randomString()
 			).toString(),
 			"headless-builder/applications", Http.Method.POST);
 		HTTPTestUtil.invoke(
