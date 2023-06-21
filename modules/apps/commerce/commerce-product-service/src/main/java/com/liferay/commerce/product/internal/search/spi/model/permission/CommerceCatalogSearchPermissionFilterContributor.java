@@ -61,13 +61,13 @@ public class CommerceCatalogSearchPermissionFilterContributor
 				return;
 			}
 
+			TermsFilter termsFilter = new TermsFilter("accountEntryId");
+
 			List<AccountEntry> accountEntries =
 				_accountEntryLocalService.getUserAccountEntries(
 					permissionChecker.getUserId(), 0L, StringPool.BLANK,
 					new String[] {AccountConstants.ACCOUNT_ENTRY_TYPE_SUPPLIER},
 					QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-
-			TermsFilter termsFilter = new TermsFilter("accountEntryId");
 
 			for (AccountEntry accountEntry : accountEntries) {
 				termsFilter.addValue(
