@@ -669,17 +669,9 @@ public abstract class BaseDB implements DB {
 
 		String deleteTriggerName = dbInspector.normalizeName(
 			"delete_" + sourceTableName);
-		String insertTriggerName = dbInspector.normalizeName(
-			"insert_" + sourceTableName);
-		String updateTriggerName = dbInspector.normalizeName(
-			"update_" + sourceTableName);
 
-		String[] sourceColumnNames = TransformUtil.transformToArray(
-			columnNamesMap.entrySet(), Map.Entry::getKey, String.class);
 		String[] sourcePrimaryKeyColumnNames = getPrimaryKeyColumnNames(
 			connection, sourceTableName);
-		String[] targetColumnNames = TransformUtil.transformToArray(
-			columnNamesMap.entrySet(), Map.Entry::getValue, String.class);
 		String[] targetPrimaryKeyColumnNames = TransformUtil.transform(
 			sourcePrimaryKeyColumnNames, columnNamesMap::get, String.class);
 
@@ -687,10 +679,20 @@ public abstract class BaseDB implements DB {
 			connection, sourceTableName, targetTableName, deleteTriggerName,
 			sourcePrimaryKeyColumnNames, targetPrimaryKeyColumnNames);
 
+		String insertTriggerName = dbInspector.normalizeName(
+			"insert_" + sourceTableName);
+		String[] sourceColumnNames = TransformUtil.transformToArray(
+			columnNamesMap.entrySet(), Map.Entry::getKey, String.class);
+		String[] targetColumnNames = TransformUtil.transformToArray(
+			columnNamesMap.entrySet(), Map.Entry::getValue, String.class);
+
 		createSyncInsertTrigger(
 			connection, sourceTableName, targetTableName, insertTriggerName,
 			sourceColumnNames, targetColumnNames, sourcePrimaryKeyColumnNames,
 			targetPrimaryKeyColumnNames);
+
+		String updateTriggerName = dbInspector.normalizeName(
+			"update_" + sourceTableName);
 
 		createSyncUpdateTrigger(
 			connection, sourceTableName, targetTableName, updateTriggerName,
