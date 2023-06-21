@@ -55,7 +55,7 @@ public class APIApplicationProviderImpl implements APIApplicationProvider {
 
 		if (objectEntry == null) {
 			throw new NotFoundException(
-				"APIApplication with baseURL " + baseURL + " not found.");
+				"API application with base URL " + baseURL + " does not exist");
 		}
 
 		List<APIApplication.Schema> schemas = _getSchemas(
