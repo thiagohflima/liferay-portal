@@ -152,6 +152,8 @@ public class PostgreSQLDB extends BaseDB {
 			String[] targetPrimaryKeyColumnNames)
 		throws Exception {
 
+		_createTriggerFunction(connection, triggerName, sb.toString());
+
 		_createTrigger(
 			connection, sourceTableName, "after delete", triggerName);
 
@@ -170,8 +172,6 @@ public class PostgreSQLDB extends BaseDB {
 			sb.append(" = old.");
 			sb.append(sourcePrimaryKeyColumnNames[i]);
 		}
-
-		_createTriggerFunction(connection, triggerName, sb.toString());
 	}
 
 	@Override
@@ -182,6 +182,8 @@ public class PostgreSQLDB extends BaseDB {
 			String[] sourcePrimaryKeyColumnNames,
 			String[] targetPrimaryKeyColumnNames)
 		throws Exception {
+
+		_createTriggerFunction(connection, triggerName, sb.toString());
 
 		_createTrigger(
 			connection, sourceTableName, "after insert", triggerName);
@@ -204,8 +206,6 @@ public class PostgreSQLDB extends BaseDB {
 		}
 
 		sb.append(")");
-
-		_createTriggerFunction(connection, triggerName, sb.toString());
 	}
 
 	@Override
@@ -216,6 +216,8 @@ public class PostgreSQLDB extends BaseDB {
 			String[] sourcePrimaryKeyColumnNames,
 			String[] targetPrimaryKeyColumnNames)
 		throws Exception {
+
+		_createTriggerFunction(connection, triggerName, sb.toString());
 
 		_createTrigger(
 			connection, sourceTableName, "after update", triggerName);
@@ -247,8 +249,6 @@ public class PostgreSQLDB extends BaseDB {
 			sb.append(" = old.");
 			sb.append(sourcePrimaryKeyColumnNames[i]);
 		}
-
-		_createTriggerFunction(connection, triggerName, sb.toString());
 	}
 
 	@Override
