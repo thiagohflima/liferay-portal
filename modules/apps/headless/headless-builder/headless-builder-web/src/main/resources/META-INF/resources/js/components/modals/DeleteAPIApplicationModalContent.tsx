@@ -92,12 +92,6 @@ export function DeleteAPIApplicationModalContent({
 					)}
 				</p>
 
-				<p>
-					{Liferay.Language.get(
-						'also-all-the-assets-that-used-it-will-not-work'
-					)}
-				</p>
-
 				<p
 					dangerouslySetInnerHTML={{
 						__html: sub(
