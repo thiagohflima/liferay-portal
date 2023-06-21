@@ -665,17 +665,12 @@ public abstract class BaseDB implements DB {
 			String targetTableName, Map<String, String> columnNamesMap)
 		throws Exception {
 
-		Set<Map.Entry<String, String>> entrySet = columnNamesMap.entrySet();
-
 		String[] sourceColumnNames = TransformUtil.transformToArray(
-			entrySet, Map.Entry::getKey, String.class);
-
-		String[] targetColumnNames = TransformUtil.transformToArray(
-			entrySet, Map.Entry::getValue, String.class);
-
+			columnNamesMap.entrySet(), Map.Entry::getKey, String.class);
 		String[] sourcePrimaryKeyColumnNames = getPrimaryKeyColumnNames(
 			connection, sourceTableName);
-
+		String[] targetColumnNames = TransformUtil.transformToArray(
+			columnNamesMap.entrySet(), Map.Entry::getValue, String.class);
 		String[] targetPrimaryKeyColumnNames = TransformUtil.transform(
 			sourcePrimaryKeyColumnNames, columnNamesMap::get, String.class);
 
