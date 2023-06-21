@@ -34,8 +34,30 @@ import org.junit.Test;
 public class APIEndpointObjectEntryModelListenerTest extends BaseTestCase {
 
 	@Test
-	public void testInvalidPathAPIEndpoint() throws Exception {
+	public void test() throws Exception {
+
+		// An API endpoint must be related to an API application
+
 		JSONObject jsonObject = HTTPTestUtil.invoke(
+			JSONUtil.put(
+				"httpMethod", "get"
+			).put(
+				"name", RandomTestUtil.randomString()
+			).put(
+				"path", RandomTestUtil.randomString()
+			).put(
+				"scope", "company"
+			).toString(),
+			"headless-builder/endpoints", Http.Method.POST);
+
+		Assert.assertEquals("BAD_REQUEST", jsonObject.get("status"));
+		Assert.assertEquals(
+			"An API endpoint must be related to an API application",
+			jsonObject.get("title"));
+
+		// Path can have a maximum of 255 alphanumeric characters
+
+		jsonObject = HTTPTestUtil.invoke(
 			JSONUtil.put(
 				"httpMethod", "get"
 			).put(
@@ -54,37 +76,20 @@ public class APIEndpointObjectEntryModelListenerTest extends BaseTestCase {
 		Assert.assertEquals(
 			"Path can have a maximum of 255 alphanumeric characters",
 			jsonObject.get("title"));
-	}
 
-	@Test
-	public void testPostAPIEndpointNotRelatedWithAPIApplication()
-		throws Exception {
+		// Success
 
-		JSONObject jsonObject = HTTPTestUtil.invoke(
+		JSONObject apiApplicationJSONObject = HTTPTestUtil.invoke(
 			JSONUtil.put(
-				"httpMethod", "get"
+				"applicationStatus", "published"
 			).put(
-				"name", RandomTestUtil.randomString()
+				"baseURL", RandomTestUtil.randomString()
 			).put(
-				"path", RandomTestUtil.randomString()
-			).put(
-				"scope", "company"
+				"title", RandomTestUtil.randomString()
 			).toString(),
-			"headless-builder/endpoints", Http.Method.POST);
+			"headless-builder/applications", Http.Method.POST);
 
-		Assert.assertEquals("BAD_REQUEST", jsonObject.get("status"));
-		Assert.assertEquals(
-			"An endpoint must be related to an application",
-			jsonObject.get("title"));
-	}
-
-	@Test
-	public void testPostAPIEndpointRelatedWithAPIApplication()
-		throws Exception {
-
-		JSONObject apiApplicationJSONObject = _createAPIApplicationJSONObject();
-
-		JSONObject jsonObject = HTTPTestUtil.invoke(
+		jsonObject = HTTPTestUtil.invoke(
 			JSONUtil.put(
 				"httpMethod", "get"
 			).put(
@@ -106,21 +111,16 @@ public class APIEndpointObjectEntryModelListenerTest extends BaseTestCase {
 			).get(
 				"code"
 			));
-
 		Assert.assertEquals(
-			jsonObject.get("r_apiApplicationToAPIEndpoints_c_apiApplicationId"),
-			apiApplicationJSONObject.get("id"));
-	}
+			apiApplicationJSONObject.get("id"),
+			jsonObject.get(
+				"r_apiApplicationToAPIEndpoints_c_apiApplicationId"));
 
-	@Test
-	public void testPostAPIEndpointRelatedWithAPIApplicationWithSamePath()
-		throws Exception {
+		// There is an API endpoint with the same HTTP method and path
 
 		String path = RandomTestUtil.randomString();
 
-		JSONObject apiApplicationJSONObject = _createAPIApplicationJSONObject();
-
-		JSONObject jsonObject = HTTPTestUtil.invoke(
+		jsonObject = HTTPTestUtil.invoke(
 			JSONUtil.put(
 				"httpMethod", "get"
 			).put(
@@ -156,49 +156,8 @@ public class APIEndpointObjectEntryModelListenerTest extends BaseTestCase {
 
 		Assert.assertEquals("BAD_REQUEST", jsonObject.get("status"));
 		Assert.assertEquals(
-			"There is an endpoint with the same http method and path " +
-				"combination",
+			"There is an API endpoint with the same HTTP method and path",
 			jsonObject.get("title"));
-	}
-
-	@Test
-	public void testValidPathAPIEndpoint() throws Exception {
-		JSONObject apiApplicationJSONObject = _createAPIApplicationJSONObject();
-
-		JSONObject jsonObject = HTTPTestUtil.invoke(
-			JSONUtil.put(
-				"httpMethod", "get"
-			).put(
-				"name", RandomTestUtil.randomString()
-			).put(
-				"path", RandomTestUtil.randomString()
-			).put(
-				"r_apiApplicationToAPIEndpoints_c_apiApplicationId",
-				apiApplicationJSONObject.getLong("id")
-			).put(
-				"scope", "company"
-			).toString(),
-			"headless-builder/endpoints", Http.Method.POST);
-
-		Assert.assertEquals(
-			0,
-			jsonObject.getJSONObject(
-				"status"
-			).get(
-				"code"
-			));
-	}
-
-	private JSONObject _createAPIApplicationJSONObject() throws Exception {
-		return HTTPTestUtil.invoke(
-			JSONUtil.put(
-				"applicationStatus", "published"
-			).put(
-				"baseURL", RandomTestUtil.randomString()
-			).put(
-				"title", RandomTestUtil.randomString()
-			).toString(),
-			"headless-builder/applications", Http.Method.POST);
 	}
 
 }

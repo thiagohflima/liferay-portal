@@ -33,7 +33,10 @@ import org.junit.Test;
 public class APIApplicationObjectEntryModelListenerTest extends BaseTestCase {
 
 	@Test
-	public void testInvalidBaseURLPathAPIApplication() throws Exception {
+	public void test() throws Exception {
+
+		// Base URL can have a maximum of 255 alphanumeric characters
+
 		JSONObject jsonObject = HTTPTestUtil.invoke(
 			JSONUtil.put(
 				"applicationStatus", "published"
@@ -49,11 +52,10 @@ public class APIApplicationObjectEntryModelListenerTest extends BaseTestCase {
 		Assert.assertEquals(
 			"Base URL can have a maximum of 255 alphanumeric characters",
 			jsonObject.get("title"));
-	}
 
-	@Test
-	public void testValidBaseURLPathAPIApplication() throws Exception {
-		JSONObject jsonObject = HTTPTestUtil.invoke(
+		// Success
+
+		jsonObject = HTTPTestUtil.invoke(
 			JSONUtil.put(
 				"applicationStatus", "published"
 			).put(

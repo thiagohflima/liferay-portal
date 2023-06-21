@@ -124,7 +124,8 @@ public class APIEndpointObjectEntryModelListener
 
 			if (!valuesList.isEmpty()) {
 				throw new IllegalArgumentException(
-					"There is an endpoint with the same HTTP method and path");
+					"There is an API endpoint with the same HTTP method and " +
+						"path");
 			}
 
 			if ((long)values.get(

@@ -32,8 +32,9 @@ import org.junit.Test;
 public class APISchemaObjectEntryModelListenerTest extends BaseTestCase {
 
 	@Test
-	public void testPostAPISchemaNotRelatedWithAPIApplication()
-		throws Exception {
+	public void test() throws Exception {
+
+		// An API schema must be related to an API application
 
 		JSONObject jsonObject = HTTPTestUtil.invoke(
 			JSONUtil.put(
@@ -45,12 +46,11 @@ public class APISchemaObjectEntryModelListenerTest extends BaseTestCase {
 
 		Assert.assertEquals("BAD_REQUEST", jsonObject.get("status"));
 		Assert.assertEquals(
-			"An schema must be related to an application",
+			"An API schema must be related to an API application",
 			jsonObject.get("title"));
-	}
 
-	@Test
-	public void testPostAPISchemaRelatedWithAPIApplication() throws Exception {
+		// Success
+
 		JSONObject apiApplicationJSONObject = HTTPTestUtil.invoke(
 			JSONUtil.put(
 				"applicationStatus", "published"
@@ -61,7 +61,7 @@ public class APISchemaObjectEntryModelListenerTest extends BaseTestCase {
 			).toString(),
 			"headless-builder/applications", Http.Method.POST);
 
-		JSONObject jsonObject = HTTPTestUtil.invoke(
+		jsonObject = HTTPTestUtil.invoke(
 			JSONUtil.put(
 				"mainObjectDefinitionERC", RandomTestUtil.randomString()
 			).put(
