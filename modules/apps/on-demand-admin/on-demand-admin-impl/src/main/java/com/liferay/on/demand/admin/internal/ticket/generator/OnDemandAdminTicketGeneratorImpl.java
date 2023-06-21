@@ -99,11 +99,12 @@ public class OnDemandAdminTicketGeneratorImpl
 
 		User requestorUser = _userLocalService.getUser(userId);
 		String password = PwdGenerator.getPassword(20);
+
+		String screenName = _getScreenName(requestorUser.getUserId(), 0);
+
 		Date date = new Date();
 		Role role = _roleLocalService.getRole(
 			company.getCompanyId(), RoleConstants.ADMINISTRATOR);
-
-		String screenName = _getScreenName(requestorUser.getUserId(), 0);
 
 		User user = _userLocalService.addUser(
 			requestorUser.getUserId(), company.getCompanyId(), false, password,
