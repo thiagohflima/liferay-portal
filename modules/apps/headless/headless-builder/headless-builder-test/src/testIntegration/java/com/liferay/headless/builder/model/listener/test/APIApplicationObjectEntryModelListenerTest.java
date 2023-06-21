@@ -29,7 +29,7 @@ import org.junit.Test;
 /**
  * @author Sergio Jiménez del Coso
  */
-@FeatureFlags({"LPS-184413", "LPS-167253", "LPS-153117"})
+@FeatureFlags({"LPS-153117", "LPS-167253", "LPS-184413"})
 public class APIApplicationObjectEntryModelListenerTest extends BaseTestCase {
 
 	@Test
