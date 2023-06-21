@@ -66,6 +66,28 @@ public class APIEndpointObjectEntryModelListener
 		}
 	}
 
+	private boolean _isModified(
+		ObjectEntry originalObjectEntry, ObjectEntry objectEntry) {
+
+		Map<String, Serializable> originalValues =
+			originalObjectEntry.getValues();
+		Map<String, Serializable> values = objectEntry.getValues();
+
+		if (Objects.equals(
+				values.get("httpMethod"), originalValues.get("httpMethod")) &&
+			Objects.equals(values.get("path"), originalValues.get("path")) &&
+			Objects.equals(
+				originalValues.get(
+					"r_apiApplicationToAPIEndpoints_c_apiApplicationId"),
+				values.get(
+					"r_apiApplicationToAPIEndpoints_c_apiApplicationId"))) {
+
+			return false;
+		}
+
+		return true;
+	}
+
 	private void _validate(ObjectEntry objectEntry) {
 		try {
 			Map<String, Serializable> values = objectEntry.getValues();
@@ -115,28 +137,6 @@ public class APIEndpointObjectEntryModelListener
 		catch (Exception exception) {
 			throw new ModelListenerException(exception);
 		}
-	}
-
-	private boolean _isModified(
-		ObjectEntry originalObjectEntry, ObjectEntry objectEntry) {
-
-		Map<String, Serializable> originalValues =
-			originalObjectEntry.getValues();
-		Map<String, Serializable> values = objectEntry.getValues();
-
-		if (Objects.equals(
-				values.get("httpMethod"), originalValues.get("httpMethod")) &&
-			Objects.equals(values.get("path"), originalValues.get("path")) &&
-			Objects.equals(
-				originalValues.get(
-					"r_apiApplicationToAPIEndpoints_c_apiApplicationId"),
-				values.get(
-					"r_apiApplicationToAPIEndpoints_c_apiApplicationId"))) {
-
-			return false;
-		}
-
-		return true;
 	}
 
 	private static final Pattern _pathPattern = Pattern.compile(
