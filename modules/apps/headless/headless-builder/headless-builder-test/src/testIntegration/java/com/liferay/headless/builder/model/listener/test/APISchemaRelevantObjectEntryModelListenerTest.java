@@ -15,7 +15,6 @@
 package com.liferay.headless.builder.model.listener.test;
 
 import com.liferay.headless.builder.test.BaseTestCase;
-import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.json.JSONUtil;
 import com.liferay.portal.kernel.test.util.HTTPTestUtil;
@@ -30,32 +29,29 @@ import org.junit.Test;
  * @author Sergio Jiménez del Coso
  */
 @FeatureFlags({"LPS-153117", "LPS-167253", "LPS-184413"})
-public class APIApplicationObjectEntryModelListenerTest extends BaseTestCase {
+public class APISchemaRelevantObjectEntryModelListenerTest extends BaseTestCase {
 
 	@Test
 	public void test() throws Exception {
 
-		// Base URL can have a maximum of 255 alphanumeric characters
+		// An API schema must be related to an API application
 
 		JSONObject jsonObject = HTTPTestUtil.invoke(
 			JSONUtil.put(
-				"applicationStatus", "published"
+				"mainObjectDefinitionERC", RandomTestUtil.randomString()
 			).put(
-				"baseURL",
-				RandomTestUtil.randomString() + StringPool.FORWARD_SLASH
-			).put(
-				"title", RandomTestUtil.randomString()
+				"name", RandomTestUtil.randomString()
 			).toString(),
-			"headless-builder/applications", Http.Method.POST);
+			"headless-builder/schemas", Http.Method.POST);
 
 		Assert.assertEquals("BAD_REQUEST", jsonObject.get("status"));
 		Assert.assertEquals(
-			"Base URL can have a maximum of 255 alphanumeric characters",
+			"An API schema must be related to an API application",
 			jsonObject.get("title"));
 
 		// Success
 
-		jsonObject = HTTPTestUtil.invoke(
+		JSONObject apiApplicationJSONObject = HTTPTestUtil.invoke(
 			JSONUtil.put(
 				"applicationStatus", "published"
 			).put(
@@ -64,6 +60,17 @@ public class APIApplicationObjectEntryModelListenerTest extends BaseTestCase {
 				"title", RandomTestUtil.randomString()
 			).toString(),
 			"headless-builder/applications", Http.Method.POST);
+
+		jsonObject = HTTPTestUtil.invoke(
+			JSONUtil.put(
+				"mainObjectDefinitionERC", RandomTestUtil.randomString()
+			).put(
+				"name", RandomTestUtil.randomString()
+			).put(
+				"r_apiApplicationToAPISchemas_c_apiApplicationId",
+				apiApplicationJSONObject.getLong("id")
+			).toString(),
+			"headless-builder/schemas", Http.Method.POST);
 
 		Assert.assertEquals(
 			0,

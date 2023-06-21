@@ -15,7 +15,7 @@
 package com.liferay.headless.builder.internal.model.listener;
 
 import com.liferay.object.model.ObjectEntry;
-import com.liferay.object.model.listener.RelevantObjectEntryModelListener;
+import com.liferay.object.model.listener.RelevantRelevantObjectEntryModelListener;
 import com.liferay.portal.kernel.exception.ModelListenerException;
 import com.liferay.portal.kernel.model.BaseModelListener;
 
@@ -30,10 +30,10 @@ import org.osgi.service.component.annotations.Component;
 /**
  * @author Sergio Jiménez del Coso
  */
-@Component(service = RelevantObjectEntryModelListener.class)
-public class APIApplicationObjectEntryModelListener
+@Component(service = RelevantRelevantObjectEntryModelListener.class)
+public class APIApplicationRelevantObjectEntryModelListener
 	extends BaseModelListener<ObjectEntry>
-	implements RelevantObjectEntryModelListener {
+	implements RelevantRelevantObjectEntryModelListener {
 
 	@Override
 	public String getObjectDefinitionExternalReferenceCode() {
