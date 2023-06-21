@@ -16,7 +16,7 @@ package com.liferay.headless.builder.internal.model.listener;
 
 import com.liferay.object.model.ObjectDefinition;
 import com.liferay.object.model.ObjectEntry;
-import com.liferay.object.model.listener.ObjectDefinitionObjectEntryModelListener;
+import com.liferay.object.model.listener.RelevantObjectEntryModelListener;
 import com.liferay.object.rest.petra.sql.dsl.expression.FilterPredicateFactory;
 import com.liferay.object.service.ObjectDefinitionLocalService;
 import com.liferay.object.service.ObjectEntryLocalService;
@@ -39,10 +39,10 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Sergio Jiménez del Coso
  */
-@Component(service = ObjectDefinitionObjectEntryModelListener.class)
+@Component(service = RelevantObjectEntryModelListener.class)
 public class APIEndpointObjectEntryModelListener
 	extends BaseModelListener<ObjectEntry>
-	implements ObjectDefinitionObjectEntryModelListener {
+	implements RelevantObjectEntryModelListener {
 
 	@Override
 	public String getObjectDefinitionExternalReferenceCode() {

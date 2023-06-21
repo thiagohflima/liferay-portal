@@ -20,7 +20,7 @@ import com.liferay.portal.kernel.model.ModelListener;
 /**
  * @author Sergio Jiménez del Coso
  */
-public interface ObjectDefinitionObjectEntryModelListener
+public interface RelevantObjectEntryModelListener
 	extends ModelListener<ObjectEntry> {
 
 	public String getObjectDefinitionExternalReferenceCode();

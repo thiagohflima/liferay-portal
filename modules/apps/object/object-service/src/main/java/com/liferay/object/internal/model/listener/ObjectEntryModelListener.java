@@ -29,7 +29,7 @@ import com.liferay.object.model.ObjectFieldTable;
 import com.liferay.object.model.ObjectRelationshipTable;
 import com.liferay.object.model.ObjectViewFilterColumn;
 import com.liferay.object.model.ObjectViewFilterColumnTable;
-import com.liferay.object.model.listener.ObjectDefinitionObjectEntryModelListener;
+import com.liferay.object.model.listener.RelevantObjectEntryModelListener;
 import com.liferay.object.service.ObjectDefinitionLocalService;
 import com.liferay.object.service.ObjectEntryLocalService;
 import com.liferay.object.service.ObjectFieldLocalService;
@@ -91,10 +91,10 @@ public class ObjectEntryModelListener extends BaseModelListener<ObjectEntry> {
 		_executeObjectActions(
 			ObjectActionTriggerConstants.KEY_ON_AFTER_ADD, null, objectEntry);
 
-		_runObjectDefinitionObjectEntryModelListeners(
+		_runRelevantObjectEntryModelListeners(
 			objectEntry,
-			objectDefinitionObjectEntryModelListener ->
-				objectDefinitionObjectEntryModelListener.onAfterCreate(
+			relevantObjectEntryModelListener ->
+				relevantObjectEntryModelListener.onAfterCreate(
 					objectEntry));
 	}
 
@@ -115,10 +115,10 @@ public class ObjectEntryModelListener extends BaseModelListener<ObjectEntry> {
 			ObjectActionTriggerConstants.KEY_ON_AFTER_DELETE, objectEntry,
 			objectEntry);
 
-		_runObjectDefinitionObjectEntryModelListeners(
+		_runRelevantObjectEntryModelListeners(
 			objectEntry,
-			objectDefinitionObjectEntryModelListener ->
-				objectDefinitionObjectEntryModelListener.onAfterRemove(
+			relevantObjectEntryModelListener ->
+				relevantObjectEntryModelListener.onAfterRemove(
 					objectEntry));
 	}
 
@@ -148,10 +148,10 @@ public class ObjectEntryModelListener extends BaseModelListener<ObjectEntry> {
 			throw new ModelListenerException(portalException);
 		}
 
-		_runObjectDefinitionObjectEntryModelListeners(
+		_runRelevantObjectEntryModelListeners(
 			objectEntry,
-			objectDefinitionObjectEntryModelListener ->
-				objectDefinitionObjectEntryModelListener.onAfterUpdate(
+			relevantObjectEntryModelListener ->
+				relevantObjectEntryModelListener.onAfterUpdate(
 					originalObjectEntry, objectEntry));
 	}
 
@@ -161,10 +161,10 @@ public class ObjectEntryModelListener extends BaseModelListener<ObjectEntry> {
 
 		_validateObjectEntry(null, objectEntry);
 
-		_runObjectDefinitionObjectEntryModelListeners(
+		_runRelevantObjectEntryModelListeners(
 			objectEntry,
-			objectDefinitionObjectEntryModelListener ->
-				objectDefinitionObjectEntryModelListener.onBeforeCreate(
+			relevantObjectEntryModelListener ->
+				relevantObjectEntryModelListener.onBeforeCreate(
 					objectEntry));
 	}
 
@@ -172,10 +172,10 @@ public class ObjectEntryModelListener extends BaseModelListener<ObjectEntry> {
 	public void onBeforeRemove(ObjectEntry objectEntry)
 		throws ModelListenerException {
 
-		_runObjectDefinitionObjectEntryModelListeners(
+		_runRelevantObjectEntryModelListeners(
 			objectEntry,
-			objectDefinitionObjectEntryModelListener ->
-				objectDefinitionObjectEntryModelListener.onBeforeRemove(
+			relevantObjectEntryModelListener ->
+				relevantObjectEntryModelListener.onBeforeRemove(
 					objectEntry));
 	}
 
@@ -186,18 +186,18 @@ public class ObjectEntryModelListener extends BaseModelListener<ObjectEntry> {
 
 		_validateObjectEntry(originalObjectEntry, objectEntry);
 
-		_runObjectDefinitionObjectEntryModelListeners(
+		_runRelevantObjectEntryModelListeners(
 			objectEntry,
-			objectDefinitionObjectEntryModelListener ->
-				objectDefinitionObjectEntryModelListener.onBeforeUpdate(
+			relevantObjectEntryModelListener ->
+				relevantObjectEntryModelListener.onBeforeUpdate(
 					originalObjectEntry, objectEntry));
 	}
 
 	@Activate
 	protected void activate(BundleContext bundleContext) {
-		_objectDefinitionObjectEntryModelListeners =
+		_relevantObjectEntryModelListeners =
 			ServiceTrackerListFactory.open(
-				bundleContext, ObjectDefinitionObjectEntryModelListener.class);
+				bundleContext, RelevantObjectEntryModelListener.class);
 	}
 
 	private void _executeObjectActions(
@@ -380,26 +380,26 @@ public class ObjectEntryModelListener extends BaseModelListener<ObjectEntry> {
 		}
 	}
 
-	private void _runObjectDefinitionObjectEntryModelListeners(
+	private void _runRelevantObjectEntryModelListeners(
 		ObjectEntry objectEntry,
 		UnsafeConsumer
-			<ObjectDefinitionObjectEntryModelListener, ModelListenerException>
+			<RelevantObjectEntryModelListener, ModelListenerException>
 				unsafeConsumer) {
 
 		ObjectDefinition objectDefinition =
 			_objectDefinitionLocalService.fetchObjectDefinition(
 				objectEntry.getObjectDefinitionId());
 
-		for (ObjectDefinitionObjectEntryModelListener
-				objectDefinitionObjectEntryModelListener :
-					_objectDefinitionObjectEntryModelListeners) {
+		for (RelevantObjectEntryModelListener
+				relevantObjectEntryModelListener :
+					_relevantObjectEntryModelListeners) {
 
 			if (Objects.equals(
 					objectDefinition.getExternalReferenceCode(),
-					objectDefinitionObjectEntryModelListener.
+					relevantObjectEntryModelListener.
 						getObjectDefinitionExternalReferenceCode())) {
 
-				unsafeConsumer.accept(objectDefinitionObjectEntryModelListener);
+				unsafeConsumer.accept(relevantObjectEntryModelListener);
 			}
 		}
 	}
@@ -517,8 +517,8 @@ public class ObjectEntryModelListener extends BaseModelListener<ObjectEntry> {
 	@Reference
 	private ObjectDefinitionLocalService _objectDefinitionLocalService;
 
-	private ServiceTrackerList<ObjectDefinitionObjectEntryModelListener>
-		_objectDefinitionObjectEntryModelListeners;
+	private ServiceTrackerList<RelevantObjectEntryModelListener>
+		_relevantObjectEntryModelListeners;
 
 	@Reference
 	private ObjectEntryLocalService _objectEntryLocalService;
