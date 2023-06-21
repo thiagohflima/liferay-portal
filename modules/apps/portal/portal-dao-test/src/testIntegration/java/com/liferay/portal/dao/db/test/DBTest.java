@@ -439,18 +439,18 @@ public class DBTest {
 	public void testSyncTables() throws Exception {
 		_db.runSQL(
 			StringBundler.concat(
+				"insert into ", _TABLE_NAME_1,
+				" (id, notNilColumn, typeString) values (1, '1', ",
+				"'testValueA')"));
+
+		_db.runSQL(
+			StringBundler.concat(
 				"create table ", _TABLE_NAME_2, " (id LONG not null primary ",
 				"key, notNilColumn VARCHAR(75) not null, nilColumn ",
 				"VARCHAR(75) null, typeBlob BLOB, typeBoolean BOOLEAN,",
 				"typeDate DATE null, typeDouble DOUBLE, typeInteger INTEGER, ",
 				"typeLong LONG null, typeSBlob SBLOB, typeString STRING null, ",
 				"typeText TEXT null, typeVarchar VARCHAR(75) null);"));
-
-		_db.runSQL(
-			StringBundler.concat(
-				"insert into ", _TABLE_NAME_1,
-				" (id, notNilColumn, typeString) values (1, '1', ",
-				"'testValueA')"));
 
 		_db.runSQL(
 			StringBundler.concat(
