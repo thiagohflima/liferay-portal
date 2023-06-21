@@ -61,7 +61,7 @@ public class APIEndpointObjectEntryModelListener
 			ObjectEntry originalObjectEntry, ObjectEntry objectEntry)
 		throws ModelListenerException {
 
-		if (_validateNewAPIEndpointValues(originalObjectEntry, objectEntry)) {
+		if (_isModified(originalObjectEntry, objectEntry)) {
 			_validate(objectEntry);
 		}
 	}
@@ -122,7 +122,7 @@ public class APIEndpointObjectEntryModelListener
 		return matcher.matches();
 	}
 
-	private boolean _validateNewAPIEndpointValues(
+	private boolean _isModified(
 		ObjectEntry originalObjectEntry, ObjectEntry objectEntry) {
 
 		Map<String, Serializable> values = objectEntry.getValues();
