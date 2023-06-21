@@ -145,9 +145,8 @@ public class APIApplicationPublisherTest extends BaseHeadlessBuilderTestCase {
 		throws Exception {
 
 		String baseURL = RandomTestUtil.randomString();
-		String apiSchemaExternalReferenceCode = externalReferenceCode + "_SCHEMA";
-		String apiEndpointExternalReferenceCode =
-			externalReferenceCode + "_ENDPOINT";
+		String apiSchemaExternalReferenceCode = RandomTestUtil.randomString();
+		String apiEndpointExternalReferenceCode = RandomTestUtil.randomString();
 
 		HTTPTestUtil.invoke(
 			JSONUtil.put(
