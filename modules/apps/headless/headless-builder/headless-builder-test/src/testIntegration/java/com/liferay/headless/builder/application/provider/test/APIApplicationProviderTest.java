@@ -17,8 +17,10 @@ package com.liferay.headless.builder.application.provider.test;
 import com.liferay.headless.builder.application.APIApplication;
 import com.liferay.headless.builder.application.provider.APIApplicationProvider;
 import com.liferay.headless.builder.test.BaseHeadlessBuilderTestCase;
+import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.json.JSONUtil;
 import com.liferay.portal.kernel.test.util.HTTPTestUtil;
+import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.TestPropsValues;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.test.rule.FeatureFlags;
@@ -40,8 +42,8 @@ public class APIApplicationProviderTest extends BaseHeadlessBuilderTestCase {
 	public void tearDown() throws Exception {
 		HTTPTestUtil.invoke(
 			null,
-			"headless-builder/applications/by-external-reference-code" +
-				"/APPLICATION",
+			"headless-builder/applications/by-external-reference-code/" +
+				_API_APPLICATION_ERC,
 			Http.Method.DELETE);
 	}
 
@@ -54,7 +56,7 @@ public class APIApplicationProviderTest extends BaseHeadlessBuilderTestCase {
 					JSONUtil.put(
 						"description", "description"
 					).put(
-						"externalReferenceCode", "ENDPOINT"
+						"externalReferenceCode", _API_ENDPOINT_ERC
 					).put(
 						"httpMethod", "get"
 					).put(
@@ -75,12 +77,12 @@ public class APIApplicationProviderTest extends BaseHeadlessBuilderTestCase {
 							).put(
 								"name", "name"
 							).put(
-								"objectFieldERC", "APPLICATION_STATUS"
+								"objectFieldERC", RandomTestUtil.randomString()
 							))
 					).put(
 						"description", "description"
 					).put(
-						"externalReferenceCode", "SCHEMA"
+						"externalReferenceCode", _API_SCHEMA_ERC
 					).put(
 						"mainObjectDefinitionERC", "MSOD_API_APPLICATION"
 					).put(
@@ -91,20 +93,24 @@ public class APIApplicationProviderTest extends BaseHeadlessBuilderTestCase {
 			).put(
 				"baseURL", "test"
 			).put(
-				"externalReferenceCode", "APPLICATION"
+				"externalReferenceCode", _API_APPLICATION_ERC
 			).put(
 				"title", "title"
 			).toString(),
 			"headless-builder/applications", Http.Method.POST);
 		HTTPTestUtil.invoke(
 			null,
-			"headless-builder/schemas/by-external-reference-code/SCHEMA" +
-				"/requestAPISchemaToAPIEndpoints/ENDPOINT",
+			StringBundler.concat(
+				"headless-builder/schemas/by-external-reference-code/",
+				_API_SCHEMA_ERC, "/requestAPISchemaToAPIEndpoints/",
+				_API_ENDPOINT_ERC),
 			Http.Method.PUT);
 		HTTPTestUtil.invoke(
 			null,
-			"headless-builder/schemas/by-external-reference-code/SCHEMA" +
-				"/responseAPISchemaToAPIEndpoints/ENDPOINT",
+			StringBundler.concat(
+				"headless-builder/schemas/by-external-reference-code/",
+				_API_SCHEMA_ERC, "/responseAPISchemaToAPIEndpoints/",
+				_API_ENDPOINT_ERC),
 			Http.Method.PUT);
 
 		APIApplication apiApplication =
@@ -146,6 +152,14 @@ public class APIApplicationProviderTest extends BaseHeadlessBuilderTestCase {
 		Assert.assertEquals("name", property.getName());
 		Assert.assertEquals("Picklist", property.getType());
 	}
+
+	private static final String _API_APPLICATION_ERC =
+		RandomTestUtil.randomString();
+
+	private static final String _API_ENDPOINT_ERC =
+		RandomTestUtil.randomString();
+
+	private static final String _API_SCHEMA_ERC = RandomTestUtil.randomString();
 
 	@Inject
 	private APIApplicationProvider _apiApplicationProvider;
