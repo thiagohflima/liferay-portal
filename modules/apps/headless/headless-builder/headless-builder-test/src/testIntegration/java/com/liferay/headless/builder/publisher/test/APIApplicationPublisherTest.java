@@ -145,8 +145,8 @@ public class APIApplicationPublisherTest extends BaseHeadlessBuilderTestCase {
 		throws Exception {
 
 		String baseURL = RandomTestUtil.randomString();
-		String schemaExternalReferenceCode = externalReferenceCode + "_SCHEMA";
-		String endpointExternalReferenceCode =
+		String apiSchemaExternalReferenceCode = externalReferenceCode + "_SCHEMA";
+		String apiEndpointExternalReferenceCode =
 			externalReferenceCode + "_ENDPOINT";
 
 		HTTPTestUtil.invoke(
@@ -156,7 +156,7 @@ public class APIApplicationPublisherTest extends BaseHeadlessBuilderTestCase {
 					JSONUtil.put(
 						"description", "description"
 					).put(
-						"externalReferenceCode", endpointExternalReferenceCode
+						"externalReferenceCode", apiEndpointExternalReferenceCode
 					).put(
 						"httpMethod", "get"
 					).put(
@@ -182,7 +182,7 @@ public class APIApplicationPublisherTest extends BaseHeadlessBuilderTestCase {
 					).put(
 						"description", "description"
 					).put(
-						"externalReferenceCode", schemaExternalReferenceCode
+						"externalReferenceCode", apiSchemaExternalReferenceCode
 					).put(
 						"mainObjectDefinitionERC", "MSOD_API_APPLICATION"
 					).put(
@@ -202,16 +202,16 @@ public class APIApplicationPublisherTest extends BaseHeadlessBuilderTestCase {
 			null,
 			StringBundler.concat(
 				"headless-builder/schemas/by-external-reference-code/",
-				schemaExternalReferenceCode, "/requestAPISchemaToAPIEndpoints/",
-				endpointExternalReferenceCode),
+				apiSchemaExternalReferenceCode, "/requestAPISchemaToAPIEndpoints/",
+				apiEndpointExternalReferenceCode),
 			Http.Method.PUT);
 		HTTPTestUtil.invoke(
 			null,
 			StringBundler.concat(
 				"headless-builder/schemas/by-external-reference-code/",
-				schemaExternalReferenceCode,
+				apiSchemaExternalReferenceCode,
 				"/responseAPISchemaToAPIEndpoints/",
-				endpointExternalReferenceCode),
+				apiEndpointExternalReferenceCode),
 			Http.Method.PUT);
 
 		return _apiApplicationProvider.getAPIApplication(
