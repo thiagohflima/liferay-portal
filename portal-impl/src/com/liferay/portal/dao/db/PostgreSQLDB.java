@@ -170,7 +170,7 @@ public class PostgreSQLDB extends BaseDB {
 
 		_createTriggerFunction(connection, triggerName, sb.toString());
 		_createTrigger(
-			connection, triggerName, "after delete", sourceTableName);
+			connection, sourceTableName, "after delete", triggerName);
 	}
 
 	@Override
@@ -203,7 +203,7 @@ public class PostgreSQLDB extends BaseDB {
 
 		_createTriggerFunction(connection, triggerName, sb.toString());
 		_createTrigger(
-			connection, triggerName, "after insert", sourceTableName);
+			connection, sourceTableName, "after insert", triggerName);
 	}
 
 	@Override
@@ -245,7 +245,7 @@ public class PostgreSQLDB extends BaseDB {
 
 		_createTriggerFunction(connection, triggerName, sb.toString());
 		_createTrigger(
-			connection, triggerName, "after update", sourceTableName);
+			connection, sourceTableName, "after update", triggerName);
 	}
 
 	@Override
@@ -390,8 +390,8 @@ public class PostgreSQLDB extends BaseDB {
 	}
 
 	private void _createTrigger(
-			Connection connection, String triggerName, String triggerEvent,
-			String tableName)
+			Connection connection, String tableName, String triggerEvent,
+			String triggerName)
 		throws Exception {
 
 		runSQL(
