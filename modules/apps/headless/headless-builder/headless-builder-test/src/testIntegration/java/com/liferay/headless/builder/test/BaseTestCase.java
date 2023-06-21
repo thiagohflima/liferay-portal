@@ -72,16 +72,16 @@ public abstract class BaseTestCase {
 			}
 		}
 
-		_beforeTestApplicationERCs = _getApplicationERCs();
+		_externalReferenceCodes = _getExternalReferenceCodes();
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		Set<String> applicationERCs = _getApplicationERCs();
+		Set<String> externalReferenceCodes = _getExternalReferenceCodes();
 
-		applicationERCs.removeAll(_beforeTestApplicationERCs);
+		externalReferenceCodes.removeAll(_externalReferenceCodes);
 
-		for (String externalReferenceCode : applicationERCs) {
+		for (String externalReferenceCode : externalReferenceCodes) {
 			HTTPTestUtil.invoke(
 				null,
 				"headless-builder/applications/by-external-reference-code/" +
@@ -90,7 +90,7 @@ public abstract class BaseTestCase {
 		}
 	}
 
-	private Set<String> _getApplicationERCs() throws Exception {
+	private Set<String> _getExternalReferenceCodes() throws Exception {
 		JSONObject jsonObject = HTTPTestUtil.invoke(
 			null, "headless-builder/applications", Http.Method.GET);
 
@@ -104,6 +104,6 @@ public abstract class BaseTestCase {
 	@Inject
 	private BatchEngineUnitReader _batchEngineUnitReader;
 
-	private Set<String> _beforeTestApplicationERCs;
+	private Set<String> _externalReferenceCodes;
 
 }
