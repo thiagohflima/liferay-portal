@@ -72,7 +72,7 @@ public class APIApplicationOpenApiContributor implements OpenAPIContributor {
 			return;
 		}
 
-		APIApplication apiApplication = _fetchApiApplication(openAPIContext);
+		APIApplication apiApplication = _fetchAPIApplication(openAPIContext);
 
 		if (apiApplication == null) {
 			return;
@@ -84,6 +84,18 @@ public class APIApplicationOpenApiContributor implements OpenAPIContributor {
 			components = new Components();
 
 			openAPI.setComponents(components);
+		}
+
+		Map<String, Schema> schemas = components.getSchemas();
+
+		if (schemas == null) {
+			schemas = new TreeMap<>();
+
+			components.setSchemas(schemas);
+		}
+
+		for (APIApplication.Schema schema : apiApplication.getSchemas()) {
+			schemas.putAll(_toOpenAPISchemas(schema));
 		}
 
 		openAPI.setInfo(
@@ -107,21 +119,9 @@ public class APIApplicationOpenApiContributor implements OpenAPIContributor {
 				}
 			});
 
-		Map<String, Schema> schemas = components.getSchemas();
-
-		if (schemas == null) {
-			schemas = new TreeMap<>();
-
-			components.setSchemas(schemas);
-		}
-
-		for (APIApplication.Schema schema : apiApplication.getSchemas()) {
-			schemas.putAll(_toOpenAPISchemas(schema));
-		}
+		Paths paths = new Paths();
 
 		Paths oldPaths = openAPI.getPaths();
-
-		Paths paths = new Paths();
 
 		if ((oldPaths != null) && oldPaths.containsKey("/openapi.{type}")) {
 			paths.put("/openapi.{type}", oldPaths.get("/openapi.{type}"));
@@ -135,13 +135,15 @@ public class APIApplicationOpenApiContributor implements OpenAPIContributor {
 		openAPI.setPaths(paths);
 	}
 
-	private void _addSchemas(Class<?> clazz, Map<String, Schema> schemas) {
-		if (!schemas.containsKey(clazz.getSimpleName())) {
-			schemas.putAll(_openAPIResource.getSchemas(clazz));
+	private void _addSchemas(
+		Class<?> entityClass, Map<String, Schema> schemas) {
+
+		if (!schemas.containsKey(entityClass.getSimpleName())) {
+			schemas.putAll(_openAPIResource.getSchemas(entityClass));
 		}
 	}
 
-	private APIApplication _fetchApiApplication(OpenAPIContext openAPIContext) {
+	private APIApplication _fetchAPIApplication(OpenAPIContext openAPIContext) {
 		String path = openAPIContext.getPath();
 
 		if (path.startsWith("/o")) {
@@ -179,7 +181,6 @@ public class APIApplicationOpenApiContributor implements OpenAPIContributor {
 
 	private String _getOperationId(APIApplication.Endpoint endpoint) {
 		Http.Method method = endpoint.getMethod();
-
 		APIApplication.Schema responseSchema = endpoint.getResponseSchema();
 
 		return StringUtil.toLowerCase(method.name()) +
@@ -359,9 +360,9 @@ public class APIApplicationOpenApiContributor implements OpenAPIContributor {
 
 		Map<String, Schema> pageProperties = pageSchema.getProperties();
 
-		ArraySchema itemsSchema = (ArraySchema)pageProperties.get("items");
+		ArraySchema itemsArraySchema = (ArraySchema)pageProperties.get("items");
 
-		itemsSchema.setItems(
+		itemsArraySchema.setItems(
 			new Schema() {
 				{
 					set$ref(schema.getName());
@@ -369,6 +370,7 @@ public class APIApplicationOpenApiContributor implements OpenAPIContributor {
 			});
 
 		schemas.put("Page" + schema.getName(), pageSchema);
+
 		schemas.putAll(pageSchemas);
 
 		return schemas;
