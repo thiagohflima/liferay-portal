@@ -65,12 +65,12 @@ public class APIApplicationPublisherTest extends BaseHeadlessBuilderTestCase {
 
 	@Test
 	public void testPublish() throws Exception {
+		CountDownLatch addedCountLatch = new CountDownLatch(2);
+		CountDownLatch removedCountLatch = new CountDownLatch(2);
+
 		Bundle bundle = FrameworkUtil.getBundle(getClass());
 
 		BundleContext bundleContext = bundle.getBundleContext();
-
-		CountDownLatch addedCountLatch = new CountDownLatch(2);
-		CountDownLatch removedCountLatch = new CountDownLatch(2);
 
 		ServiceTracker<?, ?> serviceTracker =
 			new ServiceTracker<Application, Application>(
