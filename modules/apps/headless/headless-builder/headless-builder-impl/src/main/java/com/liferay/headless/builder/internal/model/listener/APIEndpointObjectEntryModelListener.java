@@ -74,7 +74,7 @@ public class APIEndpointObjectEntryModelListener
 		try {
 			Map<String, Serializable> values = objectEntry.getValues();
 
-			if (!_validateEndpointPath((String)values.get("path"))) {
+			if (!_validatePath((String)values.get("path"))) {
 				throw new IllegalArgumentException(
 					"Path can have a maximum of 255 alphanumeric characters");
 			}
@@ -116,8 +116,8 @@ public class APIEndpointObjectEntryModelListener
 		}
 	}
 
-	private boolean _validateEndpointPath(String path) {
-		Matcher matcher = _baseEndpointPathPattern.matcher(path);
+	private boolean _validatePath(String path) {
+		Matcher matcher = _pathPattern.matcher(path);
 
 		return matcher.matches();
 	}
@@ -143,7 +143,7 @@ public class APIEndpointObjectEntryModelListener
 		return true;
 	}
 
-	private static final Pattern _baseEndpointPathPattern = Pattern.compile(
+	private static final Pattern _pathPattern = Pattern.compile(
 		"[a-zA-Z0-9-/]{1,255}");
 
 	@Reference
