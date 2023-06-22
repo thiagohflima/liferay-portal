@@ -75,9 +75,6 @@ public class ObjectEntryInfoItemObjectProvider
 			return objectEntry;
 		}
 
-		ERCInfoItemIdentifier ercInfoItemIdentifier =
-			(ERCInfoItemIdentifier)infoItemIdentifier;
-
 		ObjectEntryManager objectEntryManager =
 			_objectEntryManagerRegistry.getObjectEntryManager(
 				_objectDefinition.getStorageType());
@@ -86,6 +83,9 @@ public class ObjectEntryInfoItemObjectProvider
 			ServiceContextThreadLocal.getServiceContext();
 
 		ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
+
+		ERCInfoItemIdentifier ercInfoItemIdentifier =
+			(ERCInfoItemIdentifier)infoItemIdentifier;
 
 		try {
 			com.liferay.object.rest.dto.v1_0.ObjectEntry objectEntry =
