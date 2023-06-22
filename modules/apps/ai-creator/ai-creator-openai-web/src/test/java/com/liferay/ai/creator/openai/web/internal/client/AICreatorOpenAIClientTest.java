@@ -110,7 +110,6 @@ public class AICreatorOpenAIClientTest {
 				apiKey, content, LocaleUtil.getDefault(), tone, words));
 
 		_assertMessageRoleSystemContent(LocaleUtil.getDefault(), tone, words);
-
 		_assertOptions(
 			apiKey, content, ContentTypes.APPLICATION_JSON,
 			AICreatorOpenAIClient.ENDPOINT_COMPLETION);
@@ -171,7 +170,6 @@ public class AICreatorOpenAIClientTest {
 		_aiCreatorOpenAIClient.validateAPIKey(apiKey);
 
 		_assertOptions(apiKey, AICreatorOpenAIClient.ENDPOINT_VALIDATION);
-
 		_assertResponse(response);
 		_assertResponseJSONObject(responseJSONObject);
 	}
