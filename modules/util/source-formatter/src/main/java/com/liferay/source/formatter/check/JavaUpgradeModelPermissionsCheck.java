@@ -61,7 +61,6 @@ public class JavaUpgradeModelPermissionsCheck extends BaseJavaTermCheck {
 	private String _formatClass(String content, List<String> importNames) {
 		Matcher setGroupPermissionsMatcher =
 			_setGroupPermissionsPattern.matcher(content);
-
 		Matcher setGuestPermissionsMatcher =
 			_setGuestPermissionsPattern.matcher(content);
 
@@ -92,19 +91,20 @@ public class JavaUpgradeModelPermissionsCheck extends BaseJavaTermCheck {
 	}
 
 	private String _formatMethod(String content, String fileContent) {
+		boolean hasSetGroupPermissions = false;
+
 		Matcher setGroupPermissionsMatcher =
 			_setGroupPermissionsPattern.matcher(content);
-
-		Matcher setGuestPermissionsMatcher =
-			_setGuestPermissionsPattern.matcher(content);
-
-		boolean hasSetGroupPermissions = false;
-		boolean hasSetGuestPermissions = false;
 
 		if (setGroupPermissionsMatcher.find()) {
 			hasSetGroupPermissions = _isServiceContextMethodCall(
 				content, fileContent, setGroupPermissionsMatcher.group(1));
 		}
+
+		boolean hasSetGuestPermissions = false;
+
+		Matcher setGuestPermissionsMatcher =
+			_setGuestPermissionsPattern.matcher(content);
 
 		if (setGuestPermissionsMatcher.find()) {
 			hasSetGuestPermissions = _isServiceContextMethodCall(
@@ -126,27 +126,26 @@ public class JavaUpgradeModelPermissionsCheck extends BaseJavaTermCheck {
 		Matcher setGroupPermissionsMatcher, Matcher setGuestPermissionsMatcher,
 		String javaTermContent) {
 
-		String oldSub;
-		String serviceContext;
 		String groupPermissions = "new String[0]";
 		String guestPermissions = "new String[0]";
+		String oldSub = null;
+		String serviceContext = null;
 
 		if (hasSetGroupPermissions) {
+			groupPermissions = setGroupPermissionsMatcher.group(2);
 			oldSub = setGroupPermissionsMatcher.group(0);
 			serviceContext = setGroupPermissionsMatcher.group(1);
-			groupPermissions = setGroupPermissionsMatcher.group(2);
 
 			if (hasSetGuestPermissions) {
 				guestPermissions = setGuestPermissionsMatcher.group(2);
-
 				javaTermContent = StringUtil.removeSubstring(
 					javaTermContent, setGuestPermissionsMatcher.group(0));
 			}
 		}
 		else {
+			guestPermissions = setGuestPermissionsMatcher.group(2);
 			oldSub = setGuestPermissionsMatcher.group(0);
 			serviceContext = setGuestPermissionsMatcher.group(1);
-			guestPermissions = setGuestPermissionsMatcher.group(2);
 		}
 
 		return StringUtil.replace(
