@@ -75,8 +75,9 @@ public class SXPElementServiceImpl extends SXPElementServiceBaseImpl {
 
 		if (sxpElement.isReadOnly()) {
 			throw new SXPElementReadOnlyException(
-				"This SXPElement is read-only and is not allowed to be " +
-					"Deleted");
+				StringBundler.concat(
+					"Search experiences element ", sxpElementId,
+					" is read-only"));
 		}
 
 		return sxpElementLocalService.deleteSXPElement(sxpElement);
@@ -138,9 +139,8 @@ public class SXPElementServiceImpl extends SXPElementServiceBaseImpl {
 		if (sxpElement.isReadOnly()) {
 			throw new SXPElementReadOnlyException(
 				StringBundler.concat(
-					"SXPElement with External Reference Code ",
-					sxpElement.getExternalReferenceCode(),
-					" is read-only and is not allowed to be Updated"));
+					"Search experiences element ", sxpElementId,
+					" is read-only"));
 		}
 
 		_sxpElementModelResourcePermission.check(
