@@ -113,7 +113,7 @@ public class AICreatorOpenAIClientTest {
 
 		_assertOptions(
 			apiKey, content, ContentTypes.APPLICATION_JSON,
-			AICreatorOpenAIClient.CHAT_COMPLETION_ENDPOINT);
+			AICreatorOpenAIClient.ENDPOINT_CHAT_COMPLETION);
 
 		_assertResponse(response);
 	}
@@ -126,7 +126,7 @@ public class AICreatorOpenAIClientTest {
 
 		_testIOException(
 			content, ContentTypes.APPLICATION_JSON,
-			AICreatorOpenAIClient.CHAT_COMPLETION_ENDPOINT,
+			AICreatorOpenAIClient.ENDPOINT_CHAT_COMPLETION,
 			apiKey -> _aiCreatorOpenAIClient.getCompletion(
 				apiKey, content, LocaleUtil.getDefault(),
 				RandomTestUtil.randomString(), RandomTestUtil.randomInt()));
@@ -140,7 +140,7 @@ public class AICreatorOpenAIClientTest {
 
 		_testResponseWithErrorKey(
 			content, ContentTypes.APPLICATION_JSON,
-			AICreatorOpenAIClient.CHAT_COMPLETION_ENDPOINT,
+			AICreatorOpenAIClient.ENDPOINT_CHAT_COMPLETION,
 			apiKey -> _aiCreatorOpenAIClient.getCompletion(
 				apiKey, content, LocaleUtil.getDefault(),
 				RandomTestUtil.randomString(), RandomTestUtil.randomInt()));
@@ -154,7 +154,7 @@ public class AICreatorOpenAIClientTest {
 
 		_testUnauthorizedResponseCode(
 			content, ContentTypes.APPLICATION_JSON,
-			AICreatorOpenAIClient.CHAT_COMPLETION_ENDPOINT,
+			AICreatorOpenAIClient.ENDPOINT_CHAT_COMPLETION,
 			apiKey -> _aiCreatorOpenAIClient.getCompletion(
 				apiKey, content, LocaleUtil.getDefault(),
 				RandomTestUtil.randomString(), RandomTestUtil.randomInt()));
@@ -171,7 +171,7 @@ public class AICreatorOpenAIClientTest {
 
 		_aiCreatorOpenAIClient.validateAPIKey(apiKey);
 
-		_assertOptions(apiKey, AICreatorOpenAIClient.VALIDATE_API_KEY_ENDPOINT);
+		_assertOptions(apiKey, AICreatorOpenAIClient.ENDPOINT_VALIDATION);
 
 		_assertResponse(response);
 
@@ -181,21 +181,21 @@ public class AICreatorOpenAIClientTest {
 	@Test
 	public void testValidateAPIKeyIOException() throws Exception {
 		_testIOException(
-			null, null, AICreatorOpenAIClient.VALIDATE_API_KEY_ENDPOINT,
+			null, null, AICreatorOpenAIClient.ENDPOINT_VALIDATION,
 			apiKey -> _aiCreatorOpenAIClient.validateAPIKey(apiKey));
 	}
 
 	@Test
 	public void testValidateAPIKeyResponseWithErrorKey() throws Exception {
 		_testResponseWithErrorKey(
-			null, null, AICreatorOpenAIClient.VALIDATE_API_KEY_ENDPOINT,
+			null, null, AICreatorOpenAIClient.ENDPOINT_VALIDATION,
 			apiKey -> _aiCreatorOpenAIClient.validateAPIKey(apiKey));
 	}
 
 	@Test
 	public void testValidateAPIKeyUnauthorizedResponseCode() throws Exception {
 		_testUnauthorizedResponseCode(
-			null, null, AICreatorOpenAIClient.VALIDATE_API_KEY_ENDPOINT,
+			null, null, AICreatorOpenAIClient.ENDPOINT_VALIDATION,
 			apiKey -> _aiCreatorOpenAIClient.validateAPIKey(apiKey));
 	}
 

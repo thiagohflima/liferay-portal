@@ -71,7 +71,7 @@ public class AICreatorOpenAIClientExceptionTest {
 				HttpURLConnection.HTTP_CLIENT_TIMEOUT),
 			RandomTestUtil.randomString(),
 			AICreatorOpenAIClientException.
-				AN_UNEXPECTED_ERROR_COMPLETION_MESSAGE_KEY,
+				MESSAGE_KEY_AN_UNEXPECTED_ERROR_COMPLETION,
 			(aiCreatorOpenAIClientException, locale) ->
 				aiCreatorOpenAIClientException.getCompletionLocalizedMessage(
 					locale));
@@ -83,7 +83,7 @@ public class AICreatorOpenAIClientExceptionTest {
 			new AICreatorOpenAIClientException(500),
 			RandomTestUtil.randomString(),
 			AICreatorOpenAIClientException.
-				OPENAI_IS_EXPERIENCING_ISSUES_MESSAGE_KEY,
+				MESSAGE_KEY_OPENAI_IS_EXPERIENCING_ISSUES,
 			(aiCreatorOpenAIClientException, locale) ->
 				aiCreatorOpenAIClientException.getCompletionLocalizedMessage(
 					locale));
@@ -95,7 +95,7 @@ public class AICreatorOpenAIClientExceptionTest {
 			new AICreatorOpenAIClientException(429),
 			RandomTestUtil.randomString(),
 			AICreatorOpenAIClientException.
-				OPENAI_IS_EXPERIENCING_ISSUES_MESSAGE_KEY,
+				MESSAGE_KEY_OPENAI_IS_EXPERIENCING_ISSUES,
 			(aiCreatorOpenAIClientException, locale) ->
 				aiCreatorOpenAIClientException.getCompletionLocalizedMessage(
 					locale));
@@ -107,7 +107,7 @@ public class AICreatorOpenAIClientExceptionTest {
 			new AICreatorOpenAIClientException(
 				HttpURLConnection.HTTP_CLIENT_TIMEOUT),
 			RandomTestUtil.randomString(),
-			AICreatorOpenAIClientException.AN_UNEXPECTED_ERROR_MESSAGE_KEY,
+			AICreatorOpenAIClientException.MESSAGE_KEY_AN_UNEXPECTED_ERROR,
 			(aiCreatorOpenAIClientException, locale) ->
 				aiCreatorOpenAIClientException.getLocalizedMessage(locale));
 	}
@@ -118,7 +118,7 @@ public class AICreatorOpenAIClientExceptionTest {
 			new AICreatorOpenAIClientException(
 				HttpURLConnection.HTTP_UNAUTHORIZED),
 			"invalid_api_key",
-			AICreatorOpenAIClientException.INCORRECT_API_KEY_MESSAGE_KEY,
+			AICreatorOpenAIClientException.MESSAGE_KEY_INCORRECT_API_KEY,
 			(aiCreatorOpenAIClientException, locale) ->
 				aiCreatorOpenAIClientException.getLocalizedMessage(locale));
 	}
@@ -128,7 +128,7 @@ public class AICreatorOpenAIClientExceptionTest {
 		_assertGetLocalizedMessage(
 			new AICreatorOpenAIClientException(new IOException()),
 			RandomTestUtil.randomString(),
-			AICreatorOpenAIClientException.AN_UNEXPECTED_ERROR_MESSAGE_KEY,
+			AICreatorOpenAIClientException.MESSAGE_KEY_AN_UNEXPECTED_ERROR,
 			(aiCreatorOpenAIClientException, locale) ->
 				aiCreatorOpenAIClientException.getLocalizedMessage(locale));
 	}
@@ -139,7 +139,7 @@ public class AICreatorOpenAIClientExceptionTest {
 			new AICreatorOpenAIClientException(
 				HttpURLConnection.HTTP_UNAUTHORIZED),
 			RandomTestUtil.randomString(),
-			AICreatorOpenAIClientException.INCORRECT_API_KEY_MESSAGE_KEY,
+			AICreatorOpenAIClientException.MESSAGE_KEY_INCORRECT_API_KEY,
 			(aiCreatorOpenAIClientException, locale) ->
 				aiCreatorOpenAIClientException.getLocalizedMessage(locale));
 	}

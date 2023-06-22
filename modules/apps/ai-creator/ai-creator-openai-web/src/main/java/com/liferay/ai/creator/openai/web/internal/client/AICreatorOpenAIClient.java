@@ -52,7 +52,7 @@ public class AICreatorOpenAIClient {
 
 		options.addHeader("Authorization", "Bearer " + apiKey);
 		options.addHeader("Content-Type", ContentTypes.APPLICATION_JSON);
-		options.setLocation(CHAT_COMPLETION_ENDPOINT);
+		options.setLocation(ENDPOINT_COMPLETION);
 		options.setBody(
 			JSONUtil.put(
 				"messages",
@@ -132,7 +132,7 @@ public class AICreatorOpenAIClient {
 		Http.Options options = new Http.Options();
 
 		options.addHeader("Authorization", "Bearer " + apiKey);
-		options.setLocation(VALIDATE_API_KEY_ENDPOINT);
+		options.setLocation(ENDPOINT_VALIDATION);
 
 		try (InputStream inputStream = _http.URLtoInputStream(options)) {
 			Http.Response response = options.getResponse();
@@ -167,10 +167,10 @@ public class AICreatorOpenAIClient {
 		}
 	}
 
-	protected static final String CHAT_COMPLETION_ENDPOINT =
+	protected static final String ENDPOINT_COMPLETION =
 		"https://api.openai.com/v1/chat/completions";
 
-	protected static final String VALIDATE_API_KEY_ENDPOINT =
+	protected static final String ENDPOINT_VALIDATION =
 		"https://api.openai.com/v1/models/text-davinci-003";
 
 	private static final Log _log = LogFactoryUtil.getLog(
