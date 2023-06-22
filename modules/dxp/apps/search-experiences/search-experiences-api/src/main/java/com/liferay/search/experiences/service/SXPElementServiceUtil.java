@@ -59,11 +59,11 @@ public class SXPElementServiceUtil {
 	}
 
 	public static SXPElement fetchSXPElementByExternalReferenceCode(
-			long companyId, String externalReferenceCode)
+			String externalReferenceCode, long companyId)
 		throws PortalException {
 
 		return getService().fetchSXPElementByExternalReferenceCode(
-			companyId, externalReferenceCode);
+			externalReferenceCode, companyId);
 	}
 
 	/**
@@ -82,11 +82,11 @@ public class SXPElementServiceUtil {
 	}
 
 	public static SXPElement getSXPElementByExternalReferenceCode(
-			long companyId, String externalReferenceCode)
+			String externalReferenceCode, long companyId)
 		throws PortalException {
 
 		return getService().getSXPElementByExternalReferenceCode(
-			companyId, externalReferenceCode);
+			externalReferenceCode, companyId);
 	}
 
 	public static SXPElement updateSXPElement(

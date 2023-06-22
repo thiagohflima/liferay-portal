@@ -60,11 +60,11 @@ public class SXPElementServiceWrapper
 	@Override
 	public com.liferay.search.experiences.model.SXPElement
 			fetchSXPElementByExternalReferenceCode(
-				long companyId, String externalReferenceCode)
+				String externalReferenceCode, long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _sxpElementService.fetchSXPElementByExternalReferenceCode(
-			companyId, externalReferenceCode);
+			externalReferenceCode, companyId);
 	}
 
 	/**
@@ -88,11 +88,11 @@ public class SXPElementServiceWrapper
 	@Override
 	public com.liferay.search.experiences.model.SXPElement
 			getSXPElementByExternalReferenceCode(
-				long companyId, String externalReferenceCode)
+				String externalReferenceCode, long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _sxpElementService.getSXPElementByExternalReferenceCode(
-			companyId, externalReferenceCode);
+			externalReferenceCode, companyId);
 	}
 
 	@Override

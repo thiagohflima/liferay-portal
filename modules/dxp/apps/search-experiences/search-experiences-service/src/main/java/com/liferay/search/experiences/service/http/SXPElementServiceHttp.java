@@ -139,8 +139,8 @@ public class SXPElementServiceHttp {
 
 	public static com.liferay.search.experiences.model.SXPElement
 			fetchSXPElementByExternalReferenceCode(
-				HttpPrincipal httpPrincipal, long companyId,
-				String externalReferenceCode)
+				HttpPrincipal httpPrincipal, String externalReferenceCode,
+				long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
@@ -150,7 +150,7 @@ public class SXPElementServiceHttp {
 				_fetchSXPElementByExternalReferenceCodeParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, companyId, externalReferenceCode);
+				methodKey, externalReferenceCode, companyId);
 
 			Object returnObj = null;
 
@@ -222,8 +222,8 @@ public class SXPElementServiceHttp {
 
 	public static com.liferay.search.experiences.model.SXPElement
 			getSXPElementByExternalReferenceCode(
-				HttpPrincipal httpPrincipal, long companyId,
-				String externalReferenceCode)
+				HttpPrincipal httpPrincipal, String externalReferenceCode,
+				long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
@@ -233,7 +233,7 @@ public class SXPElementServiceHttp {
 				_getSXPElementByExternalReferenceCodeParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, companyId, externalReferenceCode);
+				methodKey, externalReferenceCode, companyId);
 
 			Object returnObj = null;
 
@@ -323,13 +323,13 @@ public class SXPElementServiceHttp {
 		new Class[] {long.class};
 	private static final Class<?>[]
 		_fetchSXPElementByExternalReferenceCodeParameterTypes2 = new Class[] {
-			long.class, String.class
+			String.class, long.class
 		};
 	private static final Class<?>[] _getSXPElementParameterTypes3 =
 		new Class[] {long.class};
 	private static final Class<?>[]
 		_getSXPElementByExternalReferenceCodeParameterTypes4 = new Class[] {
-			long.class, String.class
+			String.class, long.class
 		};
 	private static final Class<?>[] _updateSXPElementParameterTypes5 =
 		new Class[] {
