@@ -76,7 +76,7 @@ public class LanguageFilter extends BasePortalFilter {
 			return;
 		}
 
-		_eTags.clear();
+		_eTagValues.clear();
 
 		_portletConfig = PortletConfigFactoryUtil.create(
 			portlets.get(0), filterConfig.getServletContext());
@@ -93,7 +93,7 @@ public class LanguageFilter extends BasePortalFilter {
 		String ifNoneMatch = httpServletRequest.getHeader(
 			HttpHeaders.IF_NONE_MATCH);
 
-		if ((ifNoneMatch != null) && ifNoneMatch.equals(_eTags.get(eTagKey))) {
+		if ((ifNoneMatch != null) && ifNoneMatch.equals(_eTagValues.get(eTagKey))) {
 			httpServletResponse.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
 
 			return;
@@ -121,13 +121,13 @@ public class LanguageFilter extends BasePortalFilter {
 		httpServletResponse.setHeader(
 			HttpHeaders.CACHE_CONTROL, "private, no-cache");
 
-		String eTag =
+		String eTagValue =
 			StringPool.QUOTE + DigesterUtil.digest("SHA-1", content) +
 				StringPool.QUOTE;
 
-		_eTags.put(eTagKey, eTag);
+		_eTagValues.put(eTagKey, eTagValue);
 
-		httpServletResponse.setHeader(HttpHeaders.ETAG, eTag);
+		httpServletResponse.setHeader(HttpHeaders.ETAG, eTagValue);
 
 		ServletResponseUtil.write(httpServletResponse, content);
 	}
@@ -161,7 +161,7 @@ public class LanguageFilter extends BasePortalFilter {
 
 	private static final Log _log = LogFactoryUtil.getLog(LanguageFilter.class);
 
-	private final Map<String, String> _eTags = new ConcurrentHashMap<>();
+	private final Map<String, String> _eTagValues = new ConcurrentHashMap<>();
 	private PortletConfig _portletConfig;
 
 	private static class NoCacheHttpServletRequestWrapper
