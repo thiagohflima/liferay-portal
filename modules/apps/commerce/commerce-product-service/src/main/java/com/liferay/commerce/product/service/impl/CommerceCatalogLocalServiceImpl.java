@@ -483,13 +483,13 @@ public class CommerceCatalogLocalServiceImpl
 				AccountConstants.ACCOUNT_ENTRY_TYPE_SUPPLIER)) {
 
 			throw new AccountEntryTypeException(
-				"Commerce Catalog can only be assigned with an account entry " +
+				"Commerce catalogs can only be assigned with an account entry " +
 					"type:" + AccountConstants.ACCOUNT_ENTRY_TYPE_SUPPLIER);
 		}
 
 		if (accountEntry.getStatus() != WorkflowConstants.STATUS_APPROVED) {
 			throw new AccountEntryStatusException(
-				"Commerce Catalog can only be assigned with an approved " +
+				"Commerce catalogs can only be assigned with an approved " +
 					"account entry");
 		}
 	}
