@@ -110,11 +110,9 @@ public class AICreatorOpenAIClientTest {
 				apiKey, content, LocaleUtil.getDefault(), tone, words));
 
 		_assertMessageRoleSystemContent(LocaleUtil.getDefault(), tone, words);
-
 		_assertOptions(
 			apiKey, content, ContentTypes.APPLICATION_JSON,
 			AICreatorOpenAIClient.ENDPOINT_CHAT_COMPLETION);
-
 		_assertResponse(response);
 	}
 
@@ -172,9 +170,7 @@ public class AICreatorOpenAIClientTest {
 		_aiCreatorOpenAIClient.validateAPIKey(apiKey);
 
 		_assertOptions(apiKey, AICreatorOpenAIClient.ENDPOINT_VALIDATION);
-
 		_assertResponse(response);
-
 		_assertResponseJSONObject(responseJSONObject);
 	}
 
@@ -213,11 +209,9 @@ public class AICreatorOpenAIClientTest {
 
 	private void _assertBody(String content, Http.Body body) throws Exception {
 		Assert.assertNotNull(body);
-
 		Assert.assertEquals(
 			ContentTypes.APPLICATION_JSON, body.getContentType());
 		Assert.assertEquals(StringPool.UTF8, body.getCharset());
-
 		Assert.assertTrue(
 			body.getContent(), JSONUtil.isJSONObject(body.getContent()));
 
@@ -230,7 +224,6 @@ public class AICreatorOpenAIClientTest {
 			"messages");
 
 		Assert.assertNotNull(contentJSONObject.toString(), messagesJSONArray);
-
 		Assert.assertEquals(
 			messagesJSONArray.toString(), 2, messagesJSONArray.length());
 
@@ -241,7 +234,6 @@ public class AICreatorOpenAIClientTest {
 		JSONObject messageJSONObject2 = messagesJSONArray.getJSONObject(1);
 
 		Assert.assertEquals(content, messageJSONObject2.getString("content"));
-
 		Assert.assertEquals("user", messageJSONObject2.getString("role"));
 	}
 
@@ -264,11 +256,8 @@ public class AICreatorOpenAIClientTest {
 		String[] arguments = argumentCaptor.getValue();
 
 		Assert.assertEquals(arguments.toString(), 3, arguments.length);
-
 		Assert.assertEquals(locale.getDisplayName(locale), arguments[0]);
-
 		Assert.assertEquals(String.valueOf(words), arguments[1]);
-
 		Assert.assertEquals(tone, arguments[2]);
 	}
 
