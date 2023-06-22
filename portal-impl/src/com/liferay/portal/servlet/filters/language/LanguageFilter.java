@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 import java.util.concurrent.ConcurrentHashMap;
@@ -160,8 +161,7 @@ public class LanguageFilter extends BasePortalFilter {
 
 	private static final Log _log = LogFactoryUtil.getLog(LanguageFilter.class);
 
-	private final ConcurrentHashMap<String, String> _eTags =
-		new ConcurrentHashMap<>();
+	private final Map<String, String> _eTags = new ConcurrentHashMap<>();
 	private PortletConfig _portletConfig;
 
 	private static class NoCacheHttpServletRequestWrapper
