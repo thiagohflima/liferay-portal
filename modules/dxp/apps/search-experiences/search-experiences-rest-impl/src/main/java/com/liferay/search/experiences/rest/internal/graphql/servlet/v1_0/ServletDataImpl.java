@@ -373,6 +373,11 @@ public class ServletDataImpl implements ServletData {
 							"getSearchableAssetNameLanguagePage"));
 
 					put(
+						"query#SXPBlueprint.sXPElementByExternalReferenceCode",
+						new ObjectValuePair<>(
+							SXPElementResourceImpl.class,
+							"getSXPElementByExternalReferenceCode"));
+					put(
 						"query#SXPElement.export",
 						new ObjectValuePair<>(
 							SXPElementResourceImpl.class,
@@ -381,6 +386,11 @@ public class ServletDataImpl implements ServletData {
 						"query#ElementInstance.sXPElement",
 						new ObjectValuePair<>(
 							SXPElementResourceImpl.class, "getSXPElement"));
+					put(
+						"query#SXPElement.sXPBlueprintByExternalReferenceCode",
+						new ObjectValuePair<>(
+							SXPBlueprintResourceImpl.class,
+							"getSXPBlueprintByExternalReferenceCode"));
 					put(
 						"query#SXPBlueprint.export",
 						new ObjectValuePair<>(

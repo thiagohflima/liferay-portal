@@ -476,6 +476,29 @@ public class Query {
 						getSearchableAssetNameLanguagePage(languageId)));
 	}
 
+	@GraphQLTypeExtension(SXPBlueprint.class)
+	public class GetSXPElementByExternalReferenceCodeTypeExtension {
+
+		public GetSXPElementByExternalReferenceCodeTypeExtension(
+			SXPBlueprint sXPBlueprint) {
+
+			_sXPBlueprint = sXPBlueprint;
+		}
+
+		@GraphQLField
+		public SXPElement sXPElementByExternalReferenceCode() throws Exception {
+			return _applyComponentServiceObjects(
+				_sxpElementResourceComponentServiceObjects,
+				Query.this::_populateResourceContext,
+				sxpElementResource ->
+					sxpElementResource.getSXPElementByExternalReferenceCode(
+						_sXPBlueprint.getExternalReferenceCode()));
+		}
+
+		private SXPBlueprint _sXPBlueprint;
+
+	}
+
 	@GraphQLTypeExtension(SXPElement.class)
 	public class GetSXPElementExportTypeExtension {
 
@@ -513,6 +536,31 @@ public class Query {
 		}
 
 		private ElementInstance _elementInstance;
+
+	}
+
+	@GraphQLTypeExtension(SXPElement.class)
+	public class GetSXPBlueprintByExternalReferenceCodeTypeExtension {
+
+		public GetSXPBlueprintByExternalReferenceCodeTypeExtension(
+			SXPElement sXPElement) {
+
+			_sXPElement = sXPElement;
+		}
+
+		@GraphQLField
+		public SXPBlueprint sXPBlueprintByExternalReferenceCode()
+			throws Exception {
+
+			return _applyComponentServiceObjects(
+				_sxpBlueprintResourceComponentServiceObjects,
+				Query.this::_populateResourceContext,
+				sxpBlueprintResource ->
+					sxpBlueprintResource.getSXPBlueprintByExternalReferenceCode(
+						_sXPElement.getExternalReferenceCode()));
+		}
+
+		private SXPElement _sXPElement;
 
 	}
 
