@@ -48,7 +48,8 @@ public class DuplicateChannelAccountIdExceptionMapper
 			Response.Status.CONFLICT,
 			StringUtil.replace(
 				duplicateCommerceChannelAccountEntryIdException.getMessage(),
-				"account entry id", "accountId"));
+				new String[] {"account entry ID", "commerce channel"},
+				new String[] {"account ID", "channel"}));
 	}
 
 }
