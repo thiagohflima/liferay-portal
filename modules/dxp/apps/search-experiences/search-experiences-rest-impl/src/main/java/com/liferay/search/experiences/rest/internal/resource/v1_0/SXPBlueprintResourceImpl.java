@@ -307,6 +307,7 @@ public class SXPBlueprintResourceImpl extends BaseSXPBlueprintResourceImpl {
 		return SXPBlueprintUtil.toSXPBlueprint(json);
 	}
 
+	@Override
 	public SXPBlueprint putSXPBlueprintByExternalReferenceCode(
 			String externalReferenceCode, SXPBlueprint sxpBlueprint)
 		throws Exception {
