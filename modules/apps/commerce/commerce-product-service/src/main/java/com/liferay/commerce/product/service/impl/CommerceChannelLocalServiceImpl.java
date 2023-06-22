@@ -627,8 +627,8 @@ public class CommerceChannelLocalServiceImpl
 							commerceChannelId) {
 
 						throw new DuplicateCommerceChannelAccountEntryIdException(
-							"There is another commerce channel with account entry ID " +
-								accountEntryId);
+							"There is another commerce channel with account " +
+								"entry ID " + accountEntryId);
 					}
 				}
 			}
