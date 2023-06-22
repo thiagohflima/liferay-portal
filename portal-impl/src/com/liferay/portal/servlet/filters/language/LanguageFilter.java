@@ -198,11 +198,11 @@ public class LanguageFilter extends BasePortalFilter {
 		public Enumeration<String> getHeaderNames() {
 			List<String> headerNames = new ArrayList<>();
 
-			Enumeration<String> headerNamesEnumeration =
+			Enumeration<String> enumeration =
 				_httpServletRequest.getHeaderNames();
 
-			while (headerNamesEnumeration.hasMoreElements()) {
-				String name = headerNamesEnumeration.nextElement();
+			while (enumeration.hasMoreElements()) {
+				String name = enumeration.nextElement();
 
 				if (StringUtil.equalsIgnoreCase(name, "If-Modified-Since") ||
 					StringUtil.equalsIgnoreCase(name, "If-None-Match")) {
@@ -210,7 +210,7 @@ public class LanguageFilter extends BasePortalFilter {
 					continue;
 				}
 
-				headerNames.add(headerNamesEnumeration.nextElement());
+				headerNames.add(enumeration.nextElement());
 			}
 
 			return new Enumeration<String>() {
