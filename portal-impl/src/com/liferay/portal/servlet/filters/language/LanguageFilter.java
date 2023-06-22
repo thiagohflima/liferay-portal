@@ -88,12 +88,14 @@ public class LanguageFilter extends BasePortalFilter {
 			HttpServletResponse httpServletResponse, FilterChain filterChain)
 		throws Exception {
 
-		String eTagKey = _getETagKey(httpServletRequest);
-
 		String ifNoneMatch = httpServletRequest.getHeader(
 			HttpHeaders.IF_NONE_MATCH);
 
-		if ((ifNoneMatch != null) && ifNoneMatch.equals(_eTagValues.get(eTagKey))) {
+		String eTagKey = _getETagKey(httpServletRequest);
+
+		if ((ifNoneMatch != null) &&
+			ifNoneMatch.equals(_eTagValues.get(eTagKey))) {
+
 			httpServletResponse.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
 
 			return;
