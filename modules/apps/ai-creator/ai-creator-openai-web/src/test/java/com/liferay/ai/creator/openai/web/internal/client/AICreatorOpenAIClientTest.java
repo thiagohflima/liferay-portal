@@ -62,8 +62,6 @@ public class AICreatorOpenAIClientTest {
 
 	@Before
 	public void setUp() throws IOException {
-		_originalLanguage = LanguageUtil.getLanguage();
-
 		_aiCreatorOpenAIClient = new AICreatorOpenAIClient();
 
 		_http = Mockito.mock(Http.class);
@@ -75,6 +73,8 @@ public class AICreatorOpenAIClientTest {
 
 		ReflectionTestUtil.setFieldValue(
 			_aiCreatorOpenAIClient, "_jsonFactory", _jsonFactory);
+
+		_originalLanguage = LanguageUtil.getLanguage();
 	}
 
 	@After
