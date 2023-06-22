@@ -316,18 +316,6 @@ public class AICreatorOpenAIClientTest {
 		);
 
 		Mockito.when(
-			_jsonFactory.createJSONObject(Mockito.anyString())
-		).thenReturn(
-			responseJSONObject
-		);
-
-		Mockito.when(
-			_jsonFactory.createJSONObject(Mockito.anyMap())
-		).thenReturn(
-			responseJSONObject
-		);
-
-		Mockito.when(
 			_http.URLtoInputStream(Mockito.any(Http.Options.class))
 		).thenAnswer(
 			invocationOnMock -> {
@@ -347,6 +335,18 @@ public class AICreatorOpenAIClientTest {
 
 				return inputStream;
 			}
+		);
+
+		Mockito.when(
+			_jsonFactory.createJSONObject(Mockito.anyMap())
+		).thenReturn(
+			responseJSONObject
+		);
+
+		Mockito.when(
+			_jsonFactory.createJSONObject(Mockito.anyString())
+		).thenReturn(
+			responseJSONObject
 		);
 
 		return response;
