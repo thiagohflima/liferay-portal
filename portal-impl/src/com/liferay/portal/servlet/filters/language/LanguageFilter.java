@@ -114,12 +114,12 @@ public class LanguageFilter extends BasePortalFilter {
 			_log.debug("Translating response " + completeURL);
 		}
 
+		httpServletResponse.setHeader(
+			HttpHeaders.CACHE_CONTROL, "private, no-cache");
+
 		String content = bufferCacheServletResponse.getString();
 
 		content = translateResponse(httpServletRequest, content);
-
-		httpServletResponse.setHeader(
-			HttpHeaders.CACHE_CONTROL, "private, no-cache");
 
 		String eTagValue =
 			StringPool.QUOTE + DigesterUtil.digest("SHA-1", content) +
