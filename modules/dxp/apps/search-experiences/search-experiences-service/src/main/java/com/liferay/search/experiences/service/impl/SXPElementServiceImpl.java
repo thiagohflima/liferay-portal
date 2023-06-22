@@ -84,7 +84,7 @@ public class SXPElementServiceImpl extends SXPElementServiceBaseImpl {
 
 	@Override
 	public SXPElement fetchSXPElementByExternalReferenceCode(
-			long companyId, String externalReferenceCode)
+			String externalReferenceCode, long companyId)
 		throws PortalException {
 
 		SXPElement sxpElement =
@@ -112,7 +112,7 @@ public class SXPElementServiceImpl extends SXPElementServiceBaseImpl {
 
 	@Override
 	public SXPElement getSXPElementByExternalReferenceCode(
-			long companyId, String externalReferenceCode)
+			String externalReferenceCode, long companyId)
 		throws PortalException {
 
 		SXPElement sxpElement =

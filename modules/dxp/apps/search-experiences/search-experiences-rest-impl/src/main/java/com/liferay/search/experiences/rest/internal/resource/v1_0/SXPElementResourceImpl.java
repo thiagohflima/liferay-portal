@@ -101,7 +101,7 @@ public class SXPElementResourceImpl extends BaseSXPElementResourceImpl {
 
 		com.liferay.search.experiences.model.SXPElement sxpElement =
 			_sxpElementService.getSXPElementByExternalReferenceCode(
-				contextCompany.getCompanyId(), externalReferenceCode);
+				externalReferenceCode, contextCompany.getCompanyId());
 
 		return _sxpElementDTOConverter.toDTO(
 			new DefaultDTOConverterContext(
@@ -317,6 +317,7 @@ public class SXPElementResourceImpl extends BaseSXPElementResourceImpl {
 		return SXPElementUtil.toSXPElement(json);
 	}
 
+	@Override
 	public SXPElement putSXPElementByExternalReferenceCode(
 			String externalReferenceCode, SXPElement sxpElement)
 		throws Exception {
@@ -324,7 +325,7 @@ public class SXPElementResourceImpl extends BaseSXPElementResourceImpl {
 		com.liferay.search.experiences.model.SXPElement
 			serviceBuilderSxpElement =
 				_sxpElementService.fetchSXPElementByExternalReferenceCode(
-					contextCompany.getCompanyId(), externalReferenceCode);
+					externalReferenceCode, contextCompany.getCompanyId());
 
 		sxpElement.setExternalReferenceCode(externalReferenceCode);
 
