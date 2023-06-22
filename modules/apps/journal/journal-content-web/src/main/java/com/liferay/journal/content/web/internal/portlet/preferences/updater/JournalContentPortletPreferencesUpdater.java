@@ -50,12 +50,12 @@ public class JournalContentPortletPreferencesUpdater
 			PortletPreferences portletPreferences, ThemeDisplay themeDisplay)
 		throws Exception {
 
-		AssetEntry assetEntry = _assetEntryLocalService.getEntry(
-			className, classPK);
-
 		AssetRendererFactory<JournalArticle> articleAssetRendererFactory =
 			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClass(
 				JournalArticle.class);
+
+		AssetEntry assetEntry = _assetEntryLocalService.getEntry(
+			className, classPK);
 
 		AssetRenderer<JournalArticle> articleAssetRenderer =
 			articleAssetRendererFactory.getAssetRenderer(
@@ -63,10 +63,9 @@ public class JournalContentPortletPreferencesUpdater
 
 		JournalArticle article = articleAssetRenderer.getAssetObject();
 
-		portletPreferences.setValue("articleId", article.getArticleId());
 		portletPreferences.setValue(
 			"groupId", String.valueOf(article.getGroupId()));
-
+		portletPreferences.setValue("articleId", article.getArticleId());
 		portletPreferences.setValue(
 			"assetEntryId", String.valueOf(assetEntry.getEntryId()));
 

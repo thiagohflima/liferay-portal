@@ -44,12 +44,12 @@ public class DDLDisplayPortletPreferencesUpdater
 			PortletPreferences portletPreferences, ThemeDisplay themeDisplay)
 		throws Exception {
 
-		AssetEntry assetEntry = _assetEntryLocalService.getEntry(
-			className, classPK);
-
 		AssetRendererFactory<DDLRecord> assetRendererFactory =
 			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClass(
 				DDLRecord.class);
+
+		AssetEntry assetEntry = _assetEntryLocalService.getEntry(
+			className, classPK);
 
 		AssetRenderer<DDLRecord> assetRenderer =
 			assetRendererFactory.getAssetRenderer(assetEntry.getClassPK());
