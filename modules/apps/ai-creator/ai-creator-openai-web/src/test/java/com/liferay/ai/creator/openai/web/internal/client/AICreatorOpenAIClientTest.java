@@ -460,10 +460,8 @@ public class AICreatorOpenAIClientTest {
 		}
 
 		_assertOptions(apiKey, content, contentType, location);
-
-		_assertResponseJSONObject(responseJSONObject);
-
 		_assertResponse(response, Mockito.times(2));
+		_assertResponseJSONObject(responseJSONObject);
 	}
 
 	private static Language _originalLanguage;
