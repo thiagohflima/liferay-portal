@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -233,7 +233,10 @@ public class LCSLicenseManager {
 					try {
 						session.invalidate();
 					}
-					catch (Exception e) {
+					catch (Exception exception) {
+						if (_log.isDebugEnabled()) {
+							_log.debug(exception);
+						}
 					}
 				}
 
@@ -258,10 +261,10 @@ public class LCSLicenseManager {
 			return (com.liferay.portal.kernel.events.LifecycleAction)
 				lifecycleActionClass.newInstance();
 		}
-		catch (Exception e) {
-			_log.error(e);
+		catch (Exception exception) {
+			_log.error(exception);
 
-			throw new RuntimeException(e);
+			throw new RuntimeException(exception);
 		}
 	}
 
@@ -377,8 +380,8 @@ public class LCSLicenseManager {
 
 			FileUtil.write(lcsStateFile, bytes);
 		}
-		catch (Exception e) {
-			_log.error("Unable to write LCSState", e);
+		catch (Exception exception) {
+			_log.error("Unable to write LCSState", exception);
 		}
 	}
 
@@ -485,8 +488,8 @@ public class LCSLicenseManager {
 
 			PropertiesUtil.load(lcsStateProperties, new String(bytes));
 		}
-		catch (Exception e) {
-			_log.error("Unable to read LCSState", e);
+		catch (Exception exception) {
+			_log.error("Unable to read LCSState", exception);
 		}
 
 		return lcsStateProperties;
@@ -507,8 +510,8 @@ public class LCSLicenseManager {
 			content = StringUtil.read(
 				classLoader, "com/liferay/portal/license/classloader/keys.txt");
 		}
-		catch (Exception e) {
-			_log.error(e);
+		catch (Exception exception) {
+			_log.error(exception);
 		}
 
 		String contentDigest = DigesterUtil.digestBase64(content);
@@ -565,7 +568,10 @@ public class LCSLicenseManager {
 		try {
 			user = PortalUtil.getUser(httpServletRequest);
 		}
-		catch (Exception e) {
+		catch (Exception exception) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(exception);
+			}
 		}
 
 		if ((user != null) && OmniadminUtil.isOmniadmin(user)) {

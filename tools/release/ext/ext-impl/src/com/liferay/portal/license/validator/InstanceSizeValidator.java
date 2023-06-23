@@ -26,9 +26,7 @@ public class InstanceSizeValidator extends LicenseValidator {
 
 	@Override
 	public void doValidateVersion(License license) throws Exception {
-		String instanceSize = license.getInstanceSize();
-
-		if (Validator.isNull(instanceSize)) {
+		if (Validator.isNull(license.getInstanceSize())) {
 			return;
 		}
 
