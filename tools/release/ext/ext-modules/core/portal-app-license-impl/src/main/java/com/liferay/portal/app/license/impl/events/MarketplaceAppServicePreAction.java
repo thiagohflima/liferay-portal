@@ -44,15 +44,18 @@ public class MarketplaceAppServicePreAction extends Action {
 	}
 
 	@Override
-	public void run(HttpServletRequest request, HttpServletResponse response) {
+	public void run(
+		HttpServletRequest httpServletRequest,
+		HttpServletResponse httpServletResponse) {
+
 		try {
-			_clientIPAddresses.add(request.getRemoteAddr());
+			_clientIPAddresses.add(httpServletRequest.getRemoteAddr());
 
 			if (_clientIPAddresses.size() > 10) {
-				if (_isControlPanel(request)) {
-					response.sendRedirect(_licensePageURL);
+				if (_isControlPanel(httpServletRequest)) {
+					httpServletResponse.sendRedirect(_licensePageURL);
 				}
-				else if (_isLicensePage(request)) {
+				else if (_isLicensePage(httpServletRequest)) {
 					StringBundler sb = new StringBundler(4);
 
 					sb.append("You have exceeded the developer license ");
@@ -60,7 +63,8 @@ public class MarketplaceAppServicePreAction extends Action {
 					sb.append(_getBundleSymbolicName());
 					sb.append(".");
 
-					request.setAttribute("ERROR_MESSAGE", sb.toString());
+					httpServletRequest.setAttribute(
+						"ERROR_MESSAGE", sb.toString());
 				}
 			}
 		}
