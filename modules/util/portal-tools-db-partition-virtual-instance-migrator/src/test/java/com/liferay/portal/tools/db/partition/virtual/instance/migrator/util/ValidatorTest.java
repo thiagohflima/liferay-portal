@@ -73,7 +73,6 @@ public class ValidatorTest {
 					"[WARN] Table table2 is not present in the target database",
 					"[WARN] Table table4 is not present in the source " +
 						"database")));
-
 		_testValidatePartitionedTables(
 			new ArrayList<>(Arrays.asList("table1", "table3", "table4")),
 			new ArrayList<>(
@@ -85,7 +84,6 @@ public class ValidatorTest {
 					"[WARN] Table table2 is not present in the source database",
 					"[WARN] Table table5 is not present in the source " +
 						"database")));
-
 		_testValidatePartitionedTables(
 			new ArrayList<>(
 				Arrays.asList(
@@ -100,7 +98,7 @@ public class ValidatorTest {
 	}
 
 	@Test
-	public void testValidateReleaseHigherVersionModules() throws Exception {
+	public void ttestValidateReleaseVersionModule() throws Exception {
 		_testValidateReleaseVersionModule(
 			"1.0.0", "module2.service",
 			() -> _validateAndAssert(
@@ -108,10 +106,6 @@ public class ValidatorTest {
 				Arrays.asList(
 					"[ERROR] Module module2.service needs to be upgraded in " +
 						"the target database before the migration")));
-	}
-
-	@Test
-	public void testValidateReleaseLowerVersionModules() throws Exception {
 		_testValidateReleaseVersionModule(
 			"10.0.0", "module1",
 			() -> _validateAndAssert(
