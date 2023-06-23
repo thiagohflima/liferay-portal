@@ -83,8 +83,7 @@ public class APIApplicationPublisherUtil {
 			boolean published = addedCountLatch.await(1, TimeUnit.MINUTES);
 
 			if (!published) {
-				throw new Exception(
-					"Something went wrong publishing the applications");
+				throw new Exception("Unable to publish API applications");
 			}
 
 			Collections.addAll(_publishedAPIApplications, apiApplications);
@@ -138,8 +137,7 @@ public class APIApplicationPublisherUtil {
 			boolean unpublished = removedCountLatch.await(1, TimeUnit.MINUTES);
 
 			if (!unpublished) {
-				throw new Exception(
-					"Something went wrong unpublishing the applications");
+				throw new Exception("Unable to unpublish API applications");
 			}
 
 			_publishedAPIApplications.removeAll(Arrays.asList(apiApplications));
