@@ -260,6 +260,7 @@ public class MediaWikiImporter {
 
 		try {
 			DLValidatorUtil.validateFileName(fileName);
+
 			DLValidatorUtil.validateFileExtension(fileName);
 
 			DLValidatorUtil.validateFileSize(
