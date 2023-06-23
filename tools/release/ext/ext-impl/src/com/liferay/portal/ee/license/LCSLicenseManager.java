@@ -99,35 +99,26 @@ public class LCSLicenseManager {
 			return;
 		}
 
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
-
-		try {
-			connection = DataAccess.getConnection();
-
-			preparedStatement = connection.prepareStatement(
+		try (Connection connection = DataAccess.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(
 				"select count(*) from User_ where (defaultUser = ?) " +
-					"and (status = ?)");
+					"and (status = ?)")) {
 
 			preparedStatement.setBoolean(1, false);
 			preparedStatement.setLong(2, WorkflowConstants.STATUS_APPROVED);
 
-			resultSet = preparedStatement.executeQuery();
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				while (resultSet.next()) {
+					long count = resultSet.getLong(1);
 
-			while (resultSet.next()) {
-				long count = resultSet.getLong(1);
-
-				if (count >= maxUsersCount) {
-					throw new CompanyMaxUsersException();
+					if (count >= maxUsersCount) {
+						throw new CompanyMaxUsersException();
+					}
 				}
 			}
 		}
 		catch (SQLException sqlException) {
 			throw new PortalException(sqlException);
-		}
-		finally {
-			DataAccess.cleanUp(connection, preparedStatement, resultSet);
 		}
 	}
 
@@ -294,9 +285,10 @@ public class LCSLicenseManager {
 		_noConnectionTime = GetterUtil.getLong(
 			lcsStateProperties.getProperty("noConnectionTime"));
 
-		ClusterStatusWatcher clusterStatusWatcher = new ClusterStatusWatcher();
-
 		if (PropsValues.CLUSTER_LINK_ENABLED) {
+			ClusterStatusWatcher clusterStatusWatcher =
+				new ClusterStatusWatcher();
+
 			clusterStatusWatcher.start();
 		}
 	}
@@ -349,6 +341,7 @@ public class LCSLicenseManager {
 
 			lcsStateProperties.setProperty(
 				"lastActiveTime", String.valueOf(_lastActiveTime));
+
 			lcsStateProperties.setProperty(
 				"noConnectionTime", String.valueOf(_noConnectionTime));
 		}
@@ -448,8 +441,9 @@ public class LCSLicenseManager {
 			sb.append(" and ");
 
 			long minutesLeft =
-				(graceTimeLeft - (daysLeft * Time.DAY) -
-					(hoursLeft * Time.HOUR)) / Time.MINUTE;
+				graceTimeLeft - (daysLeft * Time.DAY) - (hoursLeft * Time.HOUR);
+
+			minutesLeft = minutesLeft / Time.MINUTE;
 
 			sb.append(minutesLeft);
 			sb.append(" minute");
@@ -773,10 +767,10 @@ public class LCSLicenseManager {
 			}
 		}
 
-		ClusterNodeResponse clusterNodeResponse = clusterNodeResponseList.get(
-			_maxClusterNodes);
-
 		if (_clusterGracePeriodEndTime == 0) {
+			ClusterNodeResponse clusterNodeResponse =
+				clusterNodeResponseList.get(_maxClusterNodes);
+
 			_clusterGracePeriodEndTime =
 				(long)clusterNodeResponse.getResult() + _CLUSTER_GRACE_TIME;
 		}
@@ -939,8 +933,8 @@ public class LCSLicenseManager {
 
 						if (_log.isInfoEnabled()) {
 							_log.info(
-								"Shutting down current node as it is " +
-									"the latest one");
+								"Shutting down current node as it is the " +
+									"latest one");
 						}
 
 						System.exit(0);
