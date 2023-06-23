@@ -36,11 +36,11 @@ import org.osgi.util.tracker.BundleTrackerCustomizer;
 /**
  * @author Amos Fong
  */
-public class AppBundleTracker extends BundleTracker {
+public class AppBundleTracker extends BundleTracker<Object> {
 
 	public AppBundleTracker(
 		BundleContext bundleContext, int stateMask,
-		BundleTrackerCustomizer bundleTrackerCustomizer) {
+		BundleTrackerCustomizer<Object> bundleTrackerCustomizer) {
 
 		super(bundleContext, stateMask, bundleTrackerCustomizer);
 
