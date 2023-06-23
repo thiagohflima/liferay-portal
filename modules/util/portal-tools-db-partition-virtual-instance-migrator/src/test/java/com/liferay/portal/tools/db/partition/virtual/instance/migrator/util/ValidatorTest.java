@@ -67,7 +67,7 @@ public class ValidatorTest {
 				Arrays.asList("table1", "table2", "table3", "table5")),
 			new ArrayList<>(
 				Arrays.asList("table1", "table3", "table4", "table5")),
-			() -> _validateAndAssert(
+			() -> _assertValidateDatabases(
 				false, true,
 				Arrays.asList(
 					"[WARN] Table table2 is not present in the target database",
@@ -78,7 +78,7 @@ public class ValidatorTest {
 			new ArrayList<>(
 				Arrays.asList(
 					"table1", "table2", "table3", "table4", "table5")),
-			() -> _validateAndAssert(
+			() -> _assertValidateDatabases(
 				false, true,
 				Arrays.asList(
 					"[WARN] Table table2 is not present in the source database",
@@ -89,7 +89,7 @@ public class ValidatorTest {
 				Arrays.asList(
 					"table1", "table2", "table3", "table4", "table5")),
 			new ArrayList<>(Arrays.asList("table1", "table3", "table4")),
-			() -> _validateAndAssert(
+			() -> _assertValidateDatabases(
 				false, true,
 				Arrays.asList(
 					"[WARN] Table table2 is not present in the target database",
@@ -101,14 +101,14 @@ public class ValidatorTest {
 	public void ttestValidateReleaseVersionModule() throws Exception {
 		_testValidateReleaseVersionModule(
 			"1.0.0", "module2.service",
-			() -> _validateAndAssert(
+			() -> _assertValidateDatabases(
 				true, false,
 				Arrays.asList(
 					"[ERROR] Module module2.service needs to be upgraded in " +
 						"the target database before the migration")));
 		_testValidateReleaseVersionModule(
 			"10.0.0", "module1",
-			() -> _validateAndAssert(
+			() -> _assertValidateDatabases(
 				true, false,
 				Arrays.asList(
 					"[ERROR] Module module1 needs to be upgraded in the " +
@@ -143,7 +143,7 @@ public class ValidatorTest {
 			}
 		}
 
-		_validateAndAssert(
+		_assertValidateDatabases(
 			false, true,
 			Arrays.asList(
 				"[WARN] Module module1 is not present in the target database"));
@@ -153,14 +153,14 @@ public class ValidatorTest {
 	public void testValidateReleaseMissingTargetModules() throws Exception {
 		_testValidateReleaseMissingTargetModule(
 			"module1",
-			() -> _validateAndAssert(
+			() -> _assertValidateDatabases(
 				false, true,
 				Arrays.asList(
 					"[WARN] Module module1 is not present in the source " +
 						"database")));
 		_testValidateReleaseMissingTargetModule(
 			"module2.service",
-			() -> _validateAndAssert(
+			() -> _assertValidateDatabases(
 				true, false,
 				Arrays.asList(
 					"[ERROR] Module module2.service needs to be installed in " +
@@ -174,7 +174,7 @@ public class ValidatorTest {
 
 		_testValidateReleaseState(
 			failedServletContextNames, new ArrayList<>(),
-			() -> _validateAndAssert(
+			() -> _assertValidateDatabases(
 				true, false,
 				Arrays.asList(
 					"[ERROR] Module module1 has a failed release state in " +
@@ -183,7 +183,7 @@ public class ValidatorTest {
 						"the source database")));
 		_testValidateReleaseState(
 			new ArrayList<>(), failedServletContextNames,
-			() -> _validateAndAssert(
+			() -> _assertValidateDatabases(
 				true, false,
 				Arrays.asList(
 					"[ERROR] Module module1 has a failed release state in " +
@@ -196,14 +196,14 @@ public class ValidatorTest {
 	public void testValidateReleaseUnverifiedModules() throws Exception {
 		_testValidateReleaseUnverifiedModule(
 			"module2.service", true,
-			() -> _validateAndAssert(
+			() -> _assertValidateDatabases(
 				true, false,
 				Arrays.asList(
 					"[ERROR] Module module2.service needs to be verified in " +
 						"the source database before the migration")));
 		_testValidateReleaseUnverifiedModule(
 			"module2", false,
-			() -> _validateAndAssert(
+			() -> _assertValidateDatabases(
 				true, false,
 				Arrays.asList(
 					"[ERROR] Module module2 needs to be verified in the " +
@@ -214,12 +214,12 @@ public class ValidatorTest {
 	public void testValidateWebId() throws Exception {
 		_testValidateWebId(
 			false,
-			() -> _validateAndAssert(
+			() -> _assertValidateDatabases(
 				true, false,
 				Arrays.asList(
 					"[ERROR] Web ID " + _TEST_WEB_ID +
 						" already exists in the target database")));
-		_testValidateWebId(true, () -> _validateAndAssert(false, false, null));
+		_testValidateWebId(true, () -> _assertValidateDatabases(false, false, null));
 	}
 
 	private List<Release> _getReleases() {
@@ -397,7 +397,7 @@ public class ValidatorTest {
 		unsafeRunnable.run();
 	}
 
-	private void _validateAndAssert(
+	private void _assertValidateDatabases(
 			boolean hasErrors, boolean hasWarnings, List<String> messages)
 		throws Exception {
 
