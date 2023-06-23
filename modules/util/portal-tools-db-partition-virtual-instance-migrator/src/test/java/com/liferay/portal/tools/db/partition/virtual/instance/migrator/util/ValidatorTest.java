@@ -98,7 +98,7 @@ public class ValidatorTest {
 	}
 
 	@Test
-	public void ttestValidateReleaseVersionModule() throws Exception {
+	public void testValidateReleaseVersionModule() throws Exception {
 		_testValidateReleaseVersionModule(
 			"1.0.0", "module2.service",
 			() -> _assertValidateDatabases(
