@@ -17,7 +17,7 @@ package com.liferay.staging.bar.web.internal.upgrade.registry;
 import com.liferay.portal.kernel.service.ResourcePermissionLocalService;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
 import com.liferay.staging.bar.web.internal.upgrade.v1_0_0.UpgradePortletId;
-import com.liferay.staging.bar.web.internal.upgrade.v1_0_1.LayoutResourcePermissionsUpgradeProcess;
+import com.liferay.staging.bar.web.internal.upgrade.v1_0_1.ResourcePermissionsUpgradeProcess;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -37,7 +37,7 @@ public class StagingBarWebUpgradeStepRegistrator
 
 		registry.register(
 			"1.0.0", "1.0.1",
-			new LayoutResourcePermissionsUpgradeProcess(
+			new ResourcePermissionsUpgradeProcess(
 				_resourcePermissionLocalService));
 	}
 

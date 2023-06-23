@@ -27,9 +27,9 @@ import java.util.List;
 /**
  * @author Jorge Díaz
  */
-public class LayoutResourcePermissionsUpgradeProcess extends UpgradeProcess {
+public class ResourcePermissionsUpgradeProcess extends UpgradeProcess {
 
-	public LayoutResourcePermissionsUpgradeProcess(
+	public ResourcePermissionsUpgradeProcess(
 		ResourcePermissionLocalService resourcePermissionLocalService) {
 
 		_resourcePermissionLocalService = resourcePermissionLocalService;
