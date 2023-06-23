@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -42,7 +42,7 @@ public class PerUserValidator extends LicenseValidator {
 		}
 
 		if (license.getMaxUsers() > 0) {
-			long userCount = getUserCount();
+			int userCount = getUserCount();
 
 			if (userCount <= 0) {
 				throw new Exception(
@@ -62,33 +62,24 @@ public class PerUserValidator extends LicenseValidator {
 		return _VALID_TYPES;
 	}
 
-	protected long getUserCount() throws Exception {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
-
-		try {
-			connection = DataAccess.getConnection();
-
-			preparedStatement = connection.prepareStatement(
+	protected int getUserCount() throws Exception {
+		try (Connection connection = DataAccess.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(
 				"select count(*) from User_ where (defaultUser = ?) and " +
-					"(status = ?)");
+					"(status = ?)")) {
 
 			preparedStatement.setBoolean(1, false);
 			preparedStatement.setLong(2, WorkflowConstants.STATUS_APPROVED);
 
-			resultSet = preparedStatement.executeQuery();
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				while (resultSet.next()) {
+					int count = resultSet.getInt(1);
 
-			while (resultSet.next()) {
-				long count = resultSet.getLong(1);
-
-				if (count > 0) {
-					return count;
+					if (count > 0) {
+						return count;
+					}
 				}
 			}
-		}
-		finally {
-			DataAccess.cleanUp(connection, preparedStatement, resultSet);
 		}
 
 		return 0;

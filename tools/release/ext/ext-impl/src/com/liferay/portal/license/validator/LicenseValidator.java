@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -114,7 +114,7 @@ public class LicenseValidator {
 			allowedHostNames.add(hostName.toLowerCase());
 		}
 
-		if ((allowedHostNames == null) || allowedHostNames.isEmpty()) {
+		if (ListUtil.isEmpty(allowedHostNames)) {
 			return "Your license does not have any allowed host names";
 		}
 
@@ -131,7 +131,7 @@ public class LicenseValidator {
 	private String _validateIpAddresses(String[] ipAddresses) {
 		List<String> allowedIpAddresses = ListUtil.fromArray(ipAddresses);
 
-		if ((allowedIpAddresses == null) || allowedIpAddresses.isEmpty()) {
+		if (ListUtil.isEmpty(allowedIpAddresses)) {
 			return "Your license does not have any allowed IP addresses";
 		}
 
