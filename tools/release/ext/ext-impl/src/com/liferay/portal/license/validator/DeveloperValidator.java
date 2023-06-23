@@ -46,6 +46,8 @@ public class DeveloperValidator extends LicenseValidator {
 		}
 	}
 
-	private static final String[] _VALID_TYPES = {LicenseConstants.TYPE_DEVELOPER};
+	private static final String[] _VALID_TYPES = {
+		LicenseConstants.TYPE_DEVELOPER
+	};
 
 }

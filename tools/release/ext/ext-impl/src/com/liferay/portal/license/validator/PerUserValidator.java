@@ -94,6 +94,8 @@ public class PerUserValidator extends LicenseValidator {
 		return 0;
 	}
 
-	private static final String[] _VALID_TYPES = {LicenseConstants.TYPE_PER_USER};
+	private static final String[] _VALID_TYPES = {
+		LicenseConstants.TYPE_PER_USER
+	};
 
 }

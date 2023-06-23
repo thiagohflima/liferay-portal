@@ -149,7 +149,7 @@ public class AppBundleTracker extends BundleTracker {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			_log.error(e);
 		}
 
 		return properties;
