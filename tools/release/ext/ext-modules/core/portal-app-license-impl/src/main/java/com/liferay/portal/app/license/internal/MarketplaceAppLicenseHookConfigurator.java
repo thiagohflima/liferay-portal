@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.app.license.impl;
+package com.liferay.portal.app.license.internal;
 
 import com.liferay.petra.reflect.ReflectionUtil;
 import com.liferay.portal.app.license.AppLicenseVerifier;
