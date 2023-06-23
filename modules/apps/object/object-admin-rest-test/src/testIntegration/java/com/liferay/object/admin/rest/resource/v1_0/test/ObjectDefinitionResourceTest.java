@@ -243,7 +243,7 @@ public class ObjectDefinitionResourceTest
 	public void testPutObjectDefinition() throws Exception {
 		super.testPutObjectDefinition();
 
-		// Account Entry with Account restriction
+		// Account entry restricted
 
 		ObjectDefinition randomObjectDefinition = randomObjectDefinition();
 
@@ -299,7 +299,7 @@ public class ObjectDefinitionResourceTest
 		_objectDefinitionLocalService.deleteObjectDefinition(
 			postObjectDefinition.getId());
 
-		// Must not update storage type
+		// Storage type
 
 		postObjectDefinition = testPutObjectDefinition_addObjectDefinition();
 
