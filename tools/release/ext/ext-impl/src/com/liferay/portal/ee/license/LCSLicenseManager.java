@@ -222,7 +222,7 @@ public class LCSLicenseManager {
 
 			if (_clientIPAddresses.size() > license.getMaxHttpSessions()) {
 				LicenseManager.setLicense(
-					license, LicenseConstants.STATE_OVERLOAD, true);
+					license, LicenseConstants.STATE_OVERLOAD);
 
 				if (Validator.isNull(_resetToken)) {
 					_resetToken = UUID.randomUUID(

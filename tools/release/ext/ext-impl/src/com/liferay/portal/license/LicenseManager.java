@@ -325,7 +325,7 @@ public class LicenseManager {
 		}
 
 		if (license.isExpired()) {
-			_setLicense(license, LicenseConstants.STATE_EXPIRED, false, true);
+			_setLicense(license, LicenseConstants.STATE_EXPIRED, true);
 
 			return LicenseConstants.STATE_EXPIRED;
 		}
@@ -479,10 +479,8 @@ public class LicenseManager {
 		}
 	}
 
-	public static void setLicense(
-		License license, int licenseState, boolean notify) {
-
-		_setLicense(license, licenseState, notify, false);
+	public static void setLicense(License license, int licenseState) {
+		_setLicense(license, licenseState, false);
 	}
 
 	public static void writeBinaryLicense(License license) throws Exception {
@@ -630,8 +628,7 @@ public class LicenseManager {
 				}
 
 				if (!_isActiveLicense(license, false)) {
-					setLicense(
-						license, LicenseConstants.STATE_INACTIVE, notify);
+					setLicense(license, LicenseConstants.STATE_INACTIVE);
 
 					_log.error(
 						license.getProductEntryName() + " license is inactive");
@@ -641,7 +638,7 @@ public class LicenseManager {
 			}
 
 			if (license.isExpired()) {
-				setLicense(license, LicenseConstants.STATE_EXPIRED, notify);
+				setLicense(license, LicenseConstants.STATE_EXPIRED);
 
 				_log.error(
 					license.getProductEntryName() + " license is expired");
@@ -651,7 +648,7 @@ public class LicenseManager {
 
 			_validatorChain.validate(license);
 
-			setLicense(license, LicenseConstants.STATE_GOOD, notify);
+			setLicense(license, LicenseConstants.STATE_GOOD);
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
@@ -660,14 +657,14 @@ public class LicenseManager {
 			}
 		}
 		catch (CompanyMaxUsersException cmue) {
-			setLicense(license, LicenseConstants.STATE_OVERLOAD, notify);
+			setLicense(license, LicenseConstants.STATE_OVERLOAD);
 
 			_log.error(
 				license.getProductEntryName() + " license validation failed",
 				cmue);
 		}
 		catch (Exception exception) {
-			setLicense(license, LicenseConstants.STATE_INVALID, notify);
+			setLicense(license, LicenseConstants.STATE_INVALID);
 
 			_log.error(
 				license.getProductEntryName() + " license validation failed",
@@ -1334,7 +1331,7 @@ public class LicenseManager {
 	}
 
 	private static void _setLicense(
-		License license, int licenseState, boolean notify, boolean overWrite) {
+		License license, int licenseState, boolean overWrite) {
 
 		boolean[] added = {false};
 
