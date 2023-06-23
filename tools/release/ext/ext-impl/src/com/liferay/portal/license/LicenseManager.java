@@ -14,6 +14,7 @@
 
 package com.liferay.portal.license;
 
+import com.liferay.petra.io.ProtectedObjectInputStream;
 import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
@@ -1197,7 +1198,7 @@ public class LicenseManager {
 		try {
 			fileInputStream = new FileInputStream(binaryLicenseFile);
 
-			objectInputStream = new ObjectInputStream(
+			objectInputStream = new ProtectedObjectInputStream(
 				new Base64InputStream(fileInputStream));
 
 			int licenseVersion = objectInputStream.readInt();
