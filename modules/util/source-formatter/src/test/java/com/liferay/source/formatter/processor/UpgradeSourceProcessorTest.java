@@ -72,6 +72,13 @@ public class UpgradeSourceProcessorTest extends BaseSourceProcessorTestCase {
 	}
 
 	@Test
+	public void testUpgradeJavaAssetEntryAssetCategoriesCheck()
+		throws Exception {
+
+		test("upgrade/UpgradeJavaAssetEntryAssetCategoriesCheck.testjava");
+	}
+
+	@Test
 	public void testUpgradeJavaCheck() throws Exception {
 		test("upgrade/UpgradeJavaCheck.testjava");
 	}
