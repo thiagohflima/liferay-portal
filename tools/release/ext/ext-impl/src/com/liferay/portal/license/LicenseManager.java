@@ -14,6 +14,8 @@
 
 package com.liferay.portal.license;
 
+import com.liferay.petra.string.CharPool;
+import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.json.JSONObjectImpl;
 import com.liferay.portal.kernel.cluster.ClusterExecutorUtil;
@@ -41,6 +43,7 @@ import com.liferay.portal.kernel.util.DigesterUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
@@ -49,7 +52,6 @@ import com.liferay.portal.kernel.util.PortalLifecycleUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.SubscriptionSender;
 import com.liferay.portal.kernel.util.Time;
@@ -90,7 +92,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Properties;
@@ -296,12 +297,13 @@ public class LicenseManager {
 		return getLicenseState(null, LicenseConstants.PRODUCT_ID_PORTAL);
 	}
 
-	public static int getLicenseState(HttpServletRequest request) {
-		return getLicenseState(request, LicenseConstants.PRODUCT_ID_PORTAL);
+	public static int getLicenseState(HttpServletRequest httpServletRequest) {
+		return getLicenseState(
+			httpServletRequest, LicenseConstants.PRODUCT_ID_PORTAL);
 	}
 
 	public static int getLicenseState(
-		HttpServletRequest request, String productId) {
+		HttpServletRequest httpServletRequest, String productId) {
 
 		AtomicStampedReference<License> licenseStampedReference =
 			_licenseStampedReferences.get(productId);
@@ -879,9 +881,9 @@ public class LicenseManager {
 	}
 
 	private static String _getSafePropertyKey(String key) {
-		key = StringUtil.replace(key, StringPool.COLON, "_SAFE_COLON_");
-		key = StringUtil.replace(key, StringPool.EQUAL, "_SAFE_EQUAL_");
-		key = StringUtil.replace(key, StringPool.SPACE, "_SAFE_SPACE_");
+		key = StringUtil.replace(key, CharPool.COLON, "_SAFE_COLON_");
+		key = StringUtil.replace(key, CharPool.EQUAL, "_SAFE_EQUAL_");
+		key = StringUtil.replace(key, CharPool.SPACE, "_SAFE_SPACE_");
 
 		return key;
 	}
@@ -982,17 +984,22 @@ public class LicenseManager {
 		String randomUuid = UUID.randomUUID(
 		).toString();
 
-		JSONObject jsonObject = new JSONObjectImpl();
-
-		jsonObject.put("cmd", "VALIDATE");
-		jsonObject.put("key", license.getKey());
-		jsonObject.put("productId", productId);
-		jsonObject.put("randomUuid", randomUuid);
-		jsonObject.put("serverId", serverId);
-		jsonObject.put("version", 1);
-
 		try {
-			String response = LicenseUtil.sendRequest(jsonObject.toString());
+			String response = LicenseUtil.sendRequest(
+				new JSONObjectImpl(
+				).put(
+					"cmd", "VALIDATE"
+				).put(
+					"key", license.getKey()
+				).put(
+					"productId", productId
+				).put(
+					"randomUuid", randomUuid
+				).put(
+					"serverId", serverId
+				).put(
+					"version", 1
+				).toString());
 
 			JSONObject responseJSONObject = new JSONObjectImpl(response);
 
@@ -1072,7 +1079,7 @@ public class LicenseManager {
 			licenseElement.elementTextTrim("license-version"));
 
 		DateFormat longDateFormatDateTime = new SimpleDateFormat(
-			"EEEE, MMMM d, yyyy hh:mm:ss a z", Locale.US);
+			"EEEE, MMMM d, yyyy hh:mm:ss a z", LocaleUtil.US);
 
 		Date startDate = null;
 
@@ -1216,7 +1223,10 @@ public class LicenseManager {
 				try {
 					objectInputStream.close();
 				}
-				catch (IOException ioe) {
+				catch (IOException ioException) {
+					if (_log.isDebugEnabled()) {
+						_log.debug(ioException);
+					}
 				}
 			}
 
@@ -1224,7 +1234,10 @@ public class LicenseManager {
 				try {
 					fileInputStream.close();
 				}
-				catch (IOException ioe) {
+				catch (IOException ioException) {
+					if (_log.isDebugEnabled()) {
+						_log.debug(ioException);
+					}
 				}
 			}
 		}
@@ -1347,8 +1360,9 @@ public class LicenseManager {
 		if (added[0]) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					license.getProductId() + " license " + license.getKey() +
-						" state is " + licenseState);
+					StringBundler.concat(
+						license.getProductId(), " license ", license.getKey(),
+						" state is ", licenseState));
 			}
 
 			return;
@@ -1370,8 +1384,9 @@ public class LicenseManager {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					license.getProductId() + " license " + license.getKey() +
-						" state is " + licenseState);
+					StringBundler.concat(
+						license.getProductId(), " license ", license.getKey(),
+						" state is ", licenseState));
 			}
 		}
 	}
@@ -1461,19 +1476,26 @@ public class LicenseManager {
 
 		LiferayVersionValidator liferayVersionValidator =
 			new LiferayVersionValidator();
-		ProductionValidator productionValidator = new ProductionValidator();
-		LimitedValidator limitedValidator = new LimitedValidator();
-		PerUserValidator perUserValidator = new PerUserValidator();
-		DeveloperValidator developerValidator = new DeveloperValidator();
-		InstanceSizeValidator instanceSizeValidator =
-			new InstanceSizeValidator();
 
 		licenseTypeValidator.setNextValidator(liferayVersionValidator);
+
+		ProductionValidator productionValidator = new ProductionValidator();
+
 		liferayVersionValidator.setNextValidator(productionValidator);
+
+		LimitedValidator limitedValidator = new LimitedValidator();
+
 		productionValidator.setNextValidator(limitedValidator);
+
+		PerUserValidator perUserValidator = new PerUserValidator();
+
 		limitedValidator.setNextValidator(perUserValidator);
+
+		DeveloperValidator developerValidator = new DeveloperValidator();
+
 		perUserValidator.setNextValidator(developerValidator);
-		developerValidator.setNextValidator(instanceSizeValidator);
+
+		developerValidator.setNextValidator(new InstanceSizeValidator());
 
 		_validatorChain = licenseTypeValidator;
 	}

@@ -39,16 +39,18 @@ public class LifecycleAction
 	public void processLifecycleEvent(LifecycleEvent lifecycleEvent)
 		throws ActionException {
 
-		HttpServletRequest request = lifecycleEvent.getRequest();
-		HttpServletResponse response = lifecycleEvent.getResponse();
+		HttpServletRequest httpServletRequest = lifecycleEvent.getRequest();
+		HttpServletResponse httpServletResponse = lifecycleEvent.getResponse();
 
 		try {
-			int[] lcsStates = LCSLicenseManager.getLCSStates(request);
+			int[] lcsStates = LCSLicenseManager.getLCSStates(
+				httpServletRequest);
 
-			String redirect = getRedirect(request, lcsStates[0], lcsStates[1]);
+			String redirect = getRedirect(
+				httpServletRequest, lcsStates[0], lcsStates[1]);
 
 			if (Validator.isNotNull(redirect)) {
-				response.sendRedirect(redirect);
+				httpServletResponse.sendRedirect(redirect);
 			}
 		}
 		catch (Exception exception) {
@@ -57,9 +59,10 @@ public class LifecycleAction
 	}
 
 	protected String getRedirect(
-		HttpServletRequest request, int lcsPortletState, int lcsLicenseState) {
+		HttpServletRequest httpServletRequest, int lcsPortletState,
+		int lcsLicenseState) {
 
-		String path = request.getRequestURI();
+		String path = httpServletRequest.getRequestURI();
 
 		if (path.equals(
 				PortalUtil.getPathContext() + "/c/portal/setup_wizard") ||
@@ -78,9 +81,13 @@ public class LifecycleAction
 		}
 
 		if (path.equals(PortalUtil.getPathContext() + "/c/portal/license")) {
-			if (_isValidRequest(request, lcsPortletState, lcsLicenseState)) {
-				request.setAttribute("LCS_LICENSE_STATE", lcsLicenseState);
-				request.setAttribute("LCS_PORTLET_STATE", lcsPortletState);
+			if (_isValidRequest(
+					httpServletRequest, lcsPortletState, lcsLicenseState)) {
+
+				httpServletRequest.setAttribute(
+					"LCS_LICENSE_STATE", lcsLicenseState);
+				httpServletRequest.setAttribute(
+					"LCS_PORTLET_STATE", lcsPortletState);
 
 				return null;
 			}
@@ -91,9 +98,13 @@ public class LifecycleAction
 		if (path.equals(
 				PortalUtil.getPathContext() + "/c/portal/license_activation")) {
 
-			if (_isValidPortalActivationRequest(request, lcsLicenseState)) {
-				request.setAttribute("LCS_LICENSE_STATE", lcsLicenseState);
-				request.setAttribute("LCS_PORTLET_STATE", lcsPortletState);
+			if (_isValidPortalActivationRequest(
+					httpServletRequest, lcsLicenseState)) {
+
+				httpServletRequest.setAttribute(
+					"LCS_LICENSE_STATE", lcsLicenseState);
+				httpServletRequest.setAttribute(
+					"LCS_PORTLET_STATE", lcsPortletState);
 
 				return null;
 			}
@@ -108,9 +119,9 @@ public class LifecycleAction
 		}
 
 		try {
-			if (PortalUtil.getUser(request) != null) {
+			if (PortalUtil.getUser(httpServletRequest) != null) {
 				AuthenticatedSessionManagerUtil.renewSession(
-					request, request.getSession());
+					httpServletRequest, httpServletRequest.getSession());
 			}
 		}
 		catch (Exception exception) {
@@ -122,11 +133,11 @@ public class LifecycleAction
 		return PortalUtil.getPathContext() + "/c/portal/license_activation";
 	}
 
-	private boolean _isOmniAdmin(HttpServletRequest request) {
+	private boolean _isOmniAdmin(HttpServletRequest httpServletRequest) {
 		User user = null;
 
 		try {
-			user = PortalUtil.getUser(request);
+			user = PortalUtil.getUser(httpServletRequest);
 		}
 		catch (Exception exception) {
 			if (_log.isDebugEnabled()) {
@@ -142,10 +153,10 @@ public class LifecycleAction
 	}
 
 	private boolean _isValidPortalActivationRequest(
-		HttpServletRequest request, int lcsLicenseState) {
+		HttpServletRequest httpServletRequest, int lcsLicenseState) {
 
 		if ((lcsLicenseState != LicenseConstants.STATE_GOOD) ||
-			_isOmniAdmin(request)) {
+			_isOmniAdmin(httpServletRequest)) {
 
 			return true;
 		}
@@ -154,11 +165,12 @@ public class LifecycleAction
 	}
 
 	private boolean _isValidRequest(
-		HttpServletRequest request, int lcsPortletState, int lcsLicenseState) {
+		HttpServletRequest httpServletRequest, int lcsPortletState,
+		int lcsLicenseState) {
 
 		if (((lcsPortletState != LCSPortletState.GOOD.intValue()) &&
 			 (lcsLicenseState != LicenseConstants.STATE_GOOD)) ||
-			_isOmniAdmin(request)) {
+			_isOmniAdmin(httpServletRequest)) {
 
 			return true;
 		}
