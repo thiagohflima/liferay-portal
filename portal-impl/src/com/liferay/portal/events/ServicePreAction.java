@@ -1003,7 +1003,7 @@ public class ServicePreAction extends Action {
 			if (layoutGroup.isUser()) {
 				if (GetterUtil.getBoolean(
 						PropsUtil.get(
-							PropsKeys.LAYOUT_USER_PLID_ACCESS_DENIED))) {
+							PropsKeys.LAYOUT_USER_ACCESS_VIA_PLID_ENABLED))) {
 
 					long originalPlid = ParamUtil.getLong(
 						PortalUtil.getOriginalServletRequest(
