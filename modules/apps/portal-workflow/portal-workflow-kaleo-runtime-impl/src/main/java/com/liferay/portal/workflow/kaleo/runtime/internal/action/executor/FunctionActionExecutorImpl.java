@@ -227,15 +227,15 @@ public class FunctionActionExecutorImpl implements ActionExecutor {
 			return null;
 		}
 
-		String dtoclassName = assetRenderer.getClassName();
+		String dtoClassName = assetRenderer.getClassName();
 
 		if (baseModel instanceof ObjectEntry) {
-			dtoclassName = ObjectEntry.class.getName();
+			dtoClassName = ObjectEntry.class.getName();
 		}
 
 		DTOConverter<Serializable, Serializable> dtoConverter =
 			(DTOConverter<Serializable, Serializable>)
-				_dtoConverterRegistry.getDTOConverter(dtoclassName);
+				_dtoConverterRegistry.getDTOConverter(dtoClassName);
 
 		ServiceContext serviceContext = executionContext.getServiceContext();
 
