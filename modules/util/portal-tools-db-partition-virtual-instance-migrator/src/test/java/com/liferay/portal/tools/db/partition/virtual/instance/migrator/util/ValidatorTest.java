@@ -98,24 +98,6 @@ public class ValidatorTest {
 	}
 
 	@Test
-	public void testValidateReleaseVersionModule() throws Exception {
-		_testValidateReleaseVersionModule(
-			"1.0.0", "module2.service",
-			() -> _assertValidateDatabases(
-				true, false,
-				Arrays.asList(
-					"[ERROR] Module module2.service needs to be upgraded in " +
-						"the target database before the migration")));
-		_testValidateReleaseVersionModule(
-			"10.0.0", "module1",
-			() -> _assertValidateDatabases(
-				true, false,
-				Arrays.asList(
-					"[ERROR] Module module1 needs to be upgraded in the " +
-						"source database before the migration")));
-	}
-
-	@Test
 	public void testValidateReleaseMissingSourceModules() throws Exception {
 		List<Release> releases = _getReleases();
 
@@ -211,6 +193,24 @@ public class ValidatorTest {
 	}
 
 	@Test
+	public void testValidateReleaseVersionModule() throws Exception {
+		_testValidateReleaseVersionModule(
+			"1.0.0", "module2.service",
+			() -> _assertValidateDatabases(
+				true, false,
+				Arrays.asList(
+					"[ERROR] Module module2.service needs to be upgraded in " +
+						"the target database before the migration")));
+		_testValidateReleaseVersionModule(
+			"10.0.0", "module1",
+			() -> _assertValidateDatabases(
+				true, false,
+				Arrays.asList(
+					"[ERROR] Module module1 needs to be upgraded in the " +
+						"source database before the migration")));
+	}
+
+	@Test
 	public void testValidateWebId() throws Exception {
 		_testValidateWebId(
 			false,
@@ -219,7 +219,37 @@ public class ValidatorTest {
 				Arrays.asList(
 					"[ERROR] Web ID " + _TEST_WEB_ID +
 						" already exists in the target database")));
-		_testValidateWebId(true, () -> _assertValidateDatabases(false, false, null));
+		_testValidateWebId(
+			true, () -> _assertValidateDatabases(false, false, null));
+	}
+
+	private void _assertValidateDatabases(
+			boolean hasErrors, boolean hasWarnings, List<String> messages)
+		throws Exception {
+
+		try {
+			Recorder recorder = Validator.validateDatabases(
+				_sourceConnection, _targetConnection);
+
+			Assert.assertEquals(hasErrors, recorder.hasErrors());
+			Assert.assertEquals(hasWarnings, recorder.hasWarnings());
+
+			recorder.printMessages();
+
+			String string = _byteArrayOutputStream.toString();
+
+			if (messages == null) {
+				Assert.assertTrue(string.isEmpty());
+			}
+			else {
+				for (String message : messages) {
+					Assert.assertTrue(string.contains(message));
+				}
+			}
+		}
+		finally {
+			_byteArrayOutputStream.reset();
+		}
 	}
 
 	private List<Release> _getReleases() {
@@ -395,35 +425,6 @@ public class ValidatorTest {
 		);
 
 		unsafeRunnable.run();
-	}
-
-	private void _assertValidateDatabases(
-			boolean hasErrors, boolean hasWarnings, List<String> messages)
-		throws Exception {
-
-		try {
-			Recorder recorder = Validator.validateDatabases(
-				_sourceConnection, _targetConnection);
-
-			Assert.assertEquals(hasErrors, recorder.hasErrors());
-			Assert.assertEquals(hasWarnings, recorder.hasWarnings());
-
-			recorder.printMessages();
-
-			String string = _byteArrayOutputStream.toString();
-
-			if (messages == null) {
-				Assert.assertTrue(string.isEmpty());
-			}
-			else {
-				for (String message : messages) {
-					Assert.assertTrue(string.contains(message));
-				}
-			}
-		}
-		finally {
-			_byteArrayOutputStream.reset();
-		}
 	}
 
 	private static final String _TEST_WEB_ID = "test.com";
