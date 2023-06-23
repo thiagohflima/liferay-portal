@@ -214,8 +214,8 @@ public class FDSViewFragmentRenderer implements FragmentRenderer {
 			).put(
 				"views",
 				_getViewsJSONArray(
-					fdsViewObjectDefinition, fdsViewObjectEntry,
-					fragmentEntryLink)
+					fragmentEntryLink, fdsViewObjectDefinition,
+					fdsViewObjectEntry)
 			).build(),
 			httpServletRequest, writer);
 
@@ -305,13 +305,9 @@ public class FDSViewFragmentRenderer implements FragmentRenderer {
 	}
 
 	private JSONArray _getViewsJSONArray(
-			ObjectDefinition fdsViewObjectDefinition, ObjectEntry objectEntry,
-			FragmentEntryLink fragmentEntryLink)
+			FragmentEntryLink fragmentEntryLink,
+			ObjectDefinition objectDefinition, ObjectEntry objectEntry)
 		throws Exception {
-
-		Collection<ObjectEntry> fdsFields = _getRelatedObjectEntries(
-			fdsViewObjectDefinition, objectEntry,
-			"fdsViewFDSFieldRelationship");
 
 		return JSONUtil.putAll(
 			JSONUtil.put(
@@ -323,7 +319,9 @@ public class FDSViewFragmentRenderer implements FragmentRenderer {
 				JSONUtil.put(
 					"fields",
 					JSONUtil.toJSONArray(
-						fdsFields,
+						_getRelatedObjectEntries(
+							objectDefinition, objectEntry,
+							"fdsViewFDSFieldRelationship"),
 						(ObjectEntry fdsField) -> {
 							Map<String, Object> fdsFieldProperties =
 								fdsField.getProperties();
@@ -346,26 +344,24 @@ public class FDSViewFragmentRenderer implements FragmentRenderer {
 							String rendererType = String.valueOf(
 								fdsFieldProperties.get("rendererType"));
 
-							if (Objects.equals(
+							if (!Objects.equals(
 									rendererType, "clientExtension")) {
 
-								FDSCellRendererCET fdsCellRendererCET =
-									(FDSCellRendererCET)_cetManager.getCET(
-										fragmentEntryLink.getCompanyId(),
-										String.valueOf(
-											fdsFieldProperties.get(
-												"renderer")));
-
-								jsonObject.put(
-									"contentRendererClientExtension", true
-								).put(
-									"contentRendererModuleURL",
-									"default from " +
-										fdsCellRendererCET.getURL()
-								);
+								return jsonObject;
 							}
 
-							return jsonObject;
+							FDSCellRendererCET fdsCellRendererCET =
+								(FDSCellRendererCET)_cetManager.getCET(
+									fragmentEntryLink.getCompanyId(),
+									String.valueOf(
+										fdsFieldProperties.get("renderer")));
+
+							return jsonObject.put(
+								"contentRendererClientExtension", true
+							).put(
+								"contentRendererModuleURL",
+								"default from " + fdsCellRendererCET.getURL()
+							);
 						}))
 			));
 	}
