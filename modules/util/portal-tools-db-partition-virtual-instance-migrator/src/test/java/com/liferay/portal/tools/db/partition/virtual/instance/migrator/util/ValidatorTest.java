@@ -15,6 +15,7 @@
 package com.liferay.portal.tools.db.partition.virtual.instance.migrator.util;
 
 import com.liferay.petra.function.UnsafeRunnable;
+import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.version.Version;
 import com.liferay.portal.tools.db.partition.virtual.instance.migrator.Recorder;
 import com.liferay.portal.tools.db.partition.virtual.instance.migrator.Release;
@@ -427,7 +428,7 @@ public class ValidatorTest {
 		unsafeRunnable.run();
 	}
 
-	private static final String _TEST_WEB_ID = "test.com";
+	private static final String _TEST_WEB_ID = RandomTestUtil.randomString();
 
 	private final ByteArrayOutputStream _byteArrayOutputStream =
 		new ByteArrayOutputStream();
