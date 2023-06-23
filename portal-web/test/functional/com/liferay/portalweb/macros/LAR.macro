@@ -274,7 +274,7 @@ definition {
 
 			WaitForElementPresent(locator1 = "Button#BACK");
 
-			Alert.viewWarningSpecific(warningMessage = "The import LAR file is not kept and thrown away immediately after the process.");
+			Alert.viewWarningSpecific(warningMessage = "The import LAR file is deleted immediately after the import process completes.");
 
 			Alert.viewWarningSpecific(warningMessage = "Import process will be deleted after 30 days.");
 
