@@ -1241,7 +1241,7 @@ public class LicenseManager {
 			new ThreadFactory() {
 
 				public Thread newThread(Runnable runnable) {
-					Thread thread = new Thread(runnable, "");
+					Thread thread = new Thread(runnable, StringPool.BLANK);
 
 					thread.setDaemon(true);
 
