@@ -117,7 +117,7 @@ public class ValidatorTest {
 
 	@Test
 	public void testValidateReleaseMissingSourceModules() throws Exception {
-		List<Release> releases = _createReleases();
+		List<Release> releases = _getReleases();
 
 		_databaseMockedStatic.when(
 			() -> DatabaseUtil.getReleases(_sourceConnection)
@@ -158,7 +158,6 @@ public class ValidatorTest {
 				Arrays.asList(
 					"[WARN] Module module1 is not present in the source " +
 						"database")));
-
 		_testValidateReleaseMissingTargetModule(
 			"module2.service",
 			() -> _validateAndAssert(
@@ -182,7 +181,6 @@ public class ValidatorTest {
 						"the source database",
 					"[ERROR] Module module2 has a failed release state in " +
 						"the source database")));
-
 		_testValidateReleaseState(
 			new ArrayList<>(), failedServletContextNames,
 			() -> _validateAndAssert(
@@ -203,7 +201,6 @@ public class ValidatorTest {
 				Arrays.asList(
 					"[ERROR] Module module2.service needs to be verified in " +
 						"the source database before the migration")));
-
 		_testValidateReleaseUnverifiedModule(
 			"module2", false,
 			() -> _validateAndAssert(
@@ -222,11 +219,10 @@ public class ValidatorTest {
 				Arrays.asList(
 					"[ERROR] Web ID " + _TEST_WEB_ID +
 						" already exists in the target database")));
-
 		_testValidateWebId(true, () -> _validateAndAssert(false, false, null));
 	}
 
-	private List<Release> _createReleases() {
+	private List<Release> _getReleases() {
 		return Arrays.asList(
 			new Release(Version.parseVersion("3.5.1"), "module1.service", true),
 			new Release(
@@ -264,7 +260,7 @@ public class ValidatorTest {
 
 		Map<String, Release> releasesMap = new HashMap<>();
 
-		for (Release release : _createReleases()) {
+		for (Release release : _getReleases()) {
 			releasesMap.put(release.getServletContextName(), release);
 
 			if (!targetServletContextName.equals(
@@ -315,7 +311,7 @@ public class ValidatorTest {
 			UnsafeRunnable<Exception> unsafeRunnable)
 		throws Exception {
 
-		List<Release> releases = _createReleases();
+		List<Release> releases = _getReleases();
 
 		_databaseMockedStatic.when(
 			() -> DatabaseUtil.getReleases(_sourceConnection)
@@ -351,7 +347,7 @@ public class ValidatorTest {
 			UnsafeRunnable<Exception> unsafeRunnable)
 		throws Exception {
 
-		List<Release> releases = _createReleases();
+		List<Release> releases = _getReleases();
 
 		_databaseMockedStatic.when(
 			() -> DatabaseUtil.getReleases(_sourceConnection)
