@@ -14,6 +14,7 @@
 
 package com.liferay.portal.ee.license;
 
+import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.ee.license.classloader.DecryptorClassLoader;
 import com.liferay.portal.events.StartupAction;
@@ -43,7 +44,6 @@ import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
@@ -103,15 +103,15 @@ public class LCSLicenseManager {
 
 		try (Connection connection = DataAccess.getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement(
-				"select count(*) from User_ where (defaultUser = ?) " +
-					"and (status = ?)")) {
+				"select count(*) from User_ where (defaultUser = ?) and " +
+					"(status = ?)")) {
 
 			preparedStatement.setBoolean(1, false);
 			preparedStatement.setLong(2, WorkflowConstants.STATUS_APPROVED);
 
 			try (ResultSet resultSet = preparedStatement.executeQuery()) {
 				while (resultSet.next()) {
-					long count = resultSet.getLong(1);
+					int count = resultSet.getInt(1);
 
 					if (count >= maxUsersCount) {
 						throw new CompanyMaxUsersException();
@@ -173,8 +173,9 @@ public class LCSLicenseManager {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"LCS portlet state: " + _lcsPortletState + " License state: " +
-					lcsLicenseState);
+				StringBundler.concat(
+					"LCS portlet state: ", _lcsPortletState, " License state: ",
+					lcsLicenseState));
 		}
 
 		return new int[] {lcsPortletState, lcsLicenseState};
@@ -414,6 +415,7 @@ public class LCSLicenseManager {
 		long daysLeft = graceTimeLeft / Time.DAY;
 
 		sb.append(daysLeft);
+
 		sb.append(" day");
 
 		if ((daysLeft == 0) || (daysLeft > 1)) {
@@ -425,6 +427,7 @@ public class LCSLicenseManager {
 		long hoursLeft = (graceTimeLeft - (daysLeft * Time.DAY)) / Time.HOUR;
 
 		sb.append(hoursLeft);
+
 		sb.append(" hour");
 
 		if ((hoursLeft == 0) || (hoursLeft > 1)) {
@@ -440,6 +443,7 @@ public class LCSLicenseManager {
 			minutesLeft = minutesLeft / Time.MINUTE;
 
 			sb.append(minutesLeft);
+
 			sb.append(" minute");
 
 			if ((minutesLeft == 0) || (minutesLeft > 1)) {
@@ -645,8 +649,8 @@ public class LCSLicenseManager {
 				sb.append("is deactivated");
 
 				if (_CLUSTER_OVERLOAD_NODE_AUTO_SHUT_DOWN) {
-					sb.append("and will automatically shut down ");
-					sb.append("after the grace period expires");
+					sb.append("and will automatically shut down after the ");
+					sb.append("grace period expires");
 				}
 
 				sb.append(".");
