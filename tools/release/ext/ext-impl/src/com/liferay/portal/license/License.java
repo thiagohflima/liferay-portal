@@ -14,8 +14,9 @@
 
 package com.liferay.portal.license;
 
-import com.liferay.petra.string.StringPool;
+import com.liferay.petra.string.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HashMapBuilder;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
@@ -23,7 +24,6 @@ import com.liferay.portal.kernel.util.Validator;
 import java.io.Serializable;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -95,16 +95,16 @@ public class License implements Comparable<License>, Serializable {
 		return _key.compareTo(license.getKey());
 	}
 
-	public boolean equals(Object obj) {
-		if (this == obj) {
+	public boolean equals(Object object) {
+		if (this == object) {
 			return true;
 		}
 
-		if (!(obj instanceof License)) {
+		if (!(object instanceof License)) {
 			return false;
 		}
 
-		License license = (License)obj;
+		License license = (License)object;
 
 		if (Objects.equals(_key, license.getKey())) {
 			return true;
@@ -248,9 +248,9 @@ public class License implements Comparable<License>, Serializable {
 	}
 
 	public Map<String, String> getProperties() {
-		Map<String, String> properties = new HashMap<>();
-
-		properties.put("version", _licenseVersion);
+		Map<String, String> properties = HashMapBuilder.put(
+			"version", _licenseVersion
+		).build();
 
 		if (!_licenseEntryType.equals(LicenseConstants.TYPE_TRIAL)) {
 			properties.put("startDate", String.valueOf(_startDate.getTime()));
@@ -324,8 +324,8 @@ public class License implements Comparable<License>, Serializable {
 			properties.put(
 				"macAddresses",
 				StringUtil.replace(
-					StringUtil.merge(_macAddresses), StringPool.DASH,
-					StringPool.COLON));
+					StringUtil.merge(_macAddresses), CharPool.DASH,
+					CharPool.COLON));
 			properties.put("serverIds", StringUtil.merge(_serverIds));
 		}
 
@@ -443,9 +443,7 @@ public class License implements Comparable<License>, Serializable {
 	}
 
 	public String toString() {
-		Map<String, String> properties = getProperties();
-
-		return properties.toString();
+		return String.valueOf(getProperties());
 	}
 
 	private static final long serialVersionUID = 2779848304210680862L;
