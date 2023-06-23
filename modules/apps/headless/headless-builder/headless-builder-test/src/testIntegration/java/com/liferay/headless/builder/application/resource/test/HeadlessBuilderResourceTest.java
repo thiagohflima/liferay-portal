@@ -65,7 +65,7 @@ public class HeadlessBuilderResourceTest extends BaseTestCase {
 	}
 
 	@Test
-	public void testEndpointsAreReachable() throws Exception {
+	public void test() throws Exception {
 		APIApplication apiApplication1 = _addAPIApplication(
 			_API_APPLICATION_ERC_1);
 		APIApplication apiApplication2 = _addAPIApplication(
@@ -208,8 +208,8 @@ public class HeadlessBuilderResourceTest extends BaseTestCase {
 		HttpURLConnection httpURLConnection =
 			(HttpURLConnection)url.openConnection();
 
+		httpURLConnection.setRequestMethod(method.toString());
 		httpURLConnection.setRequestProperty(HttpHeaders.ACCEPT, "*/*");
-
 		httpURLConnection.setRequestProperty(
 			HttpHeaders.CONTENT_TYPE, ContentTypes.APPLICATION_JSON);
 
@@ -218,8 +218,6 @@ public class HeadlessBuilderResourceTest extends BaseTestCase {
 
 		httpURLConnection.setRequestProperty(
 			"Authorization", "Basic " + encodedUserNameAndPassword);
-
-		httpURLConnection.setRequestMethod(method.toString());
 
 		return httpURLConnection;
 	}
