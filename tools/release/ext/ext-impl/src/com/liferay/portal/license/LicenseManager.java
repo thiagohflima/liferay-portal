@@ -317,11 +317,11 @@ public class LicenseManager {
 			license = licenseStampedReference.get(stampHolder);
 		}
 
-		int licenseState = stampHolder[0];
-
 		if (license == null) {
 			return LicenseConstants.STATE_ABSENT;
 		}
+
+		int licenseState = stampHolder[0];
 
 		if (licenseState != LicenseConstants.STATE_GOOD) {
 			return licenseState;
@@ -373,8 +373,8 @@ public class LicenseManager {
 			String serverIdHostName = GetterUtil.getString(
 				serverIdProperties.getProperty("hostName"));
 
-			if (serverIdHostName.equalsIgnoreCase(
-					PortalUtil.getComputerName())) {
+			if (StringUtil.equalsIgnoreCase(
+					serverIdHostName, PortalUtil.getComputerName())) {
 
 				return _serverId;
 			}
@@ -764,9 +764,9 @@ public class LicenseManager {
 
 				_log.error(
 					StringBundler.concat(
-						"A license modified in the future was detected. " +
-							"License Modified: ",
-						lastAccessedTime, ". Current time: ", currentTime,
+						"A license modified in the future was detected. ",
+						"License Modified: ", lastAccessedTime,
+						". Current time: ", currentTime,
 						". Skipping license file ", license));
 
 				continue;
