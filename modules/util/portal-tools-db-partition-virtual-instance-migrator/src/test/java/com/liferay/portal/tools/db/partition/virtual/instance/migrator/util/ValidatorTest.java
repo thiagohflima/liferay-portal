@@ -214,14 +214,14 @@ public class ValidatorTest {
 	@Test
 	public void testValidateWebId() throws Exception {
 		_testValidateWebId(
-			false,
 			() -> _assertValidateDatabases(
 				true, false,
 				Arrays.asList(
 					"[ERROR] Web ID " + _TEST_WEB_ID +
-						" already exists in the target database")));
+						" already exists in the target database")),
+			false);
 		_testValidateWebId(
-			true, () -> _assertValidateDatabases(false, false, null));
+			() -> _assertValidateDatabases(false, false, null), true);
 	}
 
 	private void _assertValidateDatabases(
@@ -410,7 +410,7 @@ public class ValidatorTest {
 	}
 
 	private void _testValidateWebId(
-			boolean valid, UnsafeRunnable<Exception> unsafeRunnable)
+			UnsafeRunnable<Exception> unsafeRunnable, boolean valid)
 		throws Exception {
 
 		_databaseMockedStatic.when(
