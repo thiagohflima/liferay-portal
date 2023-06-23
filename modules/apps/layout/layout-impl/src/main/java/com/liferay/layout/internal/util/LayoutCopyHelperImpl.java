@@ -204,7 +204,7 @@ public class LayoutCopyHelperImpl implements LayoutCopyHelper {
 	}
 
 	private Layout _copyLayoutContent(
-			boolean copyExperience, Layout sourceLayout,
+			boolean copySegmentsExperience, Layout sourceLayout,
 			long[] sourceSegmentsExperiencesIds, Layout targetLayout,
 			long[] targetSegmentsExperiencesIds)
 		throws Exception {
@@ -225,7 +225,7 @@ public class LayoutCopyHelperImpl implements LayoutCopyHelper {
 			return TransactionInvokerUtil.invoke(
 				_transactionConfig,
 				new CopyLayoutCallable(
-					copyExperience, sourceLayout, sourceSegmentsExperiencesIds,
+					copySegmentsExperience, sourceLayout, sourceSegmentsExperiencesIds,
 					targetLayout, targetSegmentsExperiencesIds));
 		}
 		catch (Throwable throwable) {
@@ -891,7 +891,7 @@ public class LayoutCopyHelperImpl implements LayoutCopyHelper {
 
 				// LPS-108378 Copy structure before permissions and preferences
 
-				if (_copyExperience) {
+				if (_copySegmentsExperience) {
 					_copyLayoutPageTemplateStructureFromSegmentsExperience(
 						_sourceLayout, _sourceSegmentsExperiencesIds[0],
 						_targetLayout, _targetSegmentsExperiencesIds[0]);
@@ -945,11 +945,11 @@ public class LayoutCopyHelperImpl implements LayoutCopyHelper {
 		}
 
 		private CopyLayoutCallable(
-			boolean copyExperience, Layout sourceLayout,
+			boolean copySegmentsExperience, Layout sourceLayout,
 			long[] sourceSegmentsExperiencesIds, Layout targetLayout,
 			long[] targetSegmentsExperiencesIds) {
 
-			_copyExperience = copyExperience;
+			_copySegmentsExperience = copySegmentsExperience;
 			_sourceLayout = sourceLayout;
 			_sourceSegmentsExperiencesIds = sourceSegmentsExperiencesIds;
 			_targetLayout = targetLayout;
@@ -983,7 +983,7 @@ public class LayoutCopyHelperImpl implements LayoutCopyHelper {
 			}
 		}
 
-		private final boolean _copyExperience;
+		private final boolean _copySegmentsExperience;
 		private final Layout _sourceLayout;
 		private final long[] _sourceSegmentsExperiencesIds;
 		private final Layout _targetLayout;
