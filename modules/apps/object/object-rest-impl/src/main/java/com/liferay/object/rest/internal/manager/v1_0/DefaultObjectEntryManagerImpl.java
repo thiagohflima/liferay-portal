@@ -361,19 +361,20 @@ public class DefaultObjectEntryManagerImpl
 						relatedObjectDefinition.getCompanyId(),
 						objectRelationship.getType());
 
-		com.liferay.object.model.ObjectEntry objectEntry =
+		com.liferay.object.model.ObjectEntry serviceBuilderObjectEntry =
 			(com.liferay.object.model.ObjectEntry)
 				objectRelatedModelsProvider.fetchRelatedModel(
 					GroupThreadLocal.getGroupId(),
 					objectRelationship.getObjectRelationshipId(),
 					objectEntryId);
 
-		if (objectEntry == null) {
+		if (serviceBuilderObjectEntry == null) {
 			return null;
 		}
 
 		return _toObjectEntry(
-			dtoConverterContext, relatedObjectDefinition, objectEntry);
+			dtoConverterContext, relatedObjectDefinition,
+			serviceBuilderObjectEntry);
 	}
 
 	@Override
