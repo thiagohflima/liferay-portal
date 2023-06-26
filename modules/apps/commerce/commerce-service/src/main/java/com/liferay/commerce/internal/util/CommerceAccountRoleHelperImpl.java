@@ -223,6 +223,9 @@ public class CommerceAccountRoleHelperImpl
 			}
 
 			companyResourceActionIds.put(
+				PortletKeys.PORTAL,
+				new String[] {ActionKeys.VIEW_CONTROL_PANEL});
+			companyResourceActionIds.put(
 				"com.liferay.commerce.channel",
 				new String[] {
 					CommerceNotificationActionKeys.
@@ -230,16 +233,11 @@ public class CommerceAccountRoleHelperImpl
 					CommerceNotificationActionKeys.
 						ADD_COMMERCE_NOTIFICATION_TEMPLATE
 				});
-
 			companyResourceActionIds.put(
 				"com.liferay.commerce.tax",
 				new String[] {
 					CPActionKeys.VIEW_COMMERCE_PRODUCT_TAX_CATEGORIES
 				});
-
-			companyResourceActionIds.put(
-				PortletKeys.PORTAL,
-				new String[] {ActionKeys.VIEW_CONTROL_PANEL});
 		}
 
 		_setRolePermissions(
