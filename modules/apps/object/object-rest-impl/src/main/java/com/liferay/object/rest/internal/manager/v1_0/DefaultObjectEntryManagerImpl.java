@@ -902,7 +902,7 @@ public class DefaultObjectEntryManagerImpl
 				}
 
 				for (ObjectEntry nestedObjectEntry : nestedObjectEntries) {
-					if (_isManytoOneObjectRelationship(
+					if (_isManyToOneObjectRelationship(
 							objectDefinition, objectRelationship,
 							relatedObjectDefinition)) {
 
@@ -923,7 +923,7 @@ public class DefaultObjectEntryManagerImpl
 						relatedObjectDefinition, nestedObjectEntry,
 						relatedObjectDefinition.getScope());
 
-					if (!_isManytoOneObjectRelationship(
+					if (!_isManyToOneObjectRelationship(
 							objectDefinition, objectRelationship,
 							relatedObjectDefinition)) {
 
@@ -1224,7 +1224,7 @@ public class DefaultObjectEntryManagerImpl
 		return false;
 	}
 
-	private boolean _isManytoOneObjectRelationship(
+	private boolean _isManyToOneObjectRelationship(
 		ObjectDefinition objectDefinition,
 		ObjectRelationship objectRelationship,
 		ObjectDefinition relatedObjectDefinition) {
