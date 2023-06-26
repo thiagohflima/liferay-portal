@@ -224,16 +224,6 @@ public class CommerceAccountRoleHelperImpl
 			}
 
 			companyResourceActionIds.put(
-				"com.liferay.commerce.price.list",
-				new String[] {
-					CommercePriceListActionKeys.ADD_COMMERCE_PRICE_LIST
-				});
-
-			companyResourceActionIds.put(
-				"com.liferay.commerce.pricing.model.CommercePricingClass",
-				new String[] {ActionKeys.VIEW});
-
-			companyResourceActionIds.put(
 				PortletKeys.PORTAL,
 				new String[] {ActionKeys.VIEW_CONTROL_PANEL});
 			companyResourceActionIds.put(
@@ -244,6 +234,16 @@ public class CommerceAccountRoleHelperImpl
 					CommerceNotificationActionKeys.
 						ADD_COMMERCE_NOTIFICATION_TEMPLATE
 				});
+			companyResourceActionIds.put(
+				"com.liferay.commerce.price.list",
+				new String[] {
+					CommercePriceListActionKeys.ADD_COMMERCE_PRICE_LIST
+				});
+
+			companyResourceActionIds.put(
+				"com.liferay.commerce.pricing.model.CommercePricingClass",
+				new String[] {ActionKeys.VIEW});
+
 			companyResourceActionIds.put(
 				"com.liferay.commerce.tax",
 				new String[] {

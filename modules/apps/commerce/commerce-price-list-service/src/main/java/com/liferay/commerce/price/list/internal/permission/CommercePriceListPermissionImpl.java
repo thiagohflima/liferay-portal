@@ -141,7 +141,7 @@ public class CommercePriceListPermissionImpl
 
 		if ((actionId.equals(ActionKeys.UPDATE) ||
 			 actionId.equals(ActionKeys.VIEW)) &&
-			_hasSupplierPermission(permissionChecker, commercePriceList)) {
+			_hasRoleAccountSupplier(permissionChecker, commercePriceList)) {
 
 			return true;
 		}
@@ -151,10 +151,20 @@ public class CommercePriceListPermissionImpl
 			commercePriceList.getCommercePriceListId(), actionId);
 	}
 
-	private boolean _hasSupplierAccount(
+	private boolean _hasRoleAccountSupplier(
 			PermissionChecker permissionChecker,
-			CommerceCatalog commerceCatalog)
+			CommercePriceList commercePriceList)
 		throws PortalException {
+
+		CommerceCatalog commerceCatalog =
+			_commerceCatalogLocalService.fetchCommerceCatalogByGroupId(
+				commercePriceList.getGroupId());
+
+		if ((commerceCatalog != null) &&
+			(commerceCatalog.getAccountEntryId() > 0)) {
+
+			return true;
+		}
 
 		List<AccountEntry> accountEntries =
 			_accountEntryLocalService.getUserAccountEntries(
@@ -172,25 +182,6 @@ public class CommercePriceListPermissionImpl
 
 				return true;
 			}
-		}
-
-		return false;
-	}
-
-	private boolean _hasSupplierPermission(
-			PermissionChecker permissionChecker,
-			CommercePriceList commercePriceList)
-		throws PortalException {
-
-		CommerceCatalog commerceCatalog =
-			_commerceCatalogLocalService.fetchCommerceCatalogByGroupId(
-				commercePriceList.getGroupId());
-
-		if ((commerceCatalog != null) &&
-			(commerceCatalog.getAccountEntryId() > 0) &&
-			_hasSupplierAccount(permissionChecker, commerceCatalog)) {
-
-			return true;
 		}
 
 		return false;
