@@ -88,7 +88,6 @@ public class StructuredContentFolderResourceTest
 				deleteAssetLibraryStructuredContentFolderByExternalReferenceCodeHttpResponse(
 					testDeleteAssetLibraryStructuredContentFolderByExternalReferenceCode_getAssetLibraryId(),
 					postStructuredContentFolder.getExternalReferenceCode()));
-
 		assertHttpResponseStatusCode(
 			404,
 			structuredContentFolderResource.
