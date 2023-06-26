@@ -382,7 +382,7 @@ public class SystemObjectRelatedObjectEntriesTest {
 		_testPostSystemObjectEntryWithNestedCustomObjectEntries(
 			false, objectRelationship);
 
-		// Many to One relationship
+		// Many to one relationship
 
 		objectRelationship = ObjectRelationshipTestUtil.addObjectRelationship(
 			_objectDefinition, _userSystemObjectDefinition, _user.getUserId(),
