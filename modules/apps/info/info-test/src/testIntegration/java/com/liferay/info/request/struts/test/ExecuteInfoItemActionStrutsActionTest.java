@@ -110,7 +110,7 @@ public class ExecuteInfoItemActionStrutsActionTest {
 					objectDefinition.getObjectDefinitionId()));
 
 		ObjectEntry objectEntry = _objectEntryLocalService.addObjectEntry(
-			TestPropsValues.getUserId(), _group.getGroupId(),
+			_user.getUserId(), _group.getGroupId(),
 			objectDefinition.getObjectDefinitionId(),
 			HashMapBuilder.<String, Serializable>put(
 				"text", RandomTestUtil.randomString()
