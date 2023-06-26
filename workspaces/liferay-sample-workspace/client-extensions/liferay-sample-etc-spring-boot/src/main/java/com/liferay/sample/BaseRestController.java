@@ -43,25 +43,24 @@ public abstract class BaseRestController {
 			log.info("JWT Claims: " + jwt.getClaims());
 			log.info("JWT ID: " + jwt.getId());
 			log.info("JWT Subject: " + jwt.getSubject());
-
 			log.info("Parameters: " + parameters);
 		}
 	}
 
 	protected void log(Jwt jwt, Log log, String json) {
 		if (log.isInfoEnabled()) {
-			log.info("JWT Claims: " + jwt.getClaims());
-			log.info("JWT ID: " + jwt.getId());
-			log.info("JWT Subject: " + jwt.getSubject());
-
 			try {
 				JSONObject jsonObject = new JSONObject(json);
 
-				log.info("\n\n" + jsonObject.toString(4) + "\n");
+				log.info("JSON: " + jsonObject.toString(4));
 			}
 			catch (Exception exception) {
 				log.error("JSON: " + json, exception);
 			}
+
+			log.info("JWT Claims: " + jwt.getClaims());
+			log.info("JWT ID: " + jwt.getId());
+			log.info("JWT Subject: " + jwt.getSubject());
 		}
 	}
 
