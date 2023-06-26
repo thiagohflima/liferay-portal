@@ -150,10 +150,14 @@ public class CommerceChannelPermissionImpl
 			commerceChannel.getCommerceChannelId(), actionId);
 	}
 
-	private boolean _hasRoleAccountSupplier(
+	private boolean _hasSupplierPermission(
 			PermissionChecker permissionChecker,
 			CommerceChannel commerceChannel)
 		throws PortalException {
+
+		if (commerceChannel.getAccountEntryId() == 0) {
+			return false;
+		}
 
 		List<AccountEntry> accountEntries =
 			_accountEntryLocalService.getUserAccountEntries(
@@ -171,20 +175,6 @@ public class CommerceChannelPermissionImpl
 
 				return true;
 			}
-		}
-
-		return false;
-	}
-
-	private boolean _hasSupplierPermission(
-			PermissionChecker permissionChecker,
-			CommerceChannel commerceChannel)
-		throws PortalException {
-
-		if ((commerceChannel.getAccountEntryId() > 0) &&
-			_hasRoleAccountSupplier(permissionChecker, commerceChannel)) {
-
-			return true;
 		}
 
 		return false;
