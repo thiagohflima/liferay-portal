@@ -55,12 +55,12 @@ public abstract class BaseCommerceDiscountProductTarget
 	public void postProcessContextBooleanFilter(
 		BooleanFilter contextBooleanFilter, CPDefinition cpDefinition) {
 
+		BooleanFilter fieldBooleanFilter = new BooleanFilter();
+
 		BooleanFilter existBooleanFilter = new BooleanFilter();
 
 		existBooleanFilter.add(
 			new ExistsFilter(getFieldName()), BooleanClauseOccur.MUST_NOT);
-
-		BooleanFilter fieldBooleanFilter = new BooleanFilter();
 
 		fieldBooleanFilter.add(existBooleanFilter, BooleanClauseOccur.SHOULD);
 

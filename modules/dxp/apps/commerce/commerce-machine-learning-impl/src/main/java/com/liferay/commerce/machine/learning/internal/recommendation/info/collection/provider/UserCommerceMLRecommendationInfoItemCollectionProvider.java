@@ -88,7 +88,7 @@ public class UserCommerceMLRecommendationInfoItemCollectionProvider
 					0);
 			}
 
-			long[] categoryIds = null;
+			long[] assetCategoryIds = null;
 
 			if (relatedItem != null) {
 				CPDefinition cpDefinition = (CPDefinition)relatedItem;
@@ -97,14 +97,14 @@ public class UserCommerceMLRecommendationInfoItemCollectionProvider
 					CPDefinition.class.getName(),
 					cpDefinition.getCPDefinitionId());
 
-				categoryIds = assetEntry.getCategoryIds();
+				assetCategoryIds = assetEntry.getCategoryIds();
 			}
 
 			List<UserCommerceMLRecommendation> userCommerceMLRecommendations =
 				userCommerceMLRecommendationManager.
 					getUserCommerceMLRecommendations(
 						accountEntry.getCompanyId(),
-						accountEntry.getAccountEntryId(), categoryIds);
+						accountEntry.getAccountEntryId(), assetCategoryIds);
 
 			if (userCommerceMLRecommendations.isEmpty()) {
 				return InfoPage.of(
