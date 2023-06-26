@@ -58,11 +58,12 @@ public class JSUnitTestFailureMessageGenerator
 			}
 		}
 
-		String packageFailures =
-			"Build completed with " + packageFailureList.size() + " failures.";
-
 		return Dom4JUtil.getNewElement(
-			"div", null, Dom4JUtil.getNewElement("b", null, packageFailures),
+			"div", null,
+			Dom4JUtil.getNewElement(
+				"b", null,
+				"Build completed with " + packageFailureList.size() +
+					" failures."),
 			Dom4JUtil.getOrderedListElement(elementList, 7));
 	}
 
