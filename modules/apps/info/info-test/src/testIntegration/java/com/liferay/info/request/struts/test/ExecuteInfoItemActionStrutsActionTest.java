@@ -98,16 +98,16 @@ public class ExecuteInfoItemActionStrutsActionTest {
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
 
-		_user = UserTestUtil.getAdminUser(_group.getCompanyId());
-
-		UserTestUtil.setUser(_user);
-
 		ObjectDefinition objectDefinition = _addObjectDefinition();
 
 		_classNameId = String.valueOf(
 			_portal.getClassNameId(
 				ObjectDefinition.class.getName() + "#" +
 					objectDefinition.getObjectDefinitionId()));
+
+		_user = UserTestUtil.getAdminUser(_group.getCompanyId());
+
+		UserTestUtil.setUser(_user);
 
 		ObjectEntry objectEntry = _objectEntryLocalService.addObjectEntry(
 			_user.getUserId(), _group.getGroupId(),
