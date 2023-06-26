@@ -124,7 +124,7 @@ public class APIEndpointRelevantObjectEntryModelListener
 				"'");
 
 			ObjectDefinition apiEndpointObjectDefinition =
-				_objectDefinitionLocalService.fetchObjectDefinition(
+				_objectDefinitionLocalService.getObjectDefinition(
 					objectEntry.getObjectDefinitionId());
 
 			Predicate predicate = _filterPredicateFactory.create(
