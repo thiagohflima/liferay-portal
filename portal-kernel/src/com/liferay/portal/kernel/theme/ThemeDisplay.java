@@ -1509,17 +1509,16 @@ public class ThemeDisplay
 			cdnBaseURL + themeStaticResourcePath +
 				colorScheme.getColorSchemeImagesPath());
 
-		String adminThemeId = PrefsPropsUtil.getString(
+		Theme controlPanelTheme = ThemeLocalServiceUtil.getTheme(
 			_company.getCompanyId(),
-			PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID);
-
-		Theme adminTheme = ThemeLocalServiceUtil.getTheme(
-			_company.getCompanyId(), adminThemeId);
+			PrefsPropsUtil.getString(
+				_company.getCompanyId(),
+				PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID));
 
 		setPathControlPanelSpritemap(
 			StringBundler.concat(
-				cdnBaseURL, adminTheme.getStaticResourcePath(),
-				adminTheme.getImagesPath(), "/clay/icons.svg"));
+				cdnBaseURL, controlPanelTheme.getStaticResourcePath(),
+				controlPanelTheme.getImagesPath(), "/clay/icons.svg"));
 
 		String dynamicResourcesHost = getCDNDynamicResourcesHost();
 
