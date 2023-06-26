@@ -146,7 +146,7 @@ public class StructuredContentFolderResourceTest
 	public void testPostAssetLibraryStructuredContentFolder() throws Exception {
 		super.testPostAssetLibraryStructuredContentFolder();
 
-		_assertDefaultERCStructuredContentFolder(
+		_assertStructuredContentFolder(
 			structuredContentFolder ->
 				testPostAssetLibraryStructuredContentFolder_addStructuredContentFolder(
 					structuredContentFolder));
@@ -186,7 +186,7 @@ public class StructuredContentFolderResourceTest
 			testPostAssetLibraryStructuredContentFolder_addStructuredContentFolder(
 				_randomStructuredContentFolder());
 
-		_assertDefaultERCStructuredContentFolder(
+		_assertStructuredContentFolder(
 			structuredContentFolder ->
 				structuredContentFolderResource.
 					postStructuredContentFolderStructuredContentFolder(
@@ -371,7 +371,7 @@ public class StructuredContentFolderResourceTest
 		return _randomStructuredContentFolder();
 	}
 
-	private void _assertDefaultERCStructuredContentFolder(
+	private void _assertStructuredContentFolder(
 			UnsafeFunction
 				<StructuredContentFolder, StructuredContentFolder, Exception>
 					postStructuredContentFolderUnsafeFunction)
