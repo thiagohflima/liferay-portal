@@ -70,7 +70,7 @@ public interface DefaultObjectEntryManager extends ObjectEntryManager {
 			ObjectDefinition objectDefinition, long objectEntryId)
 		throws Exception;
 
-	public ObjectEntry fetchRelatedManytoOneObjectEntry(
+	public ObjectEntry fetchRelatedManyToOneObjectEntry(
 			DTOConverterContext dtoConverterContext,
 			ObjectDefinition objectDefinition, Long objectEntryId,
 			String objectRelationshipName)

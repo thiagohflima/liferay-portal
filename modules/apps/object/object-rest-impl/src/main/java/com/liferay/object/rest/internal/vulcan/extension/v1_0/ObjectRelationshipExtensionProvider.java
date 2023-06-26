@@ -111,7 +111,7 @@ public class ObjectRelationshipExtensionProvider
 								objectDefinition.getStorageType()));
 
 					return defaultObjectEntryManager.
-						fetchRelatedManytoOneObjectEntry(
+						fetchRelatedManyToOneObjectEntry(
 							_getDefaultDTOConverterContext(
 								objectDefinition, getPrimaryKey(entity), null),
 							objectDefinition, getPrimaryKey(entity),
