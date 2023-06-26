@@ -89,15 +89,17 @@ public class CommerceCatalogModelListener
 				commerceCatalog.getCompanyId(), QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS);
 
-		if (!commercePriceLists.isEmpty()) {
-			Indexer<CommercePriceList> indexer =
-				IndexerRegistryUtil.nullSafeGetIndexer(CommercePriceList.class);
+		if (commercePriceLists.isEmpty()) {
+			return;
+		}
 
-			for (CommercePriceList commercePriceList : commercePriceLists) {
-				indexer.reindex(
-					CommercePriceList.class.getName(),
-					commercePriceList.getCommercePriceListId());
-			}
+		Indexer<CommercePriceList> indexer =
+			IndexerRegistryUtil.nullSafeGetIndexer(CommercePriceList.class);
+
+		for (CommercePriceList commercePriceList : commercePriceLists) {
+			indexer.reindex(
+				CommercePriceList.class.getName(),
+				commercePriceList.getCommercePriceListId());
 		}
 	}
 
