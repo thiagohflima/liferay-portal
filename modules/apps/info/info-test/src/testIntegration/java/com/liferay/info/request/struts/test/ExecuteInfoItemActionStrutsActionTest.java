@@ -46,7 +46,6 @@ import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
-import com.liferay.portal.kernel.test.util.TestPropsValues;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
@@ -107,8 +106,6 @@ public class ExecuteInfoItemActionStrutsActionTest {
 				ObjectDefinition.class.getName() + "#" +
 					objectDefinition.getObjectDefinitionId()));
 
-		UserTestUtil.setUser(_user);
-
 		ObjectEntry objectEntry = _objectEntryLocalService.addObjectEntry(
 			_user.getUserId(), _group.getGroupId(),
 			objectDefinition.getObjectDefinitionId(),
@@ -163,8 +160,6 @@ public class ExecuteInfoItemActionStrutsActionTest {
 	@Test
 	public void testExecuteInfoItemActionFailureGuest() throws Exception {
 		_user = _userLocalService.getGuestUser(_group.getCompanyId());
-
-		UserTestUtil.setUser(_user);
 
 		_testExecuteInfoItemAction(false);
 	}
