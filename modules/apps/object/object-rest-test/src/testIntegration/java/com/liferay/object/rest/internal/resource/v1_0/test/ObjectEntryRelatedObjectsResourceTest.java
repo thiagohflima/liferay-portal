@@ -1229,12 +1229,6 @@ public class ObjectEntryRelatedObjectsResourceTest {
 					UserAccountTestUtil.randomUserAccount())),
 			_objectDefinition1.getRESTContextPath(), Http.Method.POST);
 
-		String customObjectEntryExternalReferenceCode =
-			customObjectEntryJSONObject.getString("externalReferenceCode");
-
-		String customObjectEntryId = customObjectEntryJSONObject.getString(
-			"id");
-
 		UserAccount putUserAccount = UserAccountTestUtil.randomUserAccount();
 
 		putUserAccount.setEmailAddress(
@@ -1245,7 +1239,7 @@ public class ObjectEntryRelatedObjectsResourceTest {
 				JSONObject systemObjectEntryJSONObject = HTTPTestUtil.invoke(
 					null,
 					_getEndpoint(
-						manyToOne, customObjectEntryId,
+						manyToOne, customObjectEntryJSONObject.getString("id"),
 						objectRelationship.getName()),
 					Http.Method.GET);
 
@@ -1279,7 +1273,7 @@ public class ObjectEntryRelatedObjectsResourceTest {
 			StringBundler.concat(
 				_objectDefinition1.getRESTContextPath(),
 				"/by-external-reference-code/",
-				customObjectEntryExternalReferenceCode),
+				customObjectEntryJSONObject.getString("externalReferenceCode")),
 			Http.Method.PUT);
 
 		if (manyToOne) {
