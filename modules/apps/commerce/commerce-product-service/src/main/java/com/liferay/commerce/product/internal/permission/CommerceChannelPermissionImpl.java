@@ -150,7 +150,7 @@ public class CommerceChannelPermissionImpl
 			commerceChannel.getCommerceChannelId(), actionId);
 	}
 
-	private boolean _hasSupplierAccount(
+	private boolean _hasRoleAccountSupplier(
 			PermissionChecker permissionChecker,
 			CommerceChannel commerceChannel)
 		throws PortalException {
@@ -182,7 +182,7 @@ public class CommerceChannelPermissionImpl
 		throws PortalException {
 
 		if ((commerceChannel.getAccountEntryId() > 0) &&
-			_hasSupplierAccount(permissionChecker, commerceChannel)) {
+			_hasRoleAccountSupplier(permissionChecker, commerceChannel)) {
 
 			return true;
 		}
