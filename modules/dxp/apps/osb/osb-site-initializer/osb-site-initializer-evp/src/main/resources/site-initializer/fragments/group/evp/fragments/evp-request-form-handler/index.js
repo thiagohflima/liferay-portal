@@ -187,7 +187,8 @@ function toggleServiceRequired(service) {
 		service.querySelector('[name="totalHoursRequested"]').required = false;
 		service.querySelector('[name="startDate"]').required = false;
 		service.querySelector('[name="endDate"]').required = false;
-	} else {
+	}
+	else {
 		service.querySelector('[name="managerEmailAddress"]').required = true;
 		service.querySelector('[name="totalHoursRequested"]').required = true;
 		service.querySelector('[name="startDate"]').required = true;
@@ -198,7 +199,8 @@ function toggleServiceRequired(service) {
 function toggleGrantRequired(grant) {
 	if (grant.querySelector('[name="grantAmount"]').required) {
 		grant.querySelector('[name="grantAmount"]').required = false;
-	} else {
+	}
+	else {
 		grant.querySelector('[name="grantAmount"]').required = true;
 	}
 }
@@ -304,14 +306,16 @@ const compareGrants = async () => {
 				errorMsg.style.display = 'block';
 			}
 			document.querySelector('button[type="submit"]').disabled = true;
-		} else {
+		}
+		else {
 			const errorMsg = document.querySelector('.error-msg');
 			if (errorMsg) {
 				errorMsg.style.display = 'none';
 			}
 			document.querySelector('button[type="submit"]').disabled = false;
 		}
-	} catch (error) {
+	}
+	catch (error) {
 		console.error(error);
 	}
 };
@@ -334,7 +338,8 @@ const compareHours = async () => {
 			errorMsg.style.position = 'absolute';
 		}
 		document.querySelector('button[type="submit"]').disabled = true;
-	} else {
+	}
+	else {
 		const errorMsg = document.querySelector('.error-msg');
 		if (errorMsg) {
 			errorMsg.style.display = 'none';
@@ -345,7 +350,6 @@ const compareHours = async () => {
 
 hoursInput.addEventListener('change', compareHours);
 
-/** EDIT REQUEST FORM PAGE */
 const evpRequestEditForm = document.querySelector('.evp-request-form');
 async function getEVPRequest(requestId) {
 	const searchParams = new URLSearchParams();
@@ -445,7 +449,6 @@ if (editPage) {
 		STARTDATE: 'startDate',
 	};
 
-	/** Fill Request Form */
 	getEVPRequest(requestId).then((request) => {
 		for (const [key, keyValue] of Object.entries(request)) {
 			const formInput = document.querySelector(`[name='${key}']`);
@@ -461,14 +464,12 @@ if (editPage) {
 								'#selected-org'
 							);
 
-							/** Set shown organization input value */
 							organizationInput.value = `${response['id']} - ${response['organizationName']} - ${response['taxId']} `;
 							organizationInput.setAttribute(
 								'disabled',
 								'disabled'
 							);
 
-							/** Set hidden organization input value */
 							formInput.value = response['id'];
 							formInputLabel.value = response['organizationName'];
 						});
@@ -510,7 +511,6 @@ if (editPage) {
 		}
 	});
 
-	/** Update Request */
 	if (!evpRequestEditForm) {
 		return;
 	}
@@ -533,7 +533,8 @@ if (editPage) {
 				const redirect = `${Liferay.ThemeDisplay.getPortalURL()}/web/${groupKey}/request-form-submit-page`;
 				window.location.href = redirect;
 			});
-		} catch (error) {
+		}
+		catch (error) {
 			console.error(error);
 		}
 	});
