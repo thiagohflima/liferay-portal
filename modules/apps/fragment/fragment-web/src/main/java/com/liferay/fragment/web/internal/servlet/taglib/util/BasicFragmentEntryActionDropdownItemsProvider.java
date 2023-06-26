@@ -402,6 +402,9 @@ public class BasicFragmentEntryActionDropdownItemsProvider {
 					_themeDisplay.getURLCurrent()
 				).buildString());
 
+			RequestBackedPortletURLFactory requestBackedPortletURLFactory =
+				RequestBackedPortletURLFactoryUtil.create(_httpServletRequest);
+
 			FragmentCollectionItemSelectorCriterion
 				fragmentCollectionItemSelectorCriterion =
 					new FragmentCollectionItemSelectorCriterion();
@@ -409,9 +412,6 @@ public class BasicFragmentEntryActionDropdownItemsProvider {
 			fragmentCollectionItemSelectorCriterion.
 				setDesiredItemSelectorReturnTypes(
 					new UUIDItemSelectorReturnType());
-
-			RequestBackedPortletURLFactory requestBackedPortletURLFactory =
-				RequestBackedPortletURLFactoryUtil.create(_httpServletRequest);
 
 			dropdownItem.putData(
 				"selectFragmentCollectionURL",

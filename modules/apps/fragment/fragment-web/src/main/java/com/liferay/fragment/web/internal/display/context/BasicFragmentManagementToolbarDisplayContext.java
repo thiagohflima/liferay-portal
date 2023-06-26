@@ -215,6 +215,10 @@ public class BasicFragmentManagementToolbarDisplayContext
 		).put(
 			"selectFragmentCollectionURL",
 			() -> {
+				RequestBackedPortletURLFactory requestBackedPortletURLFactory =
+					RequestBackedPortletURLFactoryUtil.create(
+						httpServletRequest);
+
 				FragmentCollectionItemSelectorCriterion
 					fragmentCollectionItemSelectorCriterion =
 						new FragmentCollectionItemSelectorCriterion();
@@ -222,10 +226,6 @@ public class BasicFragmentManagementToolbarDisplayContext
 				fragmentCollectionItemSelectorCriterion.
 					setDesiredItemSelectorReturnTypes(
 						new UUIDItemSelectorReturnType());
-
-				RequestBackedPortletURLFactory requestBackedPortletURLFactory =
-					RequestBackedPortletURLFactoryUtil.create(
-						httpServletRequest);
 
 				return String.valueOf(
 					_itemSelector.getItemSelectorURL(
