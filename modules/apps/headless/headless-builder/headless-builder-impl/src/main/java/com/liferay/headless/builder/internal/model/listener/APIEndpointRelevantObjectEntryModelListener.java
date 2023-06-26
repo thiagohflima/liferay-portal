@@ -95,10 +95,6 @@ public class APIEndpointRelevantObjectEntryModelListener
 	}
 
 	private void _validate(ObjectEntry objectEntry) {
-		ObjectDefinition apiEndpointObjectDefinition =
-			_objectDefinitionLocalService.fetchObjectDefinition(
-				objectEntry.getObjectDefinitionId());
-
 		try {
 			Map<String, Serializable> values = objectEntry.getValues();
 
@@ -126,6 +122,10 @@ public class APIEndpointRelevantObjectEntryModelListener
 				"' and r_apiApplicationToAPIEndpoints_c_apiApplicationId eq '",
 				values.get("r_apiApplicationToAPIEndpoints_c_apiApplicationId"),
 				"'");
+
+			ObjectDefinition apiEndpointObjectDefinition =
+				_objectDefinitionLocalService.fetchObjectDefinition(
+					objectEntry.getObjectDefinitionId());
 
 			Predicate predicate = _filterPredicateFactory.create(
 				filterString,
