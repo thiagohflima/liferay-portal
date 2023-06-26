@@ -1017,7 +1017,7 @@ public class LayoutCTTest {
 	}
 
 	@Test
-	public void testUpdateLayoutWithTwoExpandoBridgeAttributes()
+	public void testUpdateLayoutWithMultiplyExpandoBridgeAttributes()
 		throws Exception {
 
 		boolean active = CacheRegistryUtil.isActive();
@@ -1036,9 +1036,13 @@ public class LayoutCTTest {
 					_group.getCompanyId(), Layout.class.getName());
 
 			expandoBridge.addAttribute(
-				"CustomField1", ExpandoColumnConstants.BOOLEAN);
+				RandomTestUtil.randomString(), ExpandoColumnConstants.BOOLEAN);
+
+			// Ensure that this second call to addAttribute works. See
+			// LPS-183421 in LayoutLocalServiceImpl.
+
 			expandoBridge.addAttribute(
-				"CustomField2", ExpandoColumnConstants.BOOLEAN);
+				RandomTestUtil.randomString(), ExpandoColumnConstants.BOOLEAN);
 
 			Layout layout = LayoutTestUtil.addTypePortletLayout(_group);
 
