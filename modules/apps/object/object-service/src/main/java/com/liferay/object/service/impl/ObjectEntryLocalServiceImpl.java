@@ -571,9 +571,32 @@ public class ObjectEntryLocalServiceImpl
 			throw new UnsupportedOperationException();
 		}
 
-		DSLQuery dslQuery = _getManyToOneObjectEntriesGroupByStep(
-			groupId, objectRelationship, primaryKey,
-			DSLQueryFactoryUtil.selectDistinct(ObjectEntryTable.INSTANCE));
+		DynamicObjectDefinitionTable extensionDynamicObjectDefinitionTable =
+			_getExtensionDynamicObjectDefinitionTable(
+				objectRelationship.getObjectDefinitionId2());
+		FromStep fromStep = DSLQueryFactoryUtil.selectDistinct(
+			ObjectEntryTable.INSTANCE);
+		ObjectField objectField = _objectFieldPersistence.fetchByPrimaryKey(
+			objectRelationship.getObjectFieldId2());
+
+		Column<DynamicObjectDefinitionTable, Long> primaryKeyColumn =
+			extensionDynamicObjectDefinitionTable.getPrimaryKeyColumn();
+
+		DSLQuery dslQuery = fromStep.from(
+			extensionDynamicObjectDefinitionTable
+		).innerJoinON(
+			ObjectEntryTable.INSTANCE,
+			ObjectEntryTable.INSTANCE.objectEntryId.eq(
+				(Expression<Long>)
+					extensionDynamicObjectDefinitionTable.getColumn(
+						objectField.getDBColumnName()))
+		).where(
+			primaryKeyColumn.eq(
+				primaryKey
+			).and(
+				ObjectEntryTable.INSTANCE.groupId.eq(groupId)
+			)
+		);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Get one to many related object entries: " + dslQuery);
@@ -2245,37 +2268,6 @@ public class ObjectEntryLocalServiceImpl
 				ObjectEntrySearchUtil.getRelatedModelsPredicate(
 					dynamicObjectDefinitionTable, objectDefinition2,
 					_objectFieldLocalService, search)
-			)
-		);
-	}
-
-	private GroupByStep _getManyToOneObjectEntriesGroupByStep(
-			long groupId, ObjectRelationship objectRelationship,
-			long primaryKey, FromStep fromStep)
-		throws PortalException {
-
-		DynamicObjectDefinitionTable extensionDynamicObjectDefinitionTable =
-			_getExtensionDynamicObjectDefinitionTable(
-				objectRelationship.getObjectDefinitionId2());
-		ObjectField objectField = _objectFieldPersistence.fetchByPrimaryKey(
-			objectRelationship.getObjectFieldId2());
-
-		Column<DynamicObjectDefinitionTable, Long> primaryKeyColumn =
-			extensionDynamicObjectDefinitionTable.getPrimaryKeyColumn();
-
-		return fromStep.from(
-			extensionDynamicObjectDefinitionTable
-		).innerJoinON(
-			ObjectEntryTable.INSTANCE,
-			ObjectEntryTable.INSTANCE.objectEntryId.eq(
-				(Expression<Long>)
-					extensionDynamicObjectDefinitionTable.getColumn(
-						objectField.getDBColumnName()))
-		).where(
-			primaryKeyColumn.eq(
-				primaryKey
-			).and(
-				ObjectEntryTable.INSTANCE.groupId.eq(groupId)
 			)
 		);
 	}
