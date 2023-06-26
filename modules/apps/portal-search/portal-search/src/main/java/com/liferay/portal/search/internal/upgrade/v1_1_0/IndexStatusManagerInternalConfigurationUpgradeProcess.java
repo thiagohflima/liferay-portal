@@ -24,10 +24,10 @@ import org.osgi.service.cm.ConfigurationAdmin;
 /**
  * @author Julius Lee
  */
-public class IndexStatusManagerInternalConfigurationRemovalUpgradeProcess
+public class IndexStatusManagerInternalConfigurationUpgradeProcess
 	extends UpgradeProcess {
 
-	public IndexStatusManagerInternalConfigurationRemovalUpgradeProcess(
+	public IndexStatusManagerInternalConfigurationUpgradeProcess(
 		ConfigurationAdmin configurationAdmin) {
 
 		_configurationAdmin = configurationAdmin;
