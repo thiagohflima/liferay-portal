@@ -182,10 +182,10 @@ public class SXPBlueprintInfoCollectionProvider
 			User user = themeDisplay.getUser();
 
 			try {
-				List<Group> userSiteGroups = user.getSiteGroups();
+				List<Group> siteGroups = user.getSiteGroups();
 
 				if (!ArrayUtil.contains(
-						userSiteGroups.toArray(new Group[0]), group)) {
+						siteGroups.toArray(new Group[0]), group)) {
 
 					continue;
 				}
