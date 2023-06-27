@@ -142,10 +142,10 @@ public class ElasticsearchSearchEngineFixture implements SearchEngineFixture {
 		_companyIndexFactoryHelper = new CompanyIndexFactoryHelper();
 
 		ReflectionTestUtil.setFieldValue(
-			_companyIndexFactoryHelper, "_indexNameBuilder", indexNameBuilder);
-		ReflectionTestUtil.setFieldValue(
 			_companyIndexFactoryHelper, "_elasticsearchConfigurationWrapper",
 			createElasticsearchConfigurationWrapper(properites));
+		ReflectionTestUtil.setFieldValue(
+			_companyIndexFactoryHelper, "_indexNameBuilder", indexNameBuilder);
 		ReflectionTestUtil.setFieldValue(
 			_companyIndexFactoryHelper, "_jsonFactory", new JSONFactoryImpl());
 
@@ -157,7 +157,6 @@ public class ElasticsearchSearchEngineFixture implements SearchEngineFixture {
 		ReflectionTestUtil.setFieldValue(
 			_companyIndexFactory, "_companyIndexFactoryHelper",
 			_companyIndexFactoryHelper);
-
 		ReflectionTestUtil.setFieldValue(
 			_companyIndexFactory, "_elasticsearchConfigurationWrapper",
 			createElasticsearchConfigurationWrapper(properites));
