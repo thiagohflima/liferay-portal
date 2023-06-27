@@ -85,7 +85,7 @@ public class SiteResourceImpl extends BaseSiteResourceImpl {
 	}
 
 	@Override
-	public Site putSiteByExternalReferenceCode(
+	public Site putSite(
 			String externalReferenceCode, MultipartBody multipartBody)
 		throws Exception {
 
