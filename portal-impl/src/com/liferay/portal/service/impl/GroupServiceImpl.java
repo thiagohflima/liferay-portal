@@ -211,9 +211,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 			membershipRestriction, friendlyURL, site, inheritContent, active,
 			serviceContext);
 
-		if (site) {
-			SiteMembershipPolicyUtil.verifyPolicy(group);
-		}
+		SiteMembershipPolicyUtil.verifyPolicy(group);
 
 		return group;
 	}
