@@ -17,36 +17,6 @@
 		commerceShippingMethodModels = dataFactory.newCommerceShippingMethodModels(commerceChannelGroupModels)
 	/>
 
-	<#list accountEntryModels as accountEntryModel>
-		${dataFactory.toInsertSQL(accountEntryModel)}
-
-		${dataFactory.toInsertSQL(dataFactory.newAccountEntryUserRelModel(sampleUserModel, accountEntryModel.accountEntryId))}
-
-		${dataFactory.toInsertSQL(dataFactory.newAccountEntryGroupModel(accountEntryModel))}
-
-		<#assign
-			addressModel = dataFactory.newAddressModel(accountEntryModel.accountEntryId, countryModel.countryId)
-
-			accountEntryCommerceOrderModels = dataFactory.newAccountEntryCommerceOrderModels(commerceChannelGroupModels[0].groupId, accountEntryModel.accountEntryId, commerceCurrencyModel.commerceCurrencyId, addressModel.addressId, addressModel.addressId, commerceShippingMethodModels[0].commerceShippingMethodId, "Standard Delivery", 2)
-		/>
-
-		${dataFactory.toInsertSQL(addressModel)}
-
-		<#list accountEntryCommerceOrderModels as accountEntryCommerceOrderModel>
-			${dataFactory.toInsertSQL(accountEntryCommerceOrderModel)}
-
-			${dataFactory.toInsertSQL(dataFactory.newCommerceOrderItemModel(accountEntryCommerceOrderModel, commercePriceListModel.commercePriceListId, cProductModels[dataFactory.getRandomCProductModelIndex()]))}
-		</#list>
-
-		<#if dataFactory.maxAccountEntryCommerceOrderCount != 0>
-			<#assign
-				accountEntryCommerceOrderItemModel = dataFactory.newCommerceOrderItemModel(accountEntryCommerceOrderModels[0], commercePriceListModel.commercePriceListId, cProductModels[dataFactory.getRandomCProductModelIndex()])
-			/>
-
-			${csvFileWriter.write("commerceDeliveryAPI", virtualHostModel.hostname + "," + accountEntryModel.accountEntryId + "," + commerceChannelModels[0].commerceChannelId + "," + addressModel.addressId + "," + addressModel.countryId + "," + commerceCurrencyModel.code + "," + commerceShippingMethodModels[0].engineKey + "," + accountEntryCommerceOrderItemModel.CProductId + "," + accountEntryCommerceOrderItemModel.CPInstanceId + "," + accountEntryCommerceOrderModels[0].commerceOrderId + "\n")}
-		</#if>
-	</#list>
-
 	${dataFactory.toInsertSQL(commerceCurrencyModel)}
 
 	${dataFactory.toInsertSQL(countryModel)}
@@ -179,6 +149,36 @@
 		${dataFactory.toInsertSQL(openCommerceOrderModel)}
 
 		${dataFactory.toInsertSQL(dataFactory.newCommerceOrderItemModel(openCommerceOrderModel, commercePriceListModel.commercePriceListId, cProductModels[dataFactory.getRandomCProductModelIndex()]))}
+	</#list>
+
+	<#list accountEntryModels as accountEntryModel>
+		${dataFactory.toInsertSQL(accountEntryModel)}
+
+		${dataFactory.toInsertSQL(dataFactory.newAccountEntryUserRelModel(sampleUserModel, accountEntryModel.accountEntryId))}
+
+		${dataFactory.toInsertSQL(dataFactory.newAccountEntryGroupModel(accountEntryModel))}
+
+		<#assign
+			addressModel = dataFactory.newAddressModel(accountEntryModel.accountEntryId, countryModel.countryId)
+
+			accountEntryCommerceOrderModels = dataFactory.newAccountEntryCommerceOrderModels(commerceChannelGroupModels[0].groupId, accountEntryModel.accountEntryId, commerceCurrencyModel.commerceCurrencyId, addressModel.addressId, addressModel.addressId, commerceShippingMethodModels[0].commerceShippingMethodId, "Standard Delivery", 2)
+		/>
+
+		${dataFactory.toInsertSQL(addressModel)}
+
+		<#list accountEntryCommerceOrderModels as accountEntryCommerceOrderModel>
+			${dataFactory.toInsertSQL(accountEntryCommerceOrderModel)}
+
+			${dataFactory.toInsertSQL(dataFactory.newCommerceOrderItemModel(accountEntryCommerceOrderModel, commercePriceListModel.commercePriceListId, cProductModels[dataFactory.getRandomCProductModelIndex()]))}
+		</#list>
+
+		<#if dataFactory.maxAccountEntryCommerceOrderCount != 0>
+			<#assign
+				accountEntryCommerceOrderItemModel = dataFactory.newCommerceOrderItemModel(accountEntryCommerceOrderModels[0], commercePriceListModel.commercePriceListId, cProductModels[dataFactory.getRandomCProductModelIndex()])
+			/>
+
+			${csvFileWriter.write("commerceDeliveryAPI", virtualHostModel.hostname + "," + accountEntryModel.accountEntryId + "," + commerceChannelModels[0].commerceChannelId + "," + addressModel.addressId + "," + addressModel.countryId + "," + commerceCurrencyModel.code + "," + commerceShippingMethodModels[0].engineKey + "," + accountEntryCommerceOrderItemModel.CProductId + "," + accountEntryCommerceOrderItemModel.CPInstanceId + "," + accountEntryCommerceOrderModels[0].commerceOrderId + "\n")}
+		</#if>
 	</#list>
 
 	<#list commerceGroupModels as commerceGroupModel>
