@@ -89,7 +89,10 @@ public class SynchronizeSiteInitializerMVCActionCommand
 			long groupId, InputStream inputStream, String siteInitializerKey)
 		throws Exception {
 
-		File tempFile = FileUtil.createTempFile(inputStream);
+		File tempFile = FileUtil.createTempFile();
+
+		FileUtil.write(tempFile, inputStream);
+
 		File tempFolder = FileUtil.createTempFolder();
 
 		FileUtil.unzip(tempFile, tempFolder);

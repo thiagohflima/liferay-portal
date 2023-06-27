@@ -100,8 +100,7 @@ public class SiteResourceImpl extends BaseSiteResourceImpl {
 		else {
 			if (!group.isSite()) {
 				throw new IllegalArgumentException(
-					"No site exists with external reference code " +
-						externalReferenceCode);
+					"No site was found for key " + externalReferenceCode);
 			}
 
 			_groupPermission.check(
@@ -111,21 +110,21 @@ public class SiteResourceImpl extends BaseSiteResourceImpl {
 
 		File tempFile = FileUtil.createTempFile(
 			multipartBody.getBinaryFileAsBytes("file"));
-		File tempFolder = FileUtil.createTempFolder();
 
-		FileUtil.unzip(tempFile, tempFolder);
-
-		tempFile.delete();
+		File tempDir = FileUtil.createTempFolder();
 
 		try {
+			FileUtil.unzip(tempFile, tempDir);
+
 			SiteInitializer siteInitializer = _siteInitializerFactory.create(
-				new File(tempFolder, "site-initializer"),
+				new File(tempDir, "site-initializer"),
 				group.getName(LocaleUtil.getDefault()));
 
 			siteInitializer.initialize(group.getGroupId());
 		}
 		finally {
-			tempFolder.delete();
+			FileUtil.deltree(tempFile);
+			FileUtil.deltree(tempDir);
 		}
 
 		Group finalGroup = group;
