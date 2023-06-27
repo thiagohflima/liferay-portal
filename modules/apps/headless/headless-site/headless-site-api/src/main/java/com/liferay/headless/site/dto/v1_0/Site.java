@@ -65,7 +65,7 @@ public class Site implements Serializable {
 		return ObjectMapperUtil.unsafeReadValue(Site.class, json);
 	}
 
-	@Schema(description = "The site's external reference code.")
+	@Schema(description = "The optional external key of this account.")
 	public String getExternalReferenceCode() {
 		return externalReferenceCode;
 	}
@@ -89,7 +89,7 @@ public class Site implements Serializable {
 		}
 	}
 
-	@GraphQLField(description = "The site's external reference code.")
+	@GraphQLField(description = "The optional external key of this account.")
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String externalReferenceCode;
 
