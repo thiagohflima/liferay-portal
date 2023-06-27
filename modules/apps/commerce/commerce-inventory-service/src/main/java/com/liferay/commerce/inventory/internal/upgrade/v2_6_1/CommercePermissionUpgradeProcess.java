@@ -48,30 +48,30 @@ public class CommercePermissionUpgradeProcess extends UpgradeProcess {
 			 ResultSet resultSet = preparedStatement.executeQuery()) {
 
 			while (resultSet.next()) {
-				long roleId = resultSet.getLong(3);
+				long roleId = resultSet.getLong("roleId");
 
 				Role role = _roleLocalService.fetchRole(
-					resultSet.getLong(1), RoleConstants.GUEST);
+					resultSet.getLong("companyId"), RoleConstants.GUEST);
 
 				if ((role != null) && (roleId == role.getRoleId())) {
 					_resourcePermissionLocalService.deleteResourcePermission(
-						resultSet.getLong(2));
+						resultSet.getLong("resourcePermissionId"));
 				}
 
 				role = _roleLocalService.fetchRole(
-					resultSet.getLong(1), RoleConstants.SITE_MEMBER);
+					resultSet.getLong("companyId"), RoleConstants.SITE_MEMBER);
 
 				if ((role != null) && (roleId == role.getRoleId())) {
 					_resourcePermissionLocalService.deleteResourcePermission(
-						resultSet.getLong(2));
+						resultSet.getLong("resourcePermissionId"));
 				}
 
 				role = _roleLocalService.fetchRole(
-					resultSet.getLong(1), RoleConstants.USER);
+					resultSet.getLong("companyId"), RoleConstants.USER);
 
 				if ((role != null) && (roleId == role.getRoleId())) {
 					_resourcePermissionLocalService.deleteResourcePermission(
-						resultSet.getLong(2));
+						resultSet.getLong("resourcePermissionId"));
 				}
 			}
 		}
