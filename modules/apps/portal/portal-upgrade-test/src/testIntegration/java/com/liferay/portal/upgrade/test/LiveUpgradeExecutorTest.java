@@ -159,7 +159,7 @@ public class LiveUpgradeExecutorTest {
 		_liveUpgradeExecutor.upgrade(
 			_TABLE_NAME,
 			LiveUpgradeProcessFactory.addColumns(
-				"version LONG null", "content SBLOB"),
+				"content SBLOB", "version LONG null"),
 			LiveUpgradeProcessFactory.alterColumnName(
 				"name", "title VARCHAR(128) not null"),
 			LiveUpgradeProcessFactory.alterColumnType(
@@ -168,10 +168,9 @@ public class LiveUpgradeExecutorTest {
 
 		String tempTableName = _getTempTableName();
 
-		Assert.assertFalse(_dbInspector.hasColumn(tempTableName, "name"));
 		Assert.assertFalse(_dbInspector.hasColumn(tempTableName, "content"));
-
 		Assert.assertTrue(_dbInspector.hasColumn(tempTableName, "id"));
+		Assert.assertFalse(_dbInspector.hasColumn(tempTableName, "name"));
 		Assert.assertTrue(_dbInspector.hasColumn(tempTableName, "title"));
 		Assert.assertTrue(_dbInspector.hasColumn(tempTableName, "version"));
 
