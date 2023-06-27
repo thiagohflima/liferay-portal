@@ -180,7 +180,7 @@
 			${dataFactory.toInsertSQL(dataFactory.newCommerceOrderItemModel(accountEntryCommerceOrderModel, commercePriceListModel.commercePriceListId, cProductModels[dataFactory.getRandomCProductModelIndex()]))}
 		</#list>
 
-		<#if dataFactory.maxCommerceAccountEntryCommerceOrderCount != 0>
+		<#if dataFactory.maxCommerceAccountOrderCount != 0>
 			<#assign
 				accountEntryCommerceOrderItemModel = dataFactory.newCommerceOrderItemModel(accountEntryCommerceOrderModels[0], commercePriceListModel.commercePriceListId, cProductModels[dataFactory.getRandomCProductModelIndex()])
 			/>
