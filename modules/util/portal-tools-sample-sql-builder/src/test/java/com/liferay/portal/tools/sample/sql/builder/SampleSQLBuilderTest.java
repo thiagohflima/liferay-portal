@@ -183,10 +183,10 @@ public class SampleSQLBuilderTest {
 		properties.put(
 			BenchmarksPropsKeys.OUTPUT_CSV_FILE_NAMES,
 			StringBundler.concat(
-				"assetPublisher,blog,commerceDeliveryAPI,",
+				"assetPublisher,blog,company,commerceDeliveryAPI,",
 				"commerceInventoryWarehouseItem,commerceOrder,commerceProduct,",
-				"company,cpDefinition,documentLibrary,dynamicDataList,",
-				"fragment,layout,mbCategory,mbThread,repository,user,wiki"));
+				"cpDefinition,documentLibrary,dynamicDataList,fragment,layout,",
+				"mbCategory,mbThread,repository,user,wiki"));
 		properties.put(BenchmarksPropsKeys.OUTPUT_MERGE, "true");
 		properties.put(
 			BenchmarksPropsKeys.SCRIPT,
