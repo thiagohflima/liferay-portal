@@ -74,10 +74,11 @@ public class ElasticsearchIndexSearcherSearchAfterTest {
 	@BeforeClass
 	public static void setUpClass() throws Exception {
 		_setUpIndexingFixture();
+
 		_setUpIndexSearcherAndWriter();
 
-		_setUpIndexSearchLimit();
 		_setUpDeepPagination();
+		_setUpIndexSearchLimit();
 		_setUpSorts();
 
 		PropsTestUtil.setProps("feature.flag.LPS-172416", "true");
