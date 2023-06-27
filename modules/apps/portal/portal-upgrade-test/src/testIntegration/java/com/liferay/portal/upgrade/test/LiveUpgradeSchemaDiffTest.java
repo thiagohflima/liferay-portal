@@ -146,7 +146,6 @@ public class LiveUpgradeSchemaDiffTest {
 
 			Assert.assertTrue(
 				actualColumnNamesMap.containsKey(expectedOldColumnName));
-
 			Assert.assertEquals(
 				_dbInspector.normalizeName(entry.getValue()),
 				actualColumnNamesMap.get(expectedOldColumnName));
