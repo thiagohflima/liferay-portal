@@ -82,7 +82,7 @@ paths:
                         default response
             # @review
             tags: ["Site"]
-    /sites/by-external-reference-code/{externalReferenceCode}:
+    /sites/by-externalReferenceCode/{externalReferenceCode}:
         put:
             description:
                 Adds or update a new site
