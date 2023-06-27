@@ -22,12 +22,18 @@
 
 		countryModel = dataFactory.newCountryModel()
 
+		addressModels = dataFactory.newAddressModels(commerceAccountEntryModels, countryModel.countryId)
+
 		commerceShippingMethodModels = dataFactory.newCommerceShippingMethodModels(commerceChannelGroupModels)
 	/>
 
 	${dataFactory.toInsertSQL(commerceCurrencyModel)}
 
 	${dataFactory.toInsertSQL(countryModel)}
+
+	<#list addressModels as addressModel>
+		${dataFactory.toInsertSQL(addressModel)}
+	</#list>
 
 	<#list commerceInventoryWarehouseModels as commerceInventoryWarehouseModel>
 		${dataFactory.toInsertSQL(commerceInventoryWarehouseModel)}
@@ -167,12 +173,10 @@
 		${dataFactory.toInsertSQL(dataFactory.newCommerceAccountEntryGroupModel(commerceAccountEntryModel))}
 
 		<#assign
-			addressModel = dataFactory.newAddressModel(commerceAccountEntryModel.accountEntryId, countryModel.countryId)
+			addressModel = addressModels[commerceAccountEntryModel?index]
 
 			accountEntryCommerceOrderModels = dataFactory.newAccountEntryCommerceOrderModels(commerceChannelGroupModels[0].groupId, commerceAccountEntryModel.accountEntryId, commerceCurrencyModel.commerceCurrencyId, addressModel.addressId, addressModel.addressId, commerceShippingMethodModels[0].commerceShippingMethodId, "Standard Delivery", 2)
 		/>
-
-		${dataFactory.toInsertSQL(addressModel)}
 
 		<#list accountEntryCommerceOrderModels as accountEntryCommerceOrderModel>
 			${dataFactory.toInsertSQL(accountEntryCommerceOrderModel)}
