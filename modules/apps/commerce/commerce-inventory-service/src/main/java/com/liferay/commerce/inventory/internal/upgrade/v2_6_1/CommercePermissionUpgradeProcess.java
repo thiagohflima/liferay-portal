@@ -41,7 +41,7 @@ public class CommercePermissionUpgradeProcess extends UpgradeProcess {
 	protected void doUpgrade() throws Exception {
 		try (PreparedStatement preparedStatement = connection.prepareStatement(
 			StringBundler.concat(
-				"select companyId, resourcePermissionId, roleId from ",
+				"select resourcePermissionId, companyId, roleId from ",
 				"ResourcePermission where name = 'com.liferay.commerce.",
 				"inventory.model.CommerceInventoryWarehouse' and scope = 4"));
 
