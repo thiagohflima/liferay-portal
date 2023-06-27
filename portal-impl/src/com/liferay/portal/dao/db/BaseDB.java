@@ -203,18 +203,20 @@ public abstract class BaseDB implements DB {
 			String targetTableName, Map<String, String> columnNamesMap)
 		throws Exception {
 
+		StringBundler sb = new StringBundler();
+
+		sb.append("insert into ");
+		sb.append(targetTableName);
+		sb.append(" (");
+
 		String[] sourceColumnNames = ArrayUtil.toStringArray(
 			columnNamesMap.keySet());
 
 		String[] targetColumnNames = TransformUtil.transform(
 			sourceColumnNames, columnNamesMap::get, String.class);
 
-		StringBundler sb = new StringBundler();
-
-		sb.append("insert into ");
-		sb.append(targetTableName);
-		sb.append(" (");
 		sb.append(StringUtil.merge(targetColumnNames, ", "));
+
 		sb.append(") select ");
 
 		for (int i = 0; i < sourceColumnNames.length; i++) {
