@@ -45,7 +45,7 @@ import com.liferay.commerce.internal.upgrade.v8_9_1.CommerceChannelAccountEntryR
 import com.liferay.commerce.internal.upgrade.v8_9_4.CommerceOrderUpgradeProcess;
 import com.liferay.commerce.internal.upgrade.v9_3_0.ConfigurationUpgradeProcess;
 import com.liferay.commerce.internal.upgrade.v9_4_0.AccountRoleUpgradeProcess;
-import com.liferay.commerce.internal.upgrade.v9_6_1.SupplierPermissionUpgradeProcess;
+import com.liferay.commerce.internal.upgrade.v9_6_1.SupplierRoleUpgradeProcess;
 import com.liferay.commerce.model.impl.CPDAvailabilityEstimateModelImpl;
 import com.liferay.commerce.model.impl.CommerceAvailabilityEstimateModelImpl;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
@@ -590,7 +590,7 @@ public class CommerceServiceUpgradeStepRegistrator
 
 		registry.register(
 			"9.6.0", "9.6.1",
-			new SupplierPermissionUpgradeProcess(
+			new SupplierRoleUpgradeProcess(
 				_companyLocalService, _resourcePermissionLocalService,
 				_roleLocalService));
 

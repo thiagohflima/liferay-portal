@@ -27,9 +27,9 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 /**
  * @author Luca Pellizzon
  */
-public class SupplierPermissionUpgradeProcess extends UpgradeProcess {
+public class SupplierRoleUpgradeProcess extends UpgradeProcess {
 
-	public SupplierPermissionUpgradeProcess(
+	public SupplierRoleUpgradeProcess(
 		CompanyLocalService companyLocalService,
 		ResourcePermissionLocalService resourcePermissionLocalService,
 		RoleLocalService roleLocalService) {
@@ -113,7 +113,7 @@ public class SupplierPermissionUpgradeProcess extends UpgradeProcess {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		SupplierPermissionUpgradeProcess.class);
+		SupplierRoleUpgradeProcess.class);
 
 	private final CompanyLocalService _companyLocalService;
 	private final ResourcePermissionLocalService
