@@ -53,14 +53,14 @@ public class LiveUpgradeSchemaDiffTest {
 	public static void setUpClass() throws Exception {
 		_connection = DataAccess.getConnection();
 
-		_dbInspector = new DBInspector(_connection);
-
 		_db = DBManagerUtil.getDB();
 
 		_db.runSQL(
 			StringBundler.concat(
 				"create table ", _TABLE_NAME,
 				" (id LONG not null primary key, name VARCHAR(128) not null)"));
+
+		_dbInspector = new DBInspector(_connection);
 	}
 
 	@AfterClass
