@@ -183,14 +183,16 @@ public class LiveUpgradeExecutorTest {
 			ResultSet resultSet = preparedStatement.executeQuery()) {
 
 			Assert.assertTrue(resultSet.next());
+
 			Assert.assertEquals(1, resultSet.getLong("id"));
-			Assert.assertEquals(0, resultSet.getLong("version"));
 			Assert.assertEquals("test_a", resultSet.getString("title"));
+			Assert.assertEquals(0, resultSet.getLong("version"));
 
 			Assert.assertTrue(resultSet.next());
+
 			Assert.assertEquals(2, resultSet.getLong("id"));
-			Assert.assertEquals(0, resultSet.getLong("version"));
 			Assert.assertEquals("test_b", resultSet.getString("title"));
+			Assert.assertEquals(0, resultSet.getLong("version"));
 
 			Assert.assertFalse(resultSet.next());
 		}
@@ -204,12 +206,14 @@ public class LiveUpgradeExecutorTest {
 			ResultSet resultSet = preparedStatement.executeQuery()) {
 
 			Assert.assertTrue(resultSet.next());
-			Assert.assertEquals(1, resultSet.getLong("id"));
+
 			Assert.assertEquals("test_a", resultSet.getString(columnName));
+			Assert.assertEquals(1, resultSet.getLong("id"));
 
 			Assert.assertTrue(resultSet.next());
-			Assert.assertEquals(2, resultSet.getLong("id"));
+
 			Assert.assertEquals("test_b", resultSet.getString(columnName));
+			Assert.assertEquals(2, resultSet.getLong("id"));
 
 			Assert.assertFalse(resultSet.next());
 		}
