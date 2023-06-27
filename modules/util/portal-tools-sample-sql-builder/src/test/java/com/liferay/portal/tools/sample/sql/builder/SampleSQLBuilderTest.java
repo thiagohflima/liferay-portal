@@ -107,9 +107,6 @@ public class SampleSQLBuilderTest {
 			BenchmarksPropsKeys.COMMERCE_LAYOUT_EXCLUDED_PORTLETS,
 			StringPool.BLANK);
 		properties.put(BenchmarksPropsKeys.DB_TYPE, "hypersonic");
-		properties.put(
-			BenchmarksPropsKeys.MAX_ACCOUNT_ENTRY_COMMERCE_ORDER_COUNT, "1");
-		properties.put(BenchmarksPropsKeys.MAX_ACCOUNT_ENTRY_COUNT, "1");
 		properties.put(BenchmarksPropsKeys.MAX_ASSET_CATEGORY_COUNT, "1");
 		properties.put(
 			BenchmarksPropsKeys.MAX_ASSET_ENTRY_TO_ASSET_CATEGORY_COUNT, "1");
@@ -120,6 +117,11 @@ public class SampleSQLBuilderTest {
 		properties.put(BenchmarksPropsKeys.MAX_ASSETPUBLISHER_PAGE_COUNT, "2");
 		properties.put(BenchmarksPropsKeys.MAX_BLOGS_ENTRY_COMMENT_COUNT, "1");
 		properties.put(BenchmarksPropsKeys.MAX_BLOGS_ENTRY_COUNT, "1");
+		properties.put(
+			BenchmarksPropsKeys.MAX_COMMERCE_ACCOUNT_ENTRY_COMMERCE_ORDER_COUNT,
+			"1");
+		properties.put(
+			BenchmarksPropsKeys.MAX_COMMERCE_ACCOUNT_ENTRY_COUNT, "1");
 		properties.put(BenchmarksPropsKeys.MAX_COMMERCE_CATALOG_COUNT, "1");
 		properties.put(BenchmarksPropsKeys.MAX_COMMERCE_GROUP_COUNT, "1");
 		properties.put(

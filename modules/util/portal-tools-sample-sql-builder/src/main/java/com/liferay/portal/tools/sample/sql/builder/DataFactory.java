@@ -607,16 +607,17 @@ public class DataFactory {
 		return sb.toString();
 	}
 
-	public int getMaxAccountEntryCommerceOrderCount() {
-		return BenchmarksPropsValues.MAX_ACCOUNT_ENTRY_COMMERCE_ORDER_COUNT;
-	}
-
 	public int getMaxAssetPublisherPageCount() {
 		return BenchmarksPropsValues.MAX_ASSETPUBLISHER_PAGE_COUNT;
 	}
 
 	public int getMaxBlogsEntryCommentCount() {
 		return BenchmarksPropsValues.MAX_BLOGS_ENTRY_COMMENT_COUNT;
+	}
+
+	public int getMaxCommerceAccountEntryCommerceOrderCount() {
+		return BenchmarksPropsValues.
+			MAX_COMMERCE_ACCOUNT_ENTRY_COMMERCE_ORDER_COUNT;
 	}
 
 	public int getMaxCommerceGroupCount() {
@@ -783,10 +784,13 @@ public class DataFactory {
 		int orderStatus) {
 
 		List<CommerceOrderModel> commerceOrderModels = new ArrayList<>(
-			BenchmarksPropsValues.MAX_ACCOUNT_ENTRY_COMMERCE_ORDER_COUNT);
+			BenchmarksPropsValues.
+				MAX_COMMERCE_ACCOUNT_ENTRY_COMMERCE_ORDER_COUNT);
 
 		for (int i = 1;
-			 i <= BenchmarksPropsValues.MAX_ACCOUNT_ENTRY_COMMERCE_ORDER_COUNT;
+			 i <=
+				 BenchmarksPropsValues.
+					 MAX_COMMERCE_ACCOUNT_ENTRY_COMMERCE_ORDER_COUNT;
 			 i++) {
 
 			commerceOrderModels.add(
@@ -798,15 +802,6 @@ public class DataFactory {
 		}
 
 		return commerceOrderModels;
-	}
-
-	public GroupModel newAccountEntryGroupModel(
-		AccountEntryModel accountEntryModel) {
-
-		return newGroupModel(
-			_counter.get(), getClassNameId(AccountEntry.class),
-			accountEntryModel.getAccountEntryId(), accountEntryModel.getName(),
-			GroupConstants.TYPE_SITE_PRIVATE, false);
 	}
 
 	public AccountEntryModel newAccountEntryModel(String type, int index) {
@@ -847,19 +842,6 @@ public class DataFactory {
 		accountEntryModel.setExternalReferenceCode(uuid);
 
 		return accountEntryModel;
-	}
-
-	public List<AccountEntryModel> newAccountEntryModels() {
-		List<AccountEntryModel> accountEntryModels = new ArrayList<>(
-			BenchmarksPropsValues.MAX_ACCOUNT_ENTRY_COUNT);
-
-		for (int i = 1; i <= BenchmarksPropsValues.MAX_ACCOUNT_ENTRY_COUNT;
-			 i++) {
-
-			accountEntryModels.add(newAccountEntryModel("business", i));
-		}
-
-		return accountEntryModels;
 	}
 
 	public AccountEntryUserRelModel newAccountEntryUserRelModel(
@@ -1260,6 +1242,28 @@ public class DataFactory {
 		}
 
 		return blogEntryModels;
+	}
+
+	public GroupModel newCommerceAccountEntryGroupModel(
+		AccountEntryModel accountEntryModel) {
+
+		return newGroupModel(
+			_counter.get(), getClassNameId(AccountEntry.class),
+			accountEntryModel.getAccountEntryId(), accountEntryModel.getName(),
+			GroupConstants.TYPE_SITE_PRIVATE, false);
+	}
+
+	public List<AccountEntryModel> newCommerceAccountEntryModels() {
+		List<AccountEntryModel> accountEntryModels = new ArrayList<>(
+			BenchmarksPropsValues.MAX_COMMERCE_ACCOUNT_ENTRY_COUNT);
+
+		for (int i = 1;
+			 i <= BenchmarksPropsValues.MAX_COMMERCE_ACCOUNT_ENTRY_COUNT; i++) {
+
+			accountEntryModels.add(newAccountEntryModel("business", i));
+		}
+
+		return accountEntryModels;
 	}
 
 	public PortletPreferencesModel

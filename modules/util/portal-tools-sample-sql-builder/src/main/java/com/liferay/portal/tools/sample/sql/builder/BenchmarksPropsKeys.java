@@ -24,12 +24,6 @@ public interface BenchmarksPropsKeys {
 
 	public static final String DB_TYPE = "sample.sql.db.type";
 
-	public static final String MAX_ACCOUNT_ENTRY_COMMERCE_ORDER_COUNT =
-		"sample.sql.max.account.entry.commerce.order.count";
-
-	public static final String MAX_ACCOUNT_ENTRY_COUNT =
-		"sample.sql.max.account.entry.count";
-
 	public static final String MAX_ASSET_CATEGORY_COUNT =
 		"sample.sql.max.asset.category.count";
 
@@ -53,6 +47,12 @@ public interface BenchmarksPropsKeys {
 
 	public static final String MAX_BLOGS_ENTRY_COUNT =
 		"sample.sql.max.blogs.entry.count";
+
+	public static final String MAX_COMMERCE_ACCOUNT_ENTRY_COMMERCE_ORDER_COUNT =
+		"sample.sql.max.commerce.account.entry.commerce.order.count";
+
+	public static final String MAX_COMMERCE_ACCOUNT_ENTRY_COUNT =
+		"sample.sql.max.commerce.account.entry.count";
 
 	public static final String MAX_COMMERCE_CATALOG_COUNT =
 		"sample.sql.max.commerce.catalog.count";
