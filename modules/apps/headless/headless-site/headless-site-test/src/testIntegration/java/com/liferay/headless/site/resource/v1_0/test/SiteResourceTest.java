@@ -97,6 +97,8 @@ public class SiteResourceTest extends BaseSiteResourceTestCase {
 	@Override
 	protected void assertValid(Site site, Map<String, File> multipartFiles)
 		throws Exception {
+
+		Assert.assertTrue(true);
 	}
 
 	@Override
@@ -127,14 +129,13 @@ public class SiteResourceTest extends BaseSiteResourceTestCase {
 
 	@Override
 	protected Site testPutSite_addSite() throws Exception {
-		return siteResource.putSite(
-			RandomTestUtil.randomString(), randomSite(), getMultipartFiles());
+		return siteResource.putSite(null, randomSite(), getMultipartFiles());
 	}
 
 	@Override
-	protected Site testPutSite_getSite(String externalReferenceCode) {
-		Group group = _groupLocalService.fetchGroupByExternalReferenceCode(
-			externalReferenceCode, testCompany.getCompanyId());
+	protected Site testPutSite_getSite(String key) {
+		Group group = _groupLocalService.fetchGroup(
+			testCompany.getCompanyId(), key);
 
 		return new Site() {
 			{

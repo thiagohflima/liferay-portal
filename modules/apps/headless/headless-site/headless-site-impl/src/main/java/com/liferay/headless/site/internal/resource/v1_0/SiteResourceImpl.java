@@ -71,7 +71,6 @@ public class SiteResourceImpl extends BaseSiteResourceImpl {
 
 			return new Site() {
 				{
-					externalReferenceCode = group.getExternalReferenceCode();
 					friendlyUrlPath = group.getFriendlyURL();
 					id = group.getGroupId();
 					key = group.getGroupKey();
@@ -131,7 +130,6 @@ public class SiteResourceImpl extends BaseSiteResourceImpl {
 
 		return new Site() {
 			{
-				externalReferenceCode = finalGroup.getExternalReferenceCode();
 				friendlyUrlPath = finalGroup.getFriendlyURL();
 				id = finalGroup.getGroupId();
 				key = finalGroup.getGroupKey();
