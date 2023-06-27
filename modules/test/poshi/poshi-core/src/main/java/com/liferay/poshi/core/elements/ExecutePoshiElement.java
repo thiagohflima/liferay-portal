@@ -89,14 +89,13 @@ public class ExecutePoshiElement extends PoshiElement {
 			List<String> methodParameterValues =
 				PoshiScriptParserUtil.getMethodParameterValues(
 					poshiScriptParentheticalContent, this);
-
 			PoshiProperties poshiProperties =
 				PoshiProperties.getPoshiProperties();
 
 			if (!(liferaySeleniumMethod == null) &&
-				poshiProperties.generateCommandSignature &&
 				(liferaySeleniumMethod.getParameterCount() !=
-					methodParameterValues.size())) {
+					methodParameterValues.size()) &&
+				poshiProperties.generateCommandSignature) {
 
 				List<String> parameterNames =
 					liferaySeleniumMethod.getParameterNames();
