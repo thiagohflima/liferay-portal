@@ -67,7 +67,7 @@ public class PDFPreviewBackgroundTaskExecutor
 		Map<String, Serializable> taskContextMap =
 			backgroundTask.getTaskContextMap();
 
-		long companyId = GetterUtil.getLong(taskContextMap.get("COMPANY_ID"));
+		long companyId = GetterUtil.getLong(taskContextMap.get("companyId"));
 
 		_generatePreviews(companyId);
 
