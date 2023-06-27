@@ -392,8 +392,8 @@ public class ObjectDefinitionLocalServiceTest {
 				RandomTestUtil.randomString(), TestPropsValues.getUserId(),
 				false, true));
 
-		_addObjectDefinition(true, false);
-		_addObjectDefinition(true, true);
+		_testAddObjectDefinition(true, false);
+		_testAddObjectDefinition(true, true);
 	}
 
 	@Test
@@ -1528,7 +1528,7 @@ public class ObjectDefinitionLocalServiceTest {
 					RandomTestUtil.randomString(), StringUtil.randomId())));
 	}
 
-	private void _addObjectDefinition(boolean modifiable, boolean system)
+	private void _testAddObjectDefinition(boolean modifiable, boolean system)
 		throws Exception {
 
 		String externalReferenceCode = RandomTestUtil.randomString();
