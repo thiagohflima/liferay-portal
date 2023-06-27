@@ -81,7 +81,7 @@ public class SiteResourceImpl extends BaseSiteResourceImpl {
 
 		Group group = null;
 
-		if (Validator.isNull(key)) {
+		if (key == null) {
 			group = _addGroup(
 				multipartBody.getValueAsInstance("site", Site.class));
 		}
