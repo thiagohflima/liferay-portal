@@ -122,9 +122,7 @@ public class WorkflowTaskManagerImpl implements WorkflowTaskManager {
 			Map<String, Serializable> workflowContext)
 		throws PortalException {
 
-		// TODO apply the permission validation using the
-		//  getAssignableUsers(workflowTaskId) method when the proper story for
-		//  providing scripted assignment in LXC env is done
+		// TODO Temporary workaround for LPS-188796
 
 		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
@@ -926,8 +924,7 @@ public class WorkflowTaskManagerImpl implements WorkflowTaskManager {
 					kaleoTaskAssignment, kaleoTaskInstanceToken);
 			}
 
-			// TODO remove this temporary work around when the proper story for
-			//  providing scripted assignment in LXC env is done
+			// TODO Temporary workaround for LPS-188796
 
 			for (KaleoTaskAssignmentInstance kaleoTaskAssignmentInstance :
 					kaleoTaskInstanceToken.getKaleoTaskAssignmentInstances()) {
