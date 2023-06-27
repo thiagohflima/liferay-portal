@@ -1,18 +1,26 @@
 <#if dataFactory.maxCommerceGroupCount != 0>
 	<#assign
 		commerceAccountEntryModels = dataFactory.newCommerceAccountEntryModels()
-		commerceCurrencyModel = dataFactory.newCommerceCurrencyModel()
+
 		commerceGroupModels = dataFactory.newCommerceGroupModels()
-		commerceInventoryWarehouseModels = dataFactory.newCommerceInventoryWarehouseModels()
-		countryModel = dataFactory.newCountryModel()
-		cpOptionCategoryModels = dataFactory.newCPOptionCategoryModels()
-		cpOptionModel = dataFactory.newCPOptionModel("select", 1)
-		cpTaxCategoryModel = dataFactory.newCPTaxCategoryModel()
+
+		commerceCurrencyModel = dataFactory.newCommerceCurrencyModel()
 
 		commerceChannelModels = dataFactory.newCommerceChannelModels(commerceGroupModels, commerceCurrencyModel)
-		cpSpecificationOptionModels = dataFactory.newCPSpecificationOptionModels(cpOptionCategoryModels)
 
 		commerceChannelGroupModels = dataFactory.newCommerceChannelGroupModels(commerceChannelModels)
+
+		commerceInventoryWarehouseModels = dataFactory.newCommerceInventoryWarehouseModels()
+
+		countryModel = dataFactory.newCountryModel()
+
+		cpOptionModel = dataFactory.newCPOptionModel("select", 1)
+
+		cpOptionCategoryModels = dataFactory.newCPOptionCategoryModels()
+
+		cpSpecificationOptionModels = dataFactory.newCPSpecificationOptionModels(cpOptionCategoryModels)
+
+		cpTaxCategoryModel = dataFactory.newCPTaxCategoryModel()
 
 		commerceShippingMethodModels = dataFactory.newCommerceShippingMethodModels(commerceChannelGroupModels)
 	/>
