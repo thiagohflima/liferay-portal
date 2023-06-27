@@ -104,7 +104,6 @@ public class ObjectRelationshipResourceTest
 
 		randomObjectRelationship.setObjectDefinitionExternalReferenceCode2(
 			RandomTestUtil.randomString());
-
 		randomObjectRelationship.setObjectDefinitionId2(0L);
 		randomObjectRelationship.setObjectDefinitionModifiable2(() -> null);
 		randomObjectRelationship.setObjectDefinitionSystem2(() -> null);
