@@ -138,7 +138,6 @@ public class SiteResourceTest extends BaseSiteResourceTestCase {
 
 		return new Site() {
 			{
-				externalReferenceCode = group.getExternalReferenceCode();
 				friendlyUrlPath = group.getFriendlyURL();
 				id = group.getGroupId();
 				key = group.getGroupKey();
