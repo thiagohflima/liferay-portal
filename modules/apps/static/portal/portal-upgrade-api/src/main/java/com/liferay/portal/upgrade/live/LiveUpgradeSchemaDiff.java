@@ -113,7 +113,7 @@ public class LiveUpgradeSchemaDiff {
 				"Column " + columnName + " does not exist");
 		}
 
-		// TODO: Validate and record column type
+		// TODO Validate and record column type
 
 	}
 

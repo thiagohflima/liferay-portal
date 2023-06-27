@@ -113,7 +113,7 @@ public class LiveUpgradeSchemaDiffTest {
 				"name", "name"
 			).build());
 
-		// TODO: Check type
+		// TODO Check type
 
 	}
 
