@@ -1528,48 +1528,6 @@ public class ObjectDefinitionLocalServiceTest {
 					RandomTestUtil.randomString(), StringUtil.randomId())));
 	}
 
-	private void _testAddObjectDefinition(boolean modifiable, boolean system)
-		throws Exception {
-
-		String externalReferenceCode = RandomTestUtil.randomString();
-		User user = TestPropsValues.getUser();
-
-		ObjectDefinition objectDefinition =
-			_objectDefinitionLocalService.addObjectDefinition(
-				externalReferenceCode, user.getUserId(), modifiable, system);
-
-		Assert.assertEquals(
-			externalReferenceCode, objectDefinition.getExternalReferenceCode());
-		Assert.assertEquals(
-			TestPropsValues.getCompanyId(), objectDefinition.getCompanyId());
-		Assert.assertEquals(user.getUserId(), objectDefinition.getUserId());
-		Assert.assertEquals(user.getFullName(), objectDefinition.getUserName());
-		Assert.assertFalse(objectDefinition.isAccountEntryRestricted());
-		Assert.assertFalse(objectDefinition.isActive());
-		Assert.assertEquals(
-			StringPool.BLANK, objectDefinition.getDBTableName());
-		Assert.assertEquals(externalReferenceCode, objectDefinition.getLabel());
-		Assert.assertFalse(objectDefinition.isEnableCategorization());
-		Assert.assertFalse(objectDefinition.isEnableComments());
-		Assert.assertFalse(objectDefinition.isEnableLocalization());
-		Assert.assertFalse(objectDefinition.isEnableObjectEntryHistory());
-		Assert.assertEquals(modifiable, objectDefinition.isModifiable());
-		Assert.assertEquals(externalReferenceCode, objectDefinition.getName());
-		Assert.assertEquals(
-			externalReferenceCode, objectDefinition.getPluralLabel());
-		Assert.assertEquals(
-			ObjectDefinitionConstants.SCOPE_COMPANY,
-			objectDefinition.getScope());
-		Assert.assertEquals(
-			ObjectDefinitionConstants.STORAGE_TYPE_DEFAULT,
-			objectDefinition.getStorageType());
-		Assert.assertEquals(system, objectDefinition.isSystem());
-		Assert.assertEquals(
-			WorkflowConstants.STATUS_DRAFT, objectDefinition.getStatus());
-
-		_objectDefinitionLocalService.deleteObjectDefinition(objectDefinition);
-	}
-
 	private ObjectDefinition _addSystemObjectDefinition(String name)
 		throws Exception {
 
@@ -1672,6 +1630,48 @@ public class ObjectDefinitionLocalServiceTest {
 
 			return dbInspector.hasTable(tableName);
 		}
+	}
+
+	private void _testAddObjectDefinition(boolean modifiable, boolean system)
+		throws Exception {
+
+		String externalReferenceCode = RandomTestUtil.randomString();
+		User user = TestPropsValues.getUser();
+
+		ObjectDefinition objectDefinition =
+			_objectDefinitionLocalService.addObjectDefinition(
+				externalReferenceCode, user.getUserId(), modifiable, system);
+
+		Assert.assertEquals(
+			externalReferenceCode, objectDefinition.getExternalReferenceCode());
+		Assert.assertEquals(
+			TestPropsValues.getCompanyId(), objectDefinition.getCompanyId());
+		Assert.assertEquals(user.getUserId(), objectDefinition.getUserId());
+		Assert.assertEquals(user.getFullName(), objectDefinition.getUserName());
+		Assert.assertFalse(objectDefinition.isAccountEntryRestricted());
+		Assert.assertFalse(objectDefinition.isActive());
+		Assert.assertEquals(
+			StringPool.BLANK, objectDefinition.getDBTableName());
+		Assert.assertEquals(externalReferenceCode, objectDefinition.getLabel());
+		Assert.assertFalse(objectDefinition.isEnableCategorization());
+		Assert.assertFalse(objectDefinition.isEnableComments());
+		Assert.assertFalse(objectDefinition.isEnableLocalization());
+		Assert.assertFalse(objectDefinition.isEnableObjectEntryHistory());
+		Assert.assertEquals(modifiable, objectDefinition.isModifiable());
+		Assert.assertEquals(externalReferenceCode, objectDefinition.getName());
+		Assert.assertEquals(
+			externalReferenceCode, objectDefinition.getPluralLabel());
+		Assert.assertEquals(
+			ObjectDefinitionConstants.SCOPE_COMPANY,
+			objectDefinition.getScope());
+		Assert.assertEquals(
+			ObjectDefinitionConstants.STORAGE_TYPE_DEFAULT,
+			objectDefinition.getStorageType());
+		Assert.assertEquals(system, objectDefinition.isSystem());
+		Assert.assertEquals(
+			WorkflowConstants.STATUS_DRAFT, objectDefinition.getStatus());
+
+		_objectDefinitionLocalService.deleteObjectDefinition(objectDefinition);
 	}
 
 	private void _testSystemObjectFields(ObjectDefinition objectDefinition)
