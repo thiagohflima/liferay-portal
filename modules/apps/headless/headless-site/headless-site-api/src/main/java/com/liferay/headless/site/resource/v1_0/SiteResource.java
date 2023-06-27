@@ -25,7 +25,6 @@ import com.liferay.portal.odata.filter.ExpressionConvert;
 import com.liferay.portal.odata.filter.FilterParserProvider;
 import com.liferay.portal.odata.sort.SortParserProvider;
 import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
-import com.liferay.portal.vulcan.multipart.MultipartBody;
 
 import java.util.Collections;
 import java.util.List;
@@ -54,10 +53,6 @@ import org.osgi.annotation.versioning.ProviderType;
 public interface SiteResource {
 
 	public Site postSite(Site site) throws Exception;
-
-	public Site putSiteByExternalReferenceCode(
-			String externalReferenceCode, MultipartBody multipartBody)
-		throws Exception;
 
 	public default void setContextAcceptLanguage(
 		AcceptLanguage contextAcceptLanguage) {
