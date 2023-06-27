@@ -110,23 +110,6 @@ public class GroupLocalServiceUtil {
 		getService().addOrganizationGroups(organizationId, groupIds);
 	}
 
-	public static Group addOrUpdateGroup(
-			String externalReferenceCode, long userId, long parentGroupId,
-			String className, long classPK, long liveGroupId,
-			Map<java.util.Locale, String> nameMap,
-			Map<java.util.Locale, String> descriptionMap, int type,
-			boolean manualMembership, int membershipRestriction,
-			String friendlyURL, boolean site, boolean inheritContent,
-			boolean active, ServiceContext serviceContext)
-		throws Exception {
-
-		return getService().addOrUpdateGroup(
-			externalReferenceCode, userId, parentGroupId, className, classPK,
-			liveGroupId, nameMap, descriptionMap, type, manualMembership,
-			membershipRestriction, friendlyURL, site, inheritContent, active,
-			serviceContext);
-	}
-
 	public static void addRoleGroup(long roleId, Group group) {
 		getService().addRoleGroup(roleId, group);
 	}
@@ -504,13 +487,6 @@ public class GroupLocalServiceUtil {
 		return getService().fetchGroup(companyId, groupKey);
 	}
 
-	public static Group fetchGroupByExternalReferenceCode(
-		String externalReferenceCode, long companyId) {
-
-		return getService().fetchGroupByExternalReferenceCode(
-			externalReferenceCode, companyId);
-	}
-
 	/**
 	 * Returns the group with the matching UUID and company.
 	 *
@@ -741,14 +717,6 @@ public class GroupLocalServiceUtil {
 		throws PortalException {
 
 		return getService().getGroup(companyId, groupKey);
-	}
-
-	public static Group getGroupByExternalReferenceCode(
-			String externalReferenceCode, long companyId)
-		throws PortalException {
-
-		return getService().getGroupByExternalReferenceCode(
-			externalReferenceCode, companyId);
 	}
 
 	/**

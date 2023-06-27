@@ -45,7 +45,6 @@ public class GroupWrapper
 		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("ctCollectionId", getCtCollectionId());
 		attributes.put("uuid", getUuid());
-		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("creatorUserId", getCreatorUserId());
@@ -89,13 +88,6 @@ public class GroupWrapper
 
 		if (uuid != null) {
 			setUuid(uuid);
-		}
-
-		String externalReferenceCode = (String)attributes.get(
-			"externalReferenceCode");
-
-		if (externalReferenceCode != null) {
-			setExternalReferenceCode(externalReferenceCode);
 		}
 
 		Long groupId = (Long)attributes.get("groupId");
@@ -492,16 +484,6 @@ public class GroupWrapper
 		boolean privateLayout, boolean controlPanel) {
 
 		return model.getDisplayURL(themeDisplay, privateLayout, controlPanel);
-	}
-
-	/**
-	 * Returns the external reference code of this group.
-	 *
-	 * @return the external reference code of this group
-	 */
-	@Override
-	public String getExternalReferenceCode() {
-		return model.getExternalReferenceCode();
 	}
 
 	/**
@@ -1231,16 +1213,6 @@ public class GroupWrapper
 		java.util.Locale defaultLocale) {
 
 		model.setDescriptionMap(descriptionMap, defaultLocale);
-	}
-
-	/**
-	 * Sets the external reference code of this group.
-	 *
-	 * @param externalReferenceCode the external reference code of this group
-	 */
-	@Override
-	public void setExternalReferenceCode(String externalReferenceCode) {
-		model.setExternalReferenceCode(externalReferenceCode);
 	}
 
 	/**
