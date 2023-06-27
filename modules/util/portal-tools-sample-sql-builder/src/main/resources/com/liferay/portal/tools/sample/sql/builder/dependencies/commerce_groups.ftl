@@ -12,8 +12,6 @@
 
 		commerceInventoryWarehouseModels = dataFactory.newCommerceInventoryWarehouseModels()
 
-		countryModel = dataFactory.newCountryModel()
-
 		cpOptionModel = dataFactory.newCPOptionModel("select", 1)
 
 		cpOptionCategoryModels = dataFactory.newCPOptionCategoryModels()
@@ -21,6 +19,8 @@
 		cpSpecificationOptionModels = dataFactory.newCPSpecificationOptionModels(cpOptionCategoryModels)
 
 		cpTaxCategoryModel = dataFactory.newCPTaxCategoryModel()
+
+		countryModel = dataFactory.newCountryModel()
 
 		commerceShippingMethodModels = dataFactory.newCommerceShippingMethodModels(commerceChannelGroupModels)
 	/>
