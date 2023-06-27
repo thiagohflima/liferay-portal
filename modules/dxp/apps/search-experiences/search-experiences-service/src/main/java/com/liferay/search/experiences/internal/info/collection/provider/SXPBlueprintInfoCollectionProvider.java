@@ -175,28 +175,30 @@ public class SXPBlueprintInfoCollectionProvider
 			themeDisplay.getCompanyId(), true);
 
 		for (Group group : groups) {
-			if ((group != null) && group.isSite() && !group.isGuest()) {
-				User user = themeDisplay.getUser();
-
-				try {
-					List<Group> userSiteGroups = user.getSiteGroups();
-
-					if (!ArrayUtil.contains(
-							userSiteGroups.toArray(new Group[0]), group)) {
-
-						continue;
-					}
-				}
-				catch (PortalException portalException) {
-					_log.error(portalException);
-				}
-
-				options.add(
-					new SelectInfoFieldType.Option(
-						new ResourceBundleInfoLocalizedValue(
-							getClass(), group.getNameCurrentValue()),
-						String.valueOf(group.getGroupId())));
+			if ((group == null) || !group.isSite() || group.isGuest()) {
+				continue;
 			}
+
+			User user = themeDisplay.getUser();
+
+			try {
+				List<Group> userSiteGroups = user.getSiteGroups();
+
+				if (!ArrayUtil.contains(
+						userSiteGroups.toArray(new Group[0]), group)) {
+
+					continue;
+				}
+			}
+			catch (PortalException portalException) {
+				_log.error(portalException);
+			}
+
+			options.add(
+				new SelectInfoFieldType.Option(
+					new ResourceBundleInfoLocalizedValue(
+						getClass(), group.getNameCurrentValue()),
+					String.valueOf(group.getGroupId())));
 		}
 
 		return options;
