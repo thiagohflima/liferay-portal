@@ -15,6 +15,9 @@
 package com.liferay.portal.vulcan.util;
 
 /**
+ * Do not delete this class to ensure backwards compatibility for older versions
+ * of REST Builder.
+ *
  * @author     Matija Petanjek
  * @deprecated As of Cavanaugh (7.4.x), replaced by {@link
  *             com.liferay.petra.function.transform.TransformUtil}
