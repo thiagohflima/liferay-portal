@@ -1558,7 +1558,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		handleAuthenticationFailure(
-			login, authType, companyId, user,
+			companyId, authType, login, user,
 			Collections.<String, String[]>emptyMap(),
 			Collections.<String, String[]>emptyMap());
 
@@ -1638,7 +1638,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		Company company = _companyPersistence.findByPrimaryKey(companyId);
 
 		handleAuthenticationFailure(
-			userName, company.getAuthType(), companyId, user,
+			companyId, company.getAuthType(), userName, user,
 			new HashMap<String, String[]>(), new HashMap<String, String[]>());
 
 		return 0;
@@ -5683,7 +5683,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 			try {
 				AuthPipeline.onDoesNotExist(
-					authType, companyId, login, headerMap, parameterMap);
+					companyId, authType, login, headerMap, parameterMap);
 			}
 			catch (Exception exception) {
 				_log.error(exception);
@@ -5752,7 +5752,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 			catch (PortalException portalException) {
 				handleAuthenticationFailure(
-					login, authType, companyId, user, headerMap, parameterMap);
+					companyId, authType, login, user, headerMap, parameterMap);
 
 				throw portalException;
 			}
@@ -5783,7 +5783,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		if (authResult == Authenticator.FAILURE) {
 			authResult = handleAuthenticationFailure(
-				login, authType, companyId, user, headerMap, parameterMap);
+				companyId, authType, login, user, headerMap, parameterMap);
 
 			user = userPersistence.fetchByPrimaryKey(user.getUserId());
 		}
@@ -6022,13 +6022,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	protected int handleAuthenticationFailure(
-		String login, String authType, long companyId, User user,
+		long companyId, String authType, String login, User user,
 		Map<String, String[]> headerMap, Map<String, String[]> parameterMap) {
 
 		if (user == null) {
 			try {
 				AuthPipeline.onDoesNotExist(
-					authType, companyId, login, headerMap, parameterMap);
+					companyId, authType, login, headerMap, parameterMap);
 			}
 			catch (Exception exception) {
 				_log.error(exception);
@@ -6059,7 +6059,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			if (user == null) {
 				try {
 					AuthPipeline.onDoesNotExist(
-						authType, companyId, login, headerMap, parameterMap);
+						companyId, authType, login, headerMap, parameterMap);
 				}
 				catch (Exception exception) {
 					_log.error(exception);

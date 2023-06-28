@@ -66,7 +66,7 @@ public class AuthPipeline {
 	}
 
 	public static void onDoesNotExist(
-			String authType, long companyId, String login,
+			long companyId, String authType, String login,
 			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
 		throws AuthException {
 
@@ -79,7 +79,7 @@ public class AuthPipeline {
 		for (AuthDNE authDNE : authDNEs) {
 			try {
 				authDNE.onDoesNotExist(
-					authType, companyId, login, headerMap, parameterMap);
+					companyId, authType, login, headerMap, parameterMap);
 			}
 			catch (AuthException authException) {
 				throw authException;

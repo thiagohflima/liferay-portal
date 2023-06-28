@@ -38,7 +38,7 @@ public class LoginAuthDNE implements AuthDNE {
 
 	@Override
 	public void onDoesNotExist(
-		String authType, long companyId, String login,
+		long companyId, String authType, String login,
 		Map<String, String[]> headerMap, Map<String, String[]> parameterMap) {
 
 		try {
