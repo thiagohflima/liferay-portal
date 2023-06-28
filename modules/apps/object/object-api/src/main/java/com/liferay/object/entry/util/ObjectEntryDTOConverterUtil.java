@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.vulcan.dto.converter.DTOConverter;
 import com.liferay.portal.vulcan.dto.converter.DTOConverterRegistry;
 import com.liferay.portal.vulcan.dto.converter.DefaultDTOConverterContext;
@@ -76,7 +75,7 @@ public class ObjectEntryDTOConverterUtil {
 					getSystemObjectDefinitionManager(objectDefinitionName),
 				user);
 
-			if (Validator.isNull(dto)) {
+			if (dto == null) {
 				return new HashMap<>();
 			}
 
