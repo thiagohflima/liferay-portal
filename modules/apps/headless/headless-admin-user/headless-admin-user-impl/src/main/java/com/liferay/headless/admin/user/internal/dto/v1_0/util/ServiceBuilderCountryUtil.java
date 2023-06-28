@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Country;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.service.CountryServiceUtil;
-import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.impl.CountryImpl;
@@ -51,15 +50,13 @@ public class ServiceBuilderCountryUtil {
 				return country;
 			}
 
-			OrderByComparator<Country> orderByComparator =
-				OrderByComparatorFactoryUtil.create(
-					CountryImpl.TABLE_NAME, "name", true);
-
 			BaseModelSearchResult<Country> baseModelSearchResult =
 				CountryServiceUtil.searchCountries(
 					companyId, true,
 					StringUtil.quote(addressCountry, CharPool.QUOTE),
-					QueryUtil.ALL_POS, QueryUtil.ALL_POS, orderByComparator);
+					QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					OrderByComparatorFactoryUtil.create(
+						CountryImpl.TABLE_NAME, "name", true));
 
 			List<Country> countries = baseModelSearchResult.getBaseModels();
 
