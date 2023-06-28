@@ -60,7 +60,7 @@ public class LoginAuthDNE implements AuthDNE {
 					).put(
 						"headers", _jsonFactory.serialize(headerMap)
 					).put(
-						"reason", "Failed to authenticate - User Does Not Exist"
+						"reason", "User does not exist"
 					));
 
 				auditMessage.setUserLogin(login);

@@ -926,7 +926,7 @@ public class UserLocalServiceTest {
 				additionalInfoJSONObject.get("reason"));
 
 			Assert.assertEquals(
-				"Failed to authenticate - User Does Not Exist", reason);
+				"User does not exist", reason);
 
 			String authType = String.valueOf(
 				additionalInfoJSONObject.get("authType"));
