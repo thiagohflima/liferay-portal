@@ -27,7 +27,6 @@ import com.liferay.portal.vulcan.dto.converter.DefaultDTOConverterContext;
 import com.liferay.portal.vulcan.util.ObjectMapperUtil;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -99,7 +98,7 @@ public class ObjectEntryDTOConverterUtil {
 				user);
 
 			if (dto == null) {
-				return new HashMap<>();
+				return Collections.emptyMap();
 			}
 
 			return ObjectMapperUtil.readValue(Map.class, dto.toString());
@@ -108,7 +107,7 @@ public class ObjectEntryDTOConverterUtil {
 			_log.error(exception);
 		}
 
-		return new HashMap<>();
+		return Collections.emptyMap();
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
