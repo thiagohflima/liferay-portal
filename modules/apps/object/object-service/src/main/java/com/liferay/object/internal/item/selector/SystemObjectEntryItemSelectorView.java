@@ -258,7 +258,7 @@ public class SystemObjectEntryItemSelectorView
 			Object titleFieldValue = ObjectEntryValuesUtil.getTitleFieldValue(
 				objectField.getBusinessType(), _baseModel.getModelAttributes(),
 				objectField, user,
-				ObjectEntryDTOConverterUtil.toDTO(
+				ObjectEntryDTOConverterUtil.toValues(
 					_baseModel, _dtoConverterRegistry,
 					_objectDefinition.getName(),
 					_systemObjectDefinitionManagerRegistry, user));

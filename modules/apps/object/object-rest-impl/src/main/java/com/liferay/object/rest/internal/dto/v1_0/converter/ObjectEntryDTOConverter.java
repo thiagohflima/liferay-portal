@@ -220,7 +220,7 @@ public class ObjectEntryDTOConverter
 										objectDefinition.getCompanyId());
 
 							Map<String, Object> values =
-								ObjectEntryDTOConverterUtil.toDTO(
+								ObjectEntryDTOConverterUtil.toValues(
 									baseModel,
 									dtoConverterContext.
 										getDTOConverterRegistry(),

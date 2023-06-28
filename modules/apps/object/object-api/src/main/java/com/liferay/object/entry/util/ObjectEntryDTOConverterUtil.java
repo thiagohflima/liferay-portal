@@ -61,7 +61,7 @@ public class ObjectEntryDTOConverterUtil {
 		return dtoConverter;
 	}
 
-	public static Map<String, Object> toDTO(
+	public static Map<String, Object> toValues(
 		BaseModel<?> baseModel, DTOConverterRegistry dtoConverterRegistry,
 		String objectDefinitionName,
 		SystemObjectDefinitionManagerRegistry
