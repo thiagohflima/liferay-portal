@@ -355,12 +355,11 @@ public class SystemObjectDefinitionManagerModelListener<T extends BaseModel<T>>
 			return;
 		}
 
-		Map<String, Object> extendedProperties = new HashMap<>(
-			EntityExtensionThreadLocal.getExtendedProperties());
-
 		List<ObjectField> objectFields =
 			_objectFieldLocalService.getObjectFields(
 				objectDefinition.getObjectDefinitionId());
+		Map<String, Object> extendedProperties = new HashMap<>(
+			EntityExtensionThreadLocal.getExtendedProperties());
 
 		if (originalModel == null) {
 			ObjectFieldUtil.validateReadOnlyObjectFields(
