@@ -876,7 +876,7 @@ public class UserLocalServiceTest {
 	private AnnouncementsDeliveryLocalService
 		_announcementsDeliveryLocalService;
 
-	private TestAuditMessageProcessor _auditMessageProcessor;
+	private AuditMessageProcessor _auditMessageProcessor;
 	private BundleActivator _bundleActivator;
 	private BundleContext _bundleContext;
 
