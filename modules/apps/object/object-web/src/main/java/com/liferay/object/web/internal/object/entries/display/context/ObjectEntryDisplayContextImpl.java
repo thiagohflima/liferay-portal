@@ -800,7 +800,7 @@ public class ObjectEntryDisplayContextImpl
 		else {
 			if (FeatureFlagManagerUtil.isEnabled("LPS-170122")) {
 				ddmFormField.setReadOnly(
-					_getReadOnly(objectEntry, objectField, readOnly));
+					_isReadOnly(objectEntry, objectField, readOnly));
 			}
 			else {
 				ddmFormField.setReadOnly(readOnly);
@@ -1099,7 +1099,7 @@ public class ObjectEntryDisplayContextImpl
 		return _objectEntry;
 	}
 
-	private boolean _getReadOnly(
+	private boolean _isReadOnly(
 			ObjectEntry objectEntry, ObjectField objectField, boolean readOnly)
 		throws PortalException {
 
