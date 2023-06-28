@@ -114,11 +114,11 @@ public class ObjectActionEngineImpl implements ObjectActionEngine {
 			return;
 		}
 
-		boolean skipReadOnlyObjectFieldsValidation =
-			ObjectEntryThreadLocal.isSkipReadOnlyObjectFieldsValidation();
 		String name = PrincipalThreadLocal.getName();
 		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
+		boolean skipReadOnlyObjectFieldsValidation =
+			ObjectEntryThreadLocal.isSkipReadOnlyObjectFieldsValidation();
 
 		try {
 			ObjectEntryThreadLocal.setSkipObjectEntryResourcePermission(true);
@@ -153,7 +153,9 @@ public class ObjectActionEngineImpl implements ObjectActionEngine {
 			ObjectEntryThreadLocal.setSkipObjectEntryResourcePermission(false);
 			ObjectEntryThreadLocal.setSkipReadOnlyObjectFieldsValidation(
 				skipReadOnlyObjectFieldsValidation);
+
 			PrincipalThreadLocal.setName(name);
+
 			PermissionThreadLocal.setPermissionChecker(permissionChecker);
 		}
 	}
