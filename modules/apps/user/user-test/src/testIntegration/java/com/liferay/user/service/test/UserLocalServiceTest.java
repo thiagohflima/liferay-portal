@@ -916,9 +916,6 @@ public class UserLocalServiceTest {
 		public void process(AuditMessage auditMessage) {
 			Assert.assertNotNull(auditMessage);
 
-			Assert.assertEquals(
-				EventTypes.LOGIN_DNE, auditMessage.getEventType());
-
 			JSONObject additionalInfoJSONObject =
 				auditMessage.getAdditionalInfo();
 
@@ -932,6 +929,9 @@ public class UserLocalServiceTest {
 
 			Assert.assertEquals(
 				"User does not exist", reason);
+
+			Assert.assertEquals(
+				EventTypes.LOGIN_DNE, auditMessage.getEventType());
 		}
 
 	}
