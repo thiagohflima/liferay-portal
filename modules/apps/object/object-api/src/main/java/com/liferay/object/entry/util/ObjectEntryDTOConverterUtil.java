@@ -61,6 +61,29 @@ public class ObjectEntryDTOConverterUtil {
 		return dtoConverter;
 	}
 
+	public static Object toDTO(
+			BaseModel<?> baseModel, DTOConverterRegistry dtoConverterRegistry,
+			SystemObjectDefinitionManager systemObjectDefinitionManager,
+			User user)
+		throws Exception {
+
+		DTOConverter<BaseModel<?>, ?> dtoConverter = getDTOConverter(
+			dtoConverterRegistry, systemObjectDefinitionManager);
+
+		Locale locale = null;
+
+		if (user != null) {
+			locale = user.getLocale();
+		}
+
+		DefaultDTOConverterContext defaultDTOConverterContext =
+			new DefaultDTOConverterContext(
+				false, Collections.emptyMap(), dtoConverterRegistry,
+				baseModel.getPrimaryKeyObj(), locale, null, user);
+
+		return dtoConverter.toDTO(defaultDTOConverterContext);
+	}
+
 	public static Map<String, Object> toValues(
 		BaseModel<?> baseModel, DTOConverterRegistry dtoConverterRegistry,
 		String objectDefinitionName,
@@ -86,29 +109,6 @@ public class ObjectEntryDTOConverterUtil {
 		}
 
 		return new HashMap<>();
-	}
-
-	public static Object toDTO(
-			BaseModel<?> baseModel, DTOConverterRegistry dtoConverterRegistry,
-			SystemObjectDefinitionManager systemObjectDefinitionManager,
-			User user)
-		throws Exception {
-
-		DTOConverter<BaseModel<?>, ?> dtoConverter = getDTOConverter(
-			dtoConverterRegistry, systemObjectDefinitionManager);
-
-		Locale locale = null;
-
-		if (user != null) {
-			locale = user.getLocale();
-		}
-
-		DefaultDTOConverterContext defaultDTOConverterContext =
-			new DefaultDTOConverterContext(
-				false, Collections.emptyMap(), dtoConverterRegistry,
-				baseModel.getPrimaryKeyObj(), locale, null, user);
-
-		return dtoConverter.toDTO(defaultDTOConverterContext);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(

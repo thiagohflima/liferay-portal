@@ -111,10 +111,11 @@ public class SystemRelatedModelsFDSDataProvider
 				User user = _userLocalService.getUser(
 					PrincipalThreadLocal.getUserId());
 
-				Map<String, Object> values = ObjectEntryDTOConverterUtil.toValues(
-					relatedModel, _dtoConverterRegistry,
-					objectDefinition.getName(),
-					_systemObjectDefinitionManagerRegistry, user);
+				Map<String, Object> values =
+					ObjectEntryDTOConverterUtil.toValues(
+						relatedModel, _dtoConverterRegistry,
+						objectDefinition.getName(),
+						_systemObjectDefinitionManagerRegistry, user);
 
 				Object titleFieldValue =
 					ObjectEntryValuesUtil.getTitleFieldValue(
