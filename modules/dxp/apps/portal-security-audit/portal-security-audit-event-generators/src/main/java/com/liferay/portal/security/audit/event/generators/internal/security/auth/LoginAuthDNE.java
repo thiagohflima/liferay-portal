@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.audit.AuditException;
 import com.liferay.portal.kernel.audit.AuditMessage;
 import com.liferay.portal.kernel.audit.AuditRouter;
 import com.liferay.portal.kernel.json.JSONFactory;
-import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.json.JSONUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
@@ -42,13 +42,10 @@ public class LoginAuthDNE implements AuthDNE {
 		Map<String, String[]> headerMap, Map<String, String[]> parameterMap) {
 
 		try {
-			JSONObject additionalInfoJSONObject =
-				_jsonFactory.createJSONObject();
-
 			AuditMessage auditMessage = new AuditMessage(
 				EventTypes.LOGIN_DNE, companyId, 0, null, User.class.getName(),
 				"0", null,
-				additionalInfoJSONObject.put(
+				JSONUtil.put(
 					"authType", authType
 				).put(
 					"headers", _jsonFactory.serialize(headerMap)
