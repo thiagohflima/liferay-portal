@@ -70,7 +70,7 @@ public class AuthPipeline {
 			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
 		throws AuthException {
 
-		List<AuthDNE> authDNEs = _authDNEServiceTrackerList.toList();
+		List<AuthDNE> authDNEs = _authDNEs.toList();
 
 		if (authDNEs.isEmpty()) {
 			return;
@@ -238,8 +238,8 @@ public class AuthPipeline {
 		}
 	}
 
-	private static final ServiceTrackerList<AuthDNE>
-		_authDNEServiceTrackerList = ServiceTrackerListFactory.open(
+	private static final ServiceTrackerList<AuthDNE> _authDNEs =
+		ServiceTrackerListFactory.open(
 			SystemBundleUtil.getBundleContext(), AuthDNE.class);
 	private static final ServiceTrackerMap<String, List<Authenticator>>
 		_authenticators = ServiceTrackerMapFactory.openMultiValueMap(
