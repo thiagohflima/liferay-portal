@@ -129,6 +129,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.time.StopWatch;
 
 /**
@@ -2001,7 +2002,8 @@ public class ServicePreAction extends Action {
 		httpServletResponse.setHeader(
 			"X-Liferay-Request-Guest-User", String.valueOf(user.isGuestUser()));
 		httpServletResponse.setHeader(
-			"X-Liferay-Request-User", String.valueOf(user.getUserId()));
+			"X-Liferay-Request-User",
+			DigestUtils.md5Hex(String.valueOf(user.getUserId())));
 	}
 
 	private void _updateUserLayouts(User user) throws Exception {
