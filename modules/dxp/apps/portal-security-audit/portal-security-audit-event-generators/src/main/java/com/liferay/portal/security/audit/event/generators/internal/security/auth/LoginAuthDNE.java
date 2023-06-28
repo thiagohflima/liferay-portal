@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.model.CompanyConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.auth.AuthDNE;
 import com.liferay.portal.security.audit.event.generators.constants.EventTypes;
@@ -43,28 +42,21 @@ public class LoginAuthDNE implements AuthDNE {
 		Map<String, String[]> headerMap, Map<String, String[]> parameterMap) {
 
 		try {
-			AuditMessage auditMessage = null;
+			JSONObject additionalInfoJSONObject =
+				_jsonFactory.createJSONObject();
 
-			if (authType.equals(CompanyConstants.AUTH_TYPE_EA) ||
-				authType.equals(CompanyConstants.AUTH_TYPE_ID) ||
-				authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
+			AuditMessage auditMessage = new AuditMessage(
+				EventTypes.LOGIN_DNE, companyId, 0, null, User.class.getName(),
+				"0", null,
+				additionalInfoJSONObject.put(
+					"authType", authType
+				).put(
+					"headers", _jsonFactory.serialize(headerMap)
+				).put(
+					"reason", "User does not exist"
+				));
 
-				JSONObject additionalInfoJSONObject =
-					_jsonFactory.createJSONObject();
-
-				auditMessage = new AuditMessage(
-					EventTypes.LOGIN_DNE, companyId, 0, null,
-					User.class.getName(), "0", null,
-					additionalInfoJSONObject.put(
-						"authType", authType
-					).put(
-						"headers", _jsonFactory.serialize(headerMap)
-					).put(
-						"reason", "User does not exist"
-					));
-
-				auditMessage.setUserLogin(login);
-			}
+			auditMessage.setUserLogin(login);
 
 			if (auditMessage == null) {
 				return;
