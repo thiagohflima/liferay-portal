@@ -123,11 +123,10 @@ public abstract class BaseObjectEntryManager {
 			}
 
 			values.putAll(
-				objectEntryLocalService.getValues(serviceBuilderObjectEntry));
-
-			values.putAll(
 				objectEntryLocalService.getSystemValues(
 					serviceBuilderObjectEntry));
+			values.putAll(
+				objectEntryLocalService.getValues(serviceBuilderObjectEntry));
 		}
 
 		ObjectFieldUtil.validateReadOnlyObjectFields(

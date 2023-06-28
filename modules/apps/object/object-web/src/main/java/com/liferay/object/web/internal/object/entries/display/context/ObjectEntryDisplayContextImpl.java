@@ -1142,10 +1142,8 @@ public class ObjectEntryDisplayContextImpl
 			existingValues.putAll(
 				_objectEntryLocalService.getSystemValues(
 					serviceBuilderObjectEntry));
-
 			existingValues.putAll(
 				_objectEntryLocalService.getValues(serviceBuilderObjectEntry));
-
 			existingValues.put("currentUserId", _themeDisplay.getUserId());
 		}
 
