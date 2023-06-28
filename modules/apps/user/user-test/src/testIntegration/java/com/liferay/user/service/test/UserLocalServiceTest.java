@@ -922,16 +922,16 @@ public class UserLocalServiceTest {
 			JSONObject additionalInfoJSONObject =
 				auditMessage.getAdditionalInfo();
 
+			String authType = String.valueOf(
+				additionalInfoJSONObject.get("authType"));
+
+			Assert.assertEquals("emailAddress", authType);
+
 			String reason = String.valueOf(
 				additionalInfoJSONObject.get("reason"));
 
 			Assert.assertEquals(
 				"User does not exist", reason);
-
-			String authType = String.valueOf(
-				additionalInfoJSONObject.get("authType"));
-
-			Assert.assertEquals("emailAddress", authType);
 		}
 
 	}
