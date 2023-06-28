@@ -14,7 +14,7 @@
 
 package com.liferay.headless.admin.user.internal.dto.v1_0.util;
 
-import com.liferay.petra.string.StringPool;
+import com.liferay.petra.string.CharPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.service.CountryServiceUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.impl.CountryImpl;
 
 import java.util.List;
@@ -50,17 +51,15 @@ public class ServiceBuilderCountryUtil {
 				return country;
 			}
 
-			String addressCountryKeyWord =
-				StringPool.QUOTE + addressCountry + StringPool.QUOTE;
-
 			OrderByComparator<Country> orderByComparator =
 				OrderByComparatorFactoryUtil.create(
 					CountryImpl.TABLE_NAME, "name", true);
 
 			BaseModelSearchResult<Country> baseModelSearchResult =
 				CountryServiceUtil.searchCountries(
-					companyId, true, addressCountryKeyWord, QueryUtil.ALL_POS,
-					QueryUtil.ALL_POS, orderByComparator);
+					companyId, true,
+					StringUtil.quote(addressCountry, CharPool.QUOTE),
+					QueryUtil.ALL_POS, QueryUtil.ALL_POS, orderByComparator);
 
 			List<Country> countries = baseModelSearchResult.getBaseModels();
 
