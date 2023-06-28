@@ -275,7 +275,7 @@ public class ObjectFieldUtil {
 			  Objects.equals(existingValue, value))) {
 
 			throw new ObjectFieldReadOnlyException(
-				"The object field " + objectFieldName + " is readOnly");
+				"Object field " + objectFieldName + " is read only");
 		}
 	}
 
