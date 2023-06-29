@@ -92,8 +92,7 @@ public class MockAICreatorOpenAIClient implements AICreatorOpenAIClient {
 		}
 
 		return new AICreatorOpenAIClientException(
-			new UnsupportedOperationException(
-				"Invalid Key to use MockAICreatorOpenAIClient, Key: " + key));
+			new UnsupportedOperationException("Unsupported key: " + key));
 	}
 
 	private String _getSampleCompletion(long sleepMillis) {
