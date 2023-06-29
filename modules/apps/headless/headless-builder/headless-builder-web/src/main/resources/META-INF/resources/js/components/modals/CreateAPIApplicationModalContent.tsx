@@ -81,7 +81,7 @@ export function CreateAPIApplicationModalContent({
 					loadData();
 					openToast({
 						message: Liferay.Language.get(
-							'new-api-application-created'
+							'new-api-application-was-created'
 						),
 						type: 'success',
 					});
