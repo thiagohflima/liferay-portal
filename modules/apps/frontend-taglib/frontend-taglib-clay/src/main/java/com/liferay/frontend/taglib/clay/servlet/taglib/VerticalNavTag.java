@@ -294,9 +294,9 @@ public class VerticalNavTag extends BaseContainerTag {
 					jspWriter.write(" active");
 				}
 
-				jspWriter.write("\" role=\"menuitem\" tabindex=\"-1\" href=\"");
+				jspWriter.write("\" href=\"");
 				jspWriter.write((String)verticalNavItem.get("href"));
-				jspWriter.write("\">");
+				jspWriter.write("\" role=\"menuitem\" tabindex=\"-1\">");
 			}
 
 			jspWriter.write((String)verticalNavItem.get("label"));
