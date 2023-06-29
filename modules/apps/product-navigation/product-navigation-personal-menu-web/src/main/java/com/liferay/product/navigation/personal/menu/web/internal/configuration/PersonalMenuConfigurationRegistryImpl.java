@@ -49,8 +49,8 @@ public class PersonalMenuConfigurationRegistryImpl
 	public PersonalMenuConfiguration getCompanyPersonalMenuConfiguration(
 		long companyId) {
 
-		if (_companyConfigurationBeans.containsKey(companyId)) {
-			return _companyConfigurationBeans.get(companyId);
+		if (_companyPersonalMenuConfigurations.containsKey(companyId)) {
+			return _companyPersonalMenuConfigurations.get(companyId);
 		}
 
 		return _systemPersonalMenuConfiguration;
@@ -87,12 +87,12 @@ public class PersonalMenuConfigurationRegistryImpl
 		if (_companyIds.containsKey(pid)) {
 			long companyId = _companyIds.remove(pid);
 
-			_companyConfigurationBeans.remove(companyId);
+			_companyPersonalMenuConfigurations.remove(companyId);
 		}
 	}
 
 	private final Map<Long, PersonalMenuConfiguration>
-		_companyConfigurationBeans = new ConcurrentHashMap<>();
+		_companyPersonalMenuConfigurations = new ConcurrentHashMap<>();
 	private final Map<String, Long> _companyIds = new ConcurrentHashMap<>();
 	private ServiceRegistration<ManagedServiceFactory> _serviceRegistration;
 	private volatile PersonalMenuConfiguration _systemPersonalMenuConfiguration;
@@ -121,7 +121,7 @@ public class PersonalMenuConfigurationRegistryImpl
 				dictionary.get("companyId"), CompanyConstants.SYSTEM);
 
 			if (companyId != CompanyConstants.SYSTEM) {
-				_companyConfigurationBeans.put(
+				_companyPersonalMenuConfigurations.put(
 					companyId,
 					ConfigurableUtil.createConfigurable(
 						PersonalMenuConfiguration.class, dictionary));
