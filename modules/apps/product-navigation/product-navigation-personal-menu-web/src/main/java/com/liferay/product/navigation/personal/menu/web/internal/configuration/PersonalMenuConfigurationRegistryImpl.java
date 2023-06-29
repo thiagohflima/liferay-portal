@@ -121,11 +121,11 @@ public class PersonalMenuConfigurationRegistryImpl
 				dictionary.get("companyId"), CompanyConstants.SYSTEM);
 
 			if (companyId != CompanyConstants.SYSTEM) {
+				_companyIds.put(pid, companyId);
 				_companyPersonalMenuConfigurations.put(
 					companyId,
 					ConfigurableUtil.createConfigurable(
 						PersonalMenuConfiguration.class, dictionary));
-				_companyIds.put(pid, companyId);
 			}
 		}
 
