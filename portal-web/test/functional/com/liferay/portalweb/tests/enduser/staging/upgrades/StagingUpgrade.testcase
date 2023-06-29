@@ -858,7 +858,6 @@ definition {
 		task ("Delete the AP widget from the created template") {
 			SiteTemplatesNavigator.gotoSiteTemplatesPage(
 				pageName = "Home",
-				siteName = "Liferay DXP",
 				siteTemplateName = "Site Template Name");
 
 			Portlet.deletePG(key_portletName = "Asset Publisher");
@@ -902,7 +901,6 @@ definition {
 		task ("Delete the AP widget from the created template") {
 			SiteTemplatesNavigator.gotoSiteTemplatesPage(
 				pageName = "Home",
-				siteName = "Liferay DXP",
 				siteTemplateName = "Site Template Name");
 
 			Portlet.deletePG(key_portletName = "Asset Publisher");
