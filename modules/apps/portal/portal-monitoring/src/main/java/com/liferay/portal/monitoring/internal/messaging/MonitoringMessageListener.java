@@ -90,7 +90,6 @@ public class MonitoringMessageListener extends BaseMessageListener {
 	protected void activate(BundleContext bundleContext) {
 		_serviceRegistration = bundleContext.registerService(
 			MonitoringControl.class, new MonitoringControlImpl(), null);
-
 		_serviceTrackerMap = ServiceTrackerMapFactory.openMultiValueMap(
 			bundleContext,
 			(Class<DataSampleProcessor<DataSample>>)
