@@ -64,7 +64,6 @@ public class HeadlessBuilderResourceTest extends BaseTestCase {
 			404,
 			HTTPTestUtil.invokeHttpCode(
 				null, apiApplication1.getBaseURL(), Http.Method.GET));
-
 		Assert.assertEquals(
 			404,
 			HTTPTestUtil.invokeHttpCode(
@@ -77,7 +76,6 @@ public class HeadlessBuilderResourceTest extends BaseTestCase {
 			200,
 			HTTPTestUtil.invokeHttpCode(
 				null, apiApplication1.getBaseURL(), Http.Method.GET));
-
 		Assert.assertEquals(
 			200,
 			HTTPTestUtil.invokeHttpCode(
@@ -90,7 +88,6 @@ public class HeadlessBuilderResourceTest extends BaseTestCase {
 			404,
 			HTTPTestUtil.invokeHttpCode(
 				null, apiApplication1.getBaseURL(), Http.Method.GET));
-
 		Assert.assertEquals(
 			200,
 			HTTPTestUtil.invokeHttpCode(

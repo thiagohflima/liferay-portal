@@ -299,39 +299,19 @@ public class HeadlessBuilderOpenAPIResourceTest extends BaseTestCase {
 	}
 
 	@Test
-	public void testGetOpenAPI() throws Exception {
-		APIApplication apiApplication = _addAPIApplication();
-
-		Assert.assertEquals(
-			404,
-			HTTPTestUtil.invokeHttpCode(
-				null, apiApplication.getBaseURL() + "/openapi.json",
-				Http.Method.GET));
-
-		APIApplicationPublisherUtil.publishApplications(
-			_apiApplicationPublisher, apiApplication);
-
-		JSONObject jsonObject = HTTPTestUtil.invoke(
-			null, apiApplication.getBaseURL() + "/openapi.json",
-			Http.Method.GET);
-
-		JSONAssert.assertEquals(
-			StringUtil.replace(
-				new String(
-					FileUtil.getBytes(
-						getClass(), "dependencies/expected_openapi.json")),
-				"${BASE_URL}", apiApplication.getBaseURL()),
-			jsonObject.toString(), JSONCompareMode.STRICT);
-	}
-
-	@Test
-	public void testGetOpenAPIURLEntry() throws Exception {
+	public void test() throws Exception {
 		APIApplication apiApplication = _addAPIApplication();
 
 		JSONObject jsonObject = HTTPTestUtil.invoke(
 			null, "/openapi", Http.Method.GET);
 
 		Assert.assertFalse(jsonObject.has("/" + apiApplication.getBaseURL()));
+
+		Assert.assertEquals(
+			404,
+			HTTPTestUtil.invokeHttpCode(
+				null, apiApplication.getBaseURL() + "/openapi.json",
+				Http.Method.GET));
 
 		APIApplicationPublisherUtil.publishApplications(
 			_apiApplicationPublisher, apiApplication);
@@ -346,6 +326,18 @@ public class HeadlessBuilderOpenAPIResourceTest extends BaseTestCase {
 						"/openapi.yaml")
 			).toString(),
 			jsonObject.toString(), JSONCompareMode.LENIENT);
+
+		jsonObject = HTTPTestUtil.invoke(
+			null, apiApplication.getBaseURL() + "/openapi.json",
+			Http.Method.GET);
+
+		JSONAssert.assertEquals(
+			StringUtil.replace(
+				new String(
+					FileUtil.getBytes(
+						getClass(), "dependencies/expected_openapi.json")),
+				"${BASE_URL}", apiApplication.getBaseURL()),
+			jsonObject.toString(), JSONCompareMode.STRICT);
 	}
 
 	private APIApplication _addAPIApplication() throws Exception {
