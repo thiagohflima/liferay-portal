@@ -3664,15 +3664,15 @@ public abstract class BaseWebDriverImpl implements LiferaySelenium, WebDriver {
 
 			@Override
 			public boolean evaluate() throws Exception {
-				WebElement element = getWebElement(locator);
+				WebElement webElement = getWebElement(locator);
 
 				WebDriver webDriver = getWebDriver();
 
 				TargetLocator targetLocator = webDriver.switchTo();
 
-				WebElement activeElement = targetLocator.activeElement();
+				WebElement activeWebElement = targetLocator.activeElement();
 
-				return element.equals(activeElement);
+				return webElement.equals(activeWebElement);
 			}
 
 		};
