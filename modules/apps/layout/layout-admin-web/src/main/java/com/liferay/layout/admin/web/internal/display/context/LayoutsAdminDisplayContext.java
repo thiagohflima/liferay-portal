@@ -701,13 +701,13 @@ public class LayoutsAdminDisplayContext {
 						"this-site-was-created");
 		}
 
-		List<String> list = new ArrayList<>();
+		List<String> layoutMessages = new ArrayList<>();
 
 		for (Layout duplicatedFriendlyURLLayout : layouts) {
-			list.add(_getLayoutMessage(duplicatedFriendlyURLLayout));
+			layoutMessages.add(_getLayoutMessage(duplicatedFriendlyURLLayout));
 		}
 
-		_warningMessage = _getWarningMessageHTML(heading, list);
+		_warningMessage = _getWarningMessageHTML(heading, layoutMessages);
 
 		return _warningMessage;
 	}
@@ -2446,15 +2446,17 @@ public class LayoutsAdminDisplayContext {
 		return _types;
 	}
 
-	private String _getWarningMessageHTML(String heading, List<String> list) {
+	private String _getWarningMessageHTML(
+		String heading, List<String> layoutMessages) {
+
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(heading);
 		sb.append("<ul>");
 
-		for (String string : list) {
+		for (String layoutMessage : layoutMessages) {
 			sb.append("<li>");
-			sb.append(string);
+			sb.append(layoutMessage);
 			sb.append("</li>");
 		}
 
