@@ -115,8 +115,8 @@ public class SearchResultResourceImpl extends BaseSearchResultResourceImpl {
 				pagination.getPageSize()
 			).withSearchContext(
 				searchContext -> _addSearchContextAttributes(
-					filter, search, searchContext,
-					searchRequestBody.getAttributes(), sorts)
+					searchRequestBody.getAttributes(), filter, search,
+					searchContext, sorts)
 			);
 
 		String[] entryClassNamesArray = _toArray(
@@ -148,8 +148,8 @@ public class SearchResultResourceImpl extends BaseSearchResultResourceImpl {
 	}
 
 	private void _addSearchContextAttributes(
-		Filter filter, String search, SearchContext searchContext,
-		Map<String, Object> attributes, Sort[] sorts) {
+		Map<String, Object> attributes, Filter filter, String search,
+		SearchContext searchContext, Sort[] sorts) {
 
 		MapUtil.isNotEmptyForEach(
 			attributes,
