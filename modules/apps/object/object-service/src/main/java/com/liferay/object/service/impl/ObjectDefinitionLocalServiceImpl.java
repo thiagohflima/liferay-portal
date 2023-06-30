@@ -833,7 +833,6 @@ public class ObjectDefinitionLocalServiceImpl
 		_validateExternalReferenceCode(
 			false, externalReferenceCode, objectDefinition.isModifiable(),
 			objectDefinition.getName(), objectDefinition.isSystem());
-
 		_validateObjectFieldId(objectDefinition, titleObjectFieldId);
 
 		objectDefinition.setExternalReferenceCode(externalReferenceCode);
