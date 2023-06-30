@@ -167,10 +167,10 @@ public class FaroSubscriptionDisplay {
 			return;
 		}
 
-		_lastAnniversaryDate = getLastAnniversaryDate(_startDate);
-
 		_individualsCount = contactsEngineClient.getIndividualsCount(
 			faroProject, false);
+
+		_lastAnniversaryDate = getLastAnniversaryDate(_startDate);
 
 		_individualsCountSinceLastAnniversary =
 			contactsEngineClient.getIndividualsCreatedSinceCount(
