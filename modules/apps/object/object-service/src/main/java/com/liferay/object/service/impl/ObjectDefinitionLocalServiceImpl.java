@@ -928,10 +928,8 @@ public class ObjectDefinitionLocalServiceImpl
 
 		_validateExternalReferenceCode(
 			true, externalReferenceCode, modifiable, name, system);
-
 		_validateEnableComments(
 			enableComments, modifiable, storageType, system);
-
 		_validateLabel(labelMap);
 		_validateName(0, user.getCompanyId(), modifiable, name, system);
 		_validatePluralLabel(pluralLabelMap);
@@ -942,7 +940,6 @@ public class ObjectDefinitionLocalServiceImpl
 			counterLocalService.increment());
 
 		objectDefinition.setExternalReferenceCode(externalReferenceCode);
-
 		objectDefinition.setCompanyId(user.getCompanyId());
 		objectDefinition.setUserId(user.getUserId());
 		objectDefinition.setUserName(user.getFullName());
@@ -1412,7 +1409,6 @@ public class ObjectDefinitionLocalServiceImpl
 		_validateExternalReferenceCode(
 			false, externalReferenceCode, objectDefinition.isModifiable(), name,
 			objectDefinition.isSystem());
-
 		_validateAccountEntryRestrictedObjectFieldId(
 			accountEntryRestrictedObjectFieldId, accountEntryRestricted,
 			objectDefinition);
