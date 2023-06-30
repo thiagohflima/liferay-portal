@@ -3658,7 +3658,7 @@ public abstract class BaseWebDriverImpl implements LiferaySelenium, WebDriver {
 
 	protected Condition getElementFocusedCondition(String locator) {
 		String message =
-			"Element from locator " + locator + " is not a focused element";
+			"Element from locator " + locator + " is not focused";
 
 		return new Condition(message) {
 
