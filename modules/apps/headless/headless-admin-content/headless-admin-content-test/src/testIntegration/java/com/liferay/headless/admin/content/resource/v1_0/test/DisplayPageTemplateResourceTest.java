@@ -106,7 +106,6 @@ public class DisplayPageTemplateResourceTest
 			page.fetchFirstItem(
 			).getCreator(
 			).getProfileURL());
-
 		assertValid(page);
 
 		displayPageTemplateResource = DisplayPageTemplateResource.builder(
@@ -128,7 +127,6 @@ public class DisplayPageTemplateResourceTest
 			testGroup.getGroupId(), Pagination.of(1, 10), null);
 
 		Assert.assertEquals(1, page.getTotalCount());
-
 		assertEquals(
 			new DisplayPageTemplate() {
 				{
@@ -136,7 +134,6 @@ public class DisplayPageTemplateResourceTest
 				}
 			},
 			page.fetchFirstItem());
-
 		assertValid(page);
 	}
 
