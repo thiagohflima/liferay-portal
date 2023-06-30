@@ -117,10 +117,10 @@ public class ObjectEntryInfoItemFormProviderTest {
 
 	@Test
 	public void testObjectEntryInfoItemFormProvider() throws Exception {
-		ObjectAction objectAction =  _objectActionLocalService.addObjectAction(
+		ObjectAction objectAction = _objectActionLocalService.addObjectAction(
 			RandomTestUtil.randomString(), TestPropsValues.getUserId(),
-			_childObjectDefinition.getObjectDefinitionId(), true, StringPool.BLANK,
-			RandomTestUtil.randomString(),
+			_childObjectDefinition.getObjectDefinitionId(), true,
+			StringPool.BLANK, RandomTestUtil.randomString(),
 			LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
 			LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
 			RandomTestUtil.randomString(),

@@ -181,9 +181,15 @@ public class ObjectEntryInfoItemFieldValuesProviderTest {
 
 		Assert.assertNotNull(infoItemFieldValues);
 
-		_assertActionInfoFieldValue(
-			infoItemFieldValues.getInfoFieldValue(objectAction.getName()),
-			objectAction);
+		InfoFieldValue<Object> infoLocalizedValue =
+			infoItemFieldValues.getInfoFieldValue(objectAction.getName());
+
+		Map<Locale, String> labelMap = objectAction.getLabelMap();
+
+		for (Map.Entry<Locale, String> entry : labelMap.entrySet()) {
+			Assert.assertEquals(
+				entry.getValue(), infoLocalizedValue.getValue(entry.getKey()));
+		}
 
 		ObjectField objectField = _objectFieldLocalService.fetchObjectField(
 			_childObjectDefinition.getObjectDefinitionId(),
@@ -230,17 +236,6 @@ public class ObjectEntryInfoItemFieldValuesProviderTest {
 			true, ObjectDefinitionConstants.SCOPE_SITE,
 			ObjectDefinitionConstants.STORAGE_TYPE_DEFAULT,
 			Arrays.asList(objectField));
-	}
-
-	private void _assertActionInfoFieldValue(
-		InfoFieldValue<Object> infoLocalizedValue, ObjectAction objectAction) {
-
-		Map<Locale, String> labelMap = objectAction.getLabelMap();
-
-		for (Map.Entry<Locale, String> entry : labelMap.entrySet()) {
-			Assert.assertEquals(
-				entry.getValue(), infoLocalizedValue.getValue(entry.getKey()));
-		}
 	}
 
 	private void _assertInfoFieldValue(
