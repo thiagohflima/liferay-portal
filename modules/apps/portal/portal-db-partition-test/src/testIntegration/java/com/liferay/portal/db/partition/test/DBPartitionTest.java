@@ -318,21 +318,17 @@ public class DBPartitionTest extends BaseDBPartitionTestCase {
 			_resourcePermissionLocalService.addResourcePermission(
 				resourcePermission);
 
-			Assert.assertFalse(
-				"UnsupportedOperationException should be thrown",
-				throwException);
+			Assert.assertFalse(throwException);
 		}
 		catch (Exception exception) {
-			Assert.assertTrue(
-				"UnsupportedOperationException should be thrown",
-				throwException);
+			Assert.assertTrue(throwException);
 
 			String message = exception.getMessage();
 
 			Assert.assertTrue(
 				message.endsWith(
 					StringBundler.concat(
-						"Invalid partition for object ",
+						"Invalid partition for ",
 						ResourcePermissionImpl.class.getName(),
 						" and company ID ", companyId)));
 		}
