@@ -117,7 +117,18 @@ public class ObjectEntryInfoItemFormProviderTest {
 
 	@Test
 	public void testObjectEntryInfoItemFormProvider() throws Exception {
-		ObjectAction objectAction = _addObjectAction(_childObjectDefinition);
+		ObjectAction objectAction =  _objectActionLocalService.addObjectAction(
+			RandomTestUtil.randomString(), TestPropsValues.getUserId(),
+			_childObjectDefinition.getObjectDefinitionId(), true, StringPool.BLANK,
+			RandomTestUtil.randomString(),
+			LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
+			LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
+			RandomTestUtil.randomString(),
+			ObjectActionExecutorConstants.KEY_GROOVY,
+			ObjectActionTriggerConstants.KEY_STANDALONE,
+			UnicodePropertiesBuilder.put(
+				"script", StringPool.BLANK
+			).build());
 
 		InfoItemFormProvider<?> infoItemFormProvider =
 			_infoItemServiceRegistry.getFirstInfoItemService(
@@ -150,23 +161,6 @@ public class ObjectEntryInfoItemFormProviderTest {
 
 		Assert.assertNotNull(
 			infoForm.getInfoField("parentTextObjectFieldName"));
-	}
-
-	private ObjectAction _addObjectAction(ObjectDefinition objectDefinition)
-		throws Exception {
-
-		return _objectActionLocalService.addObjectAction(
-			RandomTestUtil.randomString(), TestPropsValues.getUserId(),
-			objectDefinition.getObjectDefinitionId(), true, StringPool.BLANK,
-			RandomTestUtil.randomString(),
-			LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
-			LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
-			RandomTestUtil.randomString(),
-			ObjectActionExecutorConstants.KEY_GROOVY,
-			ObjectActionTriggerConstants.KEY_STANDALONE,
-			UnicodePropertiesBuilder.put(
-				"script", StringPool.BLANK
-			).build());
 	}
 
 	private ObjectDefinition _addObjectDefinition(ObjectField objectField)
