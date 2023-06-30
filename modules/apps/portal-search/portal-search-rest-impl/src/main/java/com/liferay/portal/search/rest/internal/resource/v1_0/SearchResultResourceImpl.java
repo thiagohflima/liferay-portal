@@ -119,8 +119,7 @@ public class SearchResultResourceImpl extends BaseSearchResultResourceImpl {
 					searchContext, sorts)
 			);
 
-		String[] entryClassNamesArray = _toArray(
-			entryClassNames);
+		String[] entryClassNamesArray = _toArray(entryClassNames);
 
 		if (!ArrayUtil.isEmpty(entryClassNamesArray)) {
 			searchRequestBuilder.entryClassNames(entryClassNamesArray);
@@ -188,16 +187,6 @@ public class SearchResultResourceImpl extends BaseSearchResultResourceImpl {
 
 		searchContext.setTimeZone(contextUser.getTimeZone());
 		searchContext.setUserId(contextUser.getUserId());
-	}
-
-	private String[] _toArray(String csvString) {
-		if (Validator.isBlank(csvString)) {
-			return new String[0];
-		}
-
-		csvString = StringUtil.trim(csvString);
-
-		return csvString.split("\\s*,\\s*");
 	}
 
 	private AssetRenderer<?> _getAssetRenderer(
@@ -343,6 +332,16 @@ public class SearchResultResourceImpl extends BaseSearchResultResourceImpl {
 		}
 
 		return aggregations;
+	}
+
+	private String[] _toArray(String csvString) {
+		if (Validator.isBlank(csvString)) {
+			return new String[0];
+		}
+
+		csvString = StringUtil.trim(csvString);
+
+		return csvString.split("\\s*,\\s*");
 	}
 
 	private SearchPage<SearchResult> _toSearchPage(
