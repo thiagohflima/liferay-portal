@@ -476,8 +476,7 @@ public class ObjectDefinitionLocalServiceTest {
 					@Override
 					public List<ObjectAction> getObjectActions() {
 						return Collections.singletonList(
-							_createObjectAction(
-								"updateDeliveryType1"));
+							_createObjectAction("updateDeliveryType1"));
 					}
 
 					@Override
@@ -654,8 +653,7 @@ public class ObjectDefinitionLocalServiceTest {
 					@Override
 					public List<ObjectAction> getObjectActions() {
 						return Collections.singletonList(
-							_createObjectAction(
-								"updateDeliveryType2"));
+							_createObjectAction("updateDeliveryType2"));
 					}
 
 					@Override
@@ -1682,9 +1680,7 @@ public class ObjectDefinitionLocalServiceTest {
 			expectedObjectField.isState(), objectField.isState());
 	}
 
-	private ObjectAction _createObjectAction(
-		String objectActionName) {
-
+	private ObjectAction _createObjectAction(String objectActionName) {
 		ObjectAction objectAction =
 			ObjectActionLocalServiceUtil.createObjectAction(0);
 
