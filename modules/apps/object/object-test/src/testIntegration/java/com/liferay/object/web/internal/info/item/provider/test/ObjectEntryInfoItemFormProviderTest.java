@@ -128,11 +128,9 @@ public class ObjectEntryInfoItemFormProviderTest {
 			String.valueOf(_childObjectDefinition.getObjectDefinitionId()), 0);
 
 		Assert.assertNotNull(infoForm);
-
+		Assert.assertNotNull(infoForm.getInfoField(objectAction.getName()));
 		Assert.assertNotNull(
 			infoForm.getInfoField("attachmentObjectFieldName"));
-
-		Assert.assertNotNull(infoForm.getInfoField(objectAction.getName()));
 
 		ObjectField objectField = _objectFieldLocalService.getObjectField(
 			_childObjectDefinition.getObjectDefinitionId(),
