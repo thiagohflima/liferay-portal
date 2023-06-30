@@ -1270,7 +1270,6 @@ public class ObjectDefinitionLocalServiceTest {
 				null, objectDefinitionId, 0, 0, true,
 				LocalizedMapUtil.getLocalizedMap("Able"), "Able",
 				LocalizedMapUtil.getLocalizedMap("Ables"), scope));
-
 		AssertUtils.assertFailure(
 			ObjectDefinitionExternalReferenceCodeException.
 				MustNotStartWithPrefix.class,
