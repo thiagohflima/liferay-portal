@@ -355,9 +355,9 @@ public class SearchResultResourceImpl extends BaseSearchResultResourceImpl {
 		SearchHits searchHits = searchResponse.getSearchHits();
 
 		for (SearchHit searchHit : searchHits.getSearchHits()) {
-			Document document = searchHit.getDocument();
-
 			SearchResult searchResult = new SearchResult();
+
+			Document document = searchHit.getDocument();
 
 			String entryClassName = _getEntryClassName(document);
 
