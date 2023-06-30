@@ -1216,7 +1216,7 @@ public class ObjectDefinitionLocalServiceImpl
 		String prefix = "O_";
 
 		if (modifiable && system) {
-			prefix = "MSOD_";
+			prefix = "L_";
 		}
 
 		return StringBundler.concat(
