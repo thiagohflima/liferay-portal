@@ -357,13 +357,12 @@ public class SearchResultResourceImpl extends BaseSearchResultResourceImpl {
 		for (SearchHit searchHit : searchHits.getSearchHits()) {
 			SearchResult searchResult = new SearchResult();
 
+			boolean embedded = _isEmbedded();
+
 			Document document = searchHit.getDocument();
 
 			String entryClassName = _getEntryClassName(document);
-
 			Long entryClassPK = _getEntryClassPK(document);
-
-			boolean embedded = _isEmbedded();
 
 			AssetRenderer<?> assetRenderer = null;
 
