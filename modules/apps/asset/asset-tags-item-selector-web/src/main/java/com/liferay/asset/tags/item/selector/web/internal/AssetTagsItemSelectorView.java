@@ -79,7 +79,6 @@ public class AssetTagsItemSelectorView
 		RenderRequest renderRequest =
 			(RenderRequest)httpServletRequest.getAttribute(
 				JavaConstants.JAVAX_PORTLET_REQUEST);
-
 		RenderResponse renderResponse =
 			(RenderResponse)httpServletRequest.getAttribute(
 				JavaConstants.JAVAX_PORTLET_RESPONSE);
