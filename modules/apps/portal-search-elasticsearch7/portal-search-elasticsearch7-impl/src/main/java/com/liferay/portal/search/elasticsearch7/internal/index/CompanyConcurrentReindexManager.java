@@ -116,9 +116,8 @@ public class CompanyConcurrentReindexManager
 			return;
 		}
 
-		Company company = _companyLocalService.getCompany(companyId);
-
 		String baseIndexName = _indexNameBuilder.getIndexName(companyId);
+		Company company = _companyLocalService.getCompany(companyId);
 
 		RestHighLevelClient restHighLevelClient =
 			_elasticsearchConnectionManager.getRestHighLevelClient();
@@ -152,13 +151,13 @@ public class CompanyConcurrentReindexManager
 			String baseIndexName, IndicesClient indicesClient)
 		throws Exception {
 
+		Set<String> baseIndexAliasIndexNames = new HashSet<>();
+
 		GetAliasesResponse getAliasesResponse = indicesClient.getAlias(
 			new GetAliasesRequest(baseIndexName), RequestOptions.DEFAULT);
 
 		Map<String, Set<AliasMetadata>> aliases =
 			getAliasesResponse.getAliases();
-
-		Set<String> baseIndexAliasIndexNames = new HashSet<>();
 
 		if (MapUtil.isNotEmpty(aliases)) {
 			baseIndexAliasIndexNames.addAll(aliases.keySet());
