@@ -350,9 +350,9 @@ public class SearchResultResourceImpl extends BaseSearchResultResourceImpl {
 			Pagination pagination, SearchResponse searchResponse)
 		throws Exception {
 
-		SearchHits searchHits = searchResponse.getSearchHits();
-
 		List<SearchResult> searchResults = new ArrayList<>();
+
+		SearchHits searchHits = searchResponse.getSearchHits();
 
 		for (SearchHit searchHit : searchHits.getSearchHits()) {
 			Document document = searchHit.getDocument();
