@@ -163,7 +163,18 @@ public class ObjectEntryInfoItemFieldValuesProviderTest {
 			).build(),
 			ServiceContextTestUtil.getServiceContext());
 
-		ObjectAction objectAction = _addObjectAction(objectEntry);
+		ObjectAction objectAction = _objectActionLocalService.addObjectAction(
+			RandomTestUtil.randomString(), TestPropsValues.getUserId(),
+			objectEntry.getObjectDefinitionId(), true, StringPool.BLANK,
+			RandomTestUtil.randomString(),
+			LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
+			LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
+			RandomTestUtil.randomString(),
+			ObjectActionExecutorConstants.KEY_GROOVY,
+			ObjectActionTriggerConstants.KEY_STANDALONE,
+			UnicodePropertiesBuilder.put(
+				"script", StringPool.BLANK
+			).build());
 
 		InfoItemFieldValues infoItemFieldValues =
 			infoItemFieldValuesProvider.getInfoItemFieldValues(objectEntry);
@@ -206,23 +217,6 @@ public class ObjectEntryInfoItemFieldValuesProviderTest {
 		Assert.assertEquals(
 			parentTextObjectFieldNameValue,
 			parentTextObjectFieldNameInfoFieldValue.getValue());
-	}
-
-	private ObjectAction _addObjectAction(ObjectEntry objectEntry)
-		throws Exception {
-
-		return _objectActionLocalService.addObjectAction(
-			RandomTestUtil.randomString(), TestPropsValues.getUserId(),
-			objectEntry.getObjectDefinitionId(), true, StringPool.BLANK,
-			RandomTestUtil.randomString(),
-			LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
-			LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
-			RandomTestUtil.randomString(),
-			ObjectActionExecutorConstants.KEY_GROOVY,
-			ObjectActionTriggerConstants.KEY_STANDALONE,
-			UnicodePropertiesBuilder.put(
-				"script", StringPool.BLANK
-			).build());
 	}
 
 	private ObjectDefinition _addObjectDefinition(ObjectField objectField)
