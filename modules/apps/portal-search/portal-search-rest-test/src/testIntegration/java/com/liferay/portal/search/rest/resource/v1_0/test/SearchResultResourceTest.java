@@ -122,8 +122,8 @@ public class SearchResultResourceTest extends BaseSearchResultResourceTestCase {
 		_testPostSearchPageWithNestedFacetConfiguration(ddmStructure);
 		_testPostSearchPageWithSiteFacetConfiguration();
 		_testPostSearchPageWithTagFacetConfiguration(assetTag);
-		_testPostSearchPageWithUserFacetConfiguration();
 		_testPostSearchPageWithTypeFacetConfiguration();
+		_testPostSearchPageWithUserFacetConfiguration();
 		_testPostSearchPageZeroResults();
 	}
 
