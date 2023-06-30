@@ -766,24 +766,29 @@ public class ObjectDefinitionLocalServiceTest {
 
 		SystemProperties.clear("liferay.mode");
 
-		AssertUtils.assertFailure(
-			ObjectDefinitionExternalReferenceCodeException.
-				ForbiddenUnmodifiableSystemObjectDefinitionExternalReferenceCode.class,
-			"Forbidden unmodifiable system object definition external " +
-				"reference code INVALID_TEST",
-			() ->
-				ObjectDefinitionTestUtil.addUnmodifiableSystemObjectDefinition(
-					"INVALID_TEST", TestPropsValues.getUserId(), "Test", null,
-					LocalizedMapUtil.getLocalizedMap(
-						RandomTestUtil.randomString()),
-					"Test", null, null,
-					LocalizedMapUtil.getLocalizedMap(
-						RandomTestUtil.randomString()),
-					ObjectDefinitionConstants.SCOPE_COMPANY, null, 1,
-					_objectDefinitionLocalService,
-					Collections.<ObjectField>emptyList()));
-
-		SystemProperties.set("liferay.mode", liferayMode);
+		try {
+			AssertUtils.assertFailure(
+				ObjectDefinitionExternalReferenceCodeException.
+					ForbiddenUnmodifiableSystemObjectDefinitionExternalReferenceCode.class,
+				"Forbidden unmodifiable system object definition external " +
+					"reference code INVALID_TEST",
+				() ->
+					ObjectDefinitionTestUtil.
+						addUnmodifiableSystemObjectDefinition(
+							"INVALID_TEST", TestPropsValues.getUserId(), "Test",
+							null,
+							LocalizedMapUtil.getLocalizedMap(
+								RandomTestUtil.randomString()),
+							"Test", null, null,
+							LocalizedMapUtil.getLocalizedMap(
+								RandomTestUtil.randomString()),
+							ObjectDefinitionConstants.SCOPE_COMPANY, null, 1,
+							_objectDefinitionLocalService,
+							Collections.<ObjectField>emptyList()));
+		}
+		finally {
+			SystemProperties.set("liferay.mode", liferayMode);
+		}
 
 		// Label is null
 
