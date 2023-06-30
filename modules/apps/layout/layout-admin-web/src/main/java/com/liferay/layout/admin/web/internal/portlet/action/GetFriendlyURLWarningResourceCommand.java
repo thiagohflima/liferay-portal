@@ -119,8 +119,8 @@ public class GetFriendlyURLWarningResourceCommand
 			return;
 		}
 
-		String name = ParamUtil.getString(resourceRequest, "name");
 		long groupId = ParamUtil.getLong(resourceRequest, "groupId");
+		String name = ParamUtil.getString(resourceRequest, "name");
 
 		if ((groupId == 0) || Validator.isNull(name)) {
 			JSONPortletResponseUtil.writeJSON(
