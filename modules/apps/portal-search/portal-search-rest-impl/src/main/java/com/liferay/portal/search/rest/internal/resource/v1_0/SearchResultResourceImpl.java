@@ -119,7 +119,7 @@ public class SearchResultResourceImpl extends BaseSearchResultResourceImpl {
 					searchRequestBody.getAttributes(), sorts)
 			);
 
-		String[] entryClassNamesArray = _csvStringToStringArray(
+		String[] entryClassNamesArray = _toArray(
 			entryClassNames);
 
 		if (!ArrayUtil.isEmpty(entryClassNamesArray)) {
@@ -190,7 +190,7 @@ public class SearchResultResourceImpl extends BaseSearchResultResourceImpl {
 		searchContext.setUserId(contextUser.getUserId());
 	}
 
-	private String[] _csvStringToStringArray(String csvString) {
+	private String[] _toArray(String csvString) {
 		if (Validator.isBlank(csvString)) {
 			return new String[0];
 		}
