@@ -164,9 +164,9 @@ public class SXPBlueprintInfoCollectionProvider
 
 		ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
 
-		User user = themeDisplay.getUser();
-
 		List<Group> siteGroups = null;
+
+		User user = themeDisplay.getUser();
 
 		try {
 			siteGroups = user.getSiteGroups();

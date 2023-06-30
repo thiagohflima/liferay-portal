@@ -52,15 +52,13 @@ public class MultiselectInfoFieldTypeTemplateNodeTransformer
 
 		InfoField infoField = infoFieldValue.getInfoField();
 
-		JSONArray selectedOptionValuesJSONArray =
-			_getSelectedOptionValuesJSONArray(
-				infoFieldValue, themeDisplay.getLocale());
-
 		InfoFieldType infoFieldType = infoField.getInfoFieldType();
 
 		TemplateNode templateNode = new TemplateNode(
 			themeDisplay, infoField.getName(),
-			JSONUtil.toString(selectedOptionValuesJSONArray),
+			JSONUtil.toString(
+				_getSelectedOptionValuesJSONArray(
+					infoFieldValue, themeDisplay.getLocale())),
 			infoFieldType.getName(),
 			HashMapBuilder.put(
 				"multiple", Boolean.TRUE.toString()
