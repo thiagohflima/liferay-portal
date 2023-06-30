@@ -117,12 +117,12 @@ public class ObjectEntryInfoItemFormProviderTest {
 
 	@Test
 	public void testObjectEntryInfoItemFormProvider() throws Exception {
+		ObjectAction objectAction = _addObjectAction(_childObjectDefinition);
+
 		InfoItemFormProvider<?> infoItemFormProvider =
 			_infoItemServiceRegistry.getFirstInfoItemService(
 				InfoItemFormProvider.class,
 				_childObjectDefinition.getClassName());
-
-		ObjectAction objectAction = _addObjectAction(_childObjectDefinition);
 
 		InfoForm infoForm = infoItemFormProvider.getInfoForm(
 			String.valueOf(_childObjectDefinition.getObjectDefinitionId()), 0);
