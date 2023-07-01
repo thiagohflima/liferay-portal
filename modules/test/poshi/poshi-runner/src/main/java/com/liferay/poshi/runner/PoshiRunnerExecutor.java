@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -1013,12 +1014,11 @@ public class PoshiRunnerExecutor {
 					(String)argument);
 			}
 
-			Class<?> parameterType =
+			Class<?> parameterTypeClass =
 				liferaySeleniumMethod.getParameterTypes()[i];
 
-			String parameterTypeName = parameterType.getName();
-
-			if (parameterTypeName.equals("java.lang.String") &&
+			if (Objects.equals(
+					parameterTypeClass.getName(), "java.lang.String") &&
 				Validator.isNotNull(argument)) {
 
 				argument = argument.toString();
