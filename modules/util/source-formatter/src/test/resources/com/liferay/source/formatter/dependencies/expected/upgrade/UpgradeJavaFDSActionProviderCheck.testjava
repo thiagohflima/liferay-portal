@@ -27,9 +27,9 @@ public class UpgradeJavaFDSActionProviderCheck implements FDSActionProvider {
 
 		Object originalModel = buildOriginalModel(model);
 
-		return _original.getDropdownItems(groupId, httpServletRequest, originalModel);
+		return _fdsActionProvider.getDropdownItems(groupId, httpServletRequest, originalModel);
 	}
 
-	private final FDSActionProvider _original;
+	private final FDSActionProvider _fdsActionProvider;
 
 }
