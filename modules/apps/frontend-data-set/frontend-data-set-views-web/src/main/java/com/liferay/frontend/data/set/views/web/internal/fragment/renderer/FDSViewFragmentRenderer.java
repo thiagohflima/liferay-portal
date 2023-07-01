@@ -390,7 +390,7 @@ public class FDSViewFragmentRenderer implements FragmentRenderer {
 			apiUrl, "{userId}", String.valueOf(themeDisplay.getUserId()));
 
 		if (StringUtil.contains(apiUrl, "{") && _log.isWarnEnabled()) {
-			_log.warn("Unsupported parameter in API url: " + apiUrl);
+			_log.warn("Unsupported parameter in API URL: " + apiUrl);
 		}
 
 		return apiUrl;
