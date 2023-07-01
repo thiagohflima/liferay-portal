@@ -31,10 +31,10 @@ public class UpgradeJavaAssetEntryAssetCategoriesCheck {
 
 	public void method(
 		long assetCategoryId, AssetCategory assetCategory,
-		long[] assetCategoryIds, List<AssetCategory> assetCategoryList,
+		long[] assetCategoryIds, List<AssetCategory> assetCategories,
 		long entryId) {
 
-		for (AssetCategory assetCategory : assetCategoryList) {
+		for (AssetCategory assetCategory : assetCategories) {
 			_assetEntryAssetCategoryRelLocalService.addAssetEntryAssetCategoryRel(
 				entryId, assetCategory.getCategoryId());
 		}
@@ -50,7 +50,7 @@ public class UpgradeJavaAssetEntryAssetCategoriesCheck {
 		_assetEntryAssetCategoryRelLocalService.addAssetEntryAssetCategoryRel(
 			entryId, assetCategoryId);
 
-		for (AssetCategory assetCategory : assetCategoryList) {
+		for (AssetCategory assetCategory : assetCategories) {
 			_assetEntryAssetCategoryRelLocalService.deleteAssetEntryAssetCategoryRel(
 				entryId, assetCategory.getCategoryId());
 		}
