@@ -38,7 +38,7 @@ export function ConfirmUnpublishAPIApplicationModalContent({
 
 				<p>
 					{Liferay.Language.get(
-						'also-all-the-assets-that-used-it-will-not-work'
+						'also,-all-the-assets-that-used-it-will-not-work'
 					)}
 				</p>
 			</div>
