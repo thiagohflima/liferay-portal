@@ -16,7 +16,6 @@ package com.liferay.portal.ee.license;
 
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.ee.license.classloader.DecryptorClassLoader;
-import com.liferay.portal.events.StartupAction;
 import com.liferay.portal.kernel.cluster.ClusterExecutorUtil;
 import com.liferay.portal.kernel.cluster.ClusterNode;
 import com.liferay.portal.kernel.cluster.ClusterNodeResponse;
@@ -25,7 +24,6 @@ import com.liferay.portal.kernel.cluster.ClusterRequest;
 import com.liferay.portal.kernel.cluster.FutureClusterResponses;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.encryptor.EncryptorUtil;
-import com.liferay.portal.kernel.events.LifecycleAction;
 import com.liferay.portal.kernel.exception.CompanyMaxUsersException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.license.messaging.LCSPortletState;
@@ -40,6 +38,7 @@ import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.events.LifecycleAction;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
@@ -240,14 +239,17 @@ public class LCSLicenseManager {
 		return lcsLicenseState;
 	}
 
-	public static LifecycleAction getLifecycleAction() {
+	public static com.liferay.portal.kernel.events.LifecycleAction
+		getLifecycleAction() {
+
 		ClassLoader classLoader = new DecryptorClassLoader();
 
 		try {
 			Class<?> lifecycleActionClass = classLoader.loadClass(
 				"com.liferay.portal.ee.license.LifecycleAction");
 
-			return (LifecycleAction)lifecycleActionClass.newInstance();
+			return (com.liferay.portal.kernel.events.LifecycleAction)
+				lifecycleActionClass.newInstance();
 		}
 		catch (Exception exception) {
 			_log.error(exception);
@@ -260,13 +262,16 @@ public class LCSLicenseManager {
 		return _resetToken;
 	}
 
-	public static StartupAction getStartupAction() throws Exception {
+	public static com.liferay.portal.events.StartupAction getStartupAction()
+		throws Exception {
+
 		ClassLoader classLoader = new DecryptorClassLoader();
 
 		Class<?> startupActionClass = classLoader.loadClass(
 			"com.liferay.portal.ee.license.StartupAction");
 
-		return (StartupAction)startupActionClass.newInstance();
+		return (com.liferay.portal.events.StartupAction)
+			startupActionClass.newInstance();
 	}
 
 	public static void init() {
