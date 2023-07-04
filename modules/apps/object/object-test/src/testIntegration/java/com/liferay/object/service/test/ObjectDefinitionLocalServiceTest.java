@@ -1160,10 +1160,10 @@ public class ObjectDefinitionLocalServiceTest {
 					StringUtil.randomId(),
 					ObjectRelationshipConstants.TYPE_ONE_TO_MANY));
 
-		Assert.assertFalse(objectDefinition.isSystem());
 		Assert.assertTrue(
 			objectDefinition.getAccountEntryRestrictedObjectFieldId() > 0);
 		Assert.assertTrue(objectDefinition.isAccountEntryRestricted());
+		Assert.assertFalse(objectDefinition.isSystem());
 
 		// Enabling account restriction between two custom object definitions
 
