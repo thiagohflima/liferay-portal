@@ -369,9 +369,6 @@ public class UserNotificationTypeTest extends BaseNotificationTypeTest {
 			1,
 			_userNotificationEventLocalService.getUserNotificationEventsCount(
 				user2.getUserId()));
-
-		_userNotificationEventLocalService.deleteUserNotificationEvents(
-			user2.getUserId());
 	}
 
 	@Inject
