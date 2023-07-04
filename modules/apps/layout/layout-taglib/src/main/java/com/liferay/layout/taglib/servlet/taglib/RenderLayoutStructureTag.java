@@ -997,7 +997,6 @@ public class RenderLayoutStructureTag extends IncludeTag {
 			renderLayoutStructureDisplayContext.
 				getFormStyledLayoutStructureItemRedirect(
 					formStyledLayoutStructureItem));
-
 		jspWriter.write("\"><input name=\"backURL\" type=\"hidden\" value=\"");
 
 		HttpServletRequest httpServletRequest = getRequest();

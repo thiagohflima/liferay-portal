@@ -165,19 +165,17 @@ public class AddInfoItemStrutsAction implements StrutsAction {
 				throw new InfoFormException();
 			}
 
-			Object infoItem = infoItemCreator.createFromInfoItemFieldValues(
-				groupId,
-				InfoItemFieldValues.builder(
-				).infoFieldValues(
-					infoFieldValues
-				).infoItemReference(
-					new InfoItemReference(className, 0)
-				).build());
-
 			String displayPageURL = _getDisplayPageURL(
 				className,
 				ParamUtil.getString(httpServletRequest, "displayPage"),
-				infoItem);
+				infoItemCreator.createFromInfoItemFieldValues(
+					groupId,
+					InfoItemFieldValues.builder(
+					).infoFieldValues(
+						infoFieldValues
+					).infoItemReference(
+						new InfoItemReference(className, 0)
+					).build()));
 
 			redirect = ParamUtil.getString(httpServletRequest, "redirect");
 
