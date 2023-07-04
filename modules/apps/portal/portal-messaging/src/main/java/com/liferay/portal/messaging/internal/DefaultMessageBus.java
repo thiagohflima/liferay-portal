@@ -458,7 +458,7 @@ public class DefaultMessageBus implements MessageBus {
 		new ConcurrentHashMap<>();
 	private final Map<String, DestinationWorkerConfiguration>
 		_destinationWorkerConfigurations = new ConcurrentHashMap<>();
-	private final Map<String, String> _factoryPidsToDestinationName =
+	private final Map<String, String> _factoryPidsToDestinationNames =
 		new ConcurrentHashMap<>();
 	private final Set<MessageBusEventListener> _messageBusEventListeners =
 		Collections.newSetFromMap(new ConcurrentHashMap<>());
@@ -475,7 +475,7 @@ public class DefaultMessageBus implements MessageBus {
 
 		@Override
 		public void deleted(String factoryPid) {
-			String destinationName = _factoryPidsToDestinationName.remove(
+			String destinationName = _factoryPidsToDestinationNames.remove(
 				factoryPid);
 
 			_destinationWorkerConfigurations.remove(destinationName);
@@ -494,7 +494,7 @@ public class DefaultMessageBus implements MessageBus {
 				ConfigurableUtil.createConfigurable(
 					DestinationWorkerConfiguration.class, dictionary);
 
-			_factoryPidsToDestinationName.put(
+			_factoryPidsToDestinationNames.put(
 				factoryPid, destinationWorkerConfiguration.destinationName());
 
 			_destinationWorkerConfigurations.put(
