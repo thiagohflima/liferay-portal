@@ -132,6 +132,11 @@ public class ForgotPasswordMVCActionCommandTest {
 		MockLiferayPortletActionRequest mockLiferayPortletActionRequest =
 			new MockLiferayPortletActionRequest();
 
+		mockLiferayPortletActionRequest.addParameter(
+			"login", _user.getEmailAddress());
+		mockLiferayPortletActionRequest.setAttribute(
+			JavaConstants.JAVAX_PORTLET_CONFIG, null);
+
 		ThemeDisplay themeDisplay = new ThemeDisplay();
 
 		themeDisplay.setCompany(
@@ -140,12 +145,7 @@ public class ForgotPasswordMVCActionCommandTest {
 		themeDisplay.setUser(_user);
 
 		mockLiferayPortletActionRequest.setAttribute(
-			JavaConstants.JAVAX_PORTLET_CONFIG, null);
-		mockLiferayPortletActionRequest.setAttribute(
 			WebKeys.THEME_DISPLAY, themeDisplay);
-
-		mockLiferayPortletActionRequest.addParameter(
-			"login", _user.getEmailAddress());
 
 		return mockLiferayPortletActionRequest;
 	}
