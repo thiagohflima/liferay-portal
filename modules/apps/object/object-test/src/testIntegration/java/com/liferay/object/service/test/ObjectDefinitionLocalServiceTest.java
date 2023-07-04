@@ -1138,8 +1138,8 @@ public class ObjectDefinitionLocalServiceTest {
 	@Test
 	public void testEnableAccountRestricted() throws Exception {
 
-		// Enabling account restriction between AccountEntry
-		// and a custom object definition
+		// Enable account restriction between AccountEntry and a custom object
+		// definition
 
 		ObjectDefinition objectDefinition =
 			_objectDefinitionLocalService.addObjectDefinition(
@@ -1165,7 +1165,7 @@ public class ObjectDefinitionLocalServiceTest {
 		Assert.assertTrue(objectDefinition.isAccountEntryRestricted());
 		Assert.assertFalse(objectDefinition.isSystem());
 
-		// Enabling account restriction between two custom object definitions
+		// Enable account restriction between two custom object definitions
 
 		AssertUtils.assertFailure(
 			ObjectDefinitionAccountEntryRestrictedException.class,
@@ -1185,8 +1185,8 @@ public class ObjectDefinitionLocalServiceTest {
 					StringUtil.randomId(),
 					ObjectRelationshipConstants.TYPE_ONE_TO_MANY)));
 
-		// Enabling account restriction for default storage object definition
-		// using salesforce method
+		// Enable account restriction for a default storage object definition
+		// using Salesforce
 
 		AssertUtils.assertFailure(
 			UnsupportedOperationException.class, null,
@@ -1210,7 +1210,7 @@ public class ObjectDefinitionLocalServiceTest {
 								true
 							).build())));
 
-		// Enabling account restriction to a custom salesforce object definition
+		// Enable account restriction to a custom Salesforce object definition
 
 		objectDefinition =
 			_objectDefinitionLocalService.addCustomObjectDefinition(
@@ -1249,7 +1249,7 @@ public class ObjectDefinitionLocalServiceTest {
 
 		_objectDefinitionLocalService.deleteObjectDefinition(objectDefinition);
 
-		// Enabling account restriction using a forbidden type field
+		// Enable account restriction using a forbidden type field
 
 		AssertUtils.assertFailure(
 			ObjectDefinitionAccountEntryRestrictedException.class,
@@ -1275,7 +1275,7 @@ public class ObjectDefinitionLocalServiceTest {
 								true
 							).build())));
 
-		// Switching account restricted field
+		// Update account entry restricted object field
 
 		objectDefinition =
 			_objectDefinitionLocalService.addCustomObjectDefinition(
