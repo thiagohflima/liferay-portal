@@ -278,17 +278,18 @@ public class FDSViewFragmentRenderer implements FragmentRenderer {
 			ObjectDefinition objectDefinition, ObjectEntry objectEntry)
 		throws Exception {
 
-		Map<String, Object> fdsViewProperties = objectEntry.getProperties();
-
-		String fdsFieldsOrder = (String)fdsViewProperties.get("fdsFieldsOrder");
-
-		List<Long> fdsFieldIds = ListUtil.toList(
-			Arrays.asList(StringUtil.split(fdsFieldsOrder, StringPool.COMMA)),
-			Long::parseLong);
-
 		List<ObjectEntry> fdsFieldObjectEntries = new ArrayList<>(
 			_getRelatedObjectEntries(
 				objectDefinition, objectEntry, "fdsViewFDSFieldRelationship"));
+
+		Map<String, Object> fdsViewProperties = objectEntry.getProperties();
+
+		List<Long> fdsFieldIds = ListUtil.toList(
+			Arrays.asList(
+				StringUtil.split(
+					(String)fdsViewProperties.get("fdsFieldsOrder"),
+					StringPool.COMMA)),
+			Long::parseLong);
 
 		Collections.sort(
 			fdsFieldObjectEntries,
