@@ -61,10 +61,8 @@ public class APIApplicationPublisherImpl implements APIApplicationPublisher {
 			apiApplication.getOSGiJaxRsName(),
 			key -> new ArrayList<ServiceRegistration<?>>() {
 				{
-					add(
-						_registerHeadlessBuilderAPIApplicationContextProvider(
-							apiApplication));
-					add(_registerHeadlessBuilderApplication(apiApplication));
+					add(_registerApplication(apiApplication));
+					add(_registerContextProvider(apiApplication));
 					add(
 						_registerResource(
 							apiApplication, HeadlessBuilderResourceImpl.class,
@@ -109,27 +107,8 @@ public class APIApplicationPublisherImpl implements APIApplicationPublisher {
 		_headlessBuilderApplicationServiceRegistrationsMap.clear();
 	}
 
-	private ServiceRegistration<?>
-		_registerHeadlessBuilderAPIApplicationContextProvider(
-			APIApplication apiApplication) {
-
-		return _bundleContext.registerService(
-			ContextProvider.class,
-			new APIApplicationContextProvider(_apiApplicationProvider, _portal),
-			HashMapDictionaryBuilder.<String, Object>put(
-				"osgi.jaxrs.application.select",
-				"(osgi.jaxrs.name=" + apiApplication.getOSGiJaxRsName() + ")"
-			).put(
-				"osgi.jaxrs.extension", "true"
-			).put(
-				"osgi.jaxrs.name",
-				apiApplication.getOSGiJaxRsName() +
-					"APIApplicationContextProvider"
-			).build());
-	}
-
-	private ServiceRegistration<Application>
-		_registerHeadlessBuilderApplication(APIApplication apiApplication) {
+	private ServiceRegistration<Application> _registerApplication(
+		APIApplication apiApplication) {
 
 		return _bundleContext.registerService(
 			Application.class, new Application(),
@@ -148,6 +127,24 @@ public class APIApplicationPublisherImpl implements APIApplicationPublisher {
 				"(osgi.jaxrs.name=Liferay.Vulcan)"
 			).put(
 				"osgi.jaxrs.name", apiApplication.getOSGiJaxRsName()
+			).build());
+	}
+
+	private ServiceRegistration<?> _registerContextProvider(
+		APIApplication apiApplication) {
+
+		return _bundleContext.registerService(
+			ContextProvider.class,
+			new APIApplicationContextProvider(_apiApplicationProvider, _portal),
+			HashMapDictionaryBuilder.<String, Object>put(
+				"osgi.jaxrs.application.select",
+				"(osgi.jaxrs.name=" + apiApplication.getOSGiJaxRsName() + ")"
+			).put(
+				"osgi.jaxrs.extension", "true"
+			).put(
+				"osgi.jaxrs.name",
+				apiApplication.getOSGiJaxRsName() +
+					"APIApplicationContextProvider"
 			).build());
 	}
 
