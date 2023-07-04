@@ -67,7 +67,6 @@ public class UserNotificationTypeTest extends BaseNotificationTypeTest {
 	public void tearDown() throws PortalException {
 		_userNotificationEventLocalService.deleteUserNotificationEvents(
 			user1.getUserId());
-
 		_userNotificationEventLocalService.deleteUserNotificationEvents(
 			user2.getUserId());
 	}
@@ -248,11 +247,6 @@ public class UserNotificationTypeTest extends BaseNotificationTypeTest {
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		Assert.assertEquals(
-			1,
-			_userNotificationEventLocalService.getUserNotificationEventsCount(
-				user1.getUserId()));
-
-		Assert.assertEquals(
 			notificationQueueEntries.toString(), 1,
 			notificationQueueEntries.size());
 
@@ -276,6 +270,11 @@ public class UserNotificationTypeTest extends BaseNotificationTypeTest {
 			notificationRecipientSettings.get(0), user1.getFullName());
 		_assertNotificationRecipientSetting(
 			notificationRecipientSettings.get(1), user2.getFullName());
+
+		Assert.assertEquals(
+			1,
+			_userNotificationEventLocalService.getUserNotificationEventsCount(
+				user1.getUserId()));
 	}
 
 	private void _testSendNotificationRecipientTypeTerm(
@@ -344,14 +343,6 @@ public class UserNotificationTypeTest extends BaseNotificationTypeTest {
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		Assert.assertEquals(
-			1,
-			_userNotificationEventLocalService.getUserNotificationEventsCount(
-				user2.getUserId()));
-
-		_userNotificationEventLocalService.deleteUserNotificationEvents(
-			user2.getUserId());
-
-		Assert.assertEquals(
 			notificationQueueEntries.toString(), 1,
 			notificationQueueEntries.size());
 
@@ -373,6 +364,14 @@ public class UserNotificationTypeTest extends BaseNotificationTypeTest {
 			notificationRecipientSettings.size());
 		_assertNotificationRecipientSetting(
 			notificationRecipientSettings.get(0), user2.getFullName());
+
+		Assert.assertEquals(
+			1,
+			_userNotificationEventLocalService.getUserNotificationEventsCount(
+				user2.getUserId()));
+
+		_userNotificationEventLocalService.deleteUserNotificationEvents(
+			user2.getUserId());
 	}
 
 	@Inject
