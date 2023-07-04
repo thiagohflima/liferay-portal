@@ -1161,6 +1161,8 @@ public class ObjectDefinitionLocalServiceTest {
 		Assert.assertTrue(objectDefinition.isAccountEntryRestricted());
 		Assert.assertFalse(objectDefinition.isSystem());
 
+		_objectDefinitionLocalService.deleteObjectDefinition(objectDefinition);
+
 		AssertUtils.assertFailure(
 			ObjectDefinitionAccountEntryRestrictedException.class,
 			"Custom object definitions can only be restricted by account entry",
