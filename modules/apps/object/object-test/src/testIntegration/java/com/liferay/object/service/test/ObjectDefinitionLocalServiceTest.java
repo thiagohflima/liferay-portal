@@ -1304,13 +1304,13 @@ public class ObjectDefinitionLocalServiceTest {
 							true
 						).build()));
 
+		Assert.assertTrue(
+			objectDefinition.getAccountEntryRestrictedObjectFieldId() > 0);
 		Assert.assertEquals(
 			objectDefinition.getStorageType(),
 			ObjectDefinitionConstants.STORAGE_TYPE_SALESFORCE);
-		Assert.assertFalse(objectDefinition.isSystem());
-		Assert.assertTrue(
-			objectDefinition.getAccountEntryRestrictedObjectFieldId() > 0);
 		Assert.assertTrue(objectDefinition.isAccountEntryRestricted());
+		Assert.assertFalse(objectDefinition.isSystem());
 
 		ObjectField objectField = ObjectFieldUtil.addCustomObjectField(
 			new TextObjectFieldBuilder(
