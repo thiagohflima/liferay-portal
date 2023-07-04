@@ -213,6 +213,8 @@ public class DefaultMessageBus implements MessageBus {
 
 		_messageListenerServiceTracker.close();
 
+		_messageBusEventListeners.clear();
+
 		shutdown(true);
 
 		for (Destination destination : _destinations.values()) {
@@ -220,8 +222,6 @@ public class DefaultMessageBus implements MessageBus {
 		}
 
 		_destinations.clear();
-
-		_messageBusEventListeners.clear();
 	}
 
 	@Reference(
