@@ -47,7 +47,7 @@ public class HeadlessBuilderResourceImpl
 
 		throw new NoSuchModelException(
 			String.format(
-				"Endpoint %s does not exists on %s", endpointPath,
+				"Endpoint %s does not exist for %s", endpointPath,
 				contextAPIApplication.getTitle()));
 	}
 
