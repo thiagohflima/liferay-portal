@@ -571,7 +571,6 @@ public class ObjectDefinitionLocalServiceImpl
 		}
 
 		objectDefinition.setAccountEntryRestricted(true);
-
 		objectDefinition.setAccountEntryRestrictedObjectFieldId(
 			objectField.getObjectFieldId());
 
