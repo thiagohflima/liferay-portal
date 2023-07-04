@@ -1322,7 +1322,7 @@ public class LayoutsAdminDisplayContext {
 			return _selPlid;
 		}
 
-		_selPlid = ParamUtil.getLong(
+		Long selPlid = ParamUtil.getLong(
 			_liferayPortletRequest, "selPlid", LayoutConstants.DEFAULT_PLID);
 
 		if (FeatureFlagManagerUtil.isEnabled("LPS-153951") &&
@@ -1336,9 +1336,11 @@ public class LayoutsAdminDisplayContext {
 			Layout draftLayout = layout.fetchDraftLayout();
 
 			if (draftLayout != null) {
-				_selPlid = draftLayout.getPlid();
+				selPlid = draftLayout.getPlid();
 			}
 		}
+
+		_selPlid = selPlid;
 
 		return _selPlid;
 	}
