@@ -485,10 +485,10 @@ public class DDMStructureStagedModelDataHandler
 	@Reference
 	protected JSONFactory jsonFactory;
 
-	private boolean _equalsJSON(String stringInput1, String stringInput2) {
+	private boolean _equalsJSON(String json1, String json2) {
 		try {
-			JsonNode jsonNode1 = _objectMapper.readTree(stringInput1);
-			JsonNode jsonNode2 = _objectMapper.readTree(stringInput2);
+			JsonNode jsonNode1 = _objectMapper.readTree(json1);
+			JsonNode jsonNode2 = _objectMapper.readTree(json2);
 
 			return jsonNode1.equals(jsonNode2);
 		}
