@@ -1253,8 +1253,8 @@ public class ObjectDefinitionLocalServiceTest {
 
 		AssertUtils.assertFailure(
 			ObjectDefinitionAccountEntryRestrictedException.class,
-			"Custom object definitions can only be restricted by a Integer, " +
-				"Long Integer or Text field",
+			"Custom object definitions can only be restricted by an integer, " +
+				"long integer, or text field",
 			() ->
 				_objectDefinitionLocalService.
 					enableAccountEntryRestrictedForNondefaultStorageType(

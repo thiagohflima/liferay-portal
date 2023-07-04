@@ -559,8 +559,8 @@ public class ObjectDefinitionLocalServiceImpl
 				ObjectFieldConstants.BUSINESS_TYPE_TEXT)) {
 
 			throw new ObjectDefinitionAccountEntryRestrictedException(
-				"Custom object definitions can only be restricted by a " +
-					"Integer, Long Integer or Text field");
+				"Custom object definitions can only be restricted by an " +
+					"integer, long integer, or text field");
 		}
 
 		ObjectDefinition objectDefinition = getObjectDefinition(
