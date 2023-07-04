@@ -372,8 +372,8 @@ public class ContentManager {
 				_log.debug(
 					StringBundler.concat(
 						"An error occurred while getting mapped content with ",
-						"class PK ", layoutClassedModelUsage.getClassPK(),
-						" and class name ", className),
+						"class name ", className, " and class PK ",
+						layoutClassedModelUsage.getClassPK()),
 					exception);
 			}
 		}
