@@ -1184,28 +1184,6 @@ public class ObjectDefinitionLocalServiceTest {
 	public void testEnableAccountEntryRestrictedForNondefaultStorageType()
 		throws Exception {
 
-		AssertUtils.assertFailure(
-			UnsupportedOperationException.class, null,
-			() ->
-				_objectDefinitionLocalService.
-					enableAccountEntryRestrictedForNondefaultStorageType(
-						ObjectFieldUtil.addCustomObjectField(
-							new TextObjectFieldBuilder(
-							).userId(
-								TestPropsValues.getUserId()
-							).labelMap(
-								LocalizedMapUtil.getLocalizedMap(
-									RandomTestUtil.randomString())
-							).name(
-								StringUtil.randomId()
-							).objectDefinitionId(
-								_addCustomObjectDefinition(
-									"Test" + RandomTestUtil.randomString()
-								).getObjectDefinitionId()
-							).required(
-								true
-							).build())));
-
 		ObjectDefinition objectDefinition =
 			_objectDefinitionLocalService.addCustomObjectDefinition(
 				TestPropsValues.getUserId(), false, false,
@@ -1252,6 +1230,27 @@ public class ObjectDefinitionLocalServiceTest {
 					enableAccountEntryRestrictedForNondefaultStorageType(
 						ObjectFieldUtil.addCustomObjectField(
 							new DateObjectFieldBuilder(
+							).userId(
+								TestPropsValues.getUserId()
+							).labelMap(
+								LocalizedMapUtil.getLocalizedMap(
+									RandomTestUtil.randomString())
+							).name(
+								StringUtil.randomId()
+							).objectDefinitionId(
+								_addCustomObjectDefinition(
+									"Test" + RandomTestUtil.randomString()
+								).getObjectDefinitionId()
+							).required(
+								true
+							).build())));
+		AssertUtils.assertFailure(
+			UnsupportedOperationException.class, null,
+			() ->
+				_objectDefinitionLocalService.
+					enableAccountEntryRestrictedForNondefaultStorageType(
+						ObjectFieldUtil.addCustomObjectField(
+							new TextObjectFieldBuilder(
 							).userId(
 								TestPropsValues.getUserId()
 							).labelMap(
