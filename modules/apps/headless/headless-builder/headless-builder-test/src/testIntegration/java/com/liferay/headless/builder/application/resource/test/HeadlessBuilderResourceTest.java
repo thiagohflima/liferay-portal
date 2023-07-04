@@ -57,18 +57,21 @@ public class HeadlessBuilderResourceTest extends BaseTestCase {
 	@Test
 	public void test() throws Exception {
 		APIApplication apiApplication1 = _addAPIApplication(
-			_API_APPLICATION_ERC_1, _API_APPLICATION_ENDPOINT_PATH_1);
-		APIApplication apiApplication2 = _addAPIApplication(
-			_API_APPLICATION_ERC_2, _API_APPLICATION_ENDPOINT_PATH_2);
+			_API_APPLICATION_ERC_1, _API_APPLICATION_PATH_1);
 
 		String endpointPath1 =
-			apiApplication1.getBaseURL() + _API_APPLICATION_ENDPOINT_PATH_1;
-		String endpointPath2 =
-			apiApplication2.getBaseURL() + _API_APPLICATION_ENDPOINT_PATH_2;
+			apiApplication1.getBaseURL() + _API_APPLICATION_PATH_1;
 
 		Assert.assertEquals(
 			404,
 			HTTPTestUtil.invokeHttpCode(null, endpointPath1, Http.Method.GET));
+
+		APIApplication apiApplication2 = _addAPIApplication(
+			_API_APPLICATION_ERC_2, _API_APPLICATION_PATH_2);
+
+		String endpointPath2 =
+			apiApplication2.getBaseURL() + _API_APPLICATION_PATH_2;
+
 		Assert.assertEquals(
 			404,
 			HTTPTestUtil.invokeHttpCode(null, endpointPath2, Http.Method.GET));
@@ -192,17 +195,17 @@ public class HeadlessBuilderResourceTest extends BaseTestCase {
 			baseURL, TestPropsValues.getCompanyId());
 	}
 
-	private static final String _API_APPLICATION_ENDPOINT_PATH_1 =
-		StringPool.SLASH + RandomTestUtil.randomString();
-
-	private static final String _API_APPLICATION_ENDPOINT_PATH_2 =
-		StringPool.SLASH + RandomTestUtil.randomString();
-
 	private static final String _API_APPLICATION_ERC_1 =
 		RandomTestUtil.randomString();
 
 	private static final String _API_APPLICATION_ERC_2 =
 		RandomTestUtil.randomString();
+
+	private static final String _API_APPLICATION_PATH_1 =
+		StringPool.SLASH + RandomTestUtil.randomString();
+
+	private static final String _API_APPLICATION_PATH_2 =
+		StringPool.SLASH + RandomTestUtil.randomString();
 
 	@Inject
 	private APIApplicationProvider _apiApplicationProvider;
