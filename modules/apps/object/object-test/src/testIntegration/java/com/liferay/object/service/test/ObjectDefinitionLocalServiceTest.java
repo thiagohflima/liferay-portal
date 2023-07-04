@@ -1137,10 +1137,6 @@ public class ObjectDefinitionLocalServiceTest {
 
 	@Test
 	public void testEnableAccountRestricted() throws Exception {
-
-		// Enable account restriction between AccountEntry and a custom object
-		// definition
-
 		ObjectDefinition objectDefinition =
 			_objectDefinitionLocalService.addObjectDefinition(
 				RandomTestUtil.randomString(), TestPropsValues.getUserId(),
@@ -1165,8 +1161,6 @@ public class ObjectDefinitionLocalServiceTest {
 		Assert.assertTrue(objectDefinition.isAccountEntryRestricted());
 		Assert.assertFalse(objectDefinition.isSystem());
 
-		// Enable account restriction between two custom object definitions
-
 		AssertUtils.assertFailure(
 			ObjectDefinitionAccountEntryRestrictedException.class,
 			"Custom object definitions can only be restricted by account entry",
@@ -1184,9 +1178,11 @@ public class ObjectDefinitionLocalServiceTest {
 						RandomTestUtil.randomString()),
 					StringUtil.randomId(),
 					ObjectRelationshipConstants.TYPE_ONE_TO_MANY)));
+	}
 
-		// Enable account restriction for a default storage object definition
-		// using Salesforce
+	@Test
+	public void testEnableAccountEntryRestrictedForNondefaultStorageType()
+		throws Exception {
 
 		AssertUtils.assertFailure(
 			UnsupportedOperationException.class, null,
@@ -1210,9 +1206,7 @@ public class ObjectDefinitionLocalServiceTest {
 								true
 							).build())));
 
-		// Enable account restriction to a custom Salesforce object definition
-
-		objectDefinition =
+		ObjectDefinition objectDefinition =
 			_objectDefinitionLocalService.addCustomObjectDefinition(
 				TestPropsValues.getUserId(), false, false,
 				LocalizedMapUtil.getLocalizedMap("Able"), "Able", null, null,
@@ -1249,8 +1243,6 @@ public class ObjectDefinitionLocalServiceTest {
 
 		_objectDefinitionLocalService.deleteObjectDefinition(objectDefinition);
 
-		// Enable account restriction using a forbidden type field
-
 		AssertUtils.assertFailure(
 			ObjectDefinitionAccountEntryRestrictedException.class,
 			"Custom object definitions can only be restricted by an integer, " +
@@ -1274,8 +1266,6 @@ public class ObjectDefinitionLocalServiceTest {
 							).required(
 								true
 							).build())));
-
-		// Update account entry restricted object field
 
 		objectDefinition =
 			_objectDefinitionLocalService.addCustomObjectDefinition(
