@@ -40,9 +40,11 @@ public class ClassEncryptorBuilder {
 		try {
 			Class<?> clazz = getClass();
 
+			ClassLoader classLoader = clazz.getClassLoader();
+
 			String[] keys = StringUtil.split(
 				StringUtil.read(
-					clazz.getClassLoader(),
+					classLoader,
 					"com/liferay/portal/license/classloader/keys.txt"),
 				StringPool.NEW_LINE);
 
@@ -79,8 +81,10 @@ public class ClassEncryptorBuilder {
 
 		ds.scan();
 
-		for (String fileName : ds.getIncludedFiles()) {
-			File file = new File(_basedir + "/" + fileName);
+		String[] files = ds.getIncludedFiles();
+
+		for (int i = 0; i < files.length; i++) {
+			File file = new File(_basedir + "/" + files[i]);
 
 			RandomAccessFile randomAccessFile = new RandomAccessFile(
 				file, "rw");

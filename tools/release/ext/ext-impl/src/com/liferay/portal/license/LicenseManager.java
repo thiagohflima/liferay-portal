@@ -942,7 +942,7 @@ public class LicenseManager {
 				pos = 0;
 			}
 			else {
-				pos += (int)c;
+				pos += c;
 			}
 		}
 	}

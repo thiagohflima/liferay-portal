@@ -14,7 +14,6 @@
 
 package com.liferay.portal.ee.license.classloader;
 
-import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.encryptor.EncryptorUtil;
 import com.liferay.portal.kernel.util.Base64;
@@ -53,6 +52,8 @@ public class DecryptorClassLoader extends ClassLoader {
 			char[] charArray = contentDigest.toCharArray();
 
 			for (char c : charArray) {
+				int x = c;
+
 				count++;
 
 				if ((count % marker) == 0) {
@@ -64,7 +65,7 @@ public class DecryptorClassLoader extends ClassLoader {
 					pos = 0;
 				}
 				else {
-					pos += (int)c;
+					pos += x;
 				}
 			}
 		}
@@ -83,8 +84,8 @@ public class DecryptorClassLoader extends ClassLoader {
 				name.endsWith(".license.StartupAction")) {
 
 				try {
-					String resourceName = StringUtil.replace(
-						name, CharPool.PERIOD, CharPool.SLASH);
+					String resourceName = name.replace(
+						StringPool.PERIOD, StringPool.SLASH);
 
 					URL url = super.getResource(resourceName);
 

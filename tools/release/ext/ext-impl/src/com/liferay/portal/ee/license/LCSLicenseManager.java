@@ -525,6 +525,8 @@ public class LCSLicenseManager {
 		char[] charArray = contentDigest.toCharArray();
 
 		for (char c : charArray) {
+			int x = c;
+
 			count++;
 
 			if ((count % marker) == 0) {
@@ -535,7 +537,7 @@ public class LCSLicenseManager {
 				pos = 0;
 			}
 			else {
-				pos += (int)c;
+				pos += x;
 			}
 		}
 	}
@@ -586,7 +588,7 @@ public class LCSLicenseManager {
 			return;
 		}
 
-		StringBundler sb = new StringBundler(20);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("The maximum number of ");
 		sb.append(_maxClusterNodes);
@@ -596,8 +598,9 @@ public class LCSLicenseManager {
 			sb.append("s");
 		}
 
-		sb.append(" licensed for this cluster has been exceeded. Please shut ");
-		sb.append("down excess nodes as soon as possible. An additional ");
+		sb.append(" licensed for this cluster has been exceeded. ");
+		sb.append("Please shut down excess nodes as soon as possible. ");
+		sb.append("An additional ");
 		sb.append(_maxClusterNodes);
 		sb.append(" node");
 
@@ -639,8 +642,8 @@ public class LCSLicenseManager {
 
 			if (_localClusterNodeIndex < _maxClusterNodes) {
 				sb.append("within the licensed node count and will not be ");
-				sb.append("automatically deactivated nor shut down after the ");
-				sb.append("grace period expires.");
+				sb.append("automatically deactivated nor shut down ");
+				sb.append("after the grace period expires.");
 			}
 			else if (_localClusterNodeIndex < (2 * _maxClusterNodes)) {
 				sb.append("within the temporarily permitted node count and ");
