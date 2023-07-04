@@ -115,7 +115,8 @@ paths:
     "/search":
         post:
             description:
-                "Search the company index for matching content. This endpoint is in development status and requires a feature flag: set feature.flag.LPS-179669 to true."
+                "Search the company index for matching content. This endpoint is in development and requires setting the
+                portal property 'feature.flag.LPS-179669' to true."
             operationId: postSearchPage
             parameters:
                 - in: query

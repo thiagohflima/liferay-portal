@@ -69,7 +69,7 @@ public class Mutation {
 	}
 
 	@GraphQLField(
-		description = "Search the company index for matching content. This endpoint is in development status and requires a feature flag: set feature.flag.LPS-179669 to true."
+		description = "Search the company index for matching content. This endpoint is in development and requires setting the portal property 'feature.flag.LPS-179669' to true."
 	)
 	public java.util.Collection<SearchResult> createSearchPage(
 			@GraphQLName("entryClassNames") String entryClassNames,
