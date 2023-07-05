@@ -450,7 +450,6 @@ public class StructuredContentResourceTest
 
 		JournalFolder journalFolder2 = JournalTestUtil.addFolder(
 			_depotEntry.getGroupId(), RandomTestUtil.randomString());
-
 		JournalFolder journalFolder3 = JournalTestUtil.addFolder(
 			_depotEntry.getGroupId(), RandomTestUtil.randomString());
 
