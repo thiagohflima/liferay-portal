@@ -444,6 +444,7 @@ public class BaseContainerTag extends AttributesTagSupport {
 
 	protected void writeDynamicAttributes() throws Exception {
 		Map<String, Object> escapedDynamicAttributes = new HashMap<>();
+
 		Map<String, Object> dynamicAttributes = getDynamicAttributes();
 
 		for (Map.Entry<String, Object> entry : dynamicAttributes.entrySet()) {
