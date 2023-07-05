@@ -59,15 +59,15 @@ public class LanguageResourceTest extends BaseLanguageResourceTestCase {
 		page = languageResource.getAssetLibraryLanguagesPage(
 			testGetAssetLibraryLanguagesPage_getAssetLibraryId());
 
-		Assert.assertEquals(4, page.getTotalCount());
-		Assert.assertTrue(
-			page.fetchFirstItem(
-			).getMarkedAsDefault());
 		Assert.assertEquals(
 			LocaleUtil.US,
 			LocaleUtil.fromLanguageId(
 				page.fetchFirstItem(
 				).getId()));
+		Assert.assertTrue(
+			page.fetchFirstItem(
+			).getMarkedAsDefault());
+		Assert.assertEquals(4, page.getTotalCount());
 		assertValid(page);
 	}
 
@@ -88,15 +88,15 @@ public class LanguageResourceTest extends BaseLanguageResourceTestCase {
 		page = languageResource.getSiteLanguagesPage(
 			testGetSiteLanguagesPage_getSiteId());
 
-		Assert.assertEquals(1, page.getTotalCount());
-		Assert.assertTrue(
-			page.fetchFirstItem(
-			).getMarkedAsDefault());
 		Assert.assertEquals(
 			LocaleUtil.US,
 			LocaleUtil.fromLanguageId(
 				page.fetchFirstItem(
 				).getId()));
+		Assert.assertTrue(
+			page.fetchFirstItem(
+			).getMarkedAsDefault());
+		Assert.assertEquals(1, page.getTotalCount());
 		assertValid(page);
 	}
 
