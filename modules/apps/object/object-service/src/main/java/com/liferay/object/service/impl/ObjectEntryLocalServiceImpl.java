@@ -1364,8 +1364,7 @@ public class ObjectEntryLocalServiceImpl
 
 		Map<String, Serializable> transientValues = objectEntry.getValues();
 
-		_deleteFromLocalizationTable(
-			objectDefinition, objectEntryId);
+		_deleteFromLocalizationTable(objectDefinition, objectEntryId);
 		_insertIntoLocalizationTable(objectDefinition, objectEntryId, values);
 		_updateTable(
 			_getDynamicObjectDefinitionTable(
@@ -1725,19 +1724,6 @@ public class ObjectEntryLocalServiceImpl
 		}
 	}
 
-	private void _deleteFromTable(
-			String dbTableName, String pkObjectFieldDBColumnName,
-			long primaryKey)
-		throws PortalException {
-
-		runSQL(
-			StringBundler.concat(
-				"delete from ", dbTableName, " where ",
-				pkObjectFieldDBColumnName, " = ", primaryKey));
-
-		FinderCacheUtil.clearDSLQueryCache(dbTableName);
-	}
-
 	private void _deleteFromLocalizationTable(
 			ObjectDefinition objectDefinition, long objectEntryId)
 		throws PortalException {
@@ -1755,6 +1741,19 @@ public class ObjectEntryLocalServiceImpl
 			dynamicObjectDefinitionLocalizationTable.getTableName(),
 			dynamicObjectDefinitionLocalizationTable.getForeignKeyColumnName(),
 			objectEntryId);
+	}
+
+	private void _deleteFromTable(
+			String dbTableName, String pkObjectFieldDBColumnName,
+			long primaryKey)
+		throws PortalException {
+
+		runSQL(
+			StringBundler.concat(
+				"delete from ", dbTableName, " where ",
+				pkObjectFieldDBColumnName, " = ", primaryKey));
+
+		FinderCacheUtil.clearDSLQueryCache(dbTableName);
 	}
 
 	private void _fillDefaultValue(
