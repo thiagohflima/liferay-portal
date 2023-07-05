@@ -92,7 +92,7 @@ public class StructuredContentResourceTest
 		_localizedDDMStructure = _addDDMStructure(
 			testGroup, "test-localized-ddm-structure.json");
 
-		_testDepotEntry = _depotEntryLocalService.addDepotEntry(
+		_depotEntry = _depotEntryLocalService.addDepotEntry(
 			Collections.singletonMap(
 				LocaleUtil.getDefault(), RandomTestUtil.randomString()),
 			null,
@@ -104,7 +104,7 @@ public class StructuredContentResourceTest
 			});
 
 		_depotDDMStructure = _addDDMStructure(
-			_testDepotEntry.getGroup(), "test-ddm-structure.json");
+			_depotEntry.getGroup(), "test-ddm-structure.json");
 
 		StructuredContentResource.Builder builder =
 			StructuredContentResource.builder();
@@ -321,7 +321,7 @@ public class StructuredContentResourceTest
 				postStructuredContent2.getId(), 1.0));
 
 		JournalFolder journalFolder = JournalTestUtil.addFolder(
-			_testDepotEntry.getGroupId(), RandomTestUtil.randomString());
+			_depotEntry.getGroupId(), RandomTestUtil.randomString());
 
 		StructuredContent randomStructuredContent2 = randomStructuredContent();
 
@@ -410,7 +410,7 @@ public class StructuredContentResourceTest
 			(List<StructuredContent>)structuredContentsVersionsPage.getItems());
 
 		JournalFolder journalFolder1 = JournalTestUtil.addFolder(
-			_testDepotEntry.getGroupId(), RandomTestUtil.randomString());
+			_depotEntry.getGroupId(), RandomTestUtil.randomString());
 
 		StructuredContent randomStructuredContent1 = randomStructuredContent();
 
@@ -449,10 +449,10 @@ public class StructuredContentResourceTest
 				getStructuredContent1.getStructuredContentFolderId()));
 
 		JournalFolder journalFolder2 = JournalTestUtil.addFolder(
-			_testDepotEntry.getGroupId(), RandomTestUtil.randomString());
+			_depotEntry.getGroupId(), RandomTestUtil.randomString());
 
 		JournalFolder journalFolder3 = JournalTestUtil.addFolder(
-			_testDepotEntry.getGroupId(), RandomTestUtil.randomString());
+			_depotEntry.getGroupId(), RandomTestUtil.randomString());
 
 		StructuredContent randomStructuredContent2 = randomStructuredContent();
 
@@ -476,10 +476,10 @@ public class StructuredContentResourceTest
 				).build();
 
 		_journalArticleLocalService.moveArticle(
-			_testDepotEntry.getGroupId(), structuredContent3.getKey(),
+			_depotEntry.getGroupId(), structuredContent3.getKey(),
 			journalFolder3.getFolderId(),
 			ServiceContextTestUtil.getServiceContext(
-				_testDepotEntry.getGroupId()));
+				_depotEntry.getGroupId()));
 
 		structuredContentsVersionsPage =
 			structuredContentResource.getStructuredContentsVersionsPage(
@@ -1080,6 +1080,6 @@ public class StructuredContentResourceTest
 
 	private DDMStructure _localizedDDMStructure;
 	private StructuredContentResource _structuredContentResource;
-	private DepotEntry _testDepotEntry;
+	private DepotEntry _depotEntry;
 
 }
