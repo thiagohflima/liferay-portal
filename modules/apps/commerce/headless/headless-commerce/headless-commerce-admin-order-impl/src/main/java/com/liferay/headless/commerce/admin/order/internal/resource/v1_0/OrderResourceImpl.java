@@ -673,8 +673,6 @@ public class OrderResourceImpl extends BaseOrderResourceImpl {
 					commerceOrder.getCommerceAccountId())),
 			false);
 
-		// Requested Delivery Date
-
 		_commerceOrderService.updateCommerceOrderPrices(
 			commerceOrder.getCommerceOrderId(),
 			(BigDecimal)GetterUtil.getNumber(
@@ -817,24 +815,17 @@ public class OrderResourceImpl extends BaseOrderResourceImpl {
 				requestedDeliveryDate.getMinute(), serviceContext);
 		}
 		else {
-
-			// Printed note
-
 			commerceOrder = _commerceOrderService.updatePrintedNote(
 				commerceOrder.getCommerceOrderId(),
 				GetterUtil.getString(
 					order.getPrintedNote(), commerceOrder.getPrintedNote()));
 		}
 
-		// Payment Status
-
 		_commercePaymentEngine.updateOrderPaymentStatus(
 			commerceOrder.getCommerceOrderId(),
 			GetterUtil.getInteger(
 				order.getPaymentStatus(), commerceOrder.getPaymentStatus()),
 			commerceOrder.getTransactionId(), StringPool.BLANK);
-
-		// Expando
 
 		Map<String, ?> customFields = order.getCustomFields();
 
@@ -843,8 +834,6 @@ public class OrderResourceImpl extends BaseOrderResourceImpl {
 				contextCompany.getCompanyId(), CommerceOrder.class,
 				commerceOrder.getPrimaryKey(), customFields);
 		}
-
-		// Update nested resources
 
 		commerceOrder = _updateNestedResources(
 			order, commerceOrder,
