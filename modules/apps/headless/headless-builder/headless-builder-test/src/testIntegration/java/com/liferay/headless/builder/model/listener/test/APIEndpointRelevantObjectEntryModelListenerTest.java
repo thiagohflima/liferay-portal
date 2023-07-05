@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.json.JSONUtil;
 import com.liferay.portal.kernel.test.util.HTTPTestUtil;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
+import com.liferay.portal.kernel.test.util.TestPropsValues;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.test.rule.FeatureFlags;
 
@@ -117,8 +118,6 @@ public class APIEndpointRelevantObjectEntryModelListenerTest
 			jsonObject.get(
 				"r_apiApplicationToAPIEndpoints_c_apiApplicationId"));
 
-		long apiEndpointId = jsonObject.getLong("id");
-
 		// There is an API endpoint with the same HTTP method and path
 
 		String path = RandomTestUtil.randomString();
@@ -181,10 +180,10 @@ public class APIEndpointRelevantObjectEntryModelListenerTest
 
 		Assert.assertEquals("BAD_REQUEST", jsonObject.get("status"));
 		Assert.assertEquals(
-			"An API endpoint must be related to a valid API application.",
+			"An API endpoint must be related to an API application.",
 			jsonObject.get("title"));
 
-		// API application is not valid
+		// API application is not an API application
 
 		jsonObject = HTTPTestUtil.invoke(
 			JSONUtil.put(
@@ -195,7 +194,7 @@ public class APIEndpointRelevantObjectEntryModelListenerTest
 				"path", path
 			).put(
 				"r_apiApplicationToAPIEndpoints_c_apiApplicationId",
-				apiEndpointId
+				TestPropsValues.getUserId()
 			).put(
 				"scope", "company"
 			).toString(),
@@ -203,7 +202,7 @@ public class APIEndpointRelevantObjectEntryModelListenerTest
 
 		Assert.assertEquals("BAD_REQUEST", jsonObject.get("status"));
 		Assert.assertEquals(
-			"An API endpoint must be related to a valid API application.",
+			"An API endpoint must be related to an API application.",
 			jsonObject.get("title"));
 	}
 
