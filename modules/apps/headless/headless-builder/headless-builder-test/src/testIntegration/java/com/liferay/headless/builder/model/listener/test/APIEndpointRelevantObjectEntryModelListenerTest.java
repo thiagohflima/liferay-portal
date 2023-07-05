@@ -53,7 +53,7 @@ public class APIEndpointRelevantObjectEntryModelListenerTest
 
 		Assert.assertEquals("BAD_REQUEST", jsonObject.get("status"));
 		Assert.assertEquals(
-			"An API endpoint must be related to a valid API application.",
+			"An API endpoint must be related to an API application.",
 			jsonObject.get("title"));
 
 		// Path can have a maximum of 255 alphanumeric characters
