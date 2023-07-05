@@ -1911,7 +1911,6 @@ public class DefaultObjectEntryManagerImplTest {
 				_localizedObjectFieldI18nValues
 			).build(),
 			"en_US", objectEntry.getId());
-
 		_assertLocalizedValues(
 			HashMapBuilder.<String, Object>put(
 				"localizedLongTextObjectFieldName",
@@ -1973,7 +1972,6 @@ public class DefaultObjectEntryManagerImplTest {
 				_localizedObjectFieldI18nValues
 			).build(),
 			"ar_SA", objectEntry.getId());
-
 		_assertLocalizedValues(
 			HashMapBuilder.<String, Object>put(
 				"localizedLongTextObjectFieldName",
@@ -1988,7 +1986,6 @@ public class DefaultObjectEntryManagerImplTest {
 				_localizedObjectFieldI18nValues
 			).build(),
 			"en_US", objectEntry.getId());
-
 		_assertLocalizedValues(
 			HashMapBuilder.<String, Object>put(
 				"localizedLongTextObjectFieldName", ""
@@ -2053,7 +2050,6 @@ public class DefaultObjectEntryManagerImplTest {
 				_localizedObjectFieldI18nValues
 			).build(),
 			"ar_SA", objectEntry.getId());
-
 		_assertLocalizedValues(
 			HashMapBuilder.<String, Object>put(
 				"localizedLongTextObjectFieldName", ""
@@ -2069,7 +2065,6 @@ public class DefaultObjectEntryManagerImplTest {
 				_localizedObjectFieldI18nValues
 			).build(),
 			"ca_ES", objectEntry.getId());
-
 		_assertLocalizedValues(
 			HashMapBuilder.<String, Object>put(
 				"localizedLongTextObjectFieldName",
@@ -2087,7 +2082,6 @@ public class DefaultObjectEntryManagerImplTest {
 				_localizedObjectFieldI18nValues
 			).build(),
 			"en_US", objectEntry.getId());
-
 		_assertLocalizedValues(
 			HashMapBuilder.<String, Object>put(
 				"localizedLongTextObjectFieldName", ""
