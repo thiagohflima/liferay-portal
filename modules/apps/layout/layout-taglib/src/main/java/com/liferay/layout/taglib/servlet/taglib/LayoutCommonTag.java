@@ -192,8 +192,9 @@ public class LayoutCommonTag extends IncludeTag {
 			return null;
 		}
 
-		List<String> keys = new ArrayList<>();
 		StringBundler sb = new StringBundler();
+
+		List<String> keys = new ArrayList<>();
 
 		Iterator<String> iterator = SessionMessages.iterator(
 			httpServletRequest);
