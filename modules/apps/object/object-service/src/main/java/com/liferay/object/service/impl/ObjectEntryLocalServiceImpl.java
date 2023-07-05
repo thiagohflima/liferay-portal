@@ -1364,7 +1364,7 @@ public class ObjectEntryLocalServiceImpl
 
 		Map<String, Serializable> transientValues = objectEntry.getValues();
 
-		_deleteObjectDefinitionLocalizationTableValues(
+		_deleteFromLocalizationTable(
 			objectDefinition, objectEntryId);
 		_insertIntoLocalizationTable(objectDefinition, objectEntryId, values);
 		_updateTable(
@@ -1738,7 +1738,7 @@ public class ObjectEntryLocalServiceImpl
 		FinderCacheUtil.clearDSLQueryCache(dbTableName);
 	}
 
-	private void _deleteObjectDefinitionLocalizationTableValues(
+	private void _deleteFromLocalizationTable(
 			ObjectDefinition objectDefinition, long objectEntryId)
 		throws PortalException {
 
