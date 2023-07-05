@@ -49,6 +49,4 @@ public interface VulcanBatchEngineImportTaskResource {
 
 	public void setContextUser(User contextUser);
 
-	public void setTaskItemDelegateName(String taskItemDelegateName);
-
 }
