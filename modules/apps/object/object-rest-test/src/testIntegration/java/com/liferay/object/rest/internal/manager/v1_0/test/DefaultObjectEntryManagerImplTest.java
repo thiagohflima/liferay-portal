@@ -206,24 +206,12 @@ public class DefaultObjectEntryManagerImplTest {
 		_dtoConverterContext = new DefaultDTOConverterContext(
 			false, Collections.emptyMap(), _dtoConverterRegistry, null,
 			LocaleUtil.getDefault(), null, _adminUser);
-
-		_objectDefinition1 = _createObjectDefinition(
-			Arrays.asList(
-				new TextObjectFieldBuilder(
-				).labelMap(
-					LocalizedMapUtil.getLocalizedMap(
-						RandomTestUtil.randomString())
-				).name(
-					"textObjectFieldName"
-				).build()));
-
 		_listTypeDefinition =
 			_listTypeDefinitionLocalService.addListTypeDefinition(
 				null, _adminUser.getUserId(),
 				Collections.singletonMap(
 					LocaleUtil.US, RandomTestUtil.randomString()),
 				Collections.emptyList());
-
 		_localizedObjectFieldI18nValues = HashMapBuilder.<String, Object>put(
 			"localizedLongTextObjectFieldName_i18n",
 			HashMapBuilder.put(
@@ -246,6 +234,15 @@ public class DefaultObjectEntryManagerImplTest {
 				"pt_BR", "pt_BR localizedTextObjectFieldValue"
 			).build()
 		).build();
+		_objectDefinition1 = _createObjectDefinition(
+			Arrays.asList(
+				new TextObjectFieldBuilder(
+				).labelMap(
+					LocalizedMapUtil.getLocalizedMap(
+						RandomTestUtil.randomString())
+				).name(
+					"textObjectFieldName"
+				).build()));
 
 		_objectDefinition2 = _createObjectDefinition(
 			Arrays.asList(
