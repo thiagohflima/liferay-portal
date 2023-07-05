@@ -110,7 +110,6 @@ public class AICreatorOpenAIClientExceptionTest {
 			expected,
 			aiCreatorOpenAIClientException.getCompletionLocalizedMessage(
 				LocaleUtil.getDefault()));
-
 		Assert.assertEquals(
 			expected,
 			aiCreatorOpenAIClientException.getLocalizedMessage(
