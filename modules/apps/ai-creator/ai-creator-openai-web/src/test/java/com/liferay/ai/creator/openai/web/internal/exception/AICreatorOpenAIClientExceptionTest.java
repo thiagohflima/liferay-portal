@@ -100,8 +100,6 @@ public class AICreatorOpenAIClientExceptionTest {
 				RandomTestUtil.randomString(), message,
 				RandomTestUtil.randomInt());
 
-		Locale locale = LocaleUtil.getDefault();
-
 		String expected = StringBundler.concat(
 			message, " <a href=\"",
 			AICreatorOpenAIClientException.OPENAI_API_ERRORS_LINK, "\">",
@@ -111,16 +109,18 @@ public class AICreatorOpenAIClientExceptionTest {
 		Assert.assertEquals(
 			expected,
 			aiCreatorOpenAIClientException.getCompletionLocalizedMessage(
-				locale));
+				LocaleUtil.getDefault()));
 
 		Assert.assertEquals(
 			expected,
-			aiCreatorOpenAIClientException.getLocalizedMessage(locale));
+			aiCreatorOpenAIClientException.getLocalizedMessage(
+				LocaleUtil.getDefault()));
 
 		Mockito.verify(
 			_language, Mockito.times(2)
 		).get(
-			locale, AICreatorOpenAIClientException.MESSAGE_KEY_OPENAI_API_ERRORS
+			LocaleUtil.getDefault(),
+			AICreatorOpenAIClientException.MESSAGE_KEY_OPENAI_API_ERRORS
 		);
 	}
 
@@ -132,15 +132,15 @@ public class AICreatorOpenAIClientExceptionTest {
 			new AICreatorOpenAIClientException(
 				HttpURLConnection.HTTP_CLIENT_TIMEOUT);
 
-		Locale locale = LocaleUtil.getDefault();
-
 		Assert.assertEquals(
-			key, biFunction.apply(aiCreatorOpenAIClientException, locale));
+			key,
+			biFunction.apply(
+				aiCreatorOpenAIClientException, LocaleUtil.getDefault()));
 
 		Mockito.verify(
 			_language
 		).get(
-			locale, key
+			LocaleUtil.getDefault(), key
 		);
 	}
 
