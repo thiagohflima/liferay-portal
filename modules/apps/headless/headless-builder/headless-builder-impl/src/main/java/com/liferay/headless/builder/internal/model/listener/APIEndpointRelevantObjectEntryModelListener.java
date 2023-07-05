@@ -101,19 +101,19 @@ public class APIEndpointRelevantObjectEntryModelListener
 			return false;
 		}
 
-		ObjectEntry apiApplicationObjectEntry =
+		ObjectEntry objectEntry =
 			_objectEntryLocalService.fetchObjectEntry(apiApplicationId);
 
-		if (apiApplicationObjectEntry == null) {
+		if (objectEntry == null) {
 			return false;
 		}
 
-		ObjectDefinition apiApplicationObjectDefinition =
+		ObjectDefinition objectDefinition =
 			_objectDefinitionLocalService.getObjectDefinition(
-				apiApplicationObjectEntry.getObjectDefinitionId());
+				objectEntry.getObjectDefinitionId());
 
 		if (!Objects.equals(
-				apiApplicationObjectDefinition.getExternalReferenceCode(),
+				objectDefinition.getExternalReferenceCode(),
 				"L_API_APPLICATION")) {
 
 			return false;
@@ -175,7 +175,7 @@ public class APIEndpointRelevantObjectEntryModelListener
 					null);
 			}
 
-			if (!_isValidAPIApplication(
+			if (!_isAPIApplication(
 					(long)values.get(
 						"r_apiApplicationToAPIEndpoints_c_apiApplicationId"))) {
 
