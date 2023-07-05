@@ -84,7 +84,6 @@ public class AICreatorOpenAIClientExceptionTest {
 			(aiCreatorOpenAIClientException, locale) ->
 				aiCreatorOpenAIClientException.getCompletionLocalizedMessage(
 					locale));
-
 		_testGetLocalizedMessageIOException(
 			AICreatorOpenAIClientException.
 				MESSAGE_KEY_AN_UNEXPECTED_ERROR_VALIDATION,
