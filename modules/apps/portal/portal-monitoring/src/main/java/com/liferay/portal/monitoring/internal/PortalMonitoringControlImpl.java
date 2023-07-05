@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.monitoring.internal.servlet.filter;
+package com.liferay.portal.monitoring.internal;
 
 import com.liferay.portal.kernel.monitoring.PortalMonitoringControl;
 
