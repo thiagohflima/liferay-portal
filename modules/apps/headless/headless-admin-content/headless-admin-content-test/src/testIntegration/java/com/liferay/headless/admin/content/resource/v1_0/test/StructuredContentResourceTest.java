@@ -477,8 +477,7 @@ public class StructuredContentResourceTest
 		_journalArticleLocalService.moveArticle(
 			_depotEntry.getGroupId(), structuredContent3.getKey(),
 			journalFolder3.getFolderId(),
-			ServiceContextTestUtil.getServiceContext(
-				_depotEntry.getGroupId()));
+			ServiceContextTestUtil.getServiceContext(_depotEntry.getGroupId()));
 
 		structuredContentsVersionsPage =
 			structuredContentResource.getStructuredContentsVersionsPage(
@@ -1068,6 +1067,7 @@ public class StructuredContentResourceTest
 
 	private DDMStructure _ddmStructure;
 	private DDMStructure _depotDDMStructure;
+	private DepotEntry _depotEntry;
 
 	@Inject
 	private DepotEntryLocalService _depotEntryLocalService;
@@ -1079,6 +1079,5 @@ public class StructuredContentResourceTest
 
 	private DDMStructure _localizedDDMStructure;
 	private StructuredContentResource _structuredContentResource;
-	private DepotEntry _depotEntry;
 
 }
