@@ -134,7 +134,6 @@ public class WebServerTrashTest extends BaseWebServerTestCase {
 		String path = StringBundler.concat(
 			StringPool.SLASH, fileEntry.getGroupId(), StringPool.SLASH,
 			fileEntry.getUuid());
-
 		Map<String, String> headers = Collections.singletonMap(
 			"Host", "localhost");
 
