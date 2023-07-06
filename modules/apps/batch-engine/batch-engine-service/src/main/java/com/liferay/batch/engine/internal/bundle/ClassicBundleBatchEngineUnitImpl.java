@@ -32,9 +32,9 @@ import org.osgi.framework.Bundle;
  * @author Raymond Augé
  * @author Igor Beslic
  */
-public class ClassicBatchEngineBundleUnitImpl implements BatchEngineUnit {
+public class ClassicBundleBatchEngineUnitImpl implements BatchEngineUnit {
 
-	public ClassicBatchEngineBundleUnitImpl(Bundle bundle, URL... urls) {
+	public ClassicBundleBatchEngineUnitImpl(Bundle bundle, URL... urls) {
 		_bundle = bundle;
 
 		if ((urls == null) || (urls.length > 2)) {

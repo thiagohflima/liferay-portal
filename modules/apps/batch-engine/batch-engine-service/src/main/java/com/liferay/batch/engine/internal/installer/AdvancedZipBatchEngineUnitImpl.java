@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.batch.engine.internal.bundle;
+package com.liferay.batch.engine.internal.installer;
 
 import com.liferay.batch.engine.internal.json.AdvancedJSONReader;
 import com.liferay.batch.engine.unit.BatchEngineUnit;
@@ -25,26 +25,24 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import java.net.URL;
-
-import org.osgi.framework.Bundle;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 /**
- * @author Raymond Augé
  * @author Igor Beslic
  */
-public class AdvancedBatchEngineBundleUnitImpl implements BatchEngineUnit {
+public class AdvancedZipBatchEngineUnitImpl implements BatchEngineUnit {
 
-	public AdvancedBatchEngineBundleUnitImpl(Bundle bundle, URL url) {
-		_bundle = bundle;
-		_url = url;
+	public AdvancedZipBatchEngineUnitImpl(ZipFile zipFile, ZipEntry zipEntry) {
+		_zipFile = zipFile;
+		_zipEntry = zipEntry;
 	}
 
 	@Override
 	public BatchEngineUnitConfiguration getBatchEngineUnitConfiguration()
 		throws IOException {
 
-		try (InputStream inputStream = _url.openStream()) {
+		try (InputStream inputStream = _zipFile.getInputStream(_zipEntry)) {
 			AdvancedJSONReader<BatchEngineUnitConfiguration>
 				advancedJSONReader = new AdvancedJSONReader<>(inputStream);
 
@@ -54,18 +52,18 @@ public class AdvancedBatchEngineBundleUnitImpl implements BatchEngineUnit {
 	}
 
 	@Override
-	public InputStream getConfigurationInputStream() throws IOException {
-		return _url.openStream();
+	public InputStream getConfigurationInputStream() {
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public String getDataFileName() {
-		return _url.getPath();
+		return _zipEntry.getName();
 	}
 
 	@Override
 	public InputStream getDataInputStream() throws IOException {
-		try (InputStream inputStream = _url.openStream()) {
+		try (InputStream inputStream = _zipFile.getInputStream(_zipEntry)) {
 			ByteArrayOutputStream byteArrayOutputStream =
 				new ByteArrayOutputStream();
 
@@ -82,16 +80,16 @@ public class AdvancedBatchEngineBundleUnitImpl implements BatchEngineUnit {
 
 	@Override
 	public String getFileName() {
-		return _bundle.toString();
+		return _zipFile.getName();
 	}
 
 	@Override
 	public boolean isValid() {
-		if (_url == null) {
+		if (_zipEntry == null) {
 			return false;
 		}
 
-		try (InputStream inputStream = _url.openStream()) {
+		try (InputStream inputStream = _zipFile.getInputStream(_zipEntry)) {
 			AdvancedJSONReader<?> advancedJSONReader = new AdvancedJSONReader<>(
 				inputStream);
 
@@ -99,16 +97,17 @@ public class AdvancedBatchEngineBundleUnitImpl implements BatchEngineUnit {
 		}
 		catch (IOException ioException) {
 			_log.error(
-				"Unable to get data in file " + _url.getPath(), ioException);
+				"Unable to get data in file " + _zipEntry.getName(),
+				ioException);
 		}
 
 		return false;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		AdvancedBatchEngineBundleUnitImpl.class);
+		AdvancedZipBatchEngineUnitImpl.class);
 
-	private final Bundle _bundle;
-	private final URL _url;
+	private final ZipEntry _zipEntry;
+	private final ZipFile _zipFile;
 
 }

@@ -29,9 +29,9 @@ import java.util.zip.ZipFile;
 /**
  * @author Igor Beslic
  */
-public class ClassicBatchEngineZipUnitImpl implements BatchEngineUnit {
+public class ClassicZipBatchEngineUnitImpl implements BatchEngineUnit {
 
-	public ClassicBatchEngineZipUnitImpl(
+	public ClassicZipBatchEngineUnitImpl(
 		ZipFile zipFile, ZipEntry... zipEntries) {
 
 		_zipFile = zipFile;

@@ -14,8 +14,8 @@
 
 package com.liferay.batch.engine.internal.unit;
 
-import com.liferay.batch.engine.internal.bundle.AdvancedBatchEngineBundleUnitImpl;
-import com.liferay.batch.engine.internal.bundle.ClassicBatchEngineBundleUnitImpl;
+import com.liferay.batch.engine.internal.bundle.AdvancedBundleBatchEngineUnitImpl;
+import com.liferay.batch.engine.internal.bundle.ClassicBundleBatchEngineUnitImpl;
 import com.liferay.batch.engine.unit.BatchEngineUnit;
 import com.liferay.batch.engine.unit.BatchEngineUnitReader;
 import com.liferay.petra.string.StringPool;
@@ -111,14 +111,14 @@ public class BatchEngineUnitReaderImpl implements BatchEngineUnitReader {
 				batchEngineURLs.put(key, url);
 
 				batchEngineUnits.put(
-					key, new AdvancedBatchEngineBundleUnitImpl(bundle, url));
+					key, new AdvancedBundleBatchEngineUnitImpl(bundle, url));
 
 				continue;
 			}
 
 			batchEngineUnits.put(
 				key,
-				new ClassicBatchEngineBundleUnitImpl(
+				new ClassicBundleBatchEngineUnitImpl(
 					bundle, url, complementURL));
 
 			batchEngineURLs.remove(key);

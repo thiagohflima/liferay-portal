@@ -193,14 +193,14 @@ public class BatchEngineFileInstaller implements FileInstaller {
 				batchEngineZipEntries.put(key, zipEntry);
 
 				batchEngineUnits.put(
-					key, new AdvancedBatchEngineZipUnitImpl(zipFile, zipEntry));
+					key, new AdvancedZipBatchEngineUnitImpl(zipFile, zipEntry));
 
 				continue;
 			}
 
 			batchEngineUnits.put(
 				key,
-				new ClassicBatchEngineZipUnitImpl(
+				new ClassicZipBatchEngineUnitImpl(
 					zipFile, zipEntry, complementZipEntry));
 
 			batchEngineZipEntries.remove(key);
