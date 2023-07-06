@@ -92,7 +92,7 @@ public class GetCompletionMVCResourceCommand extends BaseMVCResourceCommand {
 							themeDisplay.getLocale(),
 							"authentication-is-needed-to-use-this-feature.-" +
 								"contact-your-administrator-to-add-an-api-" +
-									"key-from-the-instance-or-site-settings")
+									"key-in-instance-or-site-settings")
 					).put(
 						"retry", false
 					)));
