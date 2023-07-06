@@ -125,63 +125,15 @@ public class BatchEngineUnitProcessorImpl implements BatchEngineUnitProcessor {
 					Object service = _bundleContext.getService(
 						serviceReference);
 
-					if (service instanceof VulcanBatchEngineTaskItemDelegate) {
-						BatchEngineTaskItemDelegate<?>
-							batchEngineTaskItemDelegate =
-								_vulcanBatchEngineTaskItemDelegateAdaptorFactory.
-									create(
-										(VulcanBatchEngineTaskItemDelegate<?>)
-											service);
-
-						try {
-							BatchEngineImportTask batchEngineImportTask =
-								_batchEngineImportTaskLocalService.
-									addBatchEngineImportTask(
-										null,
-										batchEngineUnitConfiguration.
-											getCompanyId(),
-										batchEngineUnitConfiguration.
-											getUserId(),
-										100,
-										batchEngineUnitConfiguration.
-											getCallbackURL(),
-										batchEngineUnitConfiguration.
-											getClassName(),
-										content,
-										StringUtil.toUpperCase(contentType),
-										BatchEngineTaskExecuteStatus.INITIAL.
-											name(),
-										batchEngineUnitConfiguration.
-											getFieldNameMappingMap(),
-										BatchEngineImportTaskConstants.
-											IMPORT_STRATEGY_ON_ERROR_FAIL,
-										BatchEngineTaskOperation.CREATE.name(),
-										batchEngineUnitConfiguration.
-											getParameters(),
-										batchEngineUnitConfiguration.
-											getTaskItemDelegateName(),
-										batchEngineTaskItemDelegate);
-
-							_batchEngineImportTaskExecutor.execute(
-								batchEngineImportTask,
-								batchEngineTaskItemDelegate);
-
-							if (_log.isInfoEnabled()) {
-								_log.info(
-									StringBundler.concat(
-										"Successfully deployed batch engine ",
-										"file ", batchEngineUnit.getFileName(),
-										" ",
-										batchEngineUnit.getDataFileName()));
-							}
+					try {
+						_execute(
+							batchEngineUnit, batchEngineUnitConfiguration,
+							content, contentType, service, this);
+					}
+					catch (Exception exception) {
+						if (_log.isWarnEnabled()) {
+							_log.warn(exception);
 						}
-						catch (Exception exception) {
-							if (_log.isWarnEnabled()) {
-								_log.warn(exception);
-							}
-						}
-
-						close();
 					}
 
 					_bundleContext.ungetService(serviceReference);
@@ -192,6 +144,50 @@ public class BatchEngineUnitProcessorImpl implements BatchEngineUnitProcessor {
 			};
 
 		serviceTracker.open();
+	}
+
+	private void _execute(
+			BatchEngineUnit batchEngineUnit,
+			BatchEngineUnitConfiguration batchEngineUnitConfiguration,
+			byte[] content, String contentType, Object service,
+			ServiceTracker<Object, Object> serviceTracker)
+		throws Exception {
+
+		if (!(service instanceof VulcanBatchEngineTaskItemDelegate)) {
+			return;
+		}
+
+		BatchEngineTaskItemDelegate<?> batchEngineTaskItemDelegate =
+			_vulcanBatchEngineTaskItemDelegateAdaptorFactory.create(
+				(VulcanBatchEngineTaskItemDelegate<?>)service);
+
+		BatchEngineImportTask batchEngineImportTask =
+			_batchEngineImportTaskLocalService.addBatchEngineImportTask(
+				null, batchEngineUnitConfiguration.getCompanyId(),
+				batchEngineUnitConfiguration.getUserId(), 100,
+				batchEngineUnitConfiguration.getCallbackURL(),
+				batchEngineUnitConfiguration.getClassName(), content,
+				StringUtil.toUpperCase(contentType),
+				BatchEngineTaskExecuteStatus.INITIAL.name(),
+				batchEngineUnitConfiguration.getFieldNameMappingMap(),
+				BatchEngineImportTaskConstants.IMPORT_STRATEGY_ON_ERROR_FAIL,
+				BatchEngineTaskOperation.CREATE.name(),
+				batchEngineUnitConfiguration.getParameters(),
+				batchEngineUnitConfiguration.getTaskItemDelegateName(),
+				batchEngineTaskItemDelegate);
+
+		_batchEngineImportTaskExecutor.execute(
+			batchEngineImportTask, batchEngineTaskItemDelegate);
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				StringBundler.concat(
+					"Successfully deployed batch engine file ",
+					batchEngineUnit.getFileName(), " ",
+					batchEngineUnit.getDataFileName()));
+		}
+
+		serviceTracker.close();
 	}
 
 	private String _getObjectEntryClassName(
